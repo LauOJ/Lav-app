@@ -1,0 +1,16 @@
+FROM node:20
+
+WORKDIR /app
+
+# Copiamos solo los manifests
+COPY package.json package-lock.json ./
+
+# Instalación robusta y reproducible
+RUN npm ci --include=optional
+
+# Copiamos el resto del código
+COPY . .
+
+EXPOSE 4200
+
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
