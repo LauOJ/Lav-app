@@ -21,7 +21,7 @@ services:
     ports:
       - "8001:8000"
     environment:
-      DATABASE_URL: postgres://wcadmin:wcpassword@db:5432/wcadvisor
+      DATABASE_URL: postgresql+psycopg2://wcadmin:wcpassword@db:5432/wcadvisor
     volumes:
       - ./backend:/app
 
