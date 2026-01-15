@@ -1,18 +1,18 @@
-# Usar Python 3.11
-FROM python:3.13-slim
+# Use a stable Python version with psycopg2 wheels
+FROM python:3.12-slim
 
-# Crear carpeta de la app
+# Create app directory
 WORKDIR /app
 
-# Copiar requirements y luego instalarlos
+# Copy requirements and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar todo el código
+# Copy application code
 COPY . .
 
-# Exponer el puerto donde correrá FastAPI
+# Expose the port where FastAPI runs
 EXPOSE 8000
 
-# Comando para arrancar FastAPI
+# Command to start FastAPI
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

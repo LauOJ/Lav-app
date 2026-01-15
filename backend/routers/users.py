@@ -5,6 +5,8 @@ from database import get_db
 from schemas.user import UserCreate, UserRead
 from crud.user import get_user_by_email, create_user
 
+from security import hash_password
+
 router = APIRouter(
     prefix="/users",
     tags=["users"],
@@ -26,8 +28,8 @@ def create_user_endpoint(
             detail="Email already registered",
         )
 
-    # ⚠️ Temporal: hash dummy (lo mejoraremos luego)
-    password_hash = f"hashed-{user_in.password}"
+    password_hash = hash_password(user_in.password)
+
 
     user = create_user(db, user_in, password_hash)
     return user
