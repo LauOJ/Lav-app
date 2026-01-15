@@ -22,6 +22,7 @@ services:
       - "8001:8000"
     environment:
       DATABASE_URL: postgresql+psycopg://wcadmin:wcpassword@db:5432/wcadvisor
+      SECRET_KEY: super-secret-dev-key-change-me
     volumes:
       - ./backend:/app
 
