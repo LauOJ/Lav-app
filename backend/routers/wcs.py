@@ -3,7 +3,11 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas.wc import WCCreate, WCRead
-from crud.wc import create_wc, get_wcs
+from crud.wc import create_wc as create_wc_crud, get_wcs
+
+from security import get_current_user
+from models import User
+
 
 router = APIRouter(
     prefix="/wcs",
@@ -18,9 +22,11 @@ router = APIRouter(
 def create_wc_endpoint(
     wc_in: WCCreate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
-    wc = create_wc(db, wc_in)
+    wc = create_wc_crud(db, wc_in)
     return wc
+
 
 @router.get(
     "",
