@@ -61,3 +61,11 @@ def update_review(
     db.commit()
     db.refresh(review)
     return review
+
+
+def get_reviews_by_wc_id(db: Session, wc_id: int) -> list[Review]:
+    return db.query(Review).filter(Review.wc_id == wc_id).all()
+
+
+def get_reviews_by_user_id(db: Session, user_id: int) -> list[Review]:
+    return db.query(Review).filter(Review.user_id == user_id).all()
