@@ -24,7 +24,12 @@ def create_review_endpoint(
     current_user: User = Depends(get_current_user),
 ):
     try:
-        review = create_review(db, review_in)
+        review = create_review(
+            db=db,
+            review_in=review_in,
+            user_id=current_user.id,
+        )
+
         return review
     except IntegrityError:
         raise HTTPException(

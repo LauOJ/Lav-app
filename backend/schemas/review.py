@@ -9,7 +9,6 @@ class ReviewBase(BaseModel):
 
 
 class ReviewCreate(ReviewBase):
-    user_id: int
     wc_id: int
 
 
