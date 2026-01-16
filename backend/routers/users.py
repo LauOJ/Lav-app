@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from database import get_db
 from schemas.user import UserCreate, UserRead
 from schemas.review import ReviewRead
-from crud.user import get_user_by_email, create_user
+from crud.user import create_user
 
 from security import hash_password, get_current_user
 from crud.review import get_reviews_by_user_id
@@ -24,18 +25,17 @@ def create_user_endpoint(
     user_in: UserCreate,
     db: Session = Depends(get_db),
 ):
-    existing_user = get_user_by_email(db, user_in.email)
-    if existing_user:
+    password_hash = hash_password(user_in.password)
+
+
+    try:
+        user = create_user(db, user_in, password_hash)
+        return user
+    except IntegrityError:
         raise HTTPException(
             status_code=400,
             detail="Email already registered",
         )
-
-    password_hash = hash_password(user_in.password)
-
-
-    user = create_user(db, user_in, password_hash)
-    return user
 
 
 @router.get(
