@@ -5,6 +5,8 @@ from sqlalchemy.exc import IntegrityError
 from database import get_db
 from schemas.review import ReviewCreate, ReviewRead
 from crud.review import create_review
+from security import get_current_user
+from models import User
 
 router = APIRouter(
     prefix="/reviews",
@@ -19,6 +21,7 @@ router = APIRouter(
 def create_review_endpoint(
     review_in: ReviewCreate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     try:
         review = create_review(db, review_in)
