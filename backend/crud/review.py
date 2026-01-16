@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
 from models import Review
-from schemas.review import ReviewCreate
+from schemas.review import ReviewCreate, ReviewUpdate
 
 def create_review(
     db: Session,
@@ -38,3 +38,26 @@ def delete_review(
     db.delete(review)
     db.commit()
     return True
+
+
+def update_review(
+    db: Session,
+    review_id: int,
+    user_id: int,
+    review_in: ReviewUpdate,
+) -> Review | None:
+    review = db.get(Review, review_id)
+
+    if not review:
+        return None
+
+    if review.user_id != user_id:
+        raise PermissionError
+
+    review.cleanliness_rating = review_in.cleanliness_rating
+    review.safety_rating = review_in.safety_rating
+    review.comment = review_in.comment
+
+    db.commit()
+    db.refresh(review)
+    return review

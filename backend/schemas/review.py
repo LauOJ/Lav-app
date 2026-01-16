@@ -12,6 +12,10 @@ class ReviewCreate(ReviewBase):
     wc_id: int
 
 
+class ReviewUpdate(ReviewBase):
+    pass
+
+
 class ReviewRead(ReviewBase):
     id: int
     user_id: int

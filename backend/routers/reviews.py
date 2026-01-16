@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
 from database import get_db
-from schemas.review import ReviewCreate, ReviewRead
-from crud.review import create_review, delete_review
+from schemas.review import ReviewCreate, ReviewRead, ReviewUpdate
+from crud.review import create_review, delete_review, update_review
 from security import get_current_user
 from models import User
 
@@ -65,4 +65,36 @@ def delete_review_endpoint(
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not allowed to delete this review",
+        )
+
+
+@router.put(
+    "/{review_id}",
+    response_model=ReviewRead,
+)
+def update_review_endpoint(
+    review_id: int,
+    review_in: ReviewUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    try:
+        review = update_review(
+            db=db,
+            review_id=review_id,
+            user_id=current_user.id,
+            review_in=review_in,
+        )
+
+        if not review:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Review not found",
+            )
+
+        return review
+    except PermissionError:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not allowed to edit this review",
         )
