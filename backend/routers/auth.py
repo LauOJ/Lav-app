@@ -20,7 +20,7 @@ def login(email: str, password: str, db: Session = Depends(get_db)):
             detail="Invalid credentials",
         )
 
-    token = create_access_token({"sub": str(user.id)})
+    token = create_access_token({"sub": user.id})
 
     return {
         "access_token": token,
