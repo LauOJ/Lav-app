@@ -43,6 +43,8 @@ class WC(Base):
     accessible = Column(Boolean, nullable=False, default=False)
     gender_neutral = Column(Boolean, nullable=False, default=False)
     has_changing_table = Column(Boolean, nullable=False, default=False)
+    only_for_customers = Column(Boolean, nullable=False, default=False)
+    has_intimate_hygiene_products = Column(Boolean, nullable=False, default=False)
 
     description = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

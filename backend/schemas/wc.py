@@ -9,6 +9,8 @@ class WCBase(BaseModel):
     accessible: bool = False
     gender_neutral: bool = False
     has_changing_table: bool = False
+    only_for_customers: bool = False
+    has_intimate_hygiene_products: bool = False
     description: str | None = None
 
 
