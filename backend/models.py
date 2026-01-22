@@ -1,5 +1,6 @@
 from sqlalchemy import (
     Column,
+    Float,
     Integer,
     String,
     Boolean,
@@ -37,8 +38,8 @@ class WC(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
-    latitude = Column(String, nullable=False)
-    longitude = Column(String, nullable=False)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
 
     accessible = Column(Boolean, nullable=False, default=False)
     gender_neutral = Column(Boolean, nullable=False, default=False)

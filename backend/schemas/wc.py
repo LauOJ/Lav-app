@@ -4,8 +4,8 @@ from pydantic import BaseModel, ConfigDict
 
 class WCBase(BaseModel):
     name: str
-    latitude: str
-    longitude: str
+    latitude: float
+    longitude: float
     accessible: bool = False
     gender_neutral: bool = False
     has_changing_table: bool = False
