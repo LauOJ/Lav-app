@@ -12,3 +12,7 @@ def create_wc(db: Session, wc_in: WCCreate) -> WC:
 
 def get_wcs(db: Session) -> list[WC]:
     return db.query(WC).all()
+
+
+def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
+    return db.get(WC, wc_id)

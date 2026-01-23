@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.wc import WCCreate, WCRead
 from schemas.review import ReviewRead
-from crud.wc import create_wc as create_wc_crud, get_wcs
+from crud.wc import create_wc as create_wc_crud, get_wcs, get_wc_by_id
 from crud.review import get_reviews_by_wc_id
 
 from security import get_current_user
@@ -38,6 +38,23 @@ def list_wcs_endpoint(
     db: Session = Depends(get_db),
 ):
     return get_wcs(db)
+
+
+@router.get(
+    "/{wc_id}",
+    response_model=WCRead,
+)
+def get_wc_endpoint(
+    wc_id: int,
+    db: Session = Depends(get_db),
+):
+    wc = get_wc_by_id(db, wc_id)
+    if not wc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="WC not found",
+        )
+    return wc
 
 
 @router.get(

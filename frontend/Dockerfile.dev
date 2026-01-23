@@ -1,16 +1,19 @@
 FROM node:20
 
+# 1. Directorio de trabajo
 WORKDIR /app
 
-# Copiamos solo los manifests
+# 2. Copiamos solo package.json / lock primero (cache eficiente)
 COPY package.json package-lock.json ./
 
-# Instalación robusta y reproducible
-RUN npm ci --include=optional
+# 3. Instalamos dependencias
+RUN npm install
 
-# Copiamos el resto del código
+# 4. Copiamos el resto del código
 COPY . .
 
+# 5. Exponemos el puerto del dev server
 EXPOSE 4200
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
+# 6. Arrancamos Angular en modo desarrollo
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--poll=2000"]
