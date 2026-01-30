@@ -1,3 +1,39 @@
+<h2>Filtros</h2>
+
+<label>
+  <input
+    type="checkbox"
+    [checked]="isChecked('accessible')"
+    (change)="onToggle('accessible', $event.target.checked)"
+  />
+  Accesible
+</label>
+
+<br />
+
+<label>
+  <input
+    type="checkbox"
+    [checked]="isChecked('gender_neutral')"
+    (change)="onToggle('gender_neutral', $event.target.checked)"
+  />
+  Baño neutral
+</label>
+
+<br />
+
+<label>
+  <input
+    type="checkbox"
+    [checked]="isChecked('only_for_customers')"
+    (change)="onToggle('only_for_customers', $event.target.checked)"
+  />
+  Solo para clientes
+</label>
+
+<hr />
+
+
 <h1>Listado de WCs</h1>
 
 @if (loading()) {
