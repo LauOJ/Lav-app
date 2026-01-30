@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/auth/auth.service';
+import { AuthState } from '../../../core/auth/auth.state';
 
 @Component({
   imports: [CommonModule],
@@ -11,6 +12,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 export class LoginPage {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly authState = inject(AuthState);
 
   readonly email = signal('');
   readonly password = signal('');
@@ -23,12 +25,11 @@ export class LoginPage {
 
     this.authService.login(this.email(), this.password()).subscribe({
       next: (response) => {
-        console.log('LOGIN OK → token:', response.access_token);
+        this.authState.setToken(response.access_token);
+        console.log('Token guardado');
+      
         this.loading.set(false);
-
-        // ⚠️ Aún NO guardamos el token
-        // ⚠️ Aún NO redirigimos
-      },
+      },      
       error: () => {
         this.error.set('Email o contraseña incorrectos');
         this.loading.set(false);
