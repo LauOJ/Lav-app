@@ -37,8 +37,9 @@ export class WCListPage {
       const filters: WCFilters = {
         accessible: params['accessible'] === 'true' ? true : undefined,
         gender_neutral: params['gender_neutral'] === 'true' ? true : undefined,
-        only_for_customers:
-          params['only_for_customers'] === 'true' ? true : undefined,
+        has_changing_table: params['has_changing_table'] === 'true' ? true : undefined,
+        only_for_customers: params['only_for_customers'] === 'true' ? true : undefined,
+        has_intimate_hygiene_products: params['has_intimate_hygiene_products'] === 'true' ? true : undefined,
       };
 
       this.currentFilters.set(filters);

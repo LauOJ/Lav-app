@@ -31,6 +31,30 @@
   Solo para clientes
 </label>
 
+<br />
+
+<label>
+    <input
+      type="checkbox"
+      [checked]="isChecked('has_changing_table')"
+      (change)="onToggle('has_changing_table', $event.target.checked)"
+    />
+    Cambiador
+  </label>
+  
+  <br />
+  
+  <label>
+    <input
+      type="checkbox"
+      [checked]="isChecked('has_intimate_hygiene_products')"
+      (change)="onToggle('has_intimate_hygiene_products', $event.target.checked)"
+    />
+    Productos de higiene íntima
+  </label>
+  
+  <br />
+
 <hr />
 
 
@@ -45,13 +69,27 @@
 }
 
 @if (!loading() && !error()) {
-  <ul>
-    @for (wc of wcs(); track wc.id) {
-      <li>
-        <strong>{{ wc.name }}</strong><br />
-        Accesible: {{ wc.accessible ? 'Sí' : 'No' }} |
-        Neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}
-      </li>
-    }
-  </ul>
-}
+    <ul>
+      @for (wc of wcs(); track wc.id) {
+        <li>
+          <strong>{{ wc.name }}</strong>
+  
+          <ul>
+            <li>Accesible: {{ wc.accessible ? 'Sí' : 'No' }}</li>
+            <li>Baño neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}</li>
+            <li>Cambiador: {{ wc.has_changing_table ? 'Sí' : 'No' }}</li>
+            <li>Solo para clientes: {{ wc.only_for_customers ? 'Sí' : 'No' }}</li>
+            <li>
+              Productos de higiene íntima:
+              {{ wc.has_intimate_hygiene_products ? 'Sí' : 'No' }}
+            </li>
+          </ul>
+  
+          @if (wc.description) {
+            <p><em>{{ wc.description }}</em></p>
+          }
+        </li>
+      }
+    </ul>
+  }
+  
