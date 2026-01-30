@@ -8,8 +8,12 @@ export class ApiService {
   private readonly http = inject(HttpClient);
 
   // Centralized backend URL
-  private readonly baseUrl = 'http://localhost:8001';
+  private readonly _baseUrl = 'http://localhost:8001';
 
+  get baseUrl(): string {
+    return this._baseUrl;
+  }
+  
   get<T>(url: string, options?: object) {
     return this.http.get<T>(`${this.baseUrl}${url}`, options);
   }
