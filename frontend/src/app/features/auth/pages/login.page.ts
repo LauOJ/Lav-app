@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthState } from '../../../core/auth/auth.state';
+import { UserService } from '../../../core/user/user.service';
+import { UserState } from '../../../core/user/user.state';
+
 
 @Component({
   imports: [CommonModule],
@@ -13,7 +16,9 @@ export class LoginPage {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly authState = inject(AuthState);
-
+  private readonly userService = inject(UserService);
+  private readonly userState = inject(UserState);
+  
   readonly email = signal('');
   readonly password = signal('');
   readonly loading = signal(false);
@@ -26,10 +31,19 @@ export class LoginPage {
     this.authService.login(this.email(), this.password()).subscribe({
       next: (response) => {
         this.authState.setToken(response.access_token);
-        console.log('Token guardado');
       
-        this.loading.set(false);
-      },      
+        this.userService.getMe().subscribe({
+          next: (user) => {
+            this.userState.setUser(user);
+            console.log('Usuario cargado:', user);
+            this.loading.set(false);
+          },
+          error: () => {
+            this.loading.set(false);
+          },
+        });
+      }
+      ,      
       error: () => {
         this.error.set('Email o contraseña incorrectos');
         this.loading.set(false);
