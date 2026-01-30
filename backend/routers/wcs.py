@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
+from typing import Optional
 
 from database import get_db
 from schemas.wc import WCCreate, WCRead
@@ -35,9 +36,22 @@ def create_wc_endpoint(
     response_model=list[WCRead],
 )
 def list_wcs_endpoint(
+    accessible: Optional[bool] = Query(None),
+    gender_neutral: Optional[bool] = Query(None),
+    has_changing_table: Optional[bool] = Query(None),
+    only_for_customers: Optional[bool] = Query(None),
+    has_intimate_hygiene_products: Optional[bool] = Query(None),
     db: Session = Depends(get_db),
 ):
-    return get_wcs(db)
+    return get_wcs(
+        db=db,
+        accessible=accessible,
+        gender_neutral=gender_neutral,
+        has_changing_table=has_changing_table,
+        only_for_customers=only_for_customers,
+        has_intimate_hygiene_products=has_intimate_hygiene_products,
+    )
+
 
 
 @router.get(
