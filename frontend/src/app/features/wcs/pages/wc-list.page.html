@@ -1,0 +1,21 @@
+<h1>Listado de WCs</h1>
+
+@if (loading()) {
+  <p>Cargando WCs...</p>
+}
+
+@if (error()) {
+  <p style="color: red;">{{ error() }}</p>
+}
+
+@if (!loading() && !error()) {
+  <ul>
+    @for (wc of wcs(); track wc.id) {
+      <li>
+        <strong>{{ wc.name }}</strong><br />
+        Accesible: {{ wc.accessible ? 'Sí' : 'No' }} |
+        Neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}
+      </li>
+    }
+  </ul>
+}
