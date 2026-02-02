@@ -4,10 +4,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 
 import { WCService } from '../services/wc.service';
+import { ReviewListComponent } from '../../reviews/components/review-list.component';
 
 @Component({
   selector: 'app-wc-detail-page',
   templateUrl: './wc-detail.page.html',
+  imports: [ReviewListComponent],
 })
 export class WcDetailPage {
   private route = inject(ActivatedRoute);

@@ -12,6 +12,9 @@
       <p>
         {{ wc()?.description }}
       </p>
+
+      <app-review-list [wcId]="wc()!.id" />
+
     }
   } @else {
     <p>Cargando WC…</p>

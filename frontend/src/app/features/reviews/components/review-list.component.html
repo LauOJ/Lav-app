@@ -1,0 +1,24 @@
+<h3>Reviews</h3>
+
+@if (reviews().length === 0) {
+  <p>No hay reviews todavía.</p>
+} @else {
+  <ul>
+    @for (review of reviews(); track review.id) {
+      <li>
+        <p>
+          <strong>Limpieza:</strong> {{ review.cleanliness_rating }} / 5<br />
+          <strong>Seguridad:</strong> {{ review.safety_rating }} / 5
+        </p>
+
+        @if (review.comment) {
+          <p>
+            <em>{{ review.comment }}</em>
+          </p>
+        }
+
+      </li>
+    }
+  </ul>
+}
+

@@ -1,0 +1,10 @@
+export interface Review {
+    id: number;
+    cleanliness_rating: number;
+    safety_rating: number;
+    comment?: string;
+    user_id: number;
+    wc_id: number;
+    created_at: string;
+  }
+  
