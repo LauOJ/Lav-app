@@ -1,1 +1,14 @@
+<header style="margin-bottom: 1rem">
+  @if (userState.user()) {
+    <span>
+      👤 {{ userState.user()?.email }}
+    </span>
+
+    <button (click)="onLogout()" style="margin-left: 1rem">
+      Logout
+    </button>
+  }
+</header>
+
 <router-outlet></router-outlet>
+
