@@ -25,4 +25,8 @@ export class WCService {
   
       return this.api.get<WC[]>('/wcs', { params });
     }
+
+    getById(id: number): Observable<WC> {
+        return this.api.get<WC>(`/wcs/${id}`);
+      }
 }

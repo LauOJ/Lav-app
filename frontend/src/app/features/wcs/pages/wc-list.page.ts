@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 
 import { Component, inject, signal, effect } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { WCService } from '../services/wc.service';
@@ -9,7 +9,7 @@ import { WC } from '../models/wc.model';
 import { WCFilters } from '../models/wc-filters.model';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './wc-list.page.html'
 })
 export class WCListPage {

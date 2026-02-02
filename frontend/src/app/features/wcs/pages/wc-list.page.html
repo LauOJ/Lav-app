@@ -72,8 +72,10 @@
     <ul>
       @for (wc of wcs(); track wc.id) {
         <li>
-          <strong>{{ wc.name }}</strong>
-  
+            <a [routerLink]="['/wcs', wc.id]" style="cursor: pointer; color:red">
+                <strong>{{ wc.name }}</strong>
+              </a>
+                
           <ul>
             <li>Accesible: {{ wc.accessible ? 'Sí' : 'No' }}</li>
             <li>Baño neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}</li>

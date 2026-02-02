@@ -1,0 +1,19 @@
+@if (wc()) {
+    <h2>{{ wc()?.name }}</h2>
+  
+    <ul>
+      <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>
+      <li>Neutral: {{ wc()?.gender_neutral ? 'Sí' : 'No' }}</li>
+      <li>Cambiador: {{ wc()?.has_changing_table ? 'Sí' : 'No' }}</li>
+      <li>Solo clientes: {{ wc()?.only_for_customers ? 'Sí' : 'No' }}</li>
+    </ul>
+  
+    @if (wc()?.description) {
+      <p>
+        {{ wc()?.description }}
+      </p>
+    }
+  } @else {
+    <p>Cargando WC…</p>
+  }
+  
