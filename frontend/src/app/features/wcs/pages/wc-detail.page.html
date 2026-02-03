@@ -22,8 +22,11 @@
         <p><em>Ya has dejado una review para este WC.</em></p>
       }
   
-      <app-review-list [reviews]="reviews()" />
-  
+      <app-review-list
+      [reviews]="reviews()"
+      [currentUser]="userState.user()"
+    />
+      
   } @else {
     <p>Cargando WC…</p>
   }

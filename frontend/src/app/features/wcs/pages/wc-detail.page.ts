@@ -18,7 +18,7 @@ export class WcDetailPage {
   private route = inject(ActivatedRoute);
   private wcsService = inject(WCService);
   private reviewsService = inject(ReviewsService);
-  private userState = inject(UserState);
+  public readonly userState = inject(UserState);
 
   wc = toSignal(
     this.route.paramMap.pipe(

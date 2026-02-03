@@ -12,11 +12,12 @@
         </p>
 
         @if (review.comment) {
-          <p>
-            <em>{{ review.comment }}</em>
-          </p>
+          <p>{{ review.comment }}</p>
         }
-
+  
+        @if (currentUser() && review.user_id === currentUser()!.id) {
+          <p><em>(Tu review)</em></p>
+        }
       </li>
     }
   </ul>
