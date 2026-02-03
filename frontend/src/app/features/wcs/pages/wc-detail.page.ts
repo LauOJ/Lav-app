@@ -41,9 +41,6 @@ export class WcDetailPage {
     const user = this.userState.user();
     const reviews = this.reviews();
   
-    console.log('USER:', user);
-    console.log('REVIEWS:', reviews);
-  
     if (!user) return false;
   
     return reviews.some(r => r.user_id === user.id);
