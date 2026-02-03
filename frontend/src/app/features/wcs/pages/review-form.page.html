@@ -1,0 +1,28 @@
+<h2>Nueva review</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>
+    Limpieza (1–5)
+    <input type="number" min="1" max="5" formControlName="cleanliness_rating" />
+  </label>
+
+  <br />
+
+  <label>
+    Seguridad (1–5)
+    <input type="number" min="1" max="5" formControlName="safety_rating" />
+  </label>
+
+  <br />
+
+  <label>
+    Comentario
+    <textarea formControlName="comment"></textarea>
+  </label>
+
+  <br />
+
+  <button type="submit" [disabled]="form.invalid">
+    Enviar review
+  </button>
+</form>

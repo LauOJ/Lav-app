@@ -1,21 +1,17 @@
-import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 
-import { AuthState } from './auth.state';
+const TOKEN_KEY = 'wcadvisor_token';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const authState = inject(AuthState);
-  const token = authState.token();
+  const token = localStorage.getItem(TOKEN_KEY);
 
-  if (!token) {
-    return next(req);
+  if (token) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
-  const authReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return next(authReq);
+  return next(req);
 };

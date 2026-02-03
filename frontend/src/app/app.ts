@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 
 import { UserState } from './core/user/user.state';
@@ -14,6 +14,14 @@ export class App {
   readonly userState = inject(UserState);
   readonly authState = inject(AuthState);
   private readonly router = inject(Router);
+
+  constructor() {
+    effect(() => {
+      if (this.authState.isAuthenticated() && !this.userState.user()) {
+        this.userState.loadMe();
+      }
+    });
+  }
 
   onLogout() {
     this.authState.clearToken();

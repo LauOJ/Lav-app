@@ -12,10 +12,18 @@
       <p>
         {{ wc()?.description }}
       </p>
-
-      <app-review-list [wcId]="wc()!.id" />
-
     }
+  
+    @if (!hasUserReviewed()) {
+        <a [routerLink]="['/wcs', wc()!.id, 'reviews', 'new']">
+          Añadir review
+        </a>
+      } @else {
+        <p><em>Ya has dejado una review para este WC.</em></p>
+      }
+  
+      <app-review-list [reviews]="reviews()" />
+  
   } @else {
     <p>Cargando WC…</p>
   }

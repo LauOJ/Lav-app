@@ -13,4 +13,14 @@ export class ReviewsService {
   getByWcId(wcId: number): Observable<Review[]> {
     return this.api.get<Review[]>(`/wcs/${wcId}/reviews`);
   }
+  
+  createReview(data: {
+    wc_id: number;
+    cleanliness_rating: number;
+    safety_rating: number;
+    comment?: string;
+  }) {
+    return this.api.post('/reviews', data);
+  }
+  
 }
