@@ -5,21 +5,10 @@
 } @else {
   <ul>
     @for (review of reviews(); track review.id) {
-      <li>
-        <p>
-          <strong>Limpieza:</strong> {{ review.cleanliness_rating }} / 5<br />
-          <strong>Seguridad:</strong> {{ review.safety_rating }} / 5
-        </p>
-
-        @if (review.comment) {
-          <p>{{ review.comment }}</p>
-        }
-  
-        @if (currentUser() && review.user_id === currentUser()!.id) {
-          <p><em>(Tu review)</em></p>
-        }
-      </li>
+      <app-review-item
+        [review]="review"
+        [currentUser]="currentUser()"
+      />
     }
   </ul>
 }
-

@@ -1,0 +1,18 @@
+<li>
+    <p>
+      <strong>Limpieza:</strong> {{ review().cleanliness_rating }} / 5<br />
+      <strong>Seguridad:</strong> {{ review().safety_rating }} / 5
+    </p>
+  
+    @if (review().comment) {
+      <p>{{ review().comment }}</p>
+    }
+  
+    @if (isMine()) {
+      <div style="margin-top: 0.5rem">
+        <button disabled>✏️ Editar</button>
+        <button disabled>🗑️ Borrar</button>
+      </div>
+    }
+  </li>
+  
