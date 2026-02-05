@@ -8,6 +8,7 @@
       <app-review-item
         [review]="review"
         [currentUser]="currentUser()"
+        (delete)="onDeleteReview($event)"
       />
     }
   </ul>
