@@ -14,7 +14,8 @@ export class ReviewListComponent {
     currentUser = input<User | null>();
   
     deleted = output<void>();
-  
+    updated = output<void>();
+
     private readonly reviewsService = inject(ReviewsService);
   
     onDeleteReview(reviewId: number) {
@@ -30,4 +31,26 @@ export class ReviewListComponent {
         },
       });
     }
+
+    onUpdateReview(payload: {
+        reviewId: number;
+        cleanliness_rating: number;
+        safety_rating: number;
+        comment?: string;
+      }) {
+        this.reviewsService
+          .updateReview(payload.reviewId, {
+            cleanliness_rating: payload.cleanliness_rating,
+            safety_rating: payload.safety_rating,
+            comment: payload.comment,
+          })
+          .subscribe({
+            next: () => {
+              this.updated.emit();
+            },
+            error: () => {
+              alert('Error al actualizar la review');
+            },
+          });
+      }
 }
