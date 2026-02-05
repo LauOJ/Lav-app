@@ -13,7 +13,7 @@ export class ReviewsService {
   getByWcId(wcId: number): Observable<Review[]> {
     return this.api.get<Review[]>(`/wcs/${wcId}/reviews`);
   }
-  
+
   createReview(data: {
     wc_id: number;
     cleanliness_rating: number;
@@ -23,4 +23,7 @@ export class ReviewsService {
     return this.api.post('/reviews', data);
   }
   
+  deleteReview(reviewId: number): Observable<void> {
+    return this.api.delete<void>(`/reviews/${reviewId}`);
+  }
 }
