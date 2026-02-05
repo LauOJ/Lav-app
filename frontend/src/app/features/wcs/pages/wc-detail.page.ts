@@ -90,6 +90,11 @@ export class WcDetailPage {
     this.loadReviews();
   }
 
+  onReviewUpdated() {
+    this.loadReviews();
+  }
+  
+
   // ---- DERIVED STATE ------------------------------------------
 
   hasUserReviewed = computed(() => {
