@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<h1>Registro</h1>
 
 <form (submit)="onSubmit(); $event.preventDefault()">
   <div>
@@ -26,7 +26,7 @@
   </div>
 
   <button type="submit" [disabled]="loading()">
-    {{ loading() ? 'Entrando…' : 'Entrar' }}
+    {{ loading() ? 'Registrando…' : 'Registrarse' }}
   </button>
 
   @if (error()) {
@@ -35,5 +35,5 @@
 </form>
 
 <p>
-  ¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate</a>
+  ¿Ya tienes cuenta? <a [routerLink]="['/login']">Inicia sesión</a>
 </p>

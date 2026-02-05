@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthState } from '../../../core/auth/auth.state';
@@ -9,7 +9,8 @@ import { UserState } from '../../../core/user/user.state';
 
 
 @Component({
-  imports: [CommonModule],
+  selector: 'app-login-page',
+  imports: [CommonModule, RouterModule],
   templateUrl: './login.page.html',
 })
 export class LoginPage {
@@ -35,15 +36,14 @@ export class LoginPage {
         this.userService.getMe().subscribe({
           next: (user) => {
             this.userState.setUser(user);
-            console.log('Usuario cargado:', user);
             this.loading.set(false);
+            this.router.navigate(['/wcs']);
           },
           error: () => {
             this.loading.set(false);
           },
         });
-      }
-      ,      
+      },
       error: () => {
         this.error.set('Email o contraseña incorrectos');
         this.loading.set(false);

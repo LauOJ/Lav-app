@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { User } from './user.model';
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,5 +19,12 @@ export class UserService {
 
   getMe(): Observable<User> {
     return this.http.get<User>(`${this.api.baseUrl}/users/me`);
+  }
+
+  register(email: string, password: string): Observable<User> {
+    return this.http.post<User>(`${this.api.baseUrl}/users`, {
+      email,
+      password,
+    });
   }
 }
