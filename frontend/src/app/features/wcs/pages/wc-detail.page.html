@@ -25,6 +25,7 @@
       <app-review-list
       [reviews]="reviews()"
       [currentUser]="userState.user()"
+      (deleted)="onReviewDeleted()"
     />
       
   } @else {
