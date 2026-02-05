@@ -1,22 +1,48 @@
-<li>
-    <p>
-      <strong>Limpieza:</strong> {{ review().cleanliness_rating }} / 5<br />
-      <strong>Seguridad:</strong> {{ review().safety_rating }} / 5
-    </p>
+@if (!isEditing()) {
+    <li>
+      <p>
+        <strong>Limpieza:</strong> {{ review().cleanliness_rating }} / 5<br />
+        <strong>Seguridad:</strong> {{ review().safety_rating }} / 5
+      </p>
   
-    @if (review().comment) {
-      <p>{{ review().comment }}</p>
-    }
+      @if (review().comment) {
+        <p>{{ review().comment }}</p>
+      }
   
-    @if (isMine()) {
-      <div style="margin-top: 0.5rem">
-        <button disabled>✏️ Editar</button>
-        <button
-        type="button"
-        (click)="onDelete()">
-        🗑️ Borrar
-      </button>
-            </div>
-    }
-  </li>
+      @if (isMine()) {
+        <div>
+          <button type="button" (click)="onEdit()">✏️ Editar</button>
+          <button type="button" (click)="onDelete()">🗑️ Borrar</button>
+        </div>
+      }
+    </li>
+  }
+  
+  @if (isEditing()) {
+    <li>
+      <label>
+        Limpieza:
+        <input type="number" min="1" max="5" [value]="cleanliness()" (input)="cleanliness.set($any($event.target).valueAsNumber)" />
+      </label>
+  
+      <br />
+  
+      <label>
+        Seguridad:
+        <input type="number" min="1" max="5" [value]="safety()" (input)="safety.set($any($event.target).valueAsNumber)" />
+      </label>
+  
+      <br />
+  
+      <label>
+        Comentario:
+        <textarea [value]="comment()" (input)="comment.set($any($event.target).value)"></textarea>
+      </label>
+  
+      <br />
+  
+      <button type="button" (click)="onSave()">Guardar</button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
+    </li>
+  }
   
