@@ -26,4 +26,16 @@ export class ReviewsService {
   deleteReview(reviewId: number): Observable<void> {
     return this.api.delete<void>(`/reviews/${reviewId}`);
   }
+
+  updateReview(
+    reviewId: number,
+    data: {
+      cleanliness_rating: number;
+      safety_rating: number;
+      comment?: string;
+    }
+  ) {
+    return this.api.put(`/reviews/${reviewId}`, data);
+  }
+  
 }
