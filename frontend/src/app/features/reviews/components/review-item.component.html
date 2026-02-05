@@ -11,8 +11,12 @@
     @if (isMine()) {
       <div style="margin-top: 0.5rem">
         <button disabled>✏️ Editar</button>
-        <button disabled>🗑️ Borrar</button>
-      </div>
+        <button
+        type="button"
+        (click)="onDelete()">
+        🗑️ Borrar
+      </button>
+            </div>
     }
   </li>
   
