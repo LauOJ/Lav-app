@@ -28,26 +28,17 @@ export class RegisterPage {
     this.loading.set(true);
     this.error.set(null);
 
-    this.userService.register(this.email(), this.password()).subscribe({
-      next: () => {
-        // After registration, automatically log in
-        this.authService.login(this.email(), this.password()).subscribe({
-          next: (response) => {
-            this.authState.setToken(response.access_token);
-            
-            this.userService.getMe().subscribe({
-              next: (user) => {
-                this.userState.setUser(user);
-                this.loading.set(false);
-                this.router.navigate(['/wcs']);
-              },
-              error: () => {
-                this.loading.set(false);
-              },
-            });
+    this.authService.registerAndLogin(this.email(), this.password()).subscribe({
+      next: (response) => {
+        this.authState.setToken(response.access_token);
+
+        this.userService.getMe().subscribe({
+          next: (user) => {
+            this.userState.setUser(user);
+            this.loading.set(false);
+            this.router.navigate(['/wcs']);
           },
           error: () => {
-            this.error.set('Error al iniciar sesión después del registro');
             this.loading.set(false);
           },
         });

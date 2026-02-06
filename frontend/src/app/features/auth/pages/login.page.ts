@@ -29,20 +29,11 @@ export class LoginPage {
     this.loading.set(true);
     this.error.set(null);
 
-    this.authService.login(this.email(), this.password()).subscribe({
-      next: (response) => {
-        this.authState.setToken(response.access_token);
-      
-        this.userService.getMe().subscribe({
-          next: (user) => {
-            this.userState.setUser(user);
-            this.loading.set(false);
-            this.router.navigate(['/wcs']);
-          },
-          error: () => {
-            this.loading.set(false);
-          },
-        });
+    this.authService.loginAndLoadUser(this.email(), this.password()).subscribe({
+      next: (user) => {
+        this.userState.setUser(user);
+        this.loading.set(false);
+        this.router.navigate(['/wcs']);
       },
       error: () => {
         this.error.set('Email o contraseña incorrectos');
