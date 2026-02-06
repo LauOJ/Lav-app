@@ -1,0 +1,136 @@
+<h2>Crear nuevo WC</h2>
+
+<button [routerLink]="['/wcs']">← Volver a lista</button>
+
+<br /><br />
+
+<form (submit)="onSubmit(); $event.preventDefault()">
+  <div>
+    <label>
+      Nombre *<br />
+      <input
+        type="text"
+        [value]="form().name"
+        (input)="updateName($any($event.target).value)"
+        required
+      />
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      Latitud *<br />
+      <input
+        type="number"
+        step="any"
+        [value]="form().latitude"
+        (input)="updateLatitude($any($event.target).valueAsNumber)"
+        required
+      />
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      Longitud *<br />
+      <input
+        type="number"
+        step="any"
+        [value]="form().longitude"
+        (input)="updateLongitude($any($event.target).valueAsNumber)"
+        required
+      />
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [checked]="form().accessible"
+        (change)="toggleFlag('accessible', $any($event.target).checked)"
+      />
+      Accesible
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [checked]="form().gender_neutral"
+        (change)="toggleFlag('gender_neutral', $any($event.target).checked)"
+      />
+      Baño neutral
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [checked]="form().has_changing_table"
+        (change)="toggleFlag('has_changing_table', $any($event.target).checked)"
+      />
+      Cambiador
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [checked]="form().only_for_customers"
+        (change)="toggleFlag('only_for_customers', $any($event.target).checked)"
+      />
+      Solo para clientes
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [checked]="form().has_intimate_hygiene_products"
+        (change)="toggleFlag('has_intimate_hygiene_products', $any($event.target).checked)"
+      />
+      Productos de higiene íntima
+    </label>
+  </div>
+
+  <br />
+
+  <div>
+    <label>
+      Descripción<br />
+      <textarea
+        [value]="form().description || ''"
+        (input)="updateDescription($any($event.target).value)"
+      ></textarea>
+    </label>
+  </div>
+
+  <br />
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Creando…' : 'Crear WC' }}
+  </button>
+
+  @if (error()) {
+    <p style="color: red;">{{ error() }}</p>
+  }
+</form>

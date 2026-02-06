@@ -60,6 +60,10 @@
 
 <h1>Listado de WCs</h1>
 
+<a [routerLink]="['/wcs', 'new']">+ Añadir WC</a>
+
+<br /><br />
+
 @if (loading()) {
   <p>Cargando WCs...</p>
 }

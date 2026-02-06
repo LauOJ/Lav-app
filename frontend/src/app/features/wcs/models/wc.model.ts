@@ -13,4 +13,6 @@ export interface WC {
     description: string | null;
     created_at: string;
   }
+
+export type WCCreate = Omit<WC, 'id' | 'created_at'>;
   

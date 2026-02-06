@@ -8,6 +8,12 @@ export const WCS_ROUTES: Routes = [
       import('./pages/wc-list.page').then(m => m.WCListPage),
   },
   {
+    path: 'new',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/wc-form.page').then(m => m.WCFormPage),
+  },
+  {
     path: ':id',
     loadComponent: () =>
       import('./pages/wc-detail.page').then(m => m.WcDetailPage),

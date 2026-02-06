@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from '../../../core/api/api.service';
-import { WC } from '../models/wc.model';
+import { WC, WCCreate } from '../models/wc.model';
 import { WCFilters } from '../models/wc-filters.model';
 
 @Injectable({
@@ -28,5 +28,9 @@ export class WCService {
 
     getById(id: number): Observable<WC> {
         return this.api.get<WC>(`/wcs/${id}`);
-      }
+    }
+
+    createWC(data: WCCreate): Observable<WC> {
+      return this.api.post<WC>('/wcs', data);
+    }
 }
