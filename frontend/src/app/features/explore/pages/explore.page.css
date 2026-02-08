@@ -1,0 +1,26 @@
+.explore-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+}
+
+.status-banner {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #222222;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  font-size: 0.85rem;
+  z-index: 1000;
+}
+
+.status-banner.error {
+  background: #ffe9e9;
+  color: #a01818;
+}

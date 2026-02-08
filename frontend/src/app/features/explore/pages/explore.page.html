@@ -1,0 +1,19 @@
+<section class="explore-page">
+  <app-map-view [wcs]="wcs()" (wcSelected)="onSelectWc($event)" />
+
+  @if (loading()) {
+    <div class="status-banner">Cargando WCs...</div>
+  }
+
+  @if (error()) {
+    <div class="status-banner error">{{ error() }}</div>
+  }
+
+  @if (selectedWc()) {
+    <app-wc-detail-sheet
+      [wc]="selectedWc()!"
+      (close)="onCloseSheet()"
+      (viewDetail)="onViewDetail($event)"
+    />
+  }
+</section>

@@ -4,8 +4,13 @@ import { guestGuard } from './core/auth/guest.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'wcs',
+    redirectTo: 'explore',
     pathMatch: 'full',
+  },
+  {
+    path: 'explore',
+    loadComponent: () =>
+      import('./features/explore/pages/explore.page').then(m => m.ExplorePage),
   },
   {
     path: 'login',
@@ -26,6 +31,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'wcs',
+    redirectTo: 'explore',
   },
 ];

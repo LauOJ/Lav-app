@@ -1,0 +1,45 @@
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  background: #ffffff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  background: #d0d0d0;
+  border-radius: 999px;
+  margin: 0 auto 0.75rem;
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+button {
+  border: 1px solid #dadada;
+  background: #f7f7f7;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+button.primary {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #ffffff;
+}
