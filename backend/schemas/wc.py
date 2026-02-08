@@ -21,5 +21,8 @@ class WCCreate(WCBase):
 class WCRead(WCBase):
     id: int
     created_at: datetime
+    avg_cleanliness: float | None
+    avg_safety: float | None
+    reviews_count: int
 
     model_config = ConfigDict(from_attributes=True)
