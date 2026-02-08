@@ -27,12 +27,12 @@ export class WcDetailSheet {
   }
 
   onExpand(): void {
-    this.sheetState.set('expanded');
+    this.sheetState.set(this.isExpanded() ? 'collapsed' : 'expanded');
   }
 
   onSheetClick(event: MouseEvent): void {
     const target = event.target as HTMLElement | null;
     if (target?.closest('button')) return;
-    this.sheetState.set('expanded');
+    this.sheetState.set(this.isExpanded() ? 'collapsed' : 'expanded');
   }
 }
