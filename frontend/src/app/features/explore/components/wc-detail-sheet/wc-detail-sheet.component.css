@@ -11,23 +11,80 @@
   z-index: 1100;
 }
 
+.handle-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 28px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
 .handle {
   width: 36px;
   height: 4px;
   background: #d0d0d0;
   border-radius: 999px;
-  margin: 0 auto 0.75rem;
 }
 
 .title {
   margin: 0 0 1rem;
   font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: #f1f1f1;
+  color: #4a4a4a;
+  font-size: 0.85rem;
 }
 
 .actions {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.stats {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.label {
+  color: #4a4a4a;
+}
+
+.value {
+  font-weight: 600;
+}
+
+.muted {
+  color: #7a7a7a;
+  font-weight: 400;
+}
+
+.cta {
+  margin-top: 1rem;
 }
 
 button {

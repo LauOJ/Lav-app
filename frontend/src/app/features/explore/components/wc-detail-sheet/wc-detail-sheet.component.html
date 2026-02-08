@@ -1,11 +1,76 @@
-<aside class="sheet" role="dialog" aria-label="Detalle del WC">
-  <div class="handle"></div>
-  <h2 class="title">{{ wc().name }}</h2>
+<aside class="sheet" role="dialog" aria-label="Detalle del WC" (click)="onSheetClick($event)">
+  <button type="button" class="handle-button" (click)="onExpand()">
+    <span class="handle"></span>
+  </button>
+  <h2 class="title" (click)="onExpand()">{{ wc().name }}</h2>
+
+  @if (
+    wc().accessible ||
+    wc().gender_neutral ||
+    wc().has_changing_table ||
+    wc().only_for_customers ||
+    wc().has_intimate_hygiene_products
+  ) {
+    <div class="badges">
+      @if (wc().accessible) {
+        <span class="badge">Accesible</span>
+      }
+      @if (wc().gender_neutral) {
+        <span class="badge">Neutral</span>
+      }
+      @if (wc().has_changing_table) {
+        <span class="badge">Cambiador</span>
+      }
+      @if (wc().only_for_customers) {
+        <span class="badge">Solo clientes</span>
+      }
+      @if (wc().has_intimate_hygiene_products) {
+        <span class="badge">Higiene íntima</span>
+      }
+    </div>
+  }
 
   <div class="actions">
-    <button type="button" class="primary" (click)="onViewDetail()">
-      Ver detalle completo
-    </button>
+    @if (!isExpanded()) {
+      <button type="button" class="primary" (click)="onExpand()">
+        Ver más
+      </button>
+    }
     <button type="button" class="secondary" (click)="onClose()">Cerrar</button>
   </div>
+
+  @if (isExpanded()) {
+    <div class="stats">
+      <div class="stat">
+        <span class="label">Limpieza</span>
+        @if (wc().reviews_count > 0) {
+          <span class="value">{{ wc().avg_cleanliness | number: '1.1-1' }}</span>
+        } @else {
+          <span class="value muted">Sin valoraciones</span>
+        }
+      </div>
+
+      <div class="stat">
+        <span class="label">Privacidad</span>
+        @if (wc().reviews_count > 0) {
+          <span class="value">{{ wc().avg_safety | number: '1.1-1' }}</span>
+        } @else {
+          <span class="value muted">Sin valoraciones</span>
+        }
+      </div>
+
+      <div class="stat">
+        <span class="label">Número de reviews</span>
+        @if (wc().reviews_count > 0) {
+          <span class="value">{{ wc().reviews_count }}</span>
+        } @else {
+          <span class="value muted">Sin valoraciones</span>
+        }
+      </div>
+    </div>
+
+    <div class="cta">
+      <button type="button" class="primary">Ver reviews</button>
+    </div>
+  }
 </aside>

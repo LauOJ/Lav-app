@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { WC } from '../../wcs/models/wc.model';
 import { WCService } from '../../wcs/services/wc.service';
@@ -14,7 +14,6 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
 })
 export class ExplorePage implements OnInit {
   private readonly wcService = inject(WCService);
-  private readonly router = inject(Router);
 
   readonly selectedWcId = signal<number | null>(null);
   readonly wcs = signal<WC[]>([]);
@@ -36,10 +35,6 @@ export class ExplorePage implements OnInit {
 
   onCloseSheet(): void {
     this.selectedWcId.set(null);
-  }
-
-  onViewDetail(id: number): void {
-    this.router.navigate(['/wcs', id]);
   }
 
   private loadWcs(): void {

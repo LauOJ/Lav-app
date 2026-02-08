@@ -12,7 +12,13 @@ export interface WC {
   
     description: string | null;
     created_at: string;
+    avg_cleanliness: number | null;
+    avg_safety: number | null;
+    reviews_count: number;
   }
 
-export type WCCreate = Omit<WC, 'id' | 'created_at'>;
+export type WCCreate = Omit<
+  WC,
+  'id' | 'created_at' | 'avg_cleanliness' | 'avg_safety' | 'reviews_count'
+>;
   
