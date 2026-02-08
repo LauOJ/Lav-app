@@ -3,11 +3,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
+  input,
+  output,
   OnChanges,
   OnDestroy,
-  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -22,9 +21,9 @@ import { WC } from '../../../wcs/models/wc.model';
   styleUrl: './map-view.component.css'
 })
 export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input({ required: true }) wcs: WC[] = [];
-  @Output() wcSelected = new EventEmitter<number>();
-  @Input() selectedWcId: number | null = null;
+  wcs = input.required<WC[]>();
+  wcSelected = output<number>();
+  selectedWcId = input<number | null>(null);
 
   @ViewChild('mapContainer', { static: true })
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
@@ -75,7 +74,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.markers.clearLayers();
     this.markerById.clear();
   
-    for (const wc of this.wcs ?? []) {
+    for (const wc of this.wcs() ?? []) {
       if (wc.latitude == null || wc.longitude == null) continue;
   
       const marker = L.marker([wc.latitude, wc.longitude]);
@@ -97,9 +96,10 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private centerOnSelectedWc(): void {
-    if (!this.map || this.selectedWcId == null) return;
+    const selectedWcId = this.selectedWcId();
+    if (!this.map || selectedWcId == null) return;
   
-    const marker = this.markerById.get(this.selectedWcId);
+    const marker = this.markerById.get(selectedWcId);
     if (!marker) return;
   
     this.map.setView(marker.getLatLng(), 16, { animate: true });

@@ -4,7 +4,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReviewsService } from '../../reviews/services/reviews.service';
 
 @Component({
-  standalone: true,
   templateUrl: './review-form.page.html',
   imports: [ReactiveFormsModule],
 })

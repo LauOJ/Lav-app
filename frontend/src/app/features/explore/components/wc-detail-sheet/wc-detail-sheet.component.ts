@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { WC } from '../../../wcs/models/wc.model';
 
@@ -10,15 +10,15 @@ import { WC } from '../../../wcs/models/wc.model';
   styleUrl: './wc-detail-sheet.component.css'
 })
 export class WcDetailSheet {
-  @Input({ required: true }) wc!: WC;
-  @Output() close = new EventEmitter<void>();
-  @Output() viewDetail = new EventEmitter<number>();
+  wc = input.required<WC>();
+  close = output<void>();
+  viewDetail = output<number>();
 
   onClose(): void {
     this.close.emit();
   }
 
   onViewDetail(): void {
-    this.viewDetail.emit(this.wc.id);
+    this.viewDetail.emit(this.wc().id);
   }
 }
