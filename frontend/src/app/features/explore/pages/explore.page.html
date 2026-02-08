@@ -1,5 +1,9 @@
 <section class="explore-page">
-  <app-map-view [wcs]="wcs()" (wcSelected)="onSelectWc($event)" />
+  <app-map-view
+    [wcs]="wcs()"
+    [selectedWcId]="selectedWcId()"
+    (wcSelected)="onSelectWc($event)"
+  ></app-map-view>
 
   @if (loading()) {
     <div class="status-banner">Cargando WCs...</div>
@@ -14,6 +18,6 @@
       [wc]="selectedWc()!"
       (close)="onCloseSheet()"
       (viewDetail)="onViewDetail($event)"
-    />
+    ></app-wc-detail-sheet>
   }
 </section>

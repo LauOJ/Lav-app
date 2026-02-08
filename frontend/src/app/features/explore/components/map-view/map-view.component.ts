@@ -24,12 +24,14 @@ import { WC } from '../../../wcs/models/wc.model';
 export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input({ required: true }) wcs: WC[] = [];
   @Output() wcSelected = new EventEmitter<number>();
+  @Input() selectedWcId: number | null = null;
 
   @ViewChild('mapContainer', { static: true })
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
 
   private map: L.Map | null = null;
   private readonly markers = L.layerGroup();
+  private readonly markerById = new Map<number, L.Marker>();
 
   ngAfterViewInit(): void {
     this.setupMap();
@@ -39,6 +41,10 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['wcs']) {
       this.renderMarkers();
+    }
+
+    if (changes['selectedWcId']) {
+      this.centerOnSelectedWc();
     }
   }
 
@@ -65,17 +71,21 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private renderMarkers(): void {
     if (!this.map) return;
-
+  
     this.markers.clearLayers();
-
+    this.markerById.clear();
+  
     for (const wc of this.wcs ?? []) {
       if (wc.latitude == null || wc.longitude == null) continue;
-
+  
       const marker = L.marker([wc.latitude, wc.longitude]);
       marker.on('click', () => this.wcSelected.emit(wc.id));
+  
       marker.addTo(this.markers);
+      this.markerById.set(wc.id, marker);
     }
   }
+  
 
   private setDefaultMarkerIcons(): void {
     L.Icon.Default.mergeOptions({
@@ -85,4 +95,15 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     });
   }
+
+  private centerOnSelectedWc(): void {
+    if (!this.map || this.selectedWcId == null) return;
+  
+    const marker = this.markerById.get(this.selectedWcId);
+    if (!marker) return;
+  
+    this.map.setView(marker.getLatLng(), 16, { animate: true });
+    marker.openPopup();
+  }
+  
 }
