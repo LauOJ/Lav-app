@@ -6,6 +6,38 @@
   min-height: 100%;
 }
 
+.filters-panel {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  font-size: 0.85rem;
+  z-index: 1000;
+}
+
+.filter-pill {
+  border: 1px solid #dcdcdc;
+  background: #f7f7f7;
+  color: #4a4a4a;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.filter-pill.active {
+  background: #e7eefc;
+  border-color: #b8cdf6;
+  color: #1f4cb3;
+}
+
 .status-banner {
   position: absolute;
   top: 0.75rem;

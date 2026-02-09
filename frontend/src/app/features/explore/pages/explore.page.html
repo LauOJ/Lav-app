@@ -1,6 +1,59 @@
 <section class="explore-page">
+  <div class="filters-panel" role="group" aria-label="Filtros del mapa">
+    <button
+      type="button"
+      class="filter-pill"
+      [class.active]="filters().accessible"
+      [attr.aria-pressed]="filters().accessible"
+      (click)="onToggleFilter('accessible', !filters().accessible)"
+      aria-label="Accesible"
+    >
+      A
+    </button>
+    <button
+      type="button"
+      class="filter-pill"
+      [class.active]="filters().gender_neutral"
+      [attr.aria-pressed]="filters().gender_neutral"
+      (click)="onToggleFilter('gender_neutral', !filters().gender_neutral)"
+      aria-label="Neutral"
+    >
+      GN
+    </button>
+    <button
+      type="button"
+      class="filter-pill"
+      [class.active]="filters().has_changing_table"
+      [attr.aria-pressed]="filters().has_changing_table"
+      (click)="onToggleFilter('has_changing_table', !filters().has_changing_table)"
+      aria-label="Cambiador"
+    >
+      CT
+    </button>
+    <button
+      type="button"
+      class="filter-pill"
+      [class.active]="filters().only_for_customers"
+      [attr.aria-pressed]="filters().only_for_customers"
+      (click)="onToggleFilter('only_for_customers', !filters().only_for_customers)"
+      aria-label="Solo clientes"
+    >
+      SC
+    </button>
+    <button
+      type="button"
+      class="filter-pill"
+      [class.active]="filters().has_intimate_hygiene_products"
+      [attr.aria-pressed]="filters().has_intimate_hygiene_products"
+      (click)="onToggleFilter('has_intimate_hygiene_products', !filters().has_intimate_hygiene_products)"
+      aria-label="Higiene íntima"
+    >
+      HI
+    </button>
+  </div>
+
   <app-map-view
-    [wcs]="wcs()"
+    [wcs]="filteredWcs()"
     [selectedWcId]="selectedWcId()"
     (wcSelected)="onSelectWc($event)"
   ></app-map-view>

@@ -68,6 +68,14 @@
       <button type="button" class="primary" (click)="onToggleReviews()">
         {{ showReviews() ? 'Ocultar reviews' : 'Ver reviews' }}
       </button>
+      <button
+        type="button"
+        class="secondary"
+        [routerLink]="['/wcs', wc().id]"
+        (click)="$event.stopPropagation()"
+      >
+        Ver detalle del WC
+      </button>
     </div>
 
     @if (showReviews()) {
