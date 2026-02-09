@@ -25,7 +25,7 @@
       }
   
       <app-review-list
-      [reviews]="reviews()"
+      [reviews]="sortedReviews()"
       [currentUser]="userState.user()"
       (deleted)="onReviewDeleted()"
       (updated)="onReviewUpdated()"

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { WC } from '../../../wcs/models/wc.model';
 import { WcFeatureIconsComponent } from '../wc-feature-icons/wc-feature-icons.component';
@@ -8,7 +9,7 @@ import { Review } from '../../../reviews/models/review.model';
 
 @Component({
   selector: 'app-wc-detail-sheet',
-  imports: [CommonModule, WcFeatureIconsComponent],
+  imports: [CommonModule, RouterModule, WcFeatureIconsComponent],
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })
@@ -37,7 +38,13 @@ export class WcDetailSheet {
   readonly reviews = signal<Review[]>([]);
   readonly reviewsLoading = signal(false);
   readonly reviewsError = signal<string | null>(null);
-  readonly visibleReviews = computed(() => this.reviews().slice(0, 3));
+  readonly sortedReviews = computed(() =>
+    [...this.reviews()].sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+  );
+  readonly visibleReviews = computed(() => this.sortedReviews().slice(0, 3));
   readonly hasMoreReviews = computed(() => this.wc().reviews_count > 3);
 
   constructor() {

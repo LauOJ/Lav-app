@@ -114,7 +114,13 @@
             }
           </ul>
           @if (hasMoreReviews()) {
-            <p class="secondary-cta">Ver todas las reviews ({{ wc().reviews_count }})</p>
+            <a
+              class="secondary-cta"
+              [routerLink]="['/wcs', wc().id]"
+              (click)="$event.stopPropagation()"
+            >
+              Ver todas las reviews ({{ wc().reviews_count }})
+            </a>
           }
         }
       </section>

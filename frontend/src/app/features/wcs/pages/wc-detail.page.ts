@@ -23,6 +23,12 @@ export class WcDetailPage {
 
   wc = signal<WC | null>(null);
   reviews = signal<Review[]>([]);
+  readonly sortedReviews = computed(() =>
+    [...this.reviews()].sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+  );
 
   loadingWc = signal(false);
   loadingReviews = signal(false);
