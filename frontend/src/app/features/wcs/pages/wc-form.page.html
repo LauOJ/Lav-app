@@ -7,11 +7,12 @@
 <form (submit)="onSubmit(); $event.preventDefault()">
   <div>
     <label>
-      Nombre *<br />
+      Nombre del lugar *<br />
       <input
         type="text"
         [value]="form().name"
         (input)="updateName($any($event.target).value)"
+        placeholder="Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants"
         required
       />
     </label>
