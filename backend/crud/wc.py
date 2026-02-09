@@ -3,7 +3,7 @@ from sqlalchemy import func
 from typing import Optional
 
 from models import WC, Review
-from schemas.wc import WCCreate
+from schemas.wc import WCCreate, WCUpdate
 
 def create_wc(db: Session, wc_in: WCCreate) -> WC:
     wc = WC(**wc_in.model_dump())
@@ -89,3 +89,18 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
 
     wc, avg_cleanliness, avg_safety, reviews_count = row
     return _attach_review_stats(wc, avg_cleanliness, avg_safety, reviews_count)
+
+
+def update_wc(db: Session, wc_id: int, wc_in: WCUpdate) -> WC | None:
+    wc = db.get(WC, wc_id)
+    if not wc:
+        return None
+
+    data = wc_in.model_dump(exclude_unset=True)
+    for key, value in data.items():
+        setattr(wc, key, value)
+
+    db.add(wc)
+    db.commit()
+    db.refresh(wc)
+    return get_wc_by_id(db, wc_id)

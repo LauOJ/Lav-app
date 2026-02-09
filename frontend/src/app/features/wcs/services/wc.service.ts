@@ -33,4 +33,8 @@ export class WCService {
     createWC(data: WCCreate): Observable<WC> {
       return this.api.post<WC>('/wcs', data);
     }
+
+    updateWC(id: number, data: Partial<WCCreate>): Observable<WC> {
+      return this.api.patch<WC>(`/wcs/${id}`, data);
+    }
 }

@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from typing import Optional
 
 from database import get_db
-from schemas.wc import WCCreate, WCCreated, WCRead
+from schemas.wc import WCCreate, WCCreated, WCRead, WCUpdate
 from schemas.review import ReviewRead
-from crud.wc import create_wc as create_wc_crud, get_wcs, get_wc_by_id
+from crud.wc import create_wc as create_wc_crud, get_wcs, get_wc_by_id, update_wc
 from crud.review import get_reviews_by_wc_id
 
 from security import get_current_user
@@ -63,6 +63,25 @@ def get_wc_endpoint(
     db: Session = Depends(get_db),
 ):
     wc = get_wc_by_id(db, wc_id)
+    if not wc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="WC not found",
+        )
+    return wc
+
+
+@router.patch(
+    "/{wc_id}",
+    response_model=WCRead,
+)
+def update_wc_endpoint(
+    wc_id: int,
+    wc_in: WCUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    wc = update_wc(db, wc_id, wc_in)
     if not wc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

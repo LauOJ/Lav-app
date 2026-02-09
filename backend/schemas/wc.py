@@ -18,6 +18,18 @@ class WCCreate(WCBase):
     pass
 
 
+class WCUpdate(BaseModel):
+    name: str | None = None
+    latitude: float | None = None
+    longitude: float | None = None
+    accessible: bool | None = None
+    gender_neutral: bool | None = None
+    has_changing_table: bool | None = None
+    only_for_customers: bool | None = None
+    has_intimate_hygiene_products: bool | None = None
+    description: str | None = None
+
+
 class WCCreated(WCBase):
     id: int
     created_at: datetime
