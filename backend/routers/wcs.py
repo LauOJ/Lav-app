@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 
 from database import get_db
-from schemas.wc import WCCreate, WCRead
+from schemas.wc import WCCreate, WCCreated, WCRead
 from schemas.review import ReviewRead
 from crud.wc import create_wc as create_wc_crud, get_wcs, get_wc_by_id
 from crud.review import get_reviews_by_wc_id
@@ -19,7 +19,7 @@ router = APIRouter(
 
 @router.post(
     "",
-    response_model=WCRead,
+    response_model=WCCreated,
     status_code=status.HTTP_201_CREATED,
 )
 def create_wc_endpoint(
