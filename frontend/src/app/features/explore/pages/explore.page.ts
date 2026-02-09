@@ -10,6 +10,7 @@ type ExploreFilters = {
   has_changing_table: boolean;
   only_for_customers: boolean;
   has_intimate_hygiene_products: boolean;
+  minCleanliness: number | null;
 };
 import { WCService } from '../../wcs/services/wc.service';
 import { MapViewComponent } from '../components/map-view/map-view.component';
@@ -33,7 +34,9 @@ export class ExplorePage implements OnInit {
     has_changing_table: false,
     only_for_customers: false,
     has_intimate_hygiene_products: false,
+    minCleanliness: null,
   });
+  readonly showAdvancedFilters = signal(false);
 
   readonly selectedWc = computed(() => {
     const selectedId = this.selectedWcId();
@@ -51,6 +54,10 @@ export class ExplorePage implements OnInit {
         !wc.has_intimate_hygiene_products
       ) {
         return false;
+      }
+      if (filters.minCleanliness !== null) {
+        if (wc.avg_cleanliness == null) return false;
+        if (wc.avg_cleanliness < filters.minCleanliness) return false;
       }
       return true;
     });
@@ -73,6 +80,17 @@ export class ExplorePage implements OnInit {
       ...current,
       [key]: value,
     }));
+  }
+
+  onSetMinCleanliness(value: number | null) {
+    this.filters.update(current => ({
+      ...current,
+      minCleanliness: value,
+    }));
+  }
+
+  onToggleAdvancedFilters() {
+    this.showAdvancedFilters.set(!this.showAdvancedFilters());
   }
 
   private loadWcs(): void {

@@ -11,7 +11,7 @@
   top: 0.75rem;
   right: 0.75rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.4rem;
   padding: 0.4rem;
   background: #ffffff;
@@ -21,6 +21,12 @@
   z-index: 1000;
 }
 
+.filters-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
 .filter-pill {
   border: 1px solid #dcdcdc;
   background: #f7f7f7;
@@ -28,7 +34,7 @@
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   font-size: 0.8rem;
-  min-width: 2rem;
+  min-width: 2.2rem;
   text-align: center;
 }
 
@@ -36,6 +42,39 @@
   background: #e7eefc;
   border-color: #b8cdf6;
   color: #1f4cb3;
+}
+
+.filters-advanced {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.filter-cleanliness {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.filter-cleanliness-label {
+  font-size: 0.75rem;
+  color: #4a4a4a;
+}
+
+.filter-cleanliness input[type='range'] {
+  width: 150px;
+}
+
+.filter-clear {
+  border: 1px solid #dadada;
+  background: transparent;
+  color: #6a6a6a;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+  align-self: start;
 }
 
 .status-banner {
