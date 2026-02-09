@@ -24,6 +24,7 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
 export class ExplorePage implements OnInit {
   private readonly wcService = inject(WCService);
   private readonly router = inject(Router);
+  private readonly nearbyRadiusMeters = 30;
 
   readonly selectedWcId = signal<number | null>(null);
   readonly wcs = signal<WC[]>([]);
@@ -80,6 +81,12 @@ export class ExplorePage implements OnInit {
   }
 
   onAddWcAt(coords: { lat: number; lng: number }): void {
+    if (this.hasNearbyWcs(coords.lat, coords.lng)) {
+      const shouldContinue = confirm(
+        'Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?'
+      );
+      if (!shouldContinue) return;
+    }
     this.router.navigate(['/wcs', 'new'], {
       queryParams: { lat: coords.lat, lng: coords.lng },
     });
@@ -117,5 +124,41 @@ export class ExplorePage implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  private hasNearbyWcs(lat: number, lng: number): boolean {
+    for (const wc of this.wcs()) {
+      if (wc.latitude == null || wc.longitude == null) continue;
+      if (
+        this.distanceMeters(lat, lng, wc.latitude, wc.longitude) <=
+        this.nearbyRadiusMeters
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private distanceMeters(
+    lat1: number,
+    lng1: number,
+    lat2: number,
+    lng2: number
+  ): number {
+    const radius = 6371000;
+    const dLat = this.toRadians(lat2 - lat1);
+    const dLng = this.toRadians(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.toRadians(lat1)) *
+        Math.cos(this.toRadians(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return radius * c;
+  }
+
+  private toRadians(value: number): number {
+    return (value * Math.PI) / 180;
   }
 }
