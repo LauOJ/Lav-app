@@ -1,4 +1,10 @@
-<aside class="sheet" role="dialog" aria-label="Detalle del WC" (click)="onSheetClick($event)">
+<aside
+  class="sheet"
+  [class.scrollable]="isExpanded() && showReviews()"
+  role="dialog"
+  aria-label="Detalle del WC"
+  (click)="onSheetClick($event)"
+>
   <button type="button" class="handle-button" (click)="onExpand()">
     <span class="handle"></span>
   </button>
@@ -59,7 +65,56 @@
     </div>
 
     <div class="cta">
-      <button type="button" class="primary">Ver reviews</button>
+      <button type="button" class="primary" (click)="onToggleReviews()">
+        {{ showReviews() ? 'Ocultar reviews' : 'Ver reviews' }}
+      </button>
     </div>
+
+    @if (showReviews()) {
+      <section class="reviews">
+        @if (reviewsLoading()) {
+          <p class="muted">Cargando reviews...</p>
+        } @else if (reviewsError()) {
+          <p class="muted">{{ reviewsError() }}</p>
+        } @else if (reviews().length === 0) {
+          <p class="muted">Todavía no hay reviews</p>
+        } @else {
+          <ul class="review-list">
+            @for (review of reviews(); track review.id) {
+              <li class="review-item">
+                <div class="review-metrics">
+                  <div class="review-metric">
+                    <span class="review-label">Limpieza</span>
+                    <span class="review-stars">
+                      {{ reviewStars(review.cleanliness_rating) }}
+                    </span>
+                    <span class="review-score">
+                      {{ review.cleanliness_rating }}/5
+                    </span>
+                  </div>
+                  <div class="review-metric">
+                    <span class="review-label">Privacidad</span>
+                    <span class="review-stars">
+                      {{ reviewStars(review.safety_rating) }}
+                    </span>
+                    <span class="review-score">
+                      {{ review.safety_rating }}/5
+                    </span>
+                  </div>
+                </div>
+                @if (review.comment) {
+                  <p class="review-comment">{{ review.comment }}</p>
+                }
+                @if (review.created_at) {
+                  <span class="review-date">
+                    {{ review.created_at | date: 'dd/MM/yy' }}
+                  </span>
+                }
+              </li>
+            }
+          </ul>
+        }
+      </section>
+    }
   }
 </aside>
