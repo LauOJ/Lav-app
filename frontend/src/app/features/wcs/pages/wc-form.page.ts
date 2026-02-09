@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { WCService } from '../services/wc.service';
 import { WCCreate } from '../models/wc.model';
@@ -12,6 +12,7 @@ import { WCCreate } from '../models/wc.model';
 export class WCFormPage {
   private readonly wcService = inject(WCService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   readonly form = signal<WCCreate>({
     name: '',
@@ -27,6 +28,27 @@ export class WCFormPage {
 
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
+
+  constructor() {
+    const latParam = this.route.snapshot.queryParamMap.get('lat');
+    const lngParam = this.route.snapshot.queryParamMap.get('lng');
+    const latitude = latParam ? Number(latParam) : null;
+    const longitude = lngParam ? Number(lngParam) : null;
+
+    if (latitude != null && !Number.isNaN(latitude)) {
+      this.form.update(f => ({
+        ...f,
+        latitude,
+      }));
+    }
+
+    if (longitude != null && !Number.isNaN(longitude)) {
+      this.form.update(f => ({
+        ...f,
+        longitude,
+      }));
+    }
+  }
 
   updateName(value: string) {
     this.form.update(f => ({

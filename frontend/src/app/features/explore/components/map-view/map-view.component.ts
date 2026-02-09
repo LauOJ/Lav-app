@@ -23,6 +23,7 @@ import { WC } from '../../../wcs/models/wc.model';
 export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   wcs = input.required<WC[]>();
   wcSelected = output<number>();
+  addWcAt = output<{ lat: number; lng: number }>();
   selectedWcId = input<number | null>(null);
 
   @ViewChild('mapContainer', { static: true })
@@ -31,6 +32,8 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private map: L.Map | null = null;
   private readonly markers = L.layerGroup();
   private readonly markerById = new Map<number, L.Marker>();
+  private readonly addPopup = L.popup({ closeButton: true, autoClose: true });
+  private pendingLatLng: L.LatLng | null = null;
 
   ngAfterViewInit(): void {
     this.setupMap();
@@ -66,6 +69,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     this.markers.addTo(this.map);
     this.setDefaultMarkerIcons();
+    this.attachMapHandlers();
   }
 
   private renderMarkers(): void {
@@ -93,6 +97,44 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     });
+  }
+
+  private attachMapHandlers(): void {
+    if (!this.map) return;
+
+    this.map.on('click', (event: L.LeafletMouseEvent) => {
+      this.pendingLatLng = event.latlng;
+      this.addPopup
+        .setLatLng(event.latlng)
+        .setContent(
+          '<button type="button" class="add-wc-button">Añadir WC aquí</button>'
+        );
+      this.addPopup.openOn(this.map!);
+    });
+
+    this.map.on('popupopen', (event: L.PopupEvent) => {
+      if (event.popup !== this.addPopup) return;
+      const element = event.popup.getElement();
+      const button = element?.querySelector(
+        '.add-wc-button'
+      ) as HTMLButtonElement | null;
+      if (!button) return;
+      button.onclick = () => this.onAddWcClicked();
+    });
+
+    this.map.on('popupclose', (event: L.PopupEvent) => {
+      if (event.popup !== this.addPopup) return;
+      this.pendingLatLng = null;
+    });
+  }
+
+  private onAddWcClicked(): void {
+    if (!this.pendingLatLng) return;
+    this.addWcAt.emit({
+      lat: this.pendingLatLng.lat,
+      lng: this.pendingLatLng.lng,
+    });
+    this.map?.closePopup(this.addPopup);
   }
 
   private centerOnSelectedWc(): void {

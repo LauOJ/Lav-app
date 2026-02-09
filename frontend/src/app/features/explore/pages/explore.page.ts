@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { WC } from '../../wcs/models/wc.model';
 
@@ -23,6 +23,7 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
 })
 export class ExplorePage implements OnInit {
   private readonly wcService = inject(WCService);
+  private readonly router = inject(Router);
 
   readonly selectedWcId = signal<number | null>(null);
   readonly wcs = signal<WC[]>([]);
@@ -76,6 +77,12 @@ export class ExplorePage implements OnInit {
 
   onCloseSheet(): void {
     this.selectedWcId.set(null);
+  }
+
+  onAddWcAt(coords: { lat: number; lng: number }): void {
+    this.router.navigate(['/wcs', 'new'], {
+      queryParams: { lat: coords.lat, lng: coords.lng },
+    });
   }
 
   onToggleFilter(key: keyof ExploreFilters, value: boolean) {
