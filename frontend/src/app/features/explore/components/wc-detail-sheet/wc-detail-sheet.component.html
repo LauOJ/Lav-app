@@ -80,7 +80,7 @@
           <p class="muted">Todavía no hay reviews</p>
         } @else {
           <ul class="review-list">
-            @for (review of reviews(); track review.id) {
+            @for (review of visibleReviews(); track review.id) {
               <li class="review-item">
                 <div class="review-metrics">
                   <div class="review-metric">
@@ -113,6 +113,9 @@
               </li>
             }
           </ul>
+          @if (hasMoreReviews()) {
+            <p class="secondary-cta">Ver todas las reviews ({{ wc().reviews_count }})</p>
+          }
         }
       </section>
     }

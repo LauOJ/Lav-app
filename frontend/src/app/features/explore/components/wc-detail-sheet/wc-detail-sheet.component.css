@@ -161,6 +161,13 @@
   color: #7a7a7a;
 }
 
+.secondary-cta {
+  margin: 0;
+  align-self: flex-start;
+  color: #7a7a7a;
+  font-size: 0.85rem;
+}
+
 button {
   border: 1px solid #dadada;
   background: #f7f7f7;

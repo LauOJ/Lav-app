@@ -37,6 +37,8 @@ export class WcDetailSheet {
   readonly reviews = signal<Review[]>([]);
   readonly reviewsLoading = signal(false);
   readonly reviewsError = signal<string | null>(null);
+  readonly visibleReviews = computed(() => this.reviews().slice(0, 3));
+  readonly hasMoreReviews = computed(() => this.wc().reviews_count > 3);
 
   constructor() {
     effect(() => {
