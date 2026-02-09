@@ -73,29 +73,33 @@
 }
 
 @if (!loading() && !error()) {
-    <ul>
-      @for (wc of wcs(); track wc.id) {
-        <li>
-            <a [routerLink]="['/wcs', wc.id]" style="cursor: pointer; color:red">
-                <strong>{{ wc.name }}</strong>
-              </a>
-                
-          <ul>
-            <li>Accesible: {{ wc.accessible ? 'Sí' : 'No' }}</li>
-            <li>Baño neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}</li>
-            <li>Cambiador: {{ wc.has_changing_table ? 'Sí' : 'No' }}</li>
-            <li>Solo para clientes: {{ wc.only_for_customers ? 'Sí' : 'No' }}</li>
-            <li>
-              Productos de higiene íntima:
-              {{ wc.has_intimate_hygiene_products ? 'Sí' : 'No' }}
-            </li>
-          </ul>
-  
-          @if (wc.description) {
-            <p><em>{{ wc.description }}</em></p>
-          }
-        </li>
-      }
-    </ul>
+    @if (wcs().length === 0) {
+      <p>No hay WCs registrados todavía.</p>
+    } @else {
+      <ul>
+        @for (wc of wcs(); track wc.id) {
+          <li>
+              <a [routerLink]="['/wcs', wc.id]" style="cursor: pointer; color:red">
+                  <strong>{{ wc.name }}</strong>
+                </a>
+                  
+            <ul>
+              <li>Accesible: {{ wc.accessible ? 'Sí' : 'No' }}</li>
+              <li>Baño neutral: {{ wc.gender_neutral ? 'Sí' : 'No' }}</li>
+              <li>Cambiador: {{ wc.has_changing_table ? 'Sí' : 'No' }}</li>
+              <li>Solo para clientes: {{ wc.only_for_customers ? 'Sí' : 'No' }}</li>
+              <li>
+                Productos de higiene íntima:
+                {{ wc.has_intimate_hygiene_products ? 'Sí' : 'No' }}
+              </li>
+            </ul>
+    
+            @if (wc.description) {
+              <p><em>{{ wc.description }}</em></p>
+            }
+          </li>
+        }
+      </ul>
+    }
   }
   
