@@ -110,6 +110,12 @@
     <div class="status-banner error">{{ error() }}</div>
   }
 
+  @if (showEmptyState()) {
+    <div class="status-banner empty">
+      No hay WCs que cumplan estos filtros. Prueba a desactivar algún filtro.
+    </div>
+  }
+
   @if (selectedWc()) {
     <app-wc-detail-sheet
       [wc]="selectedWc()!"

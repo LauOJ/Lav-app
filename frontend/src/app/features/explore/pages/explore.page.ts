@@ -62,6 +62,9 @@ export class ExplorePage implements OnInit {
       return true;
     });
   });
+  readonly showEmptyState = computed(
+    () => !this.loading() && !this.error() && this.filteredWcs().length === 0
+  );
 
   ngOnInit(): void {
     this.loadWcs();
