@@ -1,0 +1,22 @@
+@if (featureItems().length > 0) {
+  <div class="feature-icons" role="list">
+    @for (feature of featureItems(); track feature.key) {
+      <button
+        type="button"
+        class="feature-icon"
+        role="listitem"
+        [attr.aria-label]="feature.label"
+        [attr.title]="feature.label"
+        (pointerdown)="onPointerDown($event, feature.key)"
+        (pointerup)="onPointerUp()"
+        (pointerleave)="onPointerUp()"
+        (pointercancel)="onPointerUp()"
+      >
+        <span class="icon" aria-hidden="true">{{ feature.shortLabel }}</span>
+        @if (activeFeature() === feature.key) {
+          <span class="tooltip" role="tooltip">{{ feature.label }}</span>
+        }
+      </button>
+    }
+  </div>
+}
