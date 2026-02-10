@@ -134,6 +134,7 @@
   @if (selectedWc()) {
     <app-wc-detail-sheet
       [wc]="selectedWc()!"
+      [userLocation]="userLocation()"
       (close)="onCloseSheet()"
     ></app-wc-detail-sheet>
   }

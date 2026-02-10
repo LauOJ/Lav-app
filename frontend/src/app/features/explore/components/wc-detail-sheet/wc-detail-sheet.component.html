@@ -17,6 +17,9 @@
     ×
   </button>
   <h2 class="title" (click)="onExpand()">{{ wc().name }}</h2>
+  @if (distanceLabel()) {
+    <p class="distance muted">{{ distanceLabel() }}</p>
+  }
 
   <app-wc-feature-icons [wc]="wc()" />
 

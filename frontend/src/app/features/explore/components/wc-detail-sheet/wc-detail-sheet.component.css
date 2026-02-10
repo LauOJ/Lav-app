@@ -56,6 +56,11 @@
   cursor: pointer;
 }
 
+.distance {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.85rem;
+}
+
 .actions {
   display: flex;
   gap: 0.5rem;

@@ -17,6 +17,7 @@ export class WcDetailSheet {
   private readonly reviewsService = inject(ReviewsService);
 
   wc = input.required<WC>();
+  userLocation = input<{ lat: number; lng: number } | null>(null);
   close = output<void>();
   readonly sheetState = signal<'collapsed' | 'expanded'>('collapsed');
   readonly isExpanded = computed(() => this.sheetState() === 'expanded');
@@ -34,6 +35,7 @@ export class WcDetailSheet {
   readonly safetyAria = computed(
     () => `Privacidad: ${this.safetyRating()} de 5`
   );
+  readonly distanceLabel = computed(() => this.formatDistance());
   readonly showReviews = signal(false);
   readonly reviews = signal<Review[]>([]);
   readonly reviewsLoading = signal(false);
@@ -93,6 +95,48 @@ export class WcDetailSheet {
   reviewStars(rating: number): string {
     const bounded = Math.min(5, Math.max(0, Math.round(rating)));
     return this.toStars(bounded);
+  }
+
+  private formatDistance(): string | null {
+    const location = this.userLocation();
+    if (!location) return null;
+
+    const wc = this.wc();
+    const distance = this.distanceMeters(
+      location.lat,
+      location.lng,
+      wc.latitude,
+      wc.longitude
+    );
+
+    if (distance < 1000) {
+      return `≈ ${Math.round(distance)} m`;
+    }
+    const km = Math.round((distance / 1000) * 10) / 10;
+    return `≈ ${km} km`;
+  }
+
+  private distanceMeters(
+    lat1: number,
+    lng1: number,
+    lat2: number,
+    lng2: number
+  ): number {
+    const radius = 6371000;
+    const dLat = this.toRadians(lat2 - lat1);
+    const dLng = this.toRadians(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.toRadians(lat1)) *
+        Math.cos(this.toRadians(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return radius * c;
+  }
+
+  private toRadians(value: number): number {
+    return (value * Math.PI) / 180;
   }
 
   private loadReviews(wcId: number): void {
