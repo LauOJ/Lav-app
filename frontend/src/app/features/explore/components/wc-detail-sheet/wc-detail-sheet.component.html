@@ -8,17 +8,19 @@
   <button type="button" class="handle-button" (click)="onExpand()">
     <span class="handle"></span>
   </button>
+  <button
+    type="button"
+    class="close-button"
+    (click)="onClose()"
+    aria-label="Cerrar"
+  >
+    ×
+  </button>
   <h2 class="title" (click)="onExpand()">{{ wc().name }}</h2>
 
   <app-wc-feature-icons [wc]="wc()" />
 
   <div class="actions">
-    @if (!isExpanded()) {
-      <button type="button" class="primary" (click)="onExpand()">
-        Ver más
-      </button>
-    }
-    <button type="button" class="secondary" (click)="onClose()">Cerrar</button>
   </div>
 
   @if (isExpanded()) {
