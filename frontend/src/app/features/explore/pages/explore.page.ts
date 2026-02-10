@@ -32,6 +32,9 @@ export class ExplorePage implements OnInit {
   readonly error = signal<string | null>(null);
   readonly userLocation = signal<{ lat: number; lng: number; zoom: number } | null>(null);
   readonly geoError = signal<string | null>(null);
+  readonly searchQuery = signal('');
+  readonly searchError = signal<string | null>(null);
+  readonly searchLoading = signal(false);
   readonly filters = signal<ExploreFilters>({
     accessible: false,
     gender_neutral: false,
@@ -132,6 +135,46 @@ export class ExplorePage implements OnInit {
         this.geoError.set('No se pudo obtener tu ubicación.');
       }
     );
+  }
+
+  onSearchLocation(): void {
+    const query = this.searchQuery().trim();
+    if (!query) return;
+
+    this.searchLoading.set(true);
+    this.searchError.set(null);
+
+    fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+        query
+      )}&limit=1`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('request_failed');
+        }
+        return response.json() as Promise<Array<{ lat: string; lon: string }>>;
+      })
+      .then((results) => {
+        if (!results.length) {
+          this.searchError.set('No se encontraron resultados');
+          return;
+        }
+        const result = results[0];
+        const lat = Number(result.lat);
+        const lng = Number(result.lon);
+        if (Number.isNaN(lat) || Number.isNaN(lng)) {
+          this.searchError.set('No se encontraron resultados');
+          return;
+        }
+        this.userLocation.set({ lat, lng, zoom: 14 });
+      })
+      .catch(() => {
+        this.searchError.set('No se pudo buscar la ubicación');
+      })
+      .finally(() => {
+        this.searchLoading.set(false);
+      });
   }
 
   private loadWcs(): void {

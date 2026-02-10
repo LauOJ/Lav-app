@@ -1,4 +1,14 @@
 <section class="explore-page" [class.sheet-open]="selectedWc()">
+  <form class="search-panel" (submit)="onSearchLocation(); $event.preventDefault()">
+    <input
+      type="text"
+      placeholder="Buscar lugar o dirección"
+      [value]="searchQuery()"
+      (input)="searchQuery.set($any($event.target).value)"
+      aria-label="Buscar lugar o dirección"
+    />
+    <button type="submit" [disabled]="searchLoading()">Buscar</button>
+  </form>
   <div class="filters-panel" role="group" aria-label="Filtros del mapa">
     <div class="filters-quick">
       <button
@@ -119,6 +129,10 @@
 
   @if (error()) {
     <div class="status-banner error">{{ error() }}</div>
+  }
+
+  @if (searchError()) {
+    <div class="status-banner error">{{ searchError() }}</div>
   }
 
   @if (geoError()) {
