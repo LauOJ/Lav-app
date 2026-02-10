@@ -25,6 +25,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   wcSelected = output<number>();
   addWcAt = output<{ lat: number; lng: number }>();
   selectedWcId = input<number | null>(null);
+  userLocation = input<{ lat: number; lng: number; zoom?: number } | null>(null);
 
   @ViewChild('mapContainer', { static: true })
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
@@ -34,6 +35,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private readonly markerById = new Map<number, L.Marker>();
   private readonly addPopup = L.popup({ closeButton: true, autoClose: true });
   private pendingLatLng: L.LatLng | null = null;
+  private userMarker: L.Marker | null = null;
 
   ngAfterViewInit(): void {
     this.setupMap();
@@ -48,11 +50,16 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (changes['selectedWcId']) {
       this.centerOnSelectedWc();
     }
+
+    if (changes['userLocation']) {
+      this.centerOnUserLocation();
+    }
   }
 
   ngOnDestroy(): void {
     this.map?.remove();
     this.map = null;
+    this.userMarker = null;
   }
 
   private setupMap(): void {
@@ -146,6 +153,22 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   
     this.map.setView(marker.getLatLng(), 16, { animate: true });
     marker.openPopup();
+  }
+
+  private centerOnUserLocation(): void {
+    const location = this.userLocation();
+    if (!this.map || !location) return;
+
+    const zoom = location.zoom ?? 15;
+    const latLng = L.latLng(location.lat, location.lng);
+    this.map.setView(latLng, zoom, { animate: true });
+
+    if (!this.userMarker) {
+      this.userMarker = L.marker(latLng, { title: 'Estás aquí' });
+      this.userMarker.addTo(this.map);
+    } else {
+      this.userMarker.setLatLng(latLng);
+    }
   }
   
 }

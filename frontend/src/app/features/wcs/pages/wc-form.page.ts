@@ -14,6 +14,8 @@ export class WCFormPage {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
+  readonly isEditMode = signal(false);
+  readonly editId = signal<number | null>(null);
   readonly form = signal<WCCreate>({
     name: '',
     latitude: 0,
@@ -27,9 +29,20 @@ export class WCFormPage {
   });
 
   readonly loading = signal(false);
+  readonly loadingWc = signal(false);
   readonly error = signal<string | null>(null);
 
   constructor() {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? Number(idParam) : null;
+
+    if (idParam && id != null && !Number.isNaN(id)) {
+      this.isEditMode.set(true);
+      this.editId.set(id);
+      this.loadWcForEdit(id);
+      return;
+    }
+
     const latParam = this.route.snapshot.queryParamMap.get('lat');
     const lngParam = this.route.snapshot.queryParamMap.get('lng');
     const latitude = latParam ? Number(latParam) : null;
@@ -96,6 +109,26 @@ export class WCFormPage {
     this.loading.set(true);
     this.error.set(null);
 
+    if (this.isEditMode()) {
+      const wcId = this.editId();
+      if (wcId == null) {
+        this.error.set('WC no válido');
+        this.loading.set(false);
+        return;
+      }
+      this.wcService.updateWC(wcId, formData).subscribe({
+        next: () => {
+          this.loading.set(false);
+          this.router.navigate(['/wcs', wcId]);
+        },
+        error: () => {
+          this.error.set('Error al actualizar el WC');
+          this.loading.set(false);
+        },
+      });
+      return;
+    }
+
     this.wcService.createWC(formData).subscribe({
       next: (wc) => {
         this.loading.set(false);
@@ -104,6 +137,31 @@ export class WCFormPage {
       error: () => {
         this.error.set('Error al crear el WC');
         this.loading.set(false);
+      },
+    });
+  }
+
+  private loadWcForEdit(id: number): void {
+    this.loadingWc.set(true);
+    this.error.set(null);
+    this.wcService.getById(id).subscribe({
+      next: (wc) => {
+        this.form.set({
+          name: wc.name,
+          latitude: wc.latitude,
+          longitude: wc.longitude,
+          accessible: wc.accessible,
+          gender_neutral: wc.gender_neutral,
+          has_changing_table: wc.has_changing_table,
+          only_for_customers: wc.only_for_customers,
+          has_intimate_hygiene_products: wc.has_intimate_hygiene_products,
+          description: wc.description ?? '',
+        });
+        this.loadingWc.set(false);
+      },
+      error: () => {
+        this.error.set('WC no encontrado');
+        this.loadingWc.set(false);
       },
     });
   }

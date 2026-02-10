@@ -2,6 +2,10 @@
     <button [routerLink]="['/explore']">← Volver al mapa</button>
     
     <h2>{{ wc()?.name }}</h2>
+
+    @if (userState.user()) {
+      <a [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
+    }
   
     <ul>
       <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>

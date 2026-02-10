@@ -94,11 +94,20 @@
         </div>
       </div>
     }
+    <button
+      type="button"
+      class="filter-pill locate-button"
+      (click)="onLocateUser()"
+      aria-label="Mi ubicación"
+    >
+      Mi ubicación
+    </button>
   </div>
 
   <app-map-view
     [wcs]="filteredWcs()"
     [selectedWcId]="selectedWcId()"
+    [userLocation]="userLocation()"
     (wcSelected)="onSelectWc($event)"
     (addWcAt)="onAddWcAt($event)"
   ></app-map-view>
@@ -109,6 +118,10 @@
 
   @if (error()) {
     <div class="status-banner error">{{ error() }}</div>
+  }
+
+  @if (geoError()) {
+    <div class="status-banner error">{{ geoError() }}</div>
   }
 
   @if (showEmptyState()) {

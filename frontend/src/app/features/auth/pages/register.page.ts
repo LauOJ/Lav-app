@@ -36,7 +36,7 @@ export class RegisterPage {
           next: (user) => {
             this.userState.setUser(user);
             this.loading.set(false);
-            this.router.navigate(['/wcs']);
+            this.router.navigate(['/explore']);
           },
           error: () => {
             this.loading.set(false);

@@ -44,6 +44,10 @@
   color: #1f4cb3;
 }
 
+.locate-button {
+  min-width: 5.5rem;
+}
+
 .filters-advanced {
   display: grid;
   gap: 0.35rem;

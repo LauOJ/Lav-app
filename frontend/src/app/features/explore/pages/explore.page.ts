@@ -30,6 +30,8 @@ export class ExplorePage implements OnInit {
   readonly wcs = signal<WC[]>([]);
   readonly loading = signal<boolean>(false);
   readonly error = signal<string | null>(null);
+  readonly userLocation = signal<{ lat: number; lng: number; zoom: number } | null>(null);
+  readonly geoError = signal<string | null>(null);
   readonly filters = signal<ExploreFilters>({
     accessible: false,
     gender_neutral: false,
@@ -108,6 +110,28 @@ export class ExplorePage implements OnInit {
 
   onToggleAdvancedFilters() {
     this.showAdvancedFilters.set(!this.showAdvancedFilters());
+  }
+
+  onLocateUser(): void {
+    this.geoError.set(null);
+    if (!navigator.geolocation) {
+      this.geoError.set('La geolocalización no está disponible en este navegador.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.userLocation.set({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          zoom: 15,
+        });
+        this.geoError.set(null);
+      },
+      () => {
+        this.geoError.set('No se pudo obtener tu ubicación.');
+      }
+    );
   }
 
   private loadWcs(): void {

@@ -1,4 +1,4 @@
-<h2>Crear nuevo WC</h2>
+<h2>{{ isEditMode() ? 'Editar WC' : 'Crear nuevo WC' }}</h2>
 
 <button [routerLink]="['/wcs']">← Volver a lista</button>
 
@@ -127,8 +127,12 @@
 
   <br />
 
-  <button type="submit" [disabled]="loading()">
-    {{ loading() ? 'Creando…' : 'Crear WC' }}
+  <button type="submit" [disabled]="loading() || loadingWc()">
+    @if (isEditMode()) {
+      {{ loading() ? 'Guardando…' : 'Guardar cambios' }}
+    } @else {
+      {{ loading() ? 'Creando…' : 'Crear WC' }}
+    }
   </button>
 
   @if (error()) {

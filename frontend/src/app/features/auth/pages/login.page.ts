@@ -33,7 +33,7 @@ export class LoginPage {
       next: (user) => {
         this.userState.setUser(user);
         this.loading.set(false);
-        this.router.navigate(['/wcs']);
+        this.router.navigate(['/explore']);
       },
       error: () => {
         this.error.set('Email o contraseña incorrectos');
