@@ -66,8 +66,10 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (this.map) return;
 
     this.map = L.map(this.mapContainer.nativeElement, {
-      zoomControl: true,
+      zoomControl: false,
     }).setView([40.4168, -3.7038], 6);
+
+    L.control.zoom({ position: 'bottomleft' }).addTo(this.map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
