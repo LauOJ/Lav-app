@@ -45,8 +45,26 @@
 }
 
 .locate-button {
-  min-width: 5.5rem;
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid #dcdcdc;
+  background: #f7f7f7;
+  color: #4a4a4a;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
+
+.sheet-open .locate-button {
+  bottom: 9.5rem;
+}
+
 
 .filters-advanced {
   display: grid;

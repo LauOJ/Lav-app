@@ -1,4 +1,4 @@
-<section class="explore-page">
+<section class="explore-page" [class.sheet-open]="selectedWc()">
   <div class="filters-panel" role="group" aria-label="Filtros del mapa">
     <div class="filters-quick">
       <button
@@ -94,15 +94,16 @@
         </div>
       </div>
     }
-    <button
-      type="button"
-      class="filter-pill locate-button"
-      (click)="onLocateUser()"
-      aria-label="Mi ubicación"
-    >
-      Mi ubicación
-    </button>
   </div>
+  <button
+    type="button"
+    class="locate-button"
+    (click)="onLocateUser()"
+    aria-label="Centrar en mi ubicación"
+    title="Centrar en mi ubicación"
+  >
+    📍
+  </button>
 
   <app-map-view
     [wcs]="filteredWcs()"
