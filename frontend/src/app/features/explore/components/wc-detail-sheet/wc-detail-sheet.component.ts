@@ -7,6 +7,7 @@ import {
   ElementRef,
   inject,
   input,
+  OnDestroy,
   output,
   signal,
   ViewChild,
@@ -24,7 +25,7 @@ import { Review } from '../../../reviews/models/review.model';
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })
-export class WcDetailSheet implements AfterViewInit {
+export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly reviewsService = inject(ReviewsService);
 
   @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
@@ -34,6 +35,7 @@ export class WcDetailSheet implements AfterViewInit {
   close = output<void>();
 
   private previousFocus: HTMLElement | null = null;
+  private readonly keydownHandler = (event: KeyboardEvent) => this.handleKeydown(event);
   readonly sheetState = signal<'collapsed' | 'expanded'>('collapsed');
   readonly isExpanded = computed(() => this.sheetState() === 'expanded');
   readonly cleanlinessRating = computed(() =>
@@ -84,6 +86,17 @@ export class WcDetailSheet implements AfterViewInit {
     setTimeout(() => {
       this.closeButtonRef?.nativeElement?.focus();
     }, 0);
+    document.addEventListener('keydown', this.keydownHandler);
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('keydown', this.keydownHandler);
+  }
+
+  private handleKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this.onClose();
+    }
   }
 
   onClose(): void {
