@@ -1,5 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { WC } from '../../../wcs/models/wc.model';
@@ -13,12 +24,16 @@ import { Review } from '../../../reviews/models/review.model';
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })
-export class WcDetailSheet {
+export class WcDetailSheet implements AfterViewInit {
   private readonly reviewsService = inject(ReviewsService);
+
+  @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
 
   wc = input.required<WC>();
   userLocation = input<{ lat: number; lng: number } | null>(null);
   close = output<void>();
+
+  private previousFocus: HTMLElement | null = null;
   readonly sheetState = signal<'collapsed' | 'expanded'>('collapsed');
   readonly isExpanded = computed(() => this.sheetState() === 'expanded');
   readonly cleanlinessRating = computed(() =>
@@ -64,7 +79,17 @@ export class WcDetailSheet {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.previousFocus = document.activeElement as HTMLElement | null;
+    setTimeout(() => {
+      this.closeButtonRef?.nativeElement?.focus();
+    }, 0);
+  }
+
   onClose(): void {
+    if (this.previousFocus?.focus) {
+      this.previousFocus.focus();
+    }
     this.close.emit();
   }
 
