@@ -2,10 +2,16 @@
   class="sheet"
   [class.scrollable]="isExpanded() && showReviews()"
   role="dialog"
-  aria-label="Detalle del WC"
+  aria-modal="true"
+  aria-labelledby="wc-sheet-title"
   (click)="onSheetClick($event)"
 >
-  <button type="button" class="handle-button" (click)="onExpand()">
+  <button
+    type="button"
+    class="handle-button"
+    (click)="onExpand()"
+    aria-label="Expandir o contraer"
+  >
     <span class="handle"></span>
   </button>
   <button
@@ -16,7 +22,7 @@
   >
     ×
   </button>
-  <h2 class="title" (click)="onExpand()">{{ wc().name }}</h2>
+  <h2 id="wc-sheet-title" class="title" (click)="onExpand()">{{ wc().name }}</h2>
   @if (distanceLabel()) {
     <p class="distance muted">{{ distanceLabel() }}</p>
   }
@@ -70,7 +76,13 @@
     </div>
 
     <div class="cta">
-      <button type="button" class="primary" (click)="onToggleReviews()">
+      <button
+        type="button"
+        class="primary"
+        (click)="onToggleReviews()"
+        [attr.aria-expanded]="showReviews()"
+        aria-controls="sheet-reviews"
+      >
         {{ showReviews() ? 'Ocultar reviews' : 'Ver reviews' }}
       </button>
       <button
@@ -84,7 +96,7 @@
     </div>
 
     @if (showReviews()) {
-      <section class="reviews">
+      <section class="reviews" id="sheet-reviews">
         @if (reviewsLoading()) {
           <p class="muted">Cargando reviews...</p>
         } @else if (reviewsError()) {
@@ -98,7 +110,10 @@
                 <div class="review-metrics">
                   <div class="review-metric">
                     <span class="review-label">Limpieza</span>
-                    <span class="review-stars">
+                    <span
+                      class="review-stars"
+                      [attr.aria-label]="'Limpieza: ' + review.cleanliness_rating + ' de 5'"
+                    >
                       {{ reviewStars(review.cleanliness_rating) }}
                     </span>
                     <span class="review-score">
@@ -107,7 +122,10 @@
                   </div>
                   <div class="review-metric">
                     <span class="review-label">Privacidad</span>
-                    <span class="review-stars">
+                    <span
+                      class="review-stars"
+                      [attr.aria-label]="'Privacidad: ' + review.safety_rating + ' de 5'"
+                    >
                       {{ reviewStars(review.safety_rating) }}
                     </span>
                     <span class="review-score">
