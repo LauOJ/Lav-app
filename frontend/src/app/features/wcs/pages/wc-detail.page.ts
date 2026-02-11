@@ -36,6 +36,9 @@ export class WcDetailPage {
   errorWc = signal<string | null>(null);
   errorReviews = signal<string | null>(null);
 
+  isFavorite = signal<boolean>(false);
+  favoriteError = signal<string | null>(null);
+
   // ---- INIT ---------------------------------------------------
 
   constructor() {
@@ -63,10 +66,27 @@ export class WcDetailPage {
         this.wc.set(wc);
         this.loadingWc.set(false);
         this.loadReviews();
+        this.loadFavoriteState(wc.id);
       },
       error: () => {
         this.loadingWc.set(false);
         this.errorWc.set('WC no encontrado');
+      },
+    });
+  }
+
+  private loadFavoriteState(wcId: number) {
+    if (!this.userState.user()) {
+      this.isFavorite.set(false);
+      return;
+    }
+    this.favoriteError.set(null);
+    this.wcService.getMyFavorites().subscribe({
+      next: favorites => {
+        this.isFavorite.set(favorites.some(w => w.id === wcId));
+      },
+      error: () => {
+        this.isFavorite.set(false);
       },
     });
   }
@@ -98,6 +118,32 @@ export class WcDetailPage {
 
   onReviewUpdated() {
     this.loadReviews();
+  }
+
+  onToggleFavorite() {
+    const wc = this.wc();
+    if (!wc || !this.userState.user()) return;
+
+    this.favoriteError.set(null);
+    const wasFavorite = this.isFavorite();
+
+    if (wasFavorite) {
+      this.isFavorite.set(false);
+      this.wcService.removeFavorite(wc.id).subscribe({
+        error: () => {
+          this.isFavorite.set(true);
+          this.favoriteError.set('No se pudo quitar de favoritos.');
+        },
+      });
+    } else {
+      this.isFavorite.set(true);
+      this.wcService.addFavorite(wc.id).subscribe({
+        error: () => {
+          this.isFavorite.set(false);
+          this.favoriteError.set('No se pudo añadir a favoritos.');
+        },
+      });
+    }
   }
 
   // ---- DERIVED STATE ------------------------------------------

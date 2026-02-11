@@ -5,8 +5,15 @@
 
     @if (userState.user()) {
       <a [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
+      <button type="button" (click)="onToggleFavorite()">
+        {{ isFavorite() ? '★ En favoritos' : '☆ Añadir a favoritos' }}
+      </button>
     }
-  
+
+    @if (favoriteError()) {
+      <p>{{ favoriteError() }}</p>
+    }
+
     <ul>
       <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>
       <li>Neutral: {{ wc()?.gender_neutral ? 'Sí' : 'No' }}</li>

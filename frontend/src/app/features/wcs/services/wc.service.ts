@@ -37,4 +37,16 @@ export class WCService {
     updateWC(id: number, data: Partial<WCCreate>): Observable<WC> {
       return this.api.patch<WC>(`/wcs/${id}`, data);
     }
+
+  getMyFavorites(): Observable<WC[]> {
+    return this.api.get<WC[]>('/users/me/favorites');
+  }
+
+  addFavorite(wcId: number): Observable<unknown> {
+    return this.api.post(`/wcs/${wcId}/favorite`, {});
+  }
+
+  removeFavorite(wcId: number): Observable<void> {
+    return this.api.delete<void>(`/wcs/${wcId}/favorite`);
+  }
 }
