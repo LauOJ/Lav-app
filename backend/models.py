@@ -30,7 +30,11 @@ class User(Base):
         back_populates="user",
         cascade="all, delete-orphan",
     )
-
+    favorites = relationship(
+        "Favorite",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
 
 
 class WC(Base):
@@ -56,7 +60,11 @@ class WC(Base):
         back_populates="wc",
         cascade="all, delete-orphan",
     )
-
+    favorites = relationship(
+        "Favorite",
+        back_populates="wc",
+        cascade="all, delete-orphan",
+    )
 
 
 class Review(Base):
@@ -90,3 +98,27 @@ class Review(Base):
     # Relationships
     user = relationship("User", back_populates="reviews")
     wc = relationship("WC", back_populates="reviews")
+
+
+class Favorite(Base):
+    __tablename__ = "favorites"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    wc_id = Column(
+        Integer,
+        ForeignKey("wcs.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "wc_id", name="uq_user_wc_favorite"),
+    )
+
+    user = relationship("User", back_populates="favorites")
+    wc = relationship("WC", back_populates="favorites")

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from typing import Optional
 
@@ -7,6 +8,7 @@ from schemas.wc import WCCreate, WCCreated, WCRead, WCUpdate
 from schemas.review import ReviewRead
 from crud.wc import create_wc as create_wc_crud, get_wcs, get_wc_by_id, update_wc
 from crud.review import get_reviews_by_wc_id
+from crud.favorite import add_favorite, remove_favorite
 
 from security import get_current_user
 from models import User, WC
@@ -105,3 +107,43 @@ def list_wc_reviews_endpoint(
             detail="WC not found",
         )
     return get_reviews_by_wc_id(db, wc_id)
+
+
+@router.post(
+    "/{wc_id}/favorite",
+    status_code=status.HTTP_201_CREATED,
+)
+def add_favorite_endpoint(
+    wc_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    if get_wc_by_id(db, wc_id) is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="WC not found",
+        )
+    favorite = add_favorite(db, current_user.id, wc_id)
+    if favorite is None:
+        return JSONResponse(
+            content={"detail": "Already in favorites"},
+            status_code=status.HTTP_200_OK,
+        )
+    return {"detail": "Added to favorites"}
+
+
+@router.delete(
+    "/{wc_id}/favorite",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def remove_favorite_endpoint(
+    wc_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    removed = remove_favorite(db, current_user.id, wc_id)
+    if not removed:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Favorite not found",
+        )
