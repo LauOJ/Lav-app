@@ -14,6 +14,8 @@ def create_review(
         cleanliness_rating=review_in.cleanliness_rating,
         safety_rating=review_in.safety_rating,
         comment=review_in.comment,
+        is_safe_space=review_in.is_safe_space,
+        safe_space_comment=review_in.safe_space_comment,
         user_id=user_id,
     )
 
@@ -57,6 +59,8 @@ def update_review(
     review.cleanliness_rating = review_in.cleanliness_rating
     review.safety_rating = review_in.safety_rating
     review.comment = review_in.comment
+    review.is_safe_space = review_in.is_safe_space
+    review.safe_space_comment = review_in.safe_space_comment
 
     db.commit()
     db.refresh(review)

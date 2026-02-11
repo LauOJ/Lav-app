@@ -22,6 +22,32 @@
 
   <br />
 
+  <fieldset>
+    <legend>Según tu experiencia, ¿consideras que este WC está en un espacio seguro?</legend>
+    <label>
+      <input type="radio" formControlName="is_safe_space" [value]="'true'" />
+      Sí
+    </label>
+    <label>
+      <input type="radio" formControlName="is_safe_space" [value]="'false'" />
+      No
+    </label>
+    <label>
+      <input type="radio" formControlName="is_safe_space" [value]="''" />
+      Prefiero no decir
+    </label>
+  </fieldset>
+
+  @if (showSafeSpaceComment) {
+    <label>
+      ¿Quieres explicar por qué? (opcional)
+      <textarea formControlName="safe_space_comment"></textarea>
+    </label>
+    <br />
+  }
+
+  <br />
+
   <button type="submit" [disabled]="form.invalid">
     Enviar review
   </button>

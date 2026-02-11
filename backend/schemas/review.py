@@ -6,6 +6,8 @@ class ReviewBase(BaseModel):
     cleanliness_rating: Annotated[int, Field(ge=1, le=5)]
     safety_rating: Annotated[int, Field(ge=1, le=5)]
     comment: str | None = None
+    is_safe_space: bool | None = None
+    safe_space_comment: str | None = None
 
 
 class ReviewCreate(ReviewBase):

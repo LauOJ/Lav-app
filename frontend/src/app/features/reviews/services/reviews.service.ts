@@ -19,6 +19,8 @@ export class ReviewsService {
     cleanliness_rating: number;
     safety_rating: number;
     comment?: string;
+    is_safe_space?: boolean | null;
+    safe_space_comment?: string | null;
   }) {
     return this.api.post('/reviews', data);
   }

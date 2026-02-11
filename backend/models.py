@@ -68,6 +68,8 @@ class Review(Base):
     safety_rating = Column(Integer, nullable=False)
 
     comment = Column(Text)
+    is_safe_space = Column(Boolean, nullable=True)
+    safe_space_comment = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user_id = Column(
