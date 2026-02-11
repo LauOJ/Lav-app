@@ -1,54 +1,80 @@
 <h2>Nueva review</h2>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <label>
-    Limpieza (1–5)
-    <input type="number" min="1" max="5" formControlName="cleanliness_rating" />
-  </label>
+  <fieldset class="fieldset-reset">
+    <legend>Valoraciones (1–5)</legend>
+    <label for="cleanliness_rating">Limpieza (1–5)</label>
+    <input
+      id="cleanliness_rating"
+      type="number"
+      min="1"
+      max="5"
+      formControlName="cleanliness_rating"
+    />
+
+    <br />
+
+    <label for="safety_rating">Seguridad (1–5)</label>
+    <input
+      id="safety_rating"
+      type="number"
+      min="1"
+      max="5"
+      formControlName="safety_rating"
+    />
+  </fieldset>
 
   <br />
 
-  <label>
-    Seguridad (1–5)
-    <input type="number" min="1" max="5" formControlName="safety_rating" />
-  </label>
+  <label for="comment">Comentario</label>
+  <textarea id="comment" formControlName="comment"></textarea>
 
   <br />
 
-  <label>
-    Comentario
-    <textarea formControlName="comment"></textarea>
-  </label>
-
-  <br />
-
-  <fieldset>
-    <legend>Según tu experiencia, ¿consideras que este WC está en un espacio seguro?</legend>
-    <label>
-      <input type="radio" formControlName="is_safe_space" [value]="'true'" />
-      Sí
-    </label>
-    <label>
-      <input type="radio" formControlName="is_safe_space" [value]="'false'" />
-      No
-    </label>
-    <label>
-      <input type="radio" formControlName="is_safe_space" [value]="''" />
-      Prefiero no decir
-    </label>
+  <fieldset class="fieldset-reset">
+    <legend>Según tu experiencia, ¿consideras que este fue un espacio seguro?</legend>
+    <input
+      id="is_safe_space_yes"
+      type="radio"
+      formControlName="is_safe_space"
+      [value]="'true'"
+    />
+    <label for="is_safe_space_yes">Sí</label>
+    <input
+      id="is_safe_space_no"
+      type="radio"
+      formControlName="is_safe_space"
+      [value]="'false'"
+    />
+    <label for="is_safe_space_no">No</label>
+    <input
+      id="is_safe_space_skip"
+      type="radio"
+      formControlName="is_safe_space"
+      [value]="''"
+    />
+    <label for="is_safe_space_skip">Prefiero no decir</label>
   </fieldset>
 
   @if (showSafeSpaceComment) {
-    <label>
-      ¿Quieres explicar por qué? (opcional)
-      <textarea formControlName="safe_space_comment"></textarea>
-    </label>
+    <label for="safe_space_comment">¿Quieres explicar por qué? (opcional)</label>
+    <textarea id="safe_space_comment" formControlName="safe_space_comment"></textarea>
     <br />
   }
 
   <br />
 
-  <button type="submit" [disabled]="form.invalid">
+  @if (form.invalid) {
+    <p id="form-errors" role="alert">
+      Revisa los campos marcados.
+    </p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="form.invalid"
+    [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
+  >
     Enviar review
   </button>
 </form>

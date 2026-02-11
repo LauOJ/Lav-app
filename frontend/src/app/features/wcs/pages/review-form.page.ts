@@ -6,6 +6,9 @@ import { ReviewsService } from '../../reviews/services/reviews.service';
 @Component({
   templateUrl: './review-form.page.html',
   imports: [ReactiveFormsModule],
+  styles: [
+    '.fieldset-reset { border: none; margin: 0; padding: 0; }',
+  ],
 })
 export class ReviewFormPage {
   private route = inject(ActivatedRoute);
