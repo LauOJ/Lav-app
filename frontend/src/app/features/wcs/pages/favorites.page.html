@@ -1,0 +1,27 @@
+<h2>Mis favoritos</h2>
+
+<a [routerLink]="['/explore']">← Volver al mapa</a>
+
+<br /><br />
+
+@if (loading()) {
+  <p>Cargando...</p>
+}
+
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+@if (!loading() && !error()) {
+  @if (wcs().length === 0) {
+    <p>Todavía no tienes favoritos.</p>
+  } @else {
+    <ul>
+      @for (wc of wcs(); track wc.id) {
+        <li>
+          <a [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
+        </li>
+      }
+    </ul>
+  }
+}
