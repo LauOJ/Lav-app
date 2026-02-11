@@ -8,6 +8,25 @@ import { ReviewItemComponent } from './review-item.component';
   selector: 'app-review-list',
   templateUrl: './review-list.component.html',
   imports: [ReviewItemComponent],
+  styles: [
+    `
+      .safe-space-comment-block {
+        list-style: none;
+        margin-top: 0;
+        padding-left: 1rem;
+        font-size: 0.95em;
+      }
+      .safe-space-comment-title {
+        margin: 0 0 0.25rem 0;
+        font-weight: 600;
+        font-size: 0.9em;
+      }
+      .safe-space-comment-text {
+        margin: 0;
+        color: #555;
+      }
+    `,
+  ],
 })
 export class ReviewListComponent {
     reviews = input.required<Review[]>();

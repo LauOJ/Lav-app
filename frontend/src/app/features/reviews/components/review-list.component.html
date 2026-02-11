@@ -11,6 +11,12 @@
         (delete)="onDeleteReview($event)"
         (save)="onUpdateReview($event)"
       />
+      @if (review.safe_space_comment?.trim()) {
+        <li class="safe-space-comment-block">
+          <p class="safe-space-comment-title">Percepción del entorno:</p>
+          <p class="safe-space-comment-text">{{ review.safe_space_comment }}</p>
+        </li>
+      }
     }
   </ul>
 }
