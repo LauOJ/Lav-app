@@ -1,12 +1,12 @@
 import { Component, inject, effect } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, RouterLink } from '@angular/router';
 
 import { UserState } from './core/user/user.state';
 import { AuthState } from './core/auth/auth.state';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

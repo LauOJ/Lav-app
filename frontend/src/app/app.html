@@ -3,8 +3,10 @@
     @if (authState.isAuthenticated()) {
       @if (userState.user()) {
         <span>👤 {{ userState.user()?.email }}</span>
+        <span> | </span>
       }
-
+      <a routerLink="/favorites">Mis favoritos</a>
+      <span> | </span>
       <button (click)="onLogout()" class="logout-button">
         Logout
       </button>
