@@ -8,6 +8,9 @@ import { WCCreate } from '../models/wc.model';
   selector: 'app-wc-form-page',
   imports: [RouterModule],
   templateUrl: './wc-form.page.html',
+  styles: [
+    '.fieldset-reset { border: none; margin: 0; padding: 0; }',
+  ],
 })
 export class WCFormPage {
   private readonly wcService = inject(WCService);

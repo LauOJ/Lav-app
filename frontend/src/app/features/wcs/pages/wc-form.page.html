@@ -1,141 +1,139 @@
 <h2>{{ isEditMode() ? 'Editar WC' : 'Crear nuevo WC' }}</h2>
 
-<button [routerLink]="['/wcs']">← Volver a lista</button>
+<button [routerLink]="['/explore']">← Volver al mapa</button>
 
 <br /><br />
 
 <form (submit)="onSubmit(); $event.preventDefault()">
   <div>
-    <label>
-      Nombre del lugar *<br />
-      <input
-        type="text"
-        [value]="form().name"
-        (input)="updateName($any($event.target).value)"
-        placeholder="Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants"
-        required
-      />
-    </label>
+    <label for="wc-name">Nombre del lugar *</label>
+    <input
+      id="wc-name"
+      type="text"
+      [value]="form().name"
+      (input)="updateName($any($event.target).value)"
+      placeholder="Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants"
+      required
+    />
   </div>
 
   <br />
 
   <div>
-    <label>
-      Latitud *<br />
-      <input
-        type="number"
-        step="any"
-        [value]="form().latitude"
-        (input)="updateLatitude($any($event.target).valueAsNumber)"
-        required
-      />
-    </label>
+    <label for="wc-latitude">Latitud *</label>
+    <input
+      id="wc-latitude"
+      type="number"
+      step="any"
+      [value]="form().latitude"
+      (input)="updateLatitude($any($event.target).valueAsNumber)"
+      required
+    />
   </div>
 
   <br />
 
   <div>
-    <label>
-      Longitud *<br />
-      <input
-        type="number"
-        step="any"
-        [value]="form().longitude"
-        (input)="updateLongitude($any($event.target).valueAsNumber)"
-        required
-      />
-    </label>
+    <label for="wc-longitude">Longitud *</label>
+    <input
+      id="wc-longitude"
+      type="number"
+      step="any"
+      [value]="form().longitude"
+      (input)="updateLongitude($any($event.target).valueAsNumber)"
+      required
+    />
   </div>
 
   <br />
 
-  <div>
-    <label>
+  <fieldset class="fieldset-reset">
+    <legend>Características</legend>
+    <div>
       <input
+        id="wc-accessible"
         type="checkbox"
         [checked]="form().accessible"
         (change)="toggleFlag('accessible', $any($event.target).checked)"
       />
-      Accesible
-    </label>
-  </div>
+      <label for="wc-accessible">Accesible</label>
+    </div>
 
-  <br />
+    <br />
 
-  <div>
-    <label>
+    <div>
       <input
+        id="wc-gender_neutral"
         type="checkbox"
         [checked]="form().gender_neutral"
         (change)="toggleFlag('gender_neutral', $any($event.target).checked)"
       />
-      Baño neutral
-    </label>
-  </div>
+      <label for="wc-gender_neutral">Baño neutral</label>
+    </div>
 
-  <br />
+    <br />
 
-  <div>
-    <label>
+    <div>
       <input
+        id="wc-has_changing_table"
         type="checkbox"
         [checked]="form().has_changing_table"
         (change)="toggleFlag('has_changing_table', $any($event.target).checked)"
       />
-      Cambiador
-    </label>
-  </div>
+      <label for="wc-has_changing_table">Cambiador</label>
+    </div>
 
-  <br />
+    <br />
 
-  <div>
-    <label>
+    <div>
       <input
+        id="wc-only_for_customers"
         type="checkbox"
         [checked]="form().only_for_customers"
         (change)="toggleFlag('only_for_customers', $any($event.target).checked)"
       />
-      Solo para clientes
-    </label>
-  </div>
+      <label for="wc-only_for_customers">Solo para clientes</label>
+    </div>
 
-  <br />
+    <br />
 
-  <div>
-    <label>
+    <div>
       <input
+        id="wc-has_intimate_hygiene_products"
         type="checkbox"
         [checked]="form().has_intimate_hygiene_products"
         (change)="toggleFlag('has_intimate_hygiene_products', $any($event.target).checked)"
       />
-      Productos de higiene íntima
-    </label>
-  </div>
+      <label for="wc-has_intimate_hygiene_products">Productos de higiene íntima</label>
+    </div>
+  </fieldset>
 
   <br />
 
   <div>
-    <label>
-      Descripción<br />
-      <textarea
-        [value]="form().description || ''"
-        (input)="updateDescription($any($event.target).value)"
-      ></textarea>
-    </label>
+    <label for="wc-description">Descripción</label>
+    <textarea
+      id="wc-description"
+      [value]="form().description || ''"
+      (input)="updateDescription($any($event.target).value)"
+    ></textarea>
   </div>
 
   <br />
 
-  <button type="submit" [disabled]="loading() || loadingWc()">
+  @if (error()) {
+    <p id="wc-form-errors" role="alert" style="color: red;">{{ error() }}</p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="loading() || loadingWc()"
+    [attr.aria-describedby]="error() ? 'wc-form-errors' : null"
+  >
     @if (isEditMode()) {
       {{ loading() ? 'Guardando…' : 'Guardar cambios' }}
     } @else {
       {{ loading() ? 'Creando…' : 'Crear WC' }}
     }
   </button>
-
-  @if (error()) {
-    <p style="color: red;">{{ error() }}</p>
-  }
 </form>
