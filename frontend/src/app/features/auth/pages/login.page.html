@@ -1,39 +1,47 @@
-<h1>Login</h1>
+<div class="page-container">
+  <h1 class="page-title">Login</h1>
 
-<form (submit)="onSubmit(); $event.preventDefault()">
-  <div>
-    <label>
-      Email<br />
-      <input
-        type="email"
-        [value]="email()"
-        (input)="email.set($any($event.target).value)"
-        required
-      />
-    </label>
+  <div class="section">
+    <form (submit)="onSubmit(); $event.preventDefault()">
+      <div>
+        <label>
+          Email<br />
+          <input
+            type="email"
+            [value]="email()"
+            (input)="email.set($any($event.target).value)"
+            required
+          />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Contraseña<br />
+          <input
+            type="password"
+            [value]="password()"
+            (input)="password.set($any($event.target).value)"
+            required
+          />
+        </label>
+      </div>
+
+      @if (error()) {
+        <p class="form-error">{{ error() }}</p>
+      }
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loading()">
+          {{ loading() ? 'Entrando…' : 'Entrar' }}
+        </button>
+      </div>
+    </form>
   </div>
 
-  <div>
-    <label>
-      Contraseña<br />
-      <input
-        type="password"
-        [value]="password()"
-        (input)="password.set($any($event.target).value)"
-        required
-      />
-    </label>
+  <div class="section">
+    <p>
+      ¿No tienes cuenta? <a class="btn btn-secondary" [routerLink]="['/register']">Regístrate</a>
+    </p>
   </div>
-
-  <button type="submit" [disabled]="loading()">
-    {{ loading() ? 'Entrando…' : 'Entrar' }}
-  </button>
-
-  @if (error()) {
-    <p style="color: red;">{{ error() }}</p>
-  }
-</form>
-
-<p>
-  ¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate</a>
-</p>
+</div>
