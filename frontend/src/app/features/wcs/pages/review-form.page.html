@@ -1,70 +1,80 @@
 <div class="page-container">
   <h2 class="page-title">Nueva review</h2>
 
+  <div class="actions">
+    <a class="btn btn-secondary" [routerLink]="['/wcs', wcId]">← Volver al WC</a>
+  </div>
+
+  @if (justCreated()) {
+    <div class="success-banner">
+      WC creado correctamente. Ahora puedes añadir tu experiencia.
+    </div>
+  }
+
   <div class="section">
     <form [formGroup]="form" (ngSubmit)="submit()">
   <fieldset class="fieldset-reset">
     <legend>Valoraciones (1–5)</legend>
-    <label for="cleanliness_rating">Limpieza (1–5)</label>
-    <input
-      id="cleanliness_rating"
-      type="number"
-      min="1"
-      max="5"
-      formControlName="cleanliness_rating"
-    />
-
-    <br />
-
-    <label for="safety_rating">Seguridad (1–5)</label>
-    <input
-      id="safety_rating"
-      type="number"
-      min="1"
-      max="5"
-      formControlName="safety_rating"
-    />
+    <div class="form-group">
+      <label for="cleanliness_rating">Limpieza (1–5)</label>
+      <input
+        id="cleanliness_rating"
+        type="number"
+        min="1"
+        max="5"
+        formControlName="cleanliness_rating"
+      />
+    </div>
+    <div class="form-group">
+      <label for="safety_rating">Seguridad (1–5)</label>
+      <input
+        id="safety_rating"
+        type="number"
+        min="1"
+        max="5"
+        formControlName="safety_rating"
+      />
+    </div>
   </fieldset>
 
-  <br />
-
-  <label for="comment">Comentario</label>
-  <textarea id="comment" formControlName="comment"></textarea>
-
-  <br />
+  <div class="form-group">
+    <label for="comment">Comentario</label>
+    <textarea id="comment" formControlName="comment"></textarea>
+  </div>
 
   <fieldset class="fieldset-reset">
-    <legend>Según tu experiencia, ¿consideras que este fue un espacio seguro?</legend>
-    <input
-      id="is_safe_space_yes"
-      type="radio"
-      formControlName="is_safe_space"
-      [value]="'true'"
-    />
-    <label for="is_safe_space_yes">Sí</label>
-    <input
-      id="is_safe_space_no"
-      type="radio"
-      formControlName="is_safe_space"
-      [value]="'false'"
-    />
-    <label for="is_safe_space_no">No</label>
-    <input
-      id="is_safe_space_skip"
-      type="radio"
-      formControlName="is_safe_space"
-      [value]="''"
-    />
-    <label for="is_safe_space_skip">Prefiero no decir</label>
+    <legend>¿Te sentiste segurx en este espacio?</legend>
+    <div class="radio-group">
+      <input
+        id="is_safe_space_yes"
+        type="radio"
+        formControlName="is_safe_space"
+        [value]="'true'"
+      />
+      <label for="is_safe_space_yes">Sí</label>
+      <input
+        id="is_safe_space_no"
+        type="radio"
+        formControlName="is_safe_space"
+        [value]="'false'"
+      />
+      <label for="is_safe_space_no">No</label>
+      <input
+        id="is_safe_space_skip"
+        type="radio"
+        formControlName="is_safe_space"
+        [value]="''"
+      />
+      <label for="is_safe_space_skip">Prefiero no decir</label>
+    </div>
   </fieldset>
 
   @if (showSafeSpaceComment) {
-    <label for="safe_space_comment">¿Quieres explicar por qué? (opcional)</label>
-    <textarea id="safe_space_comment" formControlName="safe_space_comment"></textarea>
-    <br />
+    <div class="form-group">
+      <label for="safe_space_comment">¿Quieres explicar por qué? (opcional)</label>
+      <textarea id="safe_space_comment" formControlName="safe_space_comment"></textarea>
+    </div>
   }
-
-  <br />
 
   @if (form.invalid) {
     <p id="form-errors" class="form-error" role="alert">
@@ -80,6 +90,13 @@
       [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
     >
       Enviar review
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="onSkip()"
+    >
+      {{ justCreated() ? 'Crear WC sin review' : 'Omitir por ahora' }}
     </button>
   </div>
     </form>

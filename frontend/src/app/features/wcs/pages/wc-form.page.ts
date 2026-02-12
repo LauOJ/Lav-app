@@ -9,7 +9,7 @@ import { WCCreate } from '../models/wc.model';
   imports: [RouterModule],
   templateUrl: './wc-form.page.html',
   styles: [
-    '.fieldset-reset { border: none; margin: 0; padding: 0; }',
+    '.fieldset-reset { border: none; margin: 0 0 1.25rem 0; padding: 0; }',
   ],
 })
 export class WCFormPage {
@@ -135,7 +135,9 @@ export class WCFormPage {
     this.wcService.createWC(formData).subscribe({
       next: (wc) => {
         this.loading.set(false);
-        this.router.navigate(['/wcs', wc.id]);
+        this.router.navigate(['/wcs', wc.id, 'reviews', 'new'], {
+          state: { justCreated: true },
+        });
       },
       error: () => {
         this.error.set('Error al crear el WC');

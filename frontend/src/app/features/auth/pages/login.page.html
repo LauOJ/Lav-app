@@ -3,28 +3,26 @@
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">
-      <div>
-        <label>
-          Email<br />
-          <input
-            type="email"
-            [value]="email()"
-            (input)="email.set($any($event.target).value)"
-            required
-          />
-        </label>
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input
+          id="login-email"
+          type="email"
+          [value]="email()"
+          (input)="email.set($any($event.target).value)"
+          required
+        />
       </div>
 
-      <div>
-        <label>
-          Contraseña<br />
-          <input
-            type="password"
-            [value]="password()"
-            (input)="password.set($any($event.target).value)"
-            required
-          />
-        </label>
+      <div class="form-group">
+        <label for="login-password">Contraseña</label>
+        <input
+          id="login-password"
+          type="password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+          required
+        />
       </div>
 
       @if (error()) {

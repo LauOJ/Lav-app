@@ -7,7 +7,7 @@
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">
-  <div>
+  <div class="form-group">
     <label for="wc-name">Nombre del lugar *</label>
     <input
       id="wc-name"
@@ -19,9 +19,7 @@
     />
   </div>
 
-  <br />
-
-  <div>
+  <div class="form-group">
     <label for="wc-latitude">Latitud *</label>
     <input
       id="wc-latitude"
@@ -33,9 +31,7 @@
     />
   </div>
 
-  <br />
-
-  <div>
+  <div class="form-group">
     <label for="wc-longitude">Longitud *</label>
     <input
       id="wc-longitude"
@@ -46,8 +42,6 @@
       required
     />
   </div>
-
-  <br />
 
   <fieldset class="fieldset-reset">
     <legend>Características</legend>
@@ -100,9 +94,7 @@
     </div>
   </fieldset>
 
-  <br />
-
-  <div>
+  <div class="form-group">
     <label for="wc-description">Descripción</label>
     <textarea
       id="wc-description"
@@ -110,8 +102,6 @@
       (input)="updateDescription($any($event.target).value)"
     ></textarea>
   </div>
-
-  <br />
 
   @if (error()) {
     <p id="wc-form-errors" class="form-error" role="alert">{{ error() }}</p>
