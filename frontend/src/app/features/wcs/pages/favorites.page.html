@@ -1,9 +1,9 @@
 <div class="page-container">
   <h2 class="page-title">Mis favoritos</h2>
 
-  <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
-
-  <br /><br />
+  <div class="actions">
+    <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
+  </div>
 
   <div class="section">
     @if (loading()) {

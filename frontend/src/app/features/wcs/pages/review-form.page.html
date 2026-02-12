@@ -67,19 +67,21 @@
   <br />
 
   @if (form.invalid) {
-    <p id="form-errors" role="alert">
+    <p id="form-errors" class="form-error" role="alert">
       Revisa los campos marcados.
     </p>
   }
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-    [disabled]="form.invalid"
-    [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
-  >
-    Enviar review
-  </button>
+  <div class="actions">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
+    >
+      Enviar review
+    </button>
+  </div>
     </form>
   </div>
 </div>

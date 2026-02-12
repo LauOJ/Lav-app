@@ -64,16 +64,16 @@
   <div class="section">
     <h1 class="page-title">Listado de WCs</h1>
 
-    <a class="btn btn-primary" [routerLink]="['/wcs', 'new']">+ Añadir WC</a>
-
-    <br /><br />
+    <div class="actions">
+      <a class="btn btn-primary" [routerLink]="['/wcs', 'new']">+ Añadir WC</a>
+    </div>
 
     @if (loading()) {
   <p>Cargando WCs...</p>
 }
 
 @if (error()) {
-  <p style="color: red;">{{ error() }}</p>
+  <p class="form-error">{{ error() }}</p>
 }
 
 @if (!loading() && !error()) {

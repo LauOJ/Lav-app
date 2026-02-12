@@ -1,9 +1,9 @@
 <div class="page-container">
   <h2 class="page-title">{{ isEditMode() ? 'Editar WC' : 'Crear nuevo WC' }}</h2>
 
-  <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
-
-  <br /><br />
+  <div class="actions">
+    <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
+  </div>
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">
@@ -124,21 +124,23 @@
   <br />
 
   @if (error()) {
-    <p id="wc-form-errors" role="alert" style="color: red;">{{ error() }}</p>
+    <p id="wc-form-errors" class="form-error" role="alert">{{ error() }}</p>
   }
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-    [disabled]="loading() || loadingWc()"
-    [attr.aria-describedby]="error() ? 'wc-form-errors' : null"
-  >
-    @if (isEditMode()) {
-      {{ loading() ? 'Guardando…' : 'Guardar cambios' }}
-    } @else {
-      {{ loading() ? 'Creando…' : 'Crear WC' }}
-    }
-  </button>
+  <div class="actions">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="loading() || loadingWc()"
+      [attr.aria-describedby]="error() ? 'wc-form-errors' : null"
+    >
+      @if (isEditMode()) {
+        {{ loading() ? 'Guardando…' : 'Guardar cambios' }}
+      } @else {
+        {{ loading() ? 'Creando…' : 'Crear WC' }}
+      }
+    </button>
+  </div>
     </form>
   </div>
 </div>
