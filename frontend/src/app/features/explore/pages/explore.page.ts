@@ -75,6 +75,24 @@ export class ExplorePage implements OnInit {
 
   ngOnInit(): void {
     this.loadWcs();
+    this.requestInitialLocation();
+  }
+
+  private requestInitialLocation(): void {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.userLocation.set({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          zoom: 13,
+        });
+        this.geoError.set(null);
+      },
+      () => {
+        // No permission or error: map stays on default (Barcelona)
+      }
+    );
   }
 
   onSelectWc(id: number): void {
@@ -127,7 +145,7 @@ export class ExplorePage implements OnInit {
         this.userLocation.set({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-          zoom: 15,
+          zoom: 13,
         });
         this.geoError.set(null);
       },

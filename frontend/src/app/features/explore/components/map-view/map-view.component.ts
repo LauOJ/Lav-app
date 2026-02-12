@@ -67,7 +67,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     this.map = L.map(this.mapContainer.nativeElement, {
       zoomControl: false,
-    }).setView([40.4168, -3.7038], 6);
+    }).setView([41.3874, 2.1686], 12);
 
     L.control.zoom({ position: 'bottomleft' }).addTo(this.map);
 
@@ -100,9 +100,9 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   
 
   private setDefaultMarkerIcons(): void {
-    const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
-    const iconUrl = 'assets/leaflet/marker-icon.png';
-    const shadowUrl = 'assets/leaflet/marker-shadow.png';
+    const iconRetinaUrl = 'public/leaflet/marker-icon-2x.png';
+    const iconUrl = 'public/leaflet/marker-icon.png';
+    const shadowUrl = 'public/leaflet/marker-shadow.png';
   
     L.Icon.Default.mergeOptions({
       iconRetinaUrl,
