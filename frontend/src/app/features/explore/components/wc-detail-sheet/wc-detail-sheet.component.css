@@ -191,15 +191,15 @@
 }
 
 button {
-  border: 1px solid #dadada;
-  background: #f7f7f7;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   font-size: 0.95rem;
 }
 
 button.primary {
-  background: #1f6feb;
-  border-color: #1f6feb;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #ffffff;
 }

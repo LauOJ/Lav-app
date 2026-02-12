@@ -1,6 +1,25 @@
 
 @import 'leaflet/dist/leaflet.css';
 
+:root {
+  --color-primary: #2E4A6B;          /* Azul profundo LABU */
+  --color-primary-hover: #243B56;
+
+  --color-secondary: #5C8D6A;        /* Verde urbano */
+
+  --color-accent-violet: #7A6C9D;
+  --color-accent-turquoise: #4FA3A3;
+  --color-accent-coral: #D46A6A;
+
+  --color-text: #2F2F2F;
+  --color-muted: #6B7280;
+
+  --color-bg: #F6F7F8;
+  --color-surface: #FFFFFF;
+
+  --color-border: #E2E6EA;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -49,7 +68,7 @@ textarea,
 select {
   padding: 0.5rem 0.6rem;
   border-radius: 6px;
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--color-border);
   font-size: 0.9rem;
   width: 100%;
   box-sizing: border-box;
@@ -64,8 +83,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #1f6feb;
-  box-shadow: 0 0 0 2px rgba(31, 111, 235, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(46, 74, 107, 0.15);
 }
 
 .radio-group {
@@ -98,9 +117,9 @@ fieldset {
   border-radius: 6px;
   font-size: 0.88rem;
   cursor: pointer;
-  border: 1px solid #dadada;
-  background: #f7f7f7;
-  color: inherit;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
   text-decoration: none;
   line-height: 1.2;
   transition: background 0.15s ease, border 0.15s ease;
@@ -117,20 +136,21 @@ a.btn {
 }
 
 .btn-primary {
-  background: #1f6feb;
-  border-color: #1f6feb;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: #1a5fd0;
-  border-color: #1a5fd0;
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
   color: #fff;
 }
 
 .btn-secondary {
   background: transparent;
-  border-color: #dadada;
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
 
 .btn-secondary:hover {
@@ -145,7 +165,8 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
-  color: #1f2328;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 /* ---- JERARQUÍA DE TÍTULOS ---- */
