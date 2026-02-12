@@ -1,7 +1,7 @@
 <div class="page-container">
   <h2 class="page-title">{{ isEditMode() ? 'Editar WC' : 'Crear nuevo WC' }}</h2>
 
-  <button [routerLink]="['/explore']">← Volver al mapa</button>
+  <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
 
   <br /><br />
 
@@ -129,6 +129,7 @@
 
   <button
     type="submit"
+    class="btn btn-primary"
     [disabled]="loading() || loadingWc()"
     [attr.aria-describedby]="error() ? 'wc-form-errors' : null"
   >

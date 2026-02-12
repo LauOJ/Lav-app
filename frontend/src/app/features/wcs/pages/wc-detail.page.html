@@ -1,12 +1,12 @@
 <div class="page-container">
   @if (wc()) {
-    <button [routerLink]="['/explore']">← Volver al mapa</button>
+    <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
 
     <h2 class="page-title">{{ wc()?.name }}</h2>
 
     @if (userState.user()) {
-      <a [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
-      <button type="button" (click)="onToggleFavorite()">
+      <a class="btn btn-secondary" [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
+      <button type="button" class="btn btn-primary" (click)="onToggleFavorite()">
         {{ isFavorite() ? '★ En favoritos' : '☆ Añadir a favoritos' }}
       </button>
     }
@@ -31,7 +31,7 @@
     }
   
     @if (!hasUserReviewed()) {
-      <a [routerLink]="['/wcs', wc()!.id, 'reviews', 'new']">
+      <a class="btn btn-primary" [routerLink]="['/wcs', wc()!.id, 'reviews', 'new']">
         Añadir review
       </a>
     } @else {

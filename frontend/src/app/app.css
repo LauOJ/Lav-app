@@ -23,17 +23,3 @@ app-root {
   flex: 1 1 auto;
   min-height: 0;
 }
-
-.page-container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
-}
-
-.page-title {
-  margin-bottom: 1rem;
-}
-
-.section {
-  margin-bottom: 2rem;
-}

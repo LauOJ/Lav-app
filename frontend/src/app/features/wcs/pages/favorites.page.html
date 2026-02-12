@@ -1,7 +1,7 @@
 <div class="page-container">
   <h2 class="page-title">Mis favoritos</h2>
 
-  <a [routerLink]="['/explore']">← Volver al mapa</a>
+  <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
 
   <br /><br />
 
@@ -21,7 +21,7 @@
       <ul>
         @for (wc of wcs(); track wc.id) {
           <li>
-            <a [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
+            <a class="btn btn-secondary" [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
           </li>
         }
       </ul>
