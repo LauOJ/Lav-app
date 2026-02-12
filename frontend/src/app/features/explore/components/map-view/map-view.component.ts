@@ -100,13 +100,17 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   
 
   private setDefaultMarkerIcons(): void {
+    const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
+    const iconUrl = 'assets/leaflet/marker-icon.png';
+    const shadowUrl = 'assets/leaflet/marker-shadow.png';
+  
     L.Icon.Default.mergeOptions({
-      iconRetinaUrl:
-        'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconRetinaUrl,
+      iconUrl,
+      shadowUrl,
     });
   }
+  
 
   private attachMapHandlers(): void {
     if (!this.map) return;
