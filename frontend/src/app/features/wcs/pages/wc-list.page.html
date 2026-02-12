@@ -1,4 +1,6 @@
-<h2>Filtros</h2>
+<div class="page-container">
+  <div class="section">
+    <h2 class="page-title">Filtros</h2>
 
 <label>
   <input
@@ -55,16 +57,18 @@
   
   <br />
 
-<hr />
+  </div>
 
+  <hr />
 
-<h1>Listado de WCs</h1>
+  <div class="section">
+    <h1 class="page-title">Listado de WCs</h1>
 
-<a [routerLink]="['/wcs', 'new']">+ Añadir WC</a>
+    <a [routerLink]="['/wcs', 'new']">+ Añadir WC</a>
 
-<br /><br />
+    <br /><br />
 
-@if (loading()) {
+    @if (loading()) {
   <p>Cargando WCs...</p>
 }
 
@@ -102,4 +106,6 @@
       </ul>
     }
   }
+  </div>
+</div>
   

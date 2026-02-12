@@ -1,6 +1,8 @@
-<h2>Nueva review</h2>
+<div class="page-container">
+  <h2 class="page-title">Nueva review</h2>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="section">
+    <form [formGroup]="form" (ngSubmit)="submit()">
   <fieldset class="fieldset-reset">
     <legend>Valoraciones (1–5)</legend>
     <label for="cleanliness_rating">Limpieza (1–5)</label>
@@ -77,4 +79,6 @@
   >
     Enviar review
   </button>
-</form>
+    </form>
+  </div>
+</div>

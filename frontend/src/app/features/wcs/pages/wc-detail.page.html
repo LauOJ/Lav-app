@@ -1,7 +1,8 @@
-@if (wc()) {
+<div class="page-container">
+  @if (wc()) {
     <button [routerLink]="['/explore']">← Volver al mapa</button>
-    
-    <h2>{{ wc()?.name }}</h2>
+
+    <h2 class="page-title">{{ wc()?.name }}</h2>
 
     @if (userState.user()) {
       <a [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
@@ -14,12 +15,14 @@
       <p>{{ favoriteError() }}</p>
     }
 
-    <ul>
-      <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>
-      <li>Neutral: {{ wc()?.gender_neutral ? 'Sí' : 'No' }}</li>
-      <li>Cambiador: {{ wc()?.has_changing_table ? 'Sí' : 'No' }}</li>
-      <li>Solo clientes: {{ wc()?.only_for_customers ? 'Sí' : 'No' }}</li>
-    </ul>
+    <div class="section">
+      <ul>
+        <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>
+        <li>Neutral: {{ wc()?.gender_neutral ? 'Sí' : 'No' }}</li>
+        <li>Cambiador: {{ wc()?.has_changing_table ? 'Sí' : 'No' }}</li>
+        <li>Solo clientes: {{ wc()?.only_for_customers ? 'Sí' : 'No' }}</li>
+      </ul>
+    </div>
   
     @if (wc()?.description) {
       <p>
@@ -41,14 +44,15 @@
       </p>
     }
 
-    <app-review-list
-      [reviews]="sortedReviews()"
-      [currentUser]="userState.user()"
-      (deleted)="onReviewDeleted()"
-      (updated)="onReviewUpdated()"
-    />
-      
+    <div class="section">
+      <app-review-list
+        [reviews]="sortedReviews()"
+        [currentUser]="userState.user()"
+        (deleted)="onReviewDeleted()"
+        (updated)="onReviewUpdated()"
+      />
+    </div>
   } @else {
     <p>Cargando WC…</p>
   }
-  
+</div>

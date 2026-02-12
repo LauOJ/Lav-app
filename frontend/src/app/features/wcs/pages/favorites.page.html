@@ -1,10 +1,12 @@
-<h2>Mis favoritos</h2>
+<div class="page-container">
+  <h2 class="page-title">Mis favoritos</h2>
 
-<a [routerLink]="['/explore']">← Volver al mapa</a>
+  <a [routerLink]="['/explore']">← Volver al mapa</a>
 
-<br /><br />
+  <br /><br />
 
-@if (loading()) {
+  <div class="section">
+    @if (loading()) {
   <p>Cargando...</p>
 }
 
@@ -16,12 +18,14 @@
   @if (wcs().length === 0) {
     <p>Todavía no tienes favoritos.</p>
   } @else {
-    <ul>
-      @for (wc of wcs(); track wc.id) {
-        <li>
-          <a [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
-        </li>
-      }
-    </ul>
+      <ul>
+        @for (wc of wcs(); track wc.id) {
+          <li>
+            <a [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
+          </li>
+        }
+      </ul>
   }
-}
+  }
+  </div>
+</div>
