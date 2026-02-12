@@ -30,6 +30,12 @@ body {
   margin-bottom: 2rem;
 }
 
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
