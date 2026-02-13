@@ -51,6 +51,8 @@ export class ExplorePage implements OnInit {
     minCleanliness: null,
   });
   readonly showAdvancedFilters = signal(false);
+  /** Which filter button's tooltip is shown (we hide it after 500ms instead of relying on blur) */
+  readonly activeTooltipFilter = signal<keyof ExploreFilters | null>(null);
 
   readonly selectedWc = computed(() => {
     const selectedId = this.selectedWcId();
@@ -127,6 +129,16 @@ export class ExplorePage implements OnInit {
       ...current,
       [key]: value,
     }));
+  }
+
+  setFilterTooltip(key: keyof ExploreFilters | null): void {
+    this.activeTooltipFilter.set(key);
+  }
+
+  /** Show tooltip on tap/click and hide it after 500ms (does not rely on blur) */
+  showFilterTooltipTemporarily(key: keyof ExploreFilters): void {
+    this.activeTooltipFilter.set(key);
+    setTimeout(() => this.activeTooltipFilter.set(null), 500);
   }
 
   onSetMinCleanliness(value: number | null) {

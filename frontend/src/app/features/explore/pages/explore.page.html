@@ -13,53 +13,78 @@
     <div class="filters-quick">
       <button
         type="button"
-        class="filter-pill"
+        class="filter-pill filter-button"
         [class.active]="filters().accessible"
+        [class.tooltip-visible]="activeTooltipFilter() === 'accessible'"
         [attr.aria-pressed]="filters().accessible"
-        (click)="onToggleFilter('accessible', !filters().accessible)"
+        (focusin)="setFilterTooltip('accessible')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('accessible', !filters().accessible); showFilterTooltipTemporarily('accessible')"
         aria-label="Accesible"
+        title="Accesible"
       >
         <app-lucide-icon icon="accessibility" />
+        <span class="tooltip">Accesible</span>
       </button>
       <button
         type="button"
-        class="filter-pill"
+        class="filter-pill filter-button"
         [class.active]="filters().gender_neutral"
+        [class.tooltip-visible]="activeTooltipFilter() === 'gender_neutral'"
         [attr.aria-pressed]="filters().gender_neutral"
-        (click)="onToggleFilter('gender_neutral', !filters().gender_neutral)"
-        aria-label="Neutral"
+        (focusin)="setFilterTooltip('gender_neutral')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('gender_neutral', !filters().gender_neutral); showFilterTooltipTemporarily('gender_neutral')"
+        aria-label="Baño neutral"
+        title="Baño neutral"
       >
         <app-lucide-icon icon="non-binary" />
+        <span class="tooltip">Baño neutral</span>
       </button>
       <button
         type="button"
-        class="filter-pill"
+        class="filter-pill filter-button"
         [class.active]="filters().has_changing_table"
+        [class.tooltip-visible]="activeTooltipFilter() === 'has_changing_table'"
         [attr.aria-pressed]="filters().has_changing_table"
-        (click)="onToggleFilter('has_changing_table', !filters().has_changing_table)"
+        (focusin)="setFilterTooltip('has_changing_table')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('has_changing_table', !filters().has_changing_table); showFilterTooltipTemporarily('has_changing_table')"
         aria-label="Cambiador"
+        title="Cambiador"
       >
         <app-lucide-icon icon="baby" />
+        <span class="tooltip">Cambiador</span>
       </button>
       <button
         type="button"
-        class="filter-pill"
+        class="filter-pill filter-button"
         [class.active]="filters().only_for_customers"
+        [class.tooltip-visible]="activeTooltipFilter() === 'only_for_customers'"
         [attr.aria-pressed]="filters().only_for_customers"
-        (click)="onToggleFilter('only_for_customers', !filters().only_for_customers)"
+        (focusin)="setFilterTooltip('only_for_customers')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('only_for_customers', !filters().only_for_customers); showFilterTooltipTemporarily('only_for_customers')"
         aria-label="Solo clientes"
+        title="Solo clientes"
       >
         <app-lucide-icon icon="lock" />
+        <span class="tooltip">Solo clientes</span>
       </button>
       <button
         type="button"
-        class="filter-pill"
+        class="filter-pill filter-button"
         [class.active]="filters().has_intimate_hygiene_products"
+        [class.tooltip-visible]="activeTooltipFilter() === 'has_intimate_hygiene_products'"
         [attr.aria-pressed]="filters().has_intimate_hygiene_products"
-        (click)="onToggleFilter('has_intimate_hygiene_products', !filters().has_intimate_hygiene_products)"
+        (focusin)="setFilterTooltip('has_intimate_hygiene_products')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('has_intimate_hygiene_products', !filters().has_intimate_hygiene_products); showFilterTooltipTemporarily('has_intimate_hygiene_products')"
         aria-label="Higiene íntima"
+        title="Higiene íntima"
       >
         <app-lucide-icon icon="droplets" />
+        <span class="tooltip">Higiene íntima</span>
       </button>
       <button
         type="button"

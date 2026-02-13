@@ -104,6 +104,44 @@
   filter: brightness(0) invert(1);
 }
 
+.filter-button {
+  position: relative;
+}
+
+.filter-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.filter-button .tooltip {
+  position: absolute;
+  right: 115%;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: var(--color-text);
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* On larger viewports, show tooltip on hover; on mobile width only .tooltip-visible (so it can auto-hide after 500ms) */
+.filter-button.tooltip-visible .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (min-width: 769px) {
+  .filter-button:hover .tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
 .locate-button {
   position: absolute;
   bottom: 0.75rem;
