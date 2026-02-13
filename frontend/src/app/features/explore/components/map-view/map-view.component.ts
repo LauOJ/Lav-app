@@ -45,6 +45,18 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     iconAnchor: [14, 28],
   });
 
+  /** Brand teardrop shape flipped (point down) for WC markers */
+  private readonly wcMarkerIcon = L.divIcon({
+    className: 'wc-marker-icon',
+    html: `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="scale(1 -1) translate(0 -160)">
+        <path d="M60 10 C60 10, 15 70, 15 105 C15 135, 35 150, 60 150 C85 150, 105 135, 105 105 C105 70, 60 10, 60 10 Z" fill="var(--color-primary, #2E4A6B)"/>
+      </g>
+    </svg>`,
+    iconSize: [30, 40],
+    iconAnchor: [15, 40],
+  });
+
   ngAfterViewInit(): void {
     this.setupMap();
     this.renderMarkers();
@@ -57,6 +69,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     if (changes['selectedWcId']) {
       this.centerOnSelectedWc();
+      this.updateSelectedMarkerClass();
     }
 
     if (changes['userLocation']) {
@@ -97,15 +110,25 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   
     for (const wc of this.wcs() ?? []) {
       if (wc.latitude == null || wc.longitude == null) continue;
-  
-      const marker = L.marker([wc.latitude, wc.longitude]);
+
+      const marker = L.marker([wc.latitude, wc.longitude], {
+        icon: this.wcMarkerIcon,
+      });
       marker.on('click', () => this.wcSelected.emit(wc.id));
-  
+
       marker.addTo(this.markers);
       this.markerById.set(wc.id, marker);
     }
+    this.updateSelectedMarkerClass();
   }
-  
+
+  private updateSelectedMarkerClass(): void {
+    const selectedId = this.selectedWcId();
+    this.markerById.forEach((marker, id) => {
+      const el = (marker as unknown as { _icon?: HTMLElement })._icon;
+      el?.classList.toggle('wc-marker-selected', id === selectedId);
+    });
+  }
 
   private setDefaultMarkerIcons(): void {
     const iconRetinaUrl = 'leaflet/marker-icon-2x.png';
