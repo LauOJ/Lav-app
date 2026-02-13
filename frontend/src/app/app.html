@@ -9,14 +9,14 @@
     ></div>
   }
   <header class="app-header">
-    <div class="brand">
+    <a routerLink="/explore" class="brand">
       <img
         src="logo/labu-icon.svg"
         alt="Labu logo"
         class="brand-icon"
       />
       <span class="brand-name">lav-app</span>
-    </div>
+    </a>
 
     @if (authState.isAuthenticated()) {
       <div class="user-menu">
