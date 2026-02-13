@@ -13,11 +13,18 @@ type ExploreFilters = {
   minCleanliness: number | null;
 };
 import { WCService } from '../../wcs/services/wc.service';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 import { MapViewComponent } from '../components/map-view/map-view.component';
 import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.component';
 
 @Component({
-  imports: [CommonModule, RouterModule, MapViewComponent, WcDetailSheet],
+  imports: [
+    CommonModule,
+    RouterModule,
+    LucideIconComponent,
+    MapViewComponent,
+    WcDetailSheet,
+  ],
   templateUrl: './explore.page.html',
   styleUrl: './explore.page.css'
 })

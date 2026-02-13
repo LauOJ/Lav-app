@@ -30,10 +30,9 @@
 
   <app-wc-feature-icons [wc]="wc()" />
 
+  @if (isExpanded()) {
   <div class="actions">
   </div>
-
-  @if (isExpanded()) {
     <div class="ratings">
       <div class="rating">
         <span class="label">Limpieza</span>

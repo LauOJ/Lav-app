@@ -1,17 +1,19 @@
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
-import { WCService } from '../services/wc.service';
-import { ReviewsService } from '../../reviews/services/reviews.service';
-import { ReviewListComponent } from '../../reviews/components/review-list.component';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 import { UserState } from '../../../core/user/user.state';
 import { Review } from '../../reviews/models/review.model';
 import { WC } from '../models/wc.model';
+import { ReviewListComponent } from '../../reviews/components/review-list.component';
+import { ReviewsService } from '../../reviews/services/reviews.service';
+import { WCService } from '../services/wc.service';
 
 @Component({
   selector: 'app-wc-detail-page',
   templateUrl: './wc-detail.page.html',
-  imports: [ReviewListComponent, RouterModule],
+  styleUrl: './wc-detail.page.css',
+  imports: [LucideIconComponent, ReviewListComponent, RouterModule],
 })
 export class WcDetailPage {
   private route = inject(ActivatedRoute);

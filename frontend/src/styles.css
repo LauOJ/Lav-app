@@ -273,6 +273,9 @@ li {
   font-size: inherit;
   font-family: inherit;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .user-dropdown a:hover,

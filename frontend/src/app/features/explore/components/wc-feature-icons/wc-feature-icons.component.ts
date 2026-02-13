@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { LucideIconComponent, LucideIconName } from '../../../../shared/components/lucide-icon/lucide-icon.component';
 import { WC } from '../../../wcs/models/wc.model';
 
 type FeatureKey = keyof Pick<
@@ -22,12 +23,12 @@ type FeatureKey = keyof Pick<
 interface FeatureItem {
   key: FeatureKey;
   label: string;
-  shortLabel: string;
+  icon: LucideIconName;
 }
 
 @Component({
   selector: 'app-wc-feature-icons',
-  imports: [CommonModule],
+  imports: [CommonModule, LucideIconComponent],
   templateUrl: './wc-feature-icons.component.html',
   styleUrl: './wc-feature-icons.component.css'
 })
@@ -35,13 +36,13 @@ export class WcFeatureIconsComponent implements OnDestroy {
   wc = input.required<WC>();
 
   private readonly features: FeatureItem[] = [
-    { key: 'accessible', label: 'Accesible', shortLabel: 'A' },
-    { key: 'gender_neutral', label: 'Neutral', shortLabel: 'GN' },
-    { key: 'has_changing_table', label: 'Cambiador', shortLabel: 'CT' },
+    { key: 'accessible', label: 'Accesible', icon: 'accessibility' },
+    { key: 'gender_neutral', label: 'Neutral', icon: 'non-binary' },
+    { key: 'has_changing_table', label: 'Cambiador', icon: 'baby' },
     {
       key: 'has_intimate_hygiene_products',
       label: 'Higiene íntima',
-      shortLabel: 'HI',
+      icon: 'droplets',
     },
   ];
 

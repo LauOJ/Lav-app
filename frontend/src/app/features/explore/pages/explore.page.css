@@ -57,21 +57,51 @@
   gap: 0.35rem;
 }
 
+/* Map filter buttons (vertical pills: A, GN, CT, SC, HI) */
 .filter-pill {
-  border: 1px solid #dcdcdc;
-  background: #f7f7f7;
-  color: #4a4a4a;
-  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  opacity: 0.9;
+  padding: 0.4rem 0.5rem;
   border-radius: 999px;
   font-size: 0.8rem;
-  min-width: 2.2rem;
-  text-align: center;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-pill:hover {
+  background: #f0f3f7;
+}
+
+.filter-pill .lucide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.filter-pill .lucide-icon img {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .filter-pill.active {
-  background: #e7eefc;
-  border-color: #b8cdf6;
-  color: #1f4cb3;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+  opacity: 1;
+}
+
+/* Icon white when pill is active (blue background) */
+.filter-pill.active .lucide-icon ::ng-deep img {
+  filter: brightness(0) invert(1);
 }
 
 .locate-button {

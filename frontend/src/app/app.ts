@@ -1,12 +1,13 @@
 import { Component, inject, effect, signal } from '@angular/core';
 import { RouterOutlet, Router, RouterLink } from '@angular/router';
 
-import { UserState } from './core/user/user.state';
+import { LucideIconComponent } from './shared/components/lucide-icon/lucide-icon.component';
 import { AuthState } from './core/auth/auth.state';
+import { UserState } from './core/user/user.state';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, LucideIconComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

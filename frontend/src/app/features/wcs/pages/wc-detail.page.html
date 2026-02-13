@@ -6,8 +6,14 @@
       <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
       @if (userState.user()) {
         <a class="btn btn-secondary" [routerLink]="['/wcs', wc()!.id, 'edit']">Editar WC</a>
-        <button type="button" class="btn btn-primary" (click)="onToggleFavorite()">
-          {{ isFavorite() ? '★ En favoritos' : '☆ Añadir a favoritos' }}
+        <button
+          type="button"
+          class="btn btn-primary favorite-btn"
+          [class.is-favorite]="isFavorite()"
+          (click)="onToggleFavorite()"
+        >
+          <app-lucide-icon icon="star" class="favorite-icon" />
+          {{ isFavorite() ? 'En favoritos' : 'Añadir a favoritos' }}
         </button>
       }
       @if (!hasUserReviewed()) {

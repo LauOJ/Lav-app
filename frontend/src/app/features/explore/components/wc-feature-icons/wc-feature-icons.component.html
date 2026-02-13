@@ -12,7 +12,7 @@
         (pointerleave)="onPointerUp()"
         (pointercancel)="onPointerUp()"
       >
-        <span class="icon" aria-hidden="true">{{ feature.shortLabel }}</span>
+        <app-lucide-icon [icon]="feature.icon" class="icon" />
         @if (activeFeature() === feature.key) {
           <span class="tooltip" role="tooltip">{{ feature.label }}</span>
         }

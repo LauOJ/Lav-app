@@ -34,7 +34,9 @@
         </button>
         @if (isUserMenuOpen()) {
           <div class="user-dropdown">
-            <a routerLink="/favorites" (click)="closeUserMenu()">Mis favoritos</a>
+            <a routerLink="/favorites" (click)="closeUserMenu()">
+              <app-lucide-icon icon="star" class="dropdown-icon" /> Mis favoritos
+            </a>
             <button type="button" (click)="onLogout()">Cerrar sesión</button>
           </div>
         }
