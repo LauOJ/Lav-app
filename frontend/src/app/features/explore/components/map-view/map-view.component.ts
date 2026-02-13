@@ -37,6 +37,14 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private pendingLatLng: L.LatLng | null = null;
   private userMarker: L.Marker | null = null;
 
+  /** Same pin icon as the "Centrar en mi ubicación" button (📍) */
+  private readonly userLocationIcon = L.divIcon({
+    className: 'user-location-marker',
+    html: '<span aria-hidden="true">📍</span>',
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+  });
+
   ngAfterViewInit(): void {
     this.setupMap();
     this.renderMarkers();
@@ -100,9 +108,9 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   
 
   private setDefaultMarkerIcons(): void {
-    const iconRetinaUrl = 'public/leaflet/marker-icon-2x.png';
-    const iconUrl = 'public/leaflet/marker-icon.png';
-    const shadowUrl = 'public/leaflet/marker-shadow.png';
+    const iconRetinaUrl = 'leaflet/marker-icon-2x.png';
+    const iconUrl = 'leaflet/marker-icon.png';
+    const shadowUrl = 'leaflet/marker-shadow.png';
   
     L.Icon.Default.mergeOptions({
       iconRetinaUrl,
@@ -170,7 +178,10 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.map.setView(latLng, zoom, { animate: true });
 
     if (!this.userMarker) {
-      this.userMarker = L.marker(latLng, { title: 'Estás aquí' });
+      this.userMarker = L.marker(latLng, {
+        icon: this.userLocationIcon,
+        title: 'Estás aquí',
+      });
       this.userMarker.addTo(this.map);
     } else {
       this.userMarker.setLatLng(latLng);

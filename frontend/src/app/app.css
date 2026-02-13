@@ -8,15 +8,79 @@ app-root {
   flex-direction: column;
   height: 100%;
   min-height: 100%;
+  position: relative;
+}
+
+.user-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  cursor: default;
 }
 
 .app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #ededed;
+  position: relative;
+  z-index: 1100;
 }
 
-.logout-button {
-  margin-left: 1rem;
+.user-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.user-button:hover {
+  background: var(--color-bg);
+  border-color: #ccc;
+}
+
+.user-button .user-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.auth-link {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.auth-link:hover {
+  background: var(--color-bg);
+}
+
+.auth-link-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.auth-link-primary:hover {
+  background: var(--color-primary-hover);
+  color: #fff;
 }
 
 .app-content {

@@ -1,4 +1,13 @@
 <div class="app-layout">
+  @if (isUserMenuOpen()) {
+    <div
+      class="user-menu-overlay"
+      (click)="closeUserMenu()"
+      role="button"
+      tabindex="-1"
+      aria-label="Cerrar menú"
+    ></div>
+  }
   <header class="app-header">
     <div class="brand">
       <img
@@ -6,19 +15,35 @@
         alt="Labu logo"
         class="brand-icon"
       />
-      <span class="brand-name">Vau</span>
+      <span class="brand-name">lav-app</span>
     </div>
 
     @if (authState.isAuthenticated()) {
-      @if (userState.user()) {
-        <span>👤 {{ userState.user()?.email }}</span>
-        <span> | </span>
-      }
-      <a routerLink="/favorites">Mis favoritos</a>
-      <span> | </span>
-      <button (click)="onLogout()" class="logout-button">
-        Logout
-      </button>
+      <div class="user-menu">
+        <button
+          type="button"
+          class="user-button"
+          (click)="toggleUserMenu()"
+          aria-label="Menú de usuario"
+          [attr.aria-expanded]="isUserMenuOpen()"
+        >
+          <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+          </svg>
+        </button>
+        @if (isUserMenuOpen()) {
+          <div class="user-dropdown">
+            <a routerLink="/favorites" (click)="closeUserMenu()">Mis favoritos</a>
+            <button type="button" (click)="onLogout()">Cerrar sesión</button>
+          </div>
+        }
+      </div>
+    } @else {
+      <nav class="auth-links">
+        <a routerLink="/login" class="auth-link">Iniciar sesión</a>
+        <a routerLink="/register" class="auth-link auth-link-primary">Registrarse</a>
+      </nav>
     }
   </header>
 

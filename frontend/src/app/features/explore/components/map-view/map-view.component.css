@@ -8,3 +8,15 @@
   width: 100%;
   height: 100%;
 }
+
+/* User location pin: same icon as the "Centrar en mi ubicación" button */
+:host ::ng-deep .user-location-marker {
+  background: none !important;
+  border: none !important;
+}
+
+:host ::ng-deep .user-location-marker span {
+  font-size: 1.75rem;
+  line-height: 1;
+  display: block;
+}
