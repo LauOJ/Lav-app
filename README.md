@@ -6,7 +6,7 @@ Proyecto final del Ciclo Formativo de Desarrollo de Aplicaciones Web (DAW) – C
 
 ---
 
-## 🧠 Descripción
+##  Descripción
 
 LAV-APP nace como una respuesta a una necesidad cotidiana: encontrar baños accesibles, limpios y adecuados en entornos urbanos.
 
@@ -24,7 +24,7 @@ El proyecto está diseñado bajo principios de tecnología ética, accesible y o
 
 ---
 
-## 🏗 Arquitectura del proyecto
+##  Arquitectura del proyecto
 
 El proyecto está desarrollado con una arquitectura full stack separada en frontend y backend:
 
@@ -50,7 +50,7 @@ El proyecto está desarrollado con una arquitectura full stack separada en front
 
 ---
 
-## 🔐 Autenticación
+##  Autenticación
 
 La aplicación utiliza autenticación basada en JWT:
 
@@ -61,7 +61,7 @@ La aplicación utiliza autenticación basada en JWT:
 
 ---
 
-## 🗺 Funcionalidades principales
+##  Funcionalidades principales
 
 - Mapa interactivo con geolocalización
 - Filtros dinámicos
