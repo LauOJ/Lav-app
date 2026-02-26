@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,12 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   private readonly http = inject(HttpClient);
 
-  // Centralized backend URL
-  private readonly _baseUrl = 'http://localhost:8001';
-
-  get baseUrl(): string {
-    return this._baseUrl;
-  }
+  baseUrl = environment.apiUrl;
   
   get<T>(url: string, options?: object) {
     return this.http.get<T>(`${this.baseUrl}${url}`, options);
