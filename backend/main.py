@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import users, wcs, reviews, auth
+from routers import users, wcs, reviews, auth, geocode
 
 app = FastAPI(title="WC Advisor API")
 
@@ -19,6 +19,7 @@ app.include_router(users.router)
 app.include_router(wcs.router)
 app.include_router(reviews.router)
 app.include_router(auth.router)
+app.include_router(geocode.router)
 
 
 @app.get("/")

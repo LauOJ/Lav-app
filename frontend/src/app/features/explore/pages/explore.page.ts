@@ -12,6 +12,7 @@ type ExploreFilters = {
   has_intimate_hygiene_products: boolean;
   minCleanliness: number | null;
 };
+import { environment } from '../../../../environments/environment';
 import { WCService } from '../../wcs/services/wc.service';
 import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 import { MapViewComponent } from '../components/map-view/map-view.component';
@@ -182,15 +183,13 @@ export class ExplorePage implements OnInit {
     this.searchError.set(null);
 
     fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-        query
-      )}&limit=1`
+      `${environment.apiUrl}/geocode?q=${encodeURIComponent(query)}&limit=1`
     )
       .then((response) => {
         if (!response.ok) {
           throw new Error('request_failed');
         }
-        return response.json() as Promise<Array<{ lat: string; lon: string }>>;
+        return response.json() as Promise<Array<{ lat: number; lon: number }>>;
       })
       .then((results) => {
         if (!results.length) {
@@ -198,8 +197,8 @@ export class ExplorePage implements OnInit {
           return;
         }
         const result = results[0];
-        const lat = Number(result.lat);
-        const lng = Number(result.lon);
+        const lat = result.lat;
+        const lng = result.lon;
         if (Number.isNaN(lat) || Number.isNaN(lng)) {
           this.searchError.set('No se encontraron resultados');
           return;
