@@ -18,6 +18,7 @@ type FeatureKey = keyof Pick<
   | 'gender_neutral'
   | 'has_changing_table'
   | 'has_intimate_hygiene_products'
+  | 'only_for_customers'
 >;
 
 interface FeatureItem {
@@ -43,6 +44,11 @@ export class WcFeatureIconsComponent implements OnDestroy {
       key: 'has_intimate_hygiene_products',
       label: 'Higiene íntima',
       icon: 'droplets',
+    },
+    {
+      key: 'only_for_customers',
+      label: 'Solo clientes',
+      icon: 'lock',
     },
   ];
 
