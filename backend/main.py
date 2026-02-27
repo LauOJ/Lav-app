@@ -5,7 +5,8 @@ from routers import users, wcs, reviews, auth, geocode
 
 app = FastAPI(title="WC Advisor API")
 
-origins = ["http://localhost:4200", "http://localhost:4201", "http://frontend:4200"]
+origins = ["http://localhost:4200", "http://localhost:4201",     "http://localhost:8082",
+"http://frontend:4200"]
 
 app.add_middleware(
     CORSMiddleware,

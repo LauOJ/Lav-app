@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16
+    container_name: wcadvisor_db_prod
+    restart: always
+    environment:
+      POSTGRES_USER: wcadmin
+      POSTGRES_PASSWORD: wcpassword
+      POSTGRES_DB: wcadvisor
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: wcadvisor_backend_prod
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg://wcadmin:wcpassword@db:5432/wcadvisor
+      SECRET_KEY: super-secret-dev-key-change-me
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: wcadvisor_frontend_prod
+    restart: always
+    depends_on:
+      - backend
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:alpine
+    container_name: wcadvisor_gateway
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "8090:80"
+    volumes:
+      - ./nginx-gateway/nginx.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  postgres_data_prod:

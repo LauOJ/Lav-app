@@ -1,4 +1,10 @@
-export const environment = {
+/* export const environment = {
   production: true,
   apiUrl: 'https://TU-DOMINIO.com/api', // provisional
+}; */
+
+
+export const environment = {
+  production: true,
+  apiUrl: '/api',
 };
