@@ -14,7 +14,12 @@ export class ReviewItemComponent {
   save = output<{
     reviewId: number;
     cleanliness_rating: number;
-    safety_rating: number;
+    felt_safe: boolean;
+    accessible: boolean;
+    has_toilet_paper: boolean;
+    hygiene_products_available: boolean;
+    could_enter_without_buying: boolean | null;
+    has_gender_mixed_option: boolean;
     comment?: string;
   }>();
 
@@ -23,7 +28,6 @@ export class ReviewItemComponent {
 
   // campos editables locales
   cleanliness = signal(0);
-  safety = signal(0);
   comment = signal<string | undefined>(undefined);
 
   constructor() {
@@ -31,7 +35,6 @@ export class ReviewItemComponent {
     effect(() => {
       const r = this.review();
       this.cleanliness.set(r.cleanliness_rating);
-      this.safety.set(r.safety_rating);
       this.comment.set(r.comment);
     });
   }
@@ -49,7 +52,6 @@ export class ReviewItemComponent {
     this.isEditing.set(false);
     const r = this.review();
     this.cleanliness.set(r.cleanliness_rating);
-    this.safety.set(r.safety_rating);
     this.comment.set(r.comment);
   }
 
@@ -61,7 +63,12 @@ export class ReviewItemComponent {
     this.save.emit({
       reviewId: this.review().id,
       cleanliness_rating: this.cleanliness(),
-      safety_rating: this.safety(),
+      felt_safe: this.review().felt_safe,
+      accessible: this.review().accessible,
+      has_toilet_paper: this.review().has_toilet_paper,
+      hygiene_products_available: this.review().hygiene_products_available,
+      could_enter_without_buying: this.review().could_enter_without_buying,
+      has_gender_mixed_option: this.review().has_gender_mixed_option,
       comment: this.comment(),
     });
     this.isEditing.set(false);

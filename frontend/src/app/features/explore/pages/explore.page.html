@@ -14,6 +14,36 @@
       <button
         type="button"
         class="filter-pill filter-button"
+        [class.active]="filters().clean"
+        [class.tooltip-visible]="activeTooltipFilter() === 'clean'"
+        [attr.aria-pressed]="filters().clean"
+        (focusin)="setFilterTooltip('clean')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('clean', !filters().clean); showFilterTooltipTemporarily('clean')"
+        aria-label="Limpio"
+        title="Limpio"
+      >
+        <app-lucide-icon icon="star" />
+        <span class="tooltip">Limpio</span>
+      </button>
+      <button
+        type="button"
+        class="filter-pill filter-button"
+        [class.active]="filters().safe"
+        [class.tooltip-visible]="activeTooltipFilter() === 'safe'"
+        [attr.aria-pressed]="filters().safe"
+        (focusin)="setFilterTooltip('safe')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('safe', !filters().safe); showFilterTooltipTemporarily('safe')"
+        aria-label="Seguro"
+        title="Seguro"
+      >
+        <app-lucide-icon icon="lock" />
+        <span class="tooltip">Seguro</span>
+      </button>
+      <button
+        type="button"
+        class="filter-pill filter-button"
         [class.active]="filters().accessible"
         [class.tooltip-visible]="activeTooltipFilter() === 'accessible'"
         [attr.aria-pressed]="filters().accessible"
@@ -29,106 +59,34 @@
       <button
         type="button"
         class="filter-pill filter-button"
-        [class.active]="filters().gender_neutral"
-        [class.tooltip-visible]="activeTooltipFilter() === 'gender_neutral'"
-        [attr.aria-pressed]="filters().gender_neutral"
-        (focusin)="setFilterTooltip('gender_neutral')"
+        [class.active]="filters().withPaper"
+        [class.tooltip-visible]="activeTooltipFilter() === 'withPaper'"
+        [attr.aria-pressed]="filters().withPaper"
+        (focusin)="setFilterTooltip('withPaper')"
         (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('gender_neutral', !filters().gender_neutral); showFilterTooltipTemporarily('gender_neutral')"
-        aria-label="Baño neutral"
-        title="Baño neutral"
-      >
-        <app-lucide-icon icon="non-binary" />
-        <span class="tooltip">Baño neutral</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().has_changing_table"
-        [class.tooltip-visible]="activeTooltipFilter() === 'has_changing_table'"
-        [attr.aria-pressed]="filters().has_changing_table"
-        (focusin)="setFilterTooltip('has_changing_table')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('has_changing_table', !filters().has_changing_table); showFilterTooltipTemporarily('has_changing_table')"
-        aria-label="Cambiador"
-        title="Cambiador"
-      >
-        <app-lucide-icon icon="baby" />
-        <span class="tooltip">Cambiador</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().only_for_customers"
-        [class.tooltip-visible]="activeTooltipFilter() === 'only_for_customers'"
-        [attr.aria-pressed]="filters().only_for_customers"
-        (focusin)="setFilterTooltip('only_for_customers')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('only_for_customers', !filters().only_for_customers); showFilterTooltipTemporarily('only_for_customers')"
-        aria-label="Solo clientes"
-        title="Solo clientes"
-      >
-        <app-lucide-icon icon="lock" />
-        <span class="tooltip">Solo clientes</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().has_intimate_hygiene_products"
-        [class.tooltip-visible]="activeTooltipFilter() === 'has_intimate_hygiene_products'"
-        [attr.aria-pressed]="filters().has_intimate_hygiene_products"
-        (focusin)="setFilterTooltip('has_intimate_hygiene_products')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('has_intimate_hygiene_products', !filters().has_intimate_hygiene_products); showFilterTooltipTemporarily('has_intimate_hygiene_products')"
-        aria-label="Higiene íntima"
-        title="Higiene íntima"
+        (click)="onToggleFilter('withPaper', !filters().withPaper); showFilterTooltipTemporarily('withPaper')"
+        aria-label="Con papel"
+        title="Con papel"
       >
         <app-lucide-icon icon="droplets" />
-        <span class="tooltip">Higiene íntima</span>
+        <span class="tooltip">Con papel</span>
       </button>
       <button
         type="button"
-        class="filter-pill filter-toggle"
-        [class.active]="showAdvancedFilters()"
-        [attr.aria-pressed]="showAdvancedFilters()"
-        (click)="onToggleAdvancedFilters()"
-        aria-label="Mostrar filtros avanzados"
+        class="filter-pill filter-button"
+        [class.active]="filters().enoughReviews"
+        [class.tooltip-visible]="activeTooltipFilter() === 'enoughReviews'"
+        [attr.aria-pressed]="filters().enoughReviews"
+        (focusin)="setFilterTooltip('enoughReviews')"
+        (focusout)="setFilterTooltip(null)"
+        (click)="onToggleFilter('enoughReviews', !filters().enoughReviews); showFilterTooltipTemporarily('enoughReviews')"
+        aria-label="Con suficientes reseñas"
+        title="Con suficientes reseñas"
       >
-        {{ showAdvancedFilters() ? '-' : '+' }}
+        <app-lucide-icon icon="baby" />
+        <span class="tooltip">Con suficientes reseñas</span>
       </button>
     </div>
-    @if (showAdvancedFilters()) {
-      <div class="filters-advanced">
-        <div class="filter-cleanliness">
-          <span class="filter-cleanliness-label">
-            Limpieza:
-            @if (filters().minCleanliness === null) {
-              sin filtro
-            } @else {
-              ≥ {{ filters().minCleanliness }}
-            }
-          </span>
-          <input
-            type="range"
-            min="1"
-            max="5"
-            step="1"
-            [value]="filters().minCleanliness ?? 1"
-            (input)="onSetMinCleanliness($any($event.target).valueAsNumber)"
-            aria-label="Limpieza mínima"
-          />
-          @if (filters().minCleanliness !== null) {
-            <button
-              type="button"
-              class="filter-clear"
-              (click)="onSetMinCleanliness(null)"
-            >
-              Quitar
-            </button>
-          }
-        </div>
-      </div>
-    }
   </div>
   <button
     type="button"

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
@@ -157,33 +157,19 @@ export class WcDetailPage {
     return this.reviews().some(r => r.user_id === user.id);
   });
 
-  readonly safeSpaceSummaryMessage = computed<string | null>(() => {
-    const reviews = this.reviews();
-
-    let perceivedSafeCount = 0;
-    let perceivedNotAlwaysSafeCount = 0;
-
-    for (const review of reviews) {
-      if (review.is_safe_space === true) {
-        perceivedSafeCount++;
-      } else if (review.is_safe_space === false) {
-        perceivedNotAlwaysSafeCount++;
-      }
-    }
-
-    const totalConsidered = perceivedSafeCount + perceivedNotAlwaysSafeCount;
-    if (totalConsidered === 0) {
-      return null;
-    }
-
-    if (perceivedSafeCount > 0 && perceivedNotAlwaysSafeCount === 0) {
-      return 'Según las reviews disponibles, este espacio se percibe como seguro.';
-    }
-
-    if (perceivedNotAlwaysSafeCount > 0 && perceivedSafeCount === 0) {
-      return 'Según las reviews disponibles, este espacio no siempre se percibe como seguro.';
-    }
-
-    return 'Las opiniones sobre la seguridad de este espacio son variadas.';
+  readonly hasLimitedInfo = computed(() => {
+    const wc = this.wc();
+    return wc ? wc.reviews_count < 3 : false;
   });
+
+  cleanlinessStars(value: number | null): string {
+    if (value == null) return 'Sin datos';
+    const rounded = Math.min(5, Math.max(0, Math.round(value)));
+    return '★★★★★'.slice(0, rounded) + '☆☆☆☆☆'.slice(0, 5 - rounded);
+  }
+
+  asPercentage(score: number | null): string {
+    if (score == null) return 'Sin datos';
+    return `${Math.round(score * 100)}%`;
+  }
 }

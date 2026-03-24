@@ -4,6 +4,17 @@ import { Observable } from 'rxjs';
 import { ApiService } from '../../../core/api/api.service';
 import { Review } from '../models/review.model';
 
+type ReviewPayload = {
+  cleanliness_rating: number;
+  felt_safe: boolean;
+  accessible: boolean;
+  has_toilet_paper: boolean;
+  hygiene_products_available: boolean;
+  could_enter_without_buying: boolean | null;
+  has_gender_mixed_option: boolean;
+  comment?: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,14 +25,7 @@ export class ReviewsService {
     return this.api.get<Review[]>(`/wcs/${wcId}/reviews`);
   }
 
-  createReview(data: {
-    wc_id: number;
-    cleanliness_rating: number;
-    safety_rating: number;
-    comment?: string;
-    is_safe_space?: boolean | null;
-    safe_space_comment?: string | null;
-  }) {
+  createReview(data: ReviewPayload & { wc_id: number }) {
     return this.api.post('/reviews', data);
   }
   
@@ -31,11 +35,7 @@ export class ReviewsService {
 
   updateReview(
     reviewId: number,
-    data: {
-      cleanliness_rating: number;
-      safety_rating: number;
-      comment?: string;
-    }
+    data: ReviewPayload
   ) {
     return this.api.put(`/reviews/${reviewId}`, data);
   }

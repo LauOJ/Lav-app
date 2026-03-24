@@ -8,25 +8,6 @@ import { ReviewItemComponent } from './review-item.component';
   selector: 'app-review-list',
   templateUrl: './review-list.component.html',
   imports: [ReviewItemComponent],
-  styles: [
-    `
-      .safe-space-comment-block {
-        list-style: none;
-        margin-top: 0;
-        padding-left: 1rem;
-        font-size: 0.95em;
-      }
-      .safe-space-comment-title {
-        margin: 0 0 0.25rem 0;
-        font-weight: 600;
-        font-size: 0.9em;
-      }
-      .safe-space-comment-text {
-        margin: 0;
-        color: #555;
-      }
-    `,
-  ],
 })
 export class ReviewListComponent {
     reviews = input.required<Review[]>();
@@ -54,13 +35,23 @@ export class ReviewListComponent {
     onUpdateReview(payload: {
         reviewId: number;
         cleanliness_rating: number;
-        safety_rating: number;
+        felt_safe: boolean;
+        accessible: boolean;
+        has_toilet_paper: boolean;
+        hygiene_products_available: boolean;
+        could_enter_without_buying: boolean | null;
+        has_gender_mixed_option: boolean;
         comment?: string;
       }) {
         this.reviewsService
           .updateReview(payload.reviewId, {
             cleanliness_rating: payload.cleanliness_rating,
-            safety_rating: payload.safety_rating,
+            felt_safe: payload.felt_safe,
+            accessible: payload.accessible,
+            has_toilet_paper: payload.has_toilet_paper,
+            hygiene_products_available: payload.hygiene_products_available,
+            could_enter_without_buying: payload.could_enter_without_buying,
+            has_gender_mixed_option: payload.has_gender_mixed_option,
             comment: payload.comment,
           })
           .subscribe({

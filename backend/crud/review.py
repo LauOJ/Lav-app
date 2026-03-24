@@ -12,10 +12,13 @@ def create_review(
     review = Review(
         wc_id=review_in.wc_id,
         cleanliness_rating=review_in.cleanliness_rating,
-        safety_rating=review_in.safety_rating,
+        felt_safe=review_in.felt_safe,
+        accessible=review_in.accessible,
+        has_toilet_paper=review_in.has_toilet_paper,
+        hygiene_products_available=review_in.hygiene_products_available,
+        could_enter_without_buying=review_in.could_enter_without_buying,
+        has_gender_mixed_option=review_in.has_gender_mixed_option,
         comment=review_in.comment,
-        is_safe_space=review_in.is_safe_space,
-        safe_space_comment=review_in.safe_space_comment,
         user_id=user_id,
     )
 
@@ -57,10 +60,13 @@ def update_review(
         raise PermissionError
 
     review.cleanliness_rating = review_in.cleanliness_rating
-    review.safety_rating = review_in.safety_rating
+    review.felt_safe = review_in.felt_safe
+    review.accessible = review_in.accessible
+    review.has_toilet_paper = review_in.has_toilet_paper
+    review.hygiene_products_available = review_in.hygiene_products_available
+    review.could_enter_without_buying = review_in.could_enter_without_buying
+    review.has_gender_mixed_option = review_in.has_gender_mixed_option
     review.comment = review_in.comment
-    review.is_safe_space = review_in.is_safe_space
-    review.safe_space_comment = review_in.safe_space_comment
 
     db.commit()
     db.refresh(review)

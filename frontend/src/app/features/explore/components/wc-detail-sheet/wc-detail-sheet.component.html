@@ -51,18 +51,23 @@
       </div>
 
       <div class="rating">
-        <span class="label">Privacidad</span>
+        <span class="label">Seguridad</span>
         <div class="rating-visual">
-          <span class="stars" [attr.aria-label]="safetyAria()">
-            {{ safetyStars() }}
-          </span>
-          @if (wc().reviews_count > 0) {
-            <span class="rating-number">
-              {{ wc().avg_safety | number: '1.1-1' }}
-            </span>
-          } @else {
-            <span class="rating-number muted">Sin valoraciones</span>
-          }
+          <span class="rating-number">{{ asPercentage(wc().safety_score) }}</span>
+        </div>
+      </div>
+
+      <div class="rating">
+        <span class="label">Accesibilidad</span>
+        <div class="rating-visual">
+          <span class="rating-number">{{ asPercentage(wc().accessibility_score) }}</span>
+        </div>
+      </div>
+
+      <div class="rating">
+        <span class="label">Papel</span>
+        <div class="rating-visual">
+          <span class="rating-number">{{ asPercentage(wc().toilet_paper_score) }}</span>
         </div>
       </div>
 
@@ -73,6 +78,11 @@
           <span class="reviews-text muted">Sin valoraciones</span>
         }
       </div>
+      @if (hasLimitedInfo()) {
+        <div class="reviews-count">
+          <span class="reviews-text muted">Información limitada</span>
+        </div>
+      }
     </div>
 
     <div class="cta">
@@ -121,15 +131,9 @@
                     </span>
                   </div>
                   <div class="review-metric">
-                    <span class="review-label">Privacidad</span>
-                    <span
-                      class="review-stars"
-                      [attr.aria-label]="'Privacidad: ' + review.safety_rating + ' de 5'"
-                    >
-                      {{ reviewStars(review.safety_rating) }}
-                    </span>
+                    <span class="review-label">Seguridad percibida</span>
                     <span class="review-score">
-                      {{ review.safety_rating }}/5
+                      {{ review.felt_safe ? 'Sí' : 'No' }}
                     </span>
                   </div>
                 </div>

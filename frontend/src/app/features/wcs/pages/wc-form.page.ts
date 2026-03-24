@@ -23,11 +23,8 @@ export class WCFormPage {
     name: '',
     latitude: 0,
     longitude: 0,
-    accessible: false,
-    gender_neutral: false,
+    is_public: true,
     has_changing_table: false,
-    only_for_customers: false,
-    has_intimate_hygiene_products: false,
     description: '',
   });
 
@@ -155,11 +152,8 @@ export class WCFormPage {
           name: wc.name,
           latitude: wc.latitude,
           longitude: wc.longitude,
-          accessible: wc.accessible,
-          gender_neutral: wc.gender_neutral,
+          is_public: wc.is_public,
           has_changing_table: wc.has_changing_table,
-          only_for_customers: wc.only_for_customers,
-          has_intimate_hygiene_products: wc.has_intimate_hygiene_products,
           description: wc.description ?? '',
         });
         this.loadingWc.set(false);

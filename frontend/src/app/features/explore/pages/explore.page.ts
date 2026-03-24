@@ -5,12 +5,11 @@ import { Router, RouterModule } from '@angular/router';
 import { WC } from '../../wcs/models/wc.model';
 
 type ExploreFilters = {
+  clean: boolean;
+  safe: boolean;
   accessible: boolean;
-  gender_neutral: boolean;
-  has_changing_table: boolean;
-  only_for_customers: boolean;
-  has_intimate_hygiene_products: boolean;
-  minCleanliness: number | null;
+  withPaper: boolean;
+  enoughReviews: boolean;
 };
 import { environment } from '../../../../environments/environment';
 import { WCService } from '../../wcs/services/wc.service';
@@ -44,14 +43,12 @@ export class ExplorePage implements OnInit {
   readonly searchError = signal<string | null>(null);
   readonly searchLoading = signal(false);
   readonly filters = signal<ExploreFilters>({
+    clean: false,
+    safe: false,
     accessible: false,
-    gender_neutral: false,
-    has_changing_table: false,
-    only_for_customers: false,
-    has_intimate_hygiene_products: false,
-    minCleanliness: null,
+    withPaper: false,
+    enoughReviews: false,
   });
-  readonly showAdvancedFilters = signal(false);
   /** Which filter button's tooltip is shown (we hide it after 500ms instead of relying on blur) */
   readonly activeTooltipFilter = signal<keyof ExploreFilters | null>(null);
 
@@ -62,20 +59,11 @@ export class ExplorePage implements OnInit {
   readonly filteredWcs = computed(() => {
     const filters = this.filters();
     return this.wcs().filter(wc => {
-      if (filters.accessible && !wc.accessible) return false;
-      if (filters.gender_neutral && !wc.gender_neutral) return false;
-      if (filters.has_changing_table && !wc.has_changing_table) return false;
-      if (filters.only_for_customers && !wc.only_for_customers) return false;
-      if (
-        filters.has_intimate_hygiene_products &&
-        !wc.has_intimate_hygiene_products
-      ) {
-        return false;
-      }
-      if (filters.minCleanliness !== null) {
-        if (wc.avg_cleanliness == null) return false;
-        if (wc.avg_cleanliness < filters.minCleanliness) return false;
-      }
+      if (filters.clean && (wc.avg_cleanliness == null || wc.avg_cleanliness < 3.5)) return false;
+      if (filters.safe && (wc.safety_score == null || wc.safety_score < 0.7)) return false;
+      if (filters.accessible && (wc.accessibility_score == null || wc.accessibility_score < 0.6)) return false;
+      if (filters.withPaper && (wc.toilet_paper_score == null || wc.toilet_paper_score < 0.6)) return false;
+      if (filters.enoughReviews && wc.reviews_count < 3) return false;
       return true;
     });
   });
@@ -140,17 +128,6 @@ export class ExplorePage implements OnInit {
   showFilterTooltipTemporarily(key: keyof ExploreFilters): void {
     this.activeTooltipFilter.set(key);
     setTimeout(() => this.activeTooltipFilter.set(null), 500);
-  }
-
-  onSetMinCleanliness(value: number | null) {
-    this.filters.update(current => ({
-      ...current,
-      minCleanliness: value,
-    }));
-  }
-
-  onToggleAdvancedFilters() {
-    this.showAdvancedFilters.set(!this.showAdvancedFilters());
   }
 
   onLocateUser(): void {

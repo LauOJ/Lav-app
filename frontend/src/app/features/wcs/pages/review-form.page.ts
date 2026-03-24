@@ -30,17 +30,14 @@ export class ReviewFormPage {
 
   form = this.fb.group({
     cleanliness_rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]],
-    safety_rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]],
+    felt_safe: [true, Validators.required],
+    accessible: [false, Validators.required],
+    has_toilet_paper: [false, Validators.required],
+    hygiene_products_available: [false, Validators.required],
+    could_enter_without_buying: ['' as 'true' | 'false' | ''],
+    has_gender_mixed_option: [false, Validators.required],
     comment: [''],
-    is_safe_space: [null as string | null],
-    safe_space_comment: [''],
   });
-
-  /** True when user chose Sí or No (so we show the optional explanation). */
-  get showSafeSpaceComment(): boolean {
-    const v = this.form.get('is_safe_space')?.value;
-    return v === 'true' || v === 'false';
-  }
 
   onSkip() {
     this.router.navigate(['/explore']);
@@ -50,20 +47,23 @@ export class ReviewFormPage {
     if (this.form.invalid) return;
 
     const raw = this.form.getRawValue();
-    const isSafeSpaceRaw = raw.is_safe_space;
-    const isSafeSpace =
-      isSafeSpaceRaw === '' || isSafeSpaceRaw == null
+    const canEnterRaw = raw.could_enter_without_buying;
+    const couldEnterWithoutBuying =
+      canEnterRaw === '' || canEnterRaw == null
         ? null
-        : isSafeSpaceRaw === 'true';
+        : canEnterRaw === 'true';
 
     this.reviewsService
       .createReview({
         wc_id: this.wcId,
         cleanliness_rating: raw.cleanliness_rating!,
-        safety_rating: raw.safety_rating!,
+        felt_safe: !!raw.felt_safe,
+        accessible: !!raw.accessible,
+        has_toilet_paper: !!raw.has_toilet_paper,
+        hygiene_products_available: !!raw.hygiene_products_available,
+        could_enter_without_buying: couldEnterWithoutBuying,
+        has_gender_mixed_option: !!raw.has_gender_mixed_option,
         comment: raw.comment || undefined,
-        is_safe_space: isSafeSpace,
-        safe_space_comment: this.showSafeSpaceComment ? (raw.safe_space_comment || null) : undefined,
       })
       .subscribe(() => {
         this.router.navigate(['/wcs', this.wcId]);

@@ -14,7 +14,7 @@
   <div class="section">
     <form [formGroup]="form" (ngSubmit)="submit()">
   <fieldset class="fieldset-reset">
-    <legend>Valoraciones (1–5)</legend>
+    <legend>Experiencia</legend>
     <div class="form-group">
       <label for="cleanliness_rating">Limpieza (1–5)</label>
       <input
@@ -25,16 +25,6 @@
         formControlName="cleanliness_rating"
       />
     </div>
-    <div class="form-group">
-      <label for="safety_rating">Seguridad (1–5)</label>
-      <input
-        id="safety_rating"
-        type="number"
-        min="1"
-        max="5"
-        formControlName="safety_rating"
-      />
-    </div>
   </fieldset>
 
   <div class="form-group">
@@ -43,38 +33,89 @@
   </div>
 
   <fieldset class="fieldset-reset">
-    <legend>¿Te sentiste en seguridad en este espacio?</legend>
+    <legend>Indicadores rápidos</legend>
     <div class="radio-group">
       <input
-        id="is_safe_space_yes"
+        id="felt_safe_yes"
         type="radio"
-        formControlName="is_safe_space"
-        [value]="'true'"
+        formControlName="felt_safe"
+        [value]="true"
       />
-      <label for="is_safe_space_yes">Sí</label>
+      <label for="felt_safe_yes">Me sentí segura</label>
       <input
-        id="is_safe_space_no"
+        id="felt_safe_no"
         type="radio"
-        formControlName="is_safe_space"
-        [value]="'false'"
+        formControlName="felt_safe"
+        [value]="false"
       />
-      <label for="is_safe_space_no">No</label>
-      <input
-        id="is_safe_space_skip"
-        type="radio"
-        formControlName="is_safe_space"
-        [value]="''"
-      />
-      <label for="is_safe_space_skip">Prefiero no decir</label>
+      <label for="felt_safe_no">No me sentí segura</label>
     </div>
   </fieldset>
 
-  @if (showSafeSpaceComment) {
-    <div class="form-group">
-      <label for="safe_space_comment">¿Quieres explicar por qué? (opcional)</label>
-      <textarea id="safe_space_comment" formControlName="safe_space_comment"></textarea>
+  <fieldset class="fieldset-reset">
+    <legend>Accesibilidad y servicios</legend>
+    <div class="checkbox-group">
+      <div>
+        <input
+          id="review-accessible"
+          type="checkbox"
+          formControlName="accessible"
+        />
+        <label for="review-accessible">Fue accesible</label>
+      </div>
+      <div>
+        <input
+          id="review-has_toilet_paper"
+          type="checkbox"
+          formControlName="has_toilet_paper"
+        />
+        <label for="review-has_toilet_paper">Había papel higiénico</label>
+      </div>
+      <div>
+        <input
+          id="review-hygiene_products_available"
+          type="checkbox"
+          formControlName="hygiene_products_available"
+        />
+        <label for="review-hygiene_products_available">Había productos de higiene</label>
+      </div>
+      <div>
+        <input
+          id="review-has_gender_mixed_option"
+          type="checkbox"
+          formControlName="has_gender_mixed_option"
+        />
+        <label for="review-has_gender_mixed_option">Tiene opción mixta/neutra</label>
+      </div>
     </div>
-  }
+  </fieldset>
+
+  <fieldset class="fieldset-reset">
+    <legend>Acceso sin consumo</legend>
+    <div class="radio-group">
+      <input
+        id="could_enter_yes"
+        type="radio"
+        formControlName="could_enter_without_buying"
+        [value]="'true'"
+      />
+      <label for="could_enter_yes">Sí</label>
+      <input
+        id="could_enter_no"
+        type="radio"
+        formControlName="could_enter_without_buying"
+        [value]="'false'"
+      />
+      <label for="could_enter_no">No</label>
+      <input
+        id="could_enter_skip"
+        type="radio"
+        formControlName="could_enter_without_buying"
+        [value]="''"
+      />
+      <label for="could_enter_skip">No lo sé / prefiero no decir</label>
+    </div>
+  </fieldset>
 
   @if (form.invalid) {
     <p id="form-errors" class="form-error" role="alert">

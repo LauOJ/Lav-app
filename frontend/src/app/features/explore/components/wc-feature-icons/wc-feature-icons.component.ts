@@ -12,19 +12,13 @@ import {
 import { LucideIconComponent, LucideIconName } from '../../../../shared/components/lucide-icon/lucide-icon.component';
 import { WC } from '../../../wcs/models/wc.model';
 
-type FeatureKey = keyof Pick<
-  WC,
-  | 'accessible'
-  | 'gender_neutral'
-  | 'has_changing_table'
-  | 'has_intimate_hygiene_products'
-  | 'only_for_customers'
->;
+type FeatureKey = 'safety_score' | 'accessibility_score' | 'toilet_paper_score';
 
 interface FeatureItem {
   key: FeatureKey;
   label: string;
   icon: LucideIconName;
+  score: number | null;
 }
 
 @Component({
@@ -36,25 +30,19 @@ interface FeatureItem {
 export class WcFeatureIconsComponent implements OnDestroy {
   wc = input.required<WC>();
 
-  private readonly features: FeatureItem[] = [
-    { key: 'accessible', label: 'Accesible', icon: 'accessibility' },
-    { key: 'gender_neutral', label: 'Neutral', icon: 'non-binary' },
-    { key: 'has_changing_table', label: 'Cambiador', icon: 'baby' },
-    {
-      key: 'has_intimate_hygiene_products',
-      label: 'Higiene íntima',
-      icon: 'droplets',
-    },
-    {
-      key: 'only_for_customers',
-      label: 'Solo clientes',
-      icon: 'lock',
-    },
+  private readonly features: Array<Omit<FeatureItem, 'score'>> = [
+    { key: 'safety_score', label: 'Seguridad', icon: 'lock' },
+    { key: 'accessibility_score', label: 'Accesibilidad', icon: 'accessibility' },
+    { key: 'toilet_paper_score', label: 'Papel', icon: 'droplets' },
   ];
 
-  readonly featureItems = computed(() =>
-    this.features.filter(feature => this.wc()[feature.key])
-  );
+  readonly featureItems = computed(() => {
+    const wc = this.wc();
+    return this.features.map((feature) => ({
+      ...feature,
+      score: wc[feature.key],
+    }));
+  });
   readonly activeFeature = signal<FeatureKey | null>(null);
 
   private longPressTimer: number | null = null;
@@ -90,5 +78,17 @@ export class WcFeatureIconsComponent implements OnDestroy {
     if (this.longPressTimer === null) return;
     window.clearTimeout(this.longPressTimer);
     this.longPressTimer = null;
+  }
+
+  scoreClass(score: number | null): string {
+    if (score == null) return 'score-unknown';
+    if (score > 0.7) return 'score-good';
+    if (score >= 0.4) return 'score-medium';
+    return 'score-low';
+  }
+
+  scoreLabel(score: number | null): string {
+    if (score == null) return 'Sin datos';
+    return `${Math.round(score * 100)}%`;
   }
 }

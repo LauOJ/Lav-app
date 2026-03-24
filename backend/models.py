@@ -45,11 +45,8 @@ class WC(Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
 
-    accessible = Column(Boolean, nullable=False, default=False)
-    gender_neutral = Column(Boolean, nullable=False, default=False)
+    is_public = Column(Boolean, nullable=False, default=True)
     has_changing_table = Column(Boolean, nullable=False, default=False)
-    only_for_customers = Column(Boolean, nullable=False, default=False)
-    has_intimate_hygiene_products = Column(Boolean, nullable=False, default=False)
 
     description = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -73,11 +70,14 @@ class Review(Base):
     id = Column(Integer, primary_key=True)
 
     cleanliness_rating = Column(Integer, nullable=False)
-    safety_rating = Column(Integer, nullable=False)
+    felt_safe = Column(Boolean, nullable=False)
+    accessible = Column(Boolean, nullable=False)
+    has_toilet_paper = Column(Boolean, nullable=False)
+    hygiene_products_available = Column(Boolean, nullable=False)
+    could_enter_without_buying = Column(Boolean, nullable=True)
+    has_gender_mixed_option = Column(Boolean, nullable=False)
 
     comment = Column(Text)
-    is_safe_space = Column(Boolean, nullable=True)
-    safe_space_comment = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user_id = Column(

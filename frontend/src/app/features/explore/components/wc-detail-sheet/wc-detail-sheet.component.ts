@@ -41,16 +41,11 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   readonly cleanlinessRating = computed(() =>
     this.toRating(this.wc().avg_cleanliness)
   );
-  readonly safetyRating = computed(() => this.toRating(this.wc().avg_safety));
   readonly cleanlinessStars = computed(() =>
     this.toStars(this.cleanlinessRating())
   );
-  readonly safetyStars = computed(() => this.toStars(this.safetyRating()));
   readonly cleanlinessAria = computed(
     () => `Limpieza: ${this.cleanlinessRating()} de 5`
-  );
-  readonly safetyAria = computed(
-    () => `Privacidad: ${this.safetyRating()} de 5`
   );
   readonly distanceLabel = computed(() => this.formatDistance());
   readonly showReviews = signal(false);
@@ -65,6 +60,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   );
   readonly visibleReviews = computed(() => this.sortedReviews().slice(0, 3));
   readonly hasMoreReviews = computed(() => this.wc().reviews_count > 3);
+  readonly hasLimitedInfo = computed(() => this.wc().reviews_count < 3);
 
   constructor() {
     effect(() => {
@@ -133,6 +129,11 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   reviewStars(rating: number): string {
     const bounded = Math.min(5, Math.max(0, Math.round(rating)));
     return this.toStars(bounded);
+  }
+
+  asPercentage(score: number | null): string {
+    if (score == null) return 'Sin datos';
+    return `${Math.round(score * 100)}%`;
   }
 
   private formatDistance(): string | null {

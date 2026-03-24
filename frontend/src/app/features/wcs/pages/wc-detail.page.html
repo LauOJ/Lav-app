@@ -29,10 +29,14 @@
 
     <div class="section">
       <ul>
-        <li>Accesible: {{ wc()?.accessible ? 'Sí' : 'No' }}</li>
-        <li>Neutral: {{ wc()?.gender_neutral ? 'Sí' : 'No' }}</li>
-        <li>Cambiador: {{ wc()?.has_changing_table ? 'Sí' : 'No' }}</li>
-        <li>Solo clientes: {{ wc()?.only_for_customers ? 'Sí' : 'No' }}</li>
+        <li>Limpieza: {{ cleanlinessStars(wc()?.avg_cleanliness ?? null) }}</li>
+        <li>Seguridad: {{ asPercentage(wc()?.safety_score ?? null) }}</li>
+        <li>Accesibilidad: {{ asPercentage(wc()?.accessibility_score ?? null) }}</li>
+        <li>Papel: {{ asPercentage(wc()?.toilet_paper_score ?? null) }}</li>
+        <li>Reviews: {{ wc()?.reviews_count ?? 0 }}</li>
+        @if (hasLimitedInfo()) {
+          <li><em>Información limitada</em></li>
+        }
       </ul>
     </div>
 
@@ -44,12 +48,6 @@
 
     @if (hasUserReviewed()) {
       <p><em>Ya has dejado una review para este WC.</em></p>
-    }
-
-    @if (safeSpaceSummaryMessage()) {
-      <p class="wc-safe-space-summary">
-        {{ safeSpaceSummaryMessage() }}
-      </p>
     }
 
     <div class="section">

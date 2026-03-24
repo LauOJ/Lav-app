@@ -48,21 +48,12 @@
     <div class="checkbox-group">
       <div>
         <input
-          id="wc-accessible"
+          id="wc-is_public"
           type="checkbox"
-          [checked]="form().accessible"
-          (change)="toggleFlag('accessible', $any($event.target).checked)"
+          [checked]="form().is_public"
+          (change)="toggleFlag('is_public', $any($event.target).checked)"
         />
-        <label for="wc-accessible">Accesible</label>
-      </div>
-      <div>
-        <input
-          id="wc-gender_neutral"
-          type="checkbox"
-          [checked]="form().gender_neutral"
-          (change)="toggleFlag('gender_neutral', $any($event.target).checked)"
-        />
-        <label for="wc-gender_neutral">Baño neutral</label>
+        <label for="wc-is_public">Acceso público</label>
       </div>
       <div>
         <input
@@ -72,24 +63,6 @@
           (change)="toggleFlag('has_changing_table', $any($event.target).checked)"
         />
         <label for="wc-has_changing_table">Cambiador</label>
-      </div>
-      <div>
-        <input
-          id="wc-only_for_customers"
-          type="checkbox"
-          [checked]="form().only_for_customers"
-          (change)="toggleFlag('only_for_customers', $any($event.target).checked)"
-        />
-        <label for="wc-only_for_customers">Solo para clientes</label>
-      </div>
-      <div>
-        <input
-          id="wc-has_intimate_hygiene_products"
-          type="checkbox"
-          [checked]="form().has_intimate_hygiene_products"
-          (change)="toggleFlag('has_intimate_hygiene_products', $any($event.target).checked)"
-        />
-        <label for="wc-has_intimate_hygiene_products">Productos de higiene íntima</label>
       </div>
     </div>
   </fieldset>

@@ -1,9 +1,23 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import case, func
 from typing import Optional
 
 from models import WC, Review
 from schemas.wc import WCCreate, WCUpdate
+
+
+def _bool_avg_percentage(column):
+    # Keep NULL when there are no joined reviews, return 0/1 for real rows.
+    return (
+        func.avg(
+            case(
+                (Review.id.is_(None), None),
+                (column.is_(True), 1.0),
+                else_=0.0,
+            )
+        )
+        * 100
+    )
 
 def create_wc(db: Session, wc_in: WCCreate) -> WC:
     wc = WC(**wc_in.model_dump())
@@ -16,40 +30,30 @@ def create_wc(db: Session, wc_in: WCCreate) -> WC:
 def _attach_review_stats(
     wc: WC,
     avg_cleanliness: float | None,
-    avg_safety: float | None,
     reviews_count: int,
+    safety_score: float | None,
+    accessibility_score: float | None,
+    toilet_paper_score: float | None,
 ) -> WC:
     wc.avg_cleanliness = avg_cleanliness
-    wc.avg_safety = avg_safety
     wc.reviews_count = reviews_count
+    wc.safety_score = safety_score
+    wc.accessibility_score = accessibility_score
+    wc.toilet_paper_score = toilet_paper_score
     return wc
 
 def get_wcs(
     db: Session,
-    accessible: Optional[bool] = None,
-    gender_neutral: Optional[bool] = None,
+    is_public: Optional[bool] = None,
     has_changing_table: Optional[bool] = None,
-    only_for_customers: Optional[bool] = None,
-    has_intimate_hygiene_products: Optional[bool] = None,
 ) -> list[WC]:
     query = db.query(WC)
 
-    if accessible is not None:
-        query = query.filter(WC.accessible == accessible)
-
-    if gender_neutral is not None:
-        query = query.filter(WC.gender_neutral == gender_neutral)
+    if is_public is not None:
+        query = query.filter(WC.is_public == is_public)
 
     if has_changing_table is not None:
         query = query.filter(WC.has_changing_table == has_changing_table)
-
-    if only_for_customers is not None:
-        query = query.filter(WC.only_for_customers == only_for_customers)
-
-    if has_intimate_hygiene_products is not None:
-        query = query.filter(
-            WC.has_intimate_hygiene_products == has_intimate_hygiene_products
-        )
 
     query = (
         query.outerjoin(Review, Review.wc_id == WC.id)
@@ -57,15 +61,31 @@ def get_wcs(
         .with_entities(
             WC,
             func.avg(Review.cleanliness_rating).label("avg_cleanliness"),
-            func.avg(Review.safety_rating).label("avg_safety"),
             func.count(Review.id).label("reviews_count"),
+            _bool_avg_percentage(Review.felt_safe).label("safety_score"),
+            _bool_avg_percentage(Review.accessible).label("accessibility_score"),
+            _bool_avg_percentage(Review.has_toilet_paper).label("toilet_paper_score"),
         )
     )
 
     rows = query.all()
     return [
-        _attach_review_stats(wc, avg_cleanliness, avg_safety, reviews_count)
-        for wc, avg_cleanliness, avg_safety, reviews_count in rows
+        _attach_review_stats(
+            wc,
+            avg_cleanliness,
+            reviews_count,
+            safety_score,
+            accessibility_score,
+            toilet_paper_score,
+        )
+        for (
+            wc,
+            avg_cleanliness,
+            reviews_count,
+            safety_score,
+            accessibility_score,
+            toilet_paper_score,
+        ) in rows
     ]
 
 
@@ -78,8 +98,10 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         .with_entities(
             WC,
             func.avg(Review.cleanliness_rating).label("avg_cleanliness"),
-            func.avg(Review.safety_rating).label("avg_safety"),
             func.count(Review.id).label("reviews_count"),
+            _bool_avg_percentage(Review.felt_safe).label("safety_score"),
+            _bool_avg_percentage(Review.accessible).label("accessibility_score"),
+            _bool_avg_percentage(Review.has_toilet_paper).label("toilet_paper_score"),
         )
         .first()
     )
@@ -87,8 +109,22 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
     if not row:
         return None
 
-    wc, avg_cleanliness, avg_safety, reviews_count = row
-    return _attach_review_stats(wc, avg_cleanliness, avg_safety, reviews_count)
+    (
+        wc,
+        avg_cleanliness,
+        reviews_count,
+        safety_score,
+        accessibility_score,
+        toilet_paper_score,
+    ) = row
+    return _attach_review_stats(
+        wc,
+        avg_cleanliness,
+        reviews_count,
+        safety_score,
+        accessibility_score,
+        toilet_paper_score,
+    )
 
 
 def update_wc(db: Session, wc_id: int, wc_in: WCUpdate) -> WC | None:

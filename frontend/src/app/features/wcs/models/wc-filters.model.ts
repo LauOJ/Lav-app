@@ -1,7 +1,7 @@
 export interface WCFilters {
+  clean?: boolean;
+  safe?: boolean;
   accessible?: boolean;
-  gender_neutral?: boolean;
-  has_changing_table?: boolean;
-  only_for_customers?: boolean;
-  has_intimate_hygiene_products?: boolean;
+  withPaper?: boolean;
+  enoughReviews?: boolean;
 }
