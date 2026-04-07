@@ -11,6 +11,7 @@ import {
 
 import { LucideIconComponent, LucideIconName } from '../../../../shared/components/lucide-icon/lucide-icon.component';
 import { WC } from '../../../wcs/models/wc.model';
+import { normalizeWcScore } from '../../../wcs/utils/wc.utils';
 
 type FeatureKey = 'safety_score' | 'accessibility_score' | 'toilet_paper_score';
 
@@ -81,14 +82,16 @@ export class WcFeatureIconsComponent implements OnDestroy {
   }
 
   scoreClass(score: number | null): string {
-    if (score == null) return 'score-unknown';
-    if (score > 0.7) return 'score-good';
-    if (score >= 0.4) return 'score-medium';
+    const normalized = normalizeWcScore(score);
+    if (normalized == null) return 'score-unknown';
+    if (normalized > 0.7) return 'score-good';
+    if (normalized >= 0.4) return 'score-medium';
     return 'score-low';
   }
 
   scoreLabel(score: number | null): string {
-    if (score == null) return 'Sin datos';
-    return `${Math.round(score * 100)}%`;
+    const normalized = normalizeWcScore(score);
+    if (normalized == null) return 'Sin datos';
+    return `${Math.round(normalized * 100)}%`;
   }
 }

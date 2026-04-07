@@ -1,6 +1,6 @@
 <aside
   class="sheet"
-  [class.scrollable]="isExpanded() && showReviews()"
+  [class.expanded]="isExpanded()"
   role="dialog"
   aria-modal="true"
   aria-labelledby="wc-sheet-title"
@@ -33,57 +33,7 @@
   @if (isExpanded()) {
   <div class="actions">
   </div>
-    <div class="ratings">
-      <div class="rating">
-        <span class="label">Limpieza</span>
-        <div class="rating-visual">
-          <span class="stars" [attr.aria-label]="cleanlinessAria()">
-            {{ cleanlinessStars() }}
-          </span>
-          @if (wc().reviews_count > 0) {
-            <span class="rating-number">
-              {{ wc().avg_cleanliness | number: '1.1-1' }}
-            </span>
-          } @else {
-            <span class="rating-number muted">Sin valoraciones</span>
-          }
-        </div>
-      </div>
-
-      <div class="rating">
-        <span class="label">Seguridad</span>
-        <div class="rating-visual">
-          <span class="rating-number">{{ asPercentage(wc().safety_score) }}</span>
-        </div>
-      </div>
-
-      <div class="rating">
-        <span class="label">Accesibilidad</span>
-        <div class="rating-visual">
-          <span class="rating-number">{{ asPercentage(wc().accessibility_score) }}</span>
-        </div>
-      </div>
-
-      <div class="rating">
-        <span class="label">Papel</span>
-        <div class="rating-visual">
-          <span class="rating-number">{{ asPercentage(wc().toilet_paper_score) }}</span>
-        </div>
-      </div>
-
-      <div class="reviews-count">
-        @if (wc().reviews_count > 0) {
-          <span class="reviews-text">💬 {{ wc().reviews_count }} reviews</span>
-        } @else {
-          <span class="reviews-text muted">Sin valoraciones</span>
-        }
-      </div>
-      @if (hasLimitedInfo()) {
-        <div class="reviews-count">
-          <span class="reviews-text muted">Información limitada</span>
-        </div>
-      }
-    </div>
+    <app-wc-detail-content [wc]="wc()" />
 
     <div class="cta">
       <button
@@ -95,14 +45,22 @@
       >
         {{ showReviews() ? 'Ocultar reviews' : 'Ver reviews' }}
       </button>
-      <button
-        type="button"
+      <a
         class="secondary"
         [routerLink]="['/wcs', wc().id]"
         (click)="$event.stopPropagation()"
       >
-        Ver detalle del WC
-      </button>
+        Ver todas las reviews ({{ wc().reviews_count }})
+      </a>
+      @if (userState.isLoggedIn()) {
+        <a
+          class="primary"
+          [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
+          (click)="$event.stopPropagation()"
+        >
+          Escribir review
+        </a>
+      }
     </div>
 
     @if (showReviews()) {
@@ -148,15 +106,6 @@
               </li>
             }
           </ul>
-          @if (hasMoreReviews()) {
-            <a
-              class="secondary-cta"
-              [routerLink]="['/wcs', wc().id]"
-              (click)="$event.stopPropagation()"
-            >
-              Ver todas las reviews ({{ wc().reviews_count }})
-            </a>
-          }
         }
       </section>
     }

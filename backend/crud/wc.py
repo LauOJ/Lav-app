@@ -34,12 +34,18 @@ def _attach_review_stats(
     safety_score: float | None,
     accessibility_score: float | None,
     toilet_paper_score: float | None,
+    hygiene_products_score: float | None,
+    free_entry_score: float | None,
+    gender_mixed_score: float | None,
 ) -> WC:
     wc.avg_cleanliness = avg_cleanliness
     wc.reviews_count = reviews_count
     wc.safety_score = safety_score
     wc.accessibility_score = accessibility_score
     wc.toilet_paper_score = toilet_paper_score
+    wc.hygiene_products_score = hygiene_products_score
+    wc.free_entry_score = free_entry_score
+    wc.gender_mixed_score = gender_mixed_score
     return wc
 
 def get_wcs(
@@ -65,6 +71,9 @@ def get_wcs(
             _bool_avg_percentage(Review.felt_safe).label("safety_score"),
             _bool_avg_percentage(Review.accessible).label("accessibility_score"),
             _bool_avg_percentage(Review.has_toilet_paper).label("toilet_paper_score"),
+            _bool_avg_percentage(Review.hygiene_products_available).label("hygiene_products_score"),
+            _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
+            _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
         )
     )
 
@@ -77,6 +86,9 @@ def get_wcs(
             safety_score,
             accessibility_score,
             toilet_paper_score,
+            hygiene_products_score,
+            free_entry_score,
+            gender_mixed_score,
         )
         for (
             wc,
@@ -85,6 +97,9 @@ def get_wcs(
             safety_score,
             accessibility_score,
             toilet_paper_score,
+            hygiene_products_score,
+            free_entry_score,
+            gender_mixed_score,
         ) in rows
     ]
 
@@ -102,6 +117,9 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
             _bool_avg_percentage(Review.felt_safe).label("safety_score"),
             _bool_avg_percentage(Review.accessible).label("accessibility_score"),
             _bool_avg_percentage(Review.has_toilet_paper).label("toilet_paper_score"),
+            _bool_avg_percentage(Review.hygiene_products_available).label("hygiene_products_score"),
+            _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
+            _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
         )
         .first()
     )
@@ -116,6 +134,9 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         safety_score,
         accessibility_score,
         toilet_paper_score,
+        hygiene_products_score,
+        free_entry_score,
+        gender_mixed_score,
     ) = row
     return _attach_review_stats(
         wc,
@@ -124,6 +145,9 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         safety_score,
         accessibility_score,
         toilet_paper_score,
+        hygiene_products_score,
+        free_entry_score,
+        gender_mixed_score,
     )
 
 

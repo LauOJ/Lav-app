@@ -189,7 +189,6 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (!marker) return;
   
     this.map.setView(marker.getLatLng(), 16, { animate: true });
-    marker.openPopup();
   }
 
   private centerOnUserLocation(): void {

@@ -3,11 +3,6 @@ import { authGuard } from '../../core/auth/auth.guard';
 
 export const WCS_ROUTES: Routes = [
   {
-    path: '',
-    loadComponent: () =>
-      import('./pages/wc-list.page').then(m => m.WCListPage),
-  },
-  {
     path: 'new',
     canActivate: [authGuard],
     loadComponent: () =>

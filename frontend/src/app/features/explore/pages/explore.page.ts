@@ -2,18 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
-import { WC } from '../../wcs/models/wc.model';
+import { WCFilters } from '../../wcs/models/wc-filters.model';
+import { wcDistanceMeters } from '../../wcs/utils/wc.utils';
+import { WCState } from '../../wcs/state/wc.state';
 
-type ExploreFilters = {
-  clean: boolean;
-  safe: boolean;
-  accessible: boolean;
-  withPaper: boolean;
-  enoughReviews: boolean;
-};
 import { environment } from '../../../../environments/environment';
 import { WCService } from '../../wcs/services/wc.service';
-import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 import { MapViewComponent } from '../components/map-view/map-view.component';
 import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.component';
 
@@ -21,7 +15,6 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
   imports: [
     CommonModule,
     RouterModule,
-    LucideIconComponent,
     MapViewComponent,
     WcDetailSheet,
   ],
@@ -30,11 +23,10 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
 })
 export class ExplorePage implements OnInit {
   private readonly wcService = inject(WCService);
+  readonly wcState = inject(WCState);
   private readonly router = inject(Router);
   private readonly nearbyRadiusMeters = 30;
 
-  readonly selectedWcId = signal<number | null>(null);
-  readonly wcs = signal<WC[]>([]);
   readonly loading = signal<boolean>(false);
   readonly error = signal<string | null>(null);
   readonly userLocation = signal<{ lat: number; lng: number; zoom: number } | null>(null);
@@ -42,33 +34,29 @@ export class ExplorePage implements OnInit {
   readonly searchQuery = signal('');
   readonly searchError = signal<string | null>(null);
   readonly searchLoading = signal(false);
-  readonly filters = signal<ExploreFilters>({
-    clean: false,
-    safe: false,
-    accessible: false,
-    withPaper: false,
-    enoughReviews: false,
-  });
-  /** Which filter button's tooltip is shown (we hide it after 500ms instead of relying on blur) */
-  readonly activeTooltipFilter = signal<keyof ExploreFilters | null>(null);
+  readonly filterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: string }> = [
+    { key: 'isPublic', label: 'Público', icon: '🚪' },
+    { key: 'clean', label: 'Limpio', icon: '⭐' },
+    { key: 'accessible', label: 'Accesible', icon: '♿' },
+  ];
 
-  readonly selectedWc = computed(() => {
-    const selectedId = this.selectedWcId();
-    return this.wcs().find(wc => wc.id === selectedId) ?? null;
-  });
-  readonly filteredWcs = computed(() => {
-    const filters = this.filters();
-    return this.wcs().filter(wc => {
-      if (filters.clean && (wc.avg_cleanliness == null || wc.avg_cleanliness < 3.5)) return false;
-      if (filters.safe && (wc.safety_score == null || wc.safety_score < 0.7)) return false;
-      if (filters.accessible && (wc.accessibility_score == null || wc.accessibility_score < 0.6)) return false;
-      if (filters.withPaper && (wc.toilet_paper_score == null || wc.toilet_paper_score < 0.6)) return false;
-      if (filters.enoughReviews && wc.reviews_count < 3) return false;
-      return true;
-    });
-  });
+  readonly moreFilterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: string }> = [
+    { key: 'safe', label: 'Seguro', icon: '🟢' },
+    { key: 'withPaper', label: 'Papel', icon: '🧻' },
+    { key: 'hygieneProducts', label: 'Higiene', icon: '🧴' },
+    { key: 'freeEntry', label: 'Sin consumición', icon: '🆓' },
+    { key: 'genderMixed', label: 'Mixto', icon: '🚻' },
+    { key: 'changingTable', label: 'Cambiador', icon: '👶' },
+  ];
+
+  readonly showMoreFilters = signal(false);
+
+  readonly activeMoreFiltersCount = computed(() =>
+    this.moreFilterChips.filter(c => this.wcState.filters()[c.key]).length
+  );
+
   readonly showEmptyState = computed(
-    () => !this.loading() && !this.error() && this.filteredWcs().length === 0
+    () => !this.loading() && !this.error() && this.wcState.filteredWcs().length === 0
   );
 
   ngOnInit(): void {
@@ -94,11 +82,11 @@ export class ExplorePage implements OnInit {
   }
 
   onSelectWc(id: number): void {
-    this.selectedWcId.set(id);
+    this.wcState.selectWc(id);
   }
 
   onCloseSheet(): void {
-    this.selectedWcId.set(null);
+    this.wcState.selectWc(null);
   }
 
   onAddWcAt(coords: { lat: number; lng: number }): void {
@@ -113,21 +101,18 @@ export class ExplorePage implements OnInit {
     });
   }
 
-  onToggleFilter(key: keyof ExploreFilters, value: boolean) {
-    this.filters.update(current => ({
-      ...current,
-      [key]: value,
-    }));
+  onToggleFilter(key: keyof WCFilters, value: boolean): void {
+    this.wcState.setFilter(key, value);
   }
 
-  setFilterTooltip(key: keyof ExploreFilters | null): void {
-    this.activeTooltipFilter.set(key);
-  }
-
-  /** Show tooltip on tap/click and hide it after 500ms (does not rely on blur) */
-  showFilterTooltipTemporarily(key: keyof ExploreFilters): void {
-    this.activeTooltipFilter.set(key);
-    setTimeout(() => this.activeTooltipFilter.set(null), 500);
+  onClearFilters(): void {
+    const current = this.wcState.filters();
+    const reset: Partial<WCFilters> = {};
+    for (const key of Object.keys(current) as Array<keyof WCFilters>) {
+      reset[key] = false;
+    }
+    this.wcState.setFilters(reset);
+    this.showMoreFilters.set(false);
   }
 
   onLocateUser(): void {
@@ -191,12 +176,17 @@ export class ExplorePage implements OnInit {
   }
 
   private loadWcs(): void {
+    if (this.wcState.wcs().length > 0) {
+      this.loading.set(false);
+      return;
+    }
+
     this.loading.set(true);
     this.error.set(null);
 
     this.wcService.getWCs().subscribe({
       next: (wcs) => {
-        this.wcs.set(wcs);
+        this.wcState.setWcs(wcs);
         this.loading.set(false);
       },
       error: () => {
@@ -207,38 +197,12 @@ export class ExplorePage implements OnInit {
   }
 
   private hasNearbyWcs(lat: number, lng: number): boolean {
-    for (const wc of this.wcs()) {
+    for (const wc of this.wcState.wcs()) {
       if (wc.latitude == null || wc.longitude == null) continue;
-      if (
-        this.distanceMeters(lat, lng, wc.latitude, wc.longitude) <=
-        this.nearbyRadiusMeters
-      ) {
+      if (wcDistanceMeters(lat, lng, wc.latitude, wc.longitude) <= this.nearbyRadiusMeters) {
         return true;
       }
     }
     return false;
-  }
-
-  private distanceMeters(
-    lat1: number,
-    lng1: number,
-    lat2: number,
-    lng2: number
-  ): number {
-    const radius = 6371000;
-    const dLat = this.toRadians(lat2 - lat1);
-    const dLng = this.toRadians(lng2 - lng1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.toRadians(lat1)) *
-        Math.cos(this.toRadians(lat2)) *
-        Math.sin(dLng / 2) *
-        Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return radius * c;
-  }
-
-  private toRadians(value: number): number {
-    return (value * Math.PI) / 180;
   }
 }

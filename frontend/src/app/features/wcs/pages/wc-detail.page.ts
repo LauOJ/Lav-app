@@ -8,17 +8,20 @@ import { WC } from '../models/wc.model';
 import { ReviewListComponent } from '../../reviews/components/review-list.component';
 import { ReviewsService } from '../../reviews/services/reviews.service';
 import { WCService } from '../services/wc.service';
+import { WCState } from '../state/wc.state';
+import { WcDetailContentComponent } from '../components/wc-detail-content/wc-detail-content.component';
 
 @Component({
   selector: 'app-wc-detail-page',
   templateUrl: './wc-detail.page.html',
   styleUrl: './wc-detail.page.css',
-  imports: [LucideIconComponent, ReviewListComponent, RouterModule],
+  imports: [LucideIconComponent, ReviewListComponent, RouterModule, WcDetailContentComponent],
 })
 export class WcDetailPage {
   private route = inject(ActivatedRoute);
   private wcService = inject(WCService);
   private reviewsService = inject(ReviewsService);
+  private wcState = inject(WCState);
   public readonly userState = inject(UserState);
 
   // ---- STATE --------------------------------------------------
@@ -53,6 +56,16 @@ export class WcDetailPage {
         return;
       }
 
+      const cachedWc = this.wcState.getWcById(id);
+      if (cachedWc) {
+        this.wc.set(cachedWc);
+        this.loadingWc.set(false);
+        this.errorWc.set(null);
+        this.loadReviews();
+        this.loadFavoriteState(cachedWc.id);
+        return;
+      }
+
       this.loadWc(id);
     });
   }
@@ -66,6 +79,7 @@ export class WcDetailPage {
     this.wcService.getById(id).subscribe({
       next: wc => {
         this.wc.set(wc);
+        this.wcState.upsertWc(wc);
         this.loadingWc.set(false);
         this.loadReviews();
         this.loadFavoriteState(wc.id);
@@ -156,20 +170,4 @@ export class WcDetailPage {
 
     return this.reviews().some(r => r.user_id === user.id);
   });
-
-  readonly hasLimitedInfo = computed(() => {
-    const wc = this.wc();
-    return wc ? wc.reviews_count < 3 : false;
-  });
-
-  cleanlinessStars(value: number | null): string {
-    if (value == null) return 'Sin datos';
-    const rounded = Math.min(5, Math.max(0, Math.round(value)));
-    return '★★★★★'.slice(0, rounded) + '☆☆☆☆☆'.slice(0, 5 - rounded);
-  }
-
-  asPercentage(score: number | null): string {
-    if (score == null) return 'Sin datos';
-    return `${Math.round(score * 100)}%`;
-  }
 }

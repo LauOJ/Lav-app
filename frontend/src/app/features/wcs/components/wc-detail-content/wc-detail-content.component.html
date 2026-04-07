@@ -1,0 +1,73 @@
+<div class="ratings">
+  <div class="rating">
+    <span class="label">Limpieza</span>
+    <div class="rating-visual">
+      <span class="stars">
+        {{ cleanlinessStars() }}
+      </span>
+      @if (cleanlinessValue() != null) {
+        <span class="rating-number">
+          {{ cleanlinessValue()! | number: '1.1-1' }}
+        </span>
+      } @else {
+        <span class="rating-number muted">Sin valoraciones</span>
+      }
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Seguridad</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ safetyPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Accesibilidad</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ accessibilityPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Papel</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ toiletPaperPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Productos de higiene</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ hygieneProductsPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Entrada libre</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ freeEntryPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="rating">
+    <span class="label">Opción mixta</span>
+    <div class="rating-visual">
+      <span class="rating-number">{{ genderMixedPercentage() }}</span>
+    </div>
+  </div>
+
+  <div class="reviews-count">
+    @if (wc().reviews_count > 0) {
+      <span class="reviews-text">💬 {{ wc().reviews_count }} reviews</span>
+    } @else {
+      <span class="reviews-text muted">Sin valoraciones</span>
+    }
+  </div>
+
+  @if (hasLimitedInfo()) {
+    <div class="reviews-count">
+      <span class="reviews-text muted">Información limitada</span>
+    </div>
+  }
+</div>

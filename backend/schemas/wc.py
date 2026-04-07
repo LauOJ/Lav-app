@@ -39,5 +39,8 @@ class WCRead(WCBase):
     safety_score: float | None
     accessibility_score: float | None
     toilet_paper_score: float | None
+    hygiene_products_score: float | None
+    free_entry_score: float | None
+    gender_mixed_score: float | None
 
     model_config = ConfigDict(from_attributes=True)

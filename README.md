@@ -1,8 +1,72 @@
-# LAV-APP
+# WC-Advisor
 
 Aplicación web colaborativa para localizar y valorar aseos urbanos con enfoque inclusivo y social.
 
 Proyecto final del Ciclo Formativo de Desarrollo de Aplicaciones Web (DAW) – Curso 2025/2026.
+
+---
+
+## Puesta en marcha para desarrollo
+
+### Requisitos previos
+- Docker Desktop en ejecución
+- Node.js + npm instalados localmente
+- Python 3.12 instalado localmente
+
+### Cómo arrancar el entorno de desarrollo
+
+El flujo habitual es: **solo la base de datos corre en Docker**, el backend y el frontend se ejecutan localmente.
+
+**1. Levantar la base de datos**
+```bash
+docker compose up db
+```
+
+**2. Arrancar el backend** (en una terminal nueva, desde `backend/`)
+```bash
+cd backend
+
+# Solo la primera vez (o si el venv no existe):
+python -m venv venv
+
+# Activar el entorno virtual (Windows PowerShell)
+venv\Scripts\activate
+
+# Solo la primera vez (o si cambia requirements.txt):
+pip install -r requirements.txt
+
+# Ejecutar el servidor
+uvicorn main:app --reload
+```
+El backend queda disponible en `http://localhost:8000`.
+La documentación interactiva de la API: `http://localhost:8000/docs`.
+
+**3. Arrancar el frontend** (en otra terminal nueva, desde `frontend/`)
+```bash
+cd frontend
+
+# Solo la primera vez (o si cambia package.json):
+npm install
+
+npm start
+```
+La app queda disponible en `http://localhost:4200`.
+
+---
+
+### Alternativa: todo en Docker (sin instalar nada localmente)
+```bash
+docker compose up
+```
+- Frontend: `http://localhost:4201`
+- Backend: `http://localhost:8001`
+
+---
+
+### Producción
+```bash
+docker compose -f docker-compose.prod.yml up --build
+```
 
 ---
 

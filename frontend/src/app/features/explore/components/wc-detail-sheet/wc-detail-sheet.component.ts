@@ -15,18 +15,22 @@ import {
 import { RouterModule } from '@angular/router';
 
 import { WC } from '../../../wcs/models/wc.model';
+import { wcDistanceMeters } from '../../../wcs/utils/wc.utils';
+import { WcDetailContentComponent } from '../../../wcs/components/wc-detail-content/wc-detail-content.component';
 import { WcFeatureIconsComponent } from '../wc-feature-icons/wc-feature-icons.component';
 import { ReviewsService } from '../../../reviews/services/reviews.service';
 import { Review } from '../../../reviews/models/review.model';
+import { UserState } from '../../../../core/user/user.state';
 
 @Component({
   selector: 'app-wc-detail-sheet',
-  imports: [CommonModule, RouterModule, WcFeatureIconsComponent],
+  imports: [CommonModule, RouterModule, WcFeatureIconsComponent, WcDetailContentComponent],
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })
 export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly reviewsService = inject(ReviewsService);
+  readonly userState = inject(UserState);
 
   @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
 
@@ -38,15 +42,6 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly keydownHandler = (event: KeyboardEvent) => this.handleKeydown(event);
   readonly sheetState = signal<'collapsed' | 'expanded'>('collapsed');
   readonly isExpanded = computed(() => this.sheetState() === 'expanded');
-  readonly cleanlinessRating = computed(() =>
-    this.toRating(this.wc().avg_cleanliness)
-  );
-  readonly cleanlinessStars = computed(() =>
-    this.toStars(this.cleanlinessRating())
-  );
-  readonly cleanlinessAria = computed(
-    () => `Limpieza: ${this.cleanlinessRating()} de 5`
-  );
   readonly distanceLabel = computed(() => this.formatDistance());
   readonly showReviews = signal(false);
   readonly reviews = signal<Review[]>([]);
@@ -60,7 +55,6 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   );
   readonly visibleReviews = computed(() => this.sortedReviews().slice(0, 3));
   readonly hasMoreReviews = computed(() => this.wc().reviews_count > 3);
-  readonly hasLimitedInfo = computed(() => this.wc().reviews_count < 3);
 
   constructor() {
     effect(() => {
@@ -116,24 +110,9 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
     this.showReviews.set(!this.showReviews());
   }
 
-  private toRating(value: number | null): number {
-    if (value == null) return 0;
-    const rounded = Math.round(value);
-    return Math.min(5, Math.max(0, rounded));
-  }
-
-  private toStars(rating: number): string {
-    return '★★★★★'.slice(0, rating) + '☆☆☆☆☆'.slice(0, 5 - rating);
-  }
-
   reviewStars(rating: number): string {
     const bounded = Math.min(5, Math.max(0, Math.round(rating)));
-    return this.toStars(bounded);
-  }
-
-  asPercentage(score: number | null): string {
-    if (score == null) return 'Sin datos';
-    return `${Math.round(score * 100)}%`;
+    return '★★★★★'.slice(0, bounded) + '☆☆☆☆☆'.slice(0, 5 - bounded);
   }
 
   private formatDistance(): string | null {
@@ -141,7 +120,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
     if (!location) return null;
 
     const wc = this.wc();
-    const distance = this.distanceMeters(
+    const distance = wcDistanceMeters(
       location.lat,
       location.lng,
       wc.latitude,
@@ -153,29 +132,6 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
     }
     const km = Math.round((distance / 1000) * 10) / 10;
     return `≈ ${km} km`;
-  }
-
-  private distanceMeters(
-    lat1: number,
-    lng1: number,
-    lat2: number,
-    lng2: number
-  ): number {
-    const radius = 6371000;
-    const dLat = this.toRadians(lat2 - lat1);
-    const dLng = this.toRadians(lng2 - lng1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.toRadians(lat1)) *
-        Math.cos(this.toRadians(lat2)) *
-        Math.sin(dLng / 2) *
-        Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return radius * c;
-  }
-
-  private toRadians(value: number): number {
-    return (value * Math.PI) / 180;
   }
 
   private loadReviews(wcId: number): void {

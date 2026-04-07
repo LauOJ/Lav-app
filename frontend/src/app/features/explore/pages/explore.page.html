@@ -1,106 +1,77 @@
-<section class="explore-page" [class.sheet-open]="selectedWc()">
-  <form class="search-panel" (submit)="onSearchLocation(); $event.preventDefault()">
-    <input
-      type="text"
-      placeholder="Buscar lugar o dirección"
-      [value]="searchQuery()"
-      (input)="searchQuery.set($any($event.target).value)"
-      aria-label="Buscar lugar o dirección"
-    />
-    <button type="submit" [disabled]="searchLoading()">Buscar</button>
-  </form>
-  <div class="filters-panel" role="group" aria-label="Filtros del mapa">
-    <div class="filters-quick">
+<section class="explore-page" [class.sheet-open]="wcState.selectedWc()">
+  <header class="top-bar">
+    <form class="search-panel" (submit)="onSearchLocation(); $event.preventDefault()">
+      <input
+        type="text"
+        placeholder="Buscar lugar o dirección"
+        [value]="searchQuery()"
+        (input)="searchQuery.set($any($event.target).value)"
+        aria-label="Buscar lugar o dirección"
+      />
+      <button type="submit" [disabled]="searchLoading()">
+        {{ searchLoading() ? 'Buscando...' : 'Buscar' }}
+      </button>
+    </form>
+    <button
+      type="button"
+      class="locate-button"
+      (click)="onLocateUser()"
+      aria-label="Centrar en mi ubicación"
+      title="Centrar en mi ubicación"
+    >
+      📍
+    </button>
+  </header>
+
+  <div class="chips-row" role="group" aria-label="Filtros del mapa">
+    @for (chip of filterChips; track chip.key) {
       <button
         type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().clean"
-        [class.tooltip-visible]="activeTooltipFilter() === 'clean'"
-        [attr.aria-pressed]="filters().clean"
-        (focusin)="setFilterTooltip('clean')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('clean', !filters().clean); showFilterTooltipTemporarily('clean')"
-        aria-label="Limpio"
-        title="Limpio"
+        class="filter-chip"
+        [class.active]="wcState.filters()[chip.key]"
+        [attr.aria-pressed]="wcState.filters()[chip.key]"
+        (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
       >
-        <app-lucide-icon icon="star" />
-        <span class="tooltip">Limpio</span>
+        <span aria-hidden="true">{{ chip.icon }}</span>
+        {{ chip.label }}
       </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().safe"
-        [class.tooltip-visible]="activeTooltipFilter() === 'safe'"
-        [attr.aria-pressed]="filters().safe"
-        (focusin)="setFilterTooltip('safe')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('safe', !filters().safe); showFilterTooltipTemporarily('safe')"
-        aria-label="Seguro"
-        title="Seguro"
-      >
-        <app-lucide-icon icon="lock" />
-        <span class="tooltip">Seguro</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().accessible"
-        [class.tooltip-visible]="activeTooltipFilter() === 'accessible'"
-        [attr.aria-pressed]="filters().accessible"
-        (focusin)="setFilterTooltip('accessible')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('accessible', !filters().accessible); showFilterTooltipTemporarily('accessible')"
-        aria-label="Accesible"
-        title="Accesible"
-      >
-        <app-lucide-icon icon="accessibility" />
-        <span class="tooltip">Accesible</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().withPaper"
-        [class.tooltip-visible]="activeTooltipFilter() === 'withPaper'"
-        [attr.aria-pressed]="filters().withPaper"
-        (focusin)="setFilterTooltip('withPaper')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('withPaper', !filters().withPaper); showFilterTooltipTemporarily('withPaper')"
-        aria-label="Con papel"
-        title="Con papel"
-      >
-        <app-lucide-icon icon="droplets" />
-        <span class="tooltip">Con papel</span>
-      </button>
-      <button
-        type="button"
-        class="filter-pill filter-button"
-        [class.active]="filters().enoughReviews"
-        [class.tooltip-visible]="activeTooltipFilter() === 'enoughReviews'"
-        [attr.aria-pressed]="filters().enoughReviews"
-        (focusin)="setFilterTooltip('enoughReviews')"
-        (focusout)="setFilterTooltip(null)"
-        (click)="onToggleFilter('enoughReviews', !filters().enoughReviews); showFilterTooltipTemporarily('enoughReviews')"
-        aria-label="Con suficientes reseñas"
-        title="Con suficientes reseñas"
-      >
-        <app-lucide-icon icon="baby" />
-        <span class="tooltip">Con suficientes reseñas</span>
-      </button>
-    </div>
+    }
+    <button
+      type="button"
+      class="filter-chip more-filters"
+      [class.active]="showMoreFilters() || activeMoreFiltersCount() > 0"
+      [attr.aria-expanded]="showMoreFilters()"
+      (click)="showMoreFilters.set(!showMoreFilters())"
+    >
+      + Filtros
+      @if (activeMoreFiltersCount() > 0) {
+        <span class="more-badge">{{ activeMoreFiltersCount() }}</span>
+      }
+    </button>
   </div>
-  <button
-    type="button"
-    class="locate-button"
-    (click)="onLocateUser()"
-    aria-label="Centrar en mi ubicación"
-    title="Centrar en mi ubicación"
-  >
-    📍
-  </button>
+
+  @if (showMoreFilters()) {
+    <div class="more-filters-backdrop" (click)="showMoreFilters.set(false)"></div>
+    <div class="more-filters-panel" role="group" aria-label="Más filtros">
+      @for (chip of moreFilterChips; track chip.key) {
+        @if (chip.key !== 'freeEntry' || !wcState.filters().isPublic) {
+          <label class="more-filter-item">
+            <input
+              type="checkbox"
+              [checked]="wcState.filters()[chip.key]"
+              (change)="onToggleFilter(chip.key, $any($event.target).checked)"
+            />
+            <span aria-hidden="true">{{ chip.icon }}</span>
+            {{ chip.label }}
+          </label>
+        }
+      }
+    </div>
+  }
 
   <app-map-view
-    [wcs]="filteredWcs()"
-    [selectedWcId]="selectedWcId()"
+    [wcs]="wcState.filteredWcs()"
+    [selectedWcId]="wcState.selectedWcIdAsNumber()"
     [userLocation]="userLocation()"
     (wcSelected)="onSelectWc($event)"
     (addWcAt)="onAddWcAt($event)"
@@ -123,14 +94,15 @@
   }
 
   @if (showEmptyState()) {
-    <div class="status-banner empty">
-      No hay WCs que cumplan estos filtros. Prueba a desactivar algún filtro.
+    <div class="empty-state-overlay" role="status" aria-live="polite">
+      <p>No hay baños que cumplan los filtros 😕</p>
+      <button type="button" (click)="onClearFilters()">Quitar filtros</button>
     </div>
   }
 
-  @if (selectedWc()) {
+  @if (wcState.selectedWc()) {
     <app-wc-detail-sheet
-      [wc]="selectedWc()!"
+      [wc]="wcState.selectedWc()!"
       [userLocation]="userLocation()"
       (close)="onCloseSheet()"
     ></app-wc-detail-sheet>

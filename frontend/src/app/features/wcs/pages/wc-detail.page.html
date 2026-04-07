@@ -28,16 +28,7 @@
     }
 
     <div class="section">
-      <ul>
-        <li>Limpieza: {{ cleanlinessStars(wc()?.avg_cleanliness ?? null) }}</li>
-        <li>Seguridad: {{ asPercentage(wc()?.safety_score ?? null) }}</li>
-        <li>Accesibilidad: {{ asPercentage(wc()?.accessibility_score ?? null) }}</li>
-        <li>Papel: {{ asPercentage(wc()?.toilet_paper_score ?? null) }}</li>
-        <li>Reviews: {{ wc()?.reviews_count ?? 0 }}</li>
-        @if (hasLimitedInfo()) {
-          <li><em>Información limitada</em></li>
-        }
-      </ul>
+      <app-wc-detail-content [wc]="wc()!" />
     </div>
 
     @if (wc()?.description) {
