@@ -1,5 +1,4 @@
 import { Component, input, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 export type LucideIconName =
   | 'accessibility'
@@ -7,30 +6,44 @@ export type LucideIconName =
   | 'baby'
   | 'droplets'
   | 'star'
-  | 'lock';
+  | 'lock'
+  | 'door-open'
+  | 'scroll'
+  | 'tag'
+  | 'spray-can'
+  | 'sparkles';
 
 @Component({
   selector: 'app-lucide-icon',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <img
-      [src]="iconSrc()"
-      [alt]="''"
-      width="18"
-      height="18"
-      class="lucide-icon-img"
-      aria-hidden="true"
-      loading="eager"
-    />
-  `,
-  host: {
-    class: 'lucide-icon',
-  },
+  template: `<span class="icon-mask" [style.--icon-url]="iconUrl()"></span>`,
+  styles: [`
+    :host {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+    }
+    .icon-mask {
+      display: block;
+      width: 18px;
+      height: 18px;
+      background-color: currentColor;
+      -webkit-mask-image: var(--icon-url);
+      mask-image: var(--icon-url);
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
+  `],
+  host: { class: 'lucide-icon' },
 })
 export class LucideIconComponent {
   icon = input.required<LucideIconName>();
 
-  /** Path to SVG in public/media/icons (e.g. /media/icons/accessibility.svg) */
-  protected readonly iconSrc = computed(() => `/media/icons/${this.icon()}.svg`);
+  protected readonly iconUrl = computed(() => `url(/media/icons/${this.icon()}.svg)`);
 }

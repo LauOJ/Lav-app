@@ -23,31 +23,49 @@
     </button>
   </header>
 
-  <div class="chips-row" role="group" aria-label="Filtros del mapa">
+  <div class="filter-column" role="group" aria-label="Filtros del mapa">
     @for (chip of filterChips; track chip.key) {
+      <div class="filter-btn-wrap">
+        <button
+          type="button"
+          class="filter-btn"
+          [class.active]="wcState.filters()[chip.key]"
+          [attr.aria-pressed]="wcState.filters()[chip.key]"
+          [attr.aria-label]="chip.label"
+          [title]="chip.label"
+          (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
+          (pointerdown)="onFilterPointerDown($event, chip.key)"
+          (pointerup)="onFilterPointerUp()"
+          (pointerleave)="onFilterPointerUp()"
+        >
+          <app-lucide-icon [icon]="chip.icon" />
+          @if (activeTooltip() === chip.key) {
+            <span class="filter-tooltip" role="tooltip">{{ chip.label }}</span>
+          }
+        </button>
+      </div>
+    }
+    <div class="filter-btn-wrap">
       <button
         type="button"
-        class="filter-chip"
-        [class.active]="wcState.filters()[chip.key]"
-        [attr.aria-pressed]="wcState.filters()[chip.key]"
-        (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
+        class="filter-btn more-btn"
+        [class.active]="showMoreFilters() || activeMoreFiltersCount() > 0"
+        [attr.aria-expanded]="showMoreFilters()"
+        [title]="'Más filtros'"
+        (click)="showMoreFilters.set(!showMoreFilters())"
+        (pointerdown)="onFilterPointerDown($event, '__more__')"
+        (pointerup)="onFilterPointerUp()"
+        (pointerleave)="onFilterPointerUp()"
       >
-        <span aria-hidden="true">{{ chip.icon }}</span>
-        {{ chip.label }}
+        <span class="more-icon" aria-hidden="true">⋯</span>
+        @if (activeMoreFiltersCount() > 0) {
+          <span class="more-badge">{{ activeMoreFiltersCount() }}</span>
+        }
+        @if (activeTooltip() === '__more__') {
+          <span class="filter-tooltip" role="tooltip">Más filtros</span>
+        }
       </button>
-    }
-    <button
-      type="button"
-      class="filter-chip more-filters"
-      [class.active]="showMoreFilters() || activeMoreFiltersCount() > 0"
-      [attr.aria-expanded]="showMoreFilters()"
-      (click)="showMoreFilters.set(!showMoreFilters())"
-    >
-      + Filtros
-      @if (activeMoreFiltersCount() > 0) {
-        <span class="more-badge">{{ activeMoreFiltersCount() }}</span>
-      }
-    </button>
+    </div>
   </div>
 
   @if (showMoreFilters()) {
@@ -55,15 +73,16 @@
     <div class="more-filters-panel" role="group" aria-label="Más filtros">
       @for (chip of moreFilterChips; track chip.key) {
         @if (chip.key !== 'freeEntry' || !wcState.filters().isPublic) {
-          <label class="more-filter-item">
-            <input
-              type="checkbox"
-              [checked]="wcState.filters()[chip.key]"
-              (change)="onToggleFilter(chip.key, $any($event.target).checked)"
-            />
-            <span aria-hidden="true">{{ chip.icon }}</span>
-            {{ chip.label }}
-          </label>
+          <button
+            type="button"
+            class="more-filter-item"
+            [class.active]="wcState.filters()[chip.key]"
+            [attr.aria-pressed]="wcState.filters()[chip.key]"
+            (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
+          >
+            <app-lucide-icon [icon]="chip.icon" />
+            <span>{{ chip.label }}</span>
+          </button>
         }
       }
     </div>

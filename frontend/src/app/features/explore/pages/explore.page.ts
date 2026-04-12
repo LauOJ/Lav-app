@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { WCService } from '../../wcs/services/wc.service';
 import { MapViewComponent } from '../components/map-view/map-view.component';
 import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.component';
+import { LucideIconComponent, LucideIconName } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   imports: [
@@ -17,6 +18,7 @@ import { WcDetailSheet } from '../components/wc-detail-sheet/wc-detail-sheet.com
     RouterModule,
     MapViewComponent,
     WcDetailSheet,
+    LucideIconComponent,
   ],
   templateUrl: './explore.page.html',
   styleUrl: './explore.page.css'
@@ -34,22 +36,39 @@ export class ExplorePage implements OnInit {
   readonly searchQuery = signal('');
   readonly searchError = signal<string | null>(null);
   readonly searchLoading = signal(false);
-  readonly filterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: string }> = [
-    { key: 'isPublic', label: 'Público', icon: '🚪' },
-    { key: 'clean', label: 'Limpio', icon: '⭐' },
-    { key: 'accessible', label: 'Accesible', icon: '♿' },
+  readonly filterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: LucideIconName }> = [
+    { key: 'isPublic', label: 'Público', icon: 'door-open' },
+    { key: 'clean', label: 'Limpio', icon: 'sparkles' },
+    { key: 'accessible', label: 'Accesible', icon: 'accessibility' },
   ];
 
-  readonly moreFilterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: string }> = [
-    { key: 'safe', label: 'Seguro', icon: '🟢' },
-    { key: 'withPaper', label: 'Papel', icon: '🧻' },
-    { key: 'hygieneProducts', label: 'Higiene', icon: '🧴' },
-    { key: 'freeEntry', label: 'Sin consumición', icon: '🆓' },
-    { key: 'genderMixed', label: 'Mixto', icon: '🚻' },
-    { key: 'changingTable', label: 'Cambiador', icon: '👶' },
+  readonly moreFilterChips: ReadonlyArray<{ key: keyof WCFilters; label: string; icon: LucideIconName }> = [
+    { key: 'safe', label: 'Seguro', icon: 'lock' },
+    { key: 'withPaper', label: 'Papel', icon: 'scroll' },
+    { key: 'hygieneProducts', label: 'Higiene', icon: 'droplets' },
+    { key: 'freeEntry', label: 'Sin consumición', icon: 'tag' },
+    { key: 'genderMixed', label: 'Mixto', icon: 'non-binary' },
+    { key: 'changingTable', label: 'Cambiador', icon: 'baby' },
   ];
 
   readonly showMoreFilters = signal(false);
+  readonly activeTooltip = signal<string | null>(null);
+  private longPressTimer: number | null = null;
+
+  onFilterPointerDown(event: PointerEvent, key: string): void {
+    if (event.pointerType === 'mouse') return;
+    this.longPressTimer = window.setTimeout(() => {
+      this.activeTooltip.set(key);
+    }, 450);
+  }
+
+  onFilterPointerUp(): void {
+    if (this.longPressTimer !== null) {
+      window.clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+    this.activeTooltip.set(null);
+  }
 
   readonly activeMoreFiltersCount = computed(() =>
     this.moreFilterChips.filter(c => this.wcState.filters()[c.key]).length
