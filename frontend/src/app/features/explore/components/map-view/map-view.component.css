@@ -113,7 +113,7 @@
 :host ::ng-deep .add-wc-button {
   display: block;
   width: 100%;
-  padding: 0.7rem 1.1rem;
+  padding: 0.7rem 2rem 0.7rem 1.1rem;
   background: var(--color-primary);
   color: #ffffff;
   border: none;
@@ -132,7 +132,8 @@
 :host ::ng-deep .leaflet-popup-close-button {
   color: #ffffff !important;
   font-size: 1.1rem !important;
-  padding: 0.4rem 0.5rem !important;
-  top: 2px !important;
-  right: 2px !important;
+  top: 4px !important;
+  right: 6px !important;
+  padding: 0 !important;
+  line-height: 1 !important;
 }
