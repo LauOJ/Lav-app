@@ -26,6 +26,7 @@ const THRESHOLDS = {
   hygieneProducts: 0.5,
   freeEntry: 0.5,
   genderMixed: 0.5,
+  changingTable: 0.5,
 } as const;
 
 @Injectable({
@@ -54,7 +55,7 @@ export class WCState {
       if (filters.isPublic && !wc.is_public) return false;
       if (filters.freeEntry && !filters.isPublic && (normalizeWcScore(wc.free_entry_score) ?? -1) < THRESHOLDS.freeEntry) return false;
       if (filters.genderMixed && (normalizeWcScore(wc.gender_mixed_score) ?? -1) < THRESHOLDS.genderMixed) return false;
-      if (filters.changingTable && !wc.has_changing_table) return false;
+      if (filters.changingTable && (normalizeWcScore(wc.changing_table_score) ?? -1) < THRESHOLDS.changingTable) return false;
       return true;
     });
   });

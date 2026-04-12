@@ -39,6 +39,7 @@ def _attach_review_stats(
     hygiene_products_score: float | None,
     free_entry_score: float | None,
     gender_mixed_score: float | None,
+    changing_table_score: float | None,
 ) -> WC:
     wc.avg_cleanliness = avg_cleanliness
     wc.reviews_count = reviews_count
@@ -48,20 +49,17 @@ def _attach_review_stats(
     wc.hygiene_products_score = hygiene_products_score
     wc.free_entry_score = free_entry_score
     wc.gender_mixed_score = gender_mixed_score
+    wc.changing_table_score = changing_table_score
     return wc
 
 def get_wcs(
     db: Session,
     is_public: Optional[bool] = None,
-    has_changing_table: Optional[bool] = None,
 ) -> list[WC]:
     query = db.query(WC)
 
     if is_public is not None:
         query = query.filter(WC.is_public == is_public)
-
-    if has_changing_table is not None:
-        query = query.filter(WC.has_changing_table == has_changing_table)
 
     query = (
         query.outerjoin(Review, Review.wc_id == WC.id)
@@ -76,6 +74,7 @@ def get_wcs(
             _bool_avg_percentage(Review.hygiene_products_available).label("hygiene_products_score"),
             _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
             _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
+            _bool_avg_percentage(Review.has_changing_table).label("changing_table_score"),
         )
     )
 
@@ -91,6 +90,7 @@ def get_wcs(
             hygiene_products_score,
             free_entry_score,
             gender_mixed_score,
+            changing_table_score,
         )
         for (
             wc,
@@ -102,6 +102,7 @@ def get_wcs(
             hygiene_products_score,
             free_entry_score,
             gender_mixed_score,
+            changing_table_score,
         ) in rows
     ]
 
@@ -122,6 +123,7 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
             _bool_avg_percentage(Review.hygiene_products_available).label("hygiene_products_score"),
             _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
             _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
+            _bool_avg_percentage(Review.has_changing_table).label("changing_table_score"),
         )
         .first()
     )
@@ -139,6 +141,7 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         hygiene_products_score,
         free_entry_score,
         gender_mixed_score,
+        changing_table_score,
     ) = row
     return _attach_review_stats(
         wc,
@@ -150,6 +153,7 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         hygiene_products_score,
         free_entry_score,
         gender_mixed_score,
+        changing_table_score,
     )
 
 

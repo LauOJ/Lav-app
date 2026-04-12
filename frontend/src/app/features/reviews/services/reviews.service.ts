@@ -12,6 +12,7 @@ type ReviewPayload = {
   hygiene_products_available: boolean | null;
   could_enter_without_buying: boolean | null;
   has_gender_mixed_option: boolean | null;
+  has_changing_table: boolean | null;
   comment?: string;
 };
 

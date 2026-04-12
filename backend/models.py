@@ -46,7 +46,6 @@ class WC(Base):
     longitude = Column(Float, nullable=False)
 
     is_public = Column(Boolean, nullable=False, default=True)
-    has_changing_table = Column(Boolean, nullable=False, default=False)
 
     description = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -76,6 +75,7 @@ class Review(Base):
     hygiene_products_available = Column(Boolean, nullable=True)
     could_enter_without_buying = Column(Boolean, nullable=True)
     has_gender_mixed_option = Column(Boolean, nullable=True)
+    has_changing_table = Column(Boolean, nullable=True)
 
     comment = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

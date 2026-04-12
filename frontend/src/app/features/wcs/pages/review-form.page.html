@@ -81,6 +81,15 @@
         </div>
       </fieldset>
 
+      <fieldset class="fieldset-reset">
+        <legend>¿Había cambiador de bebés?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="has_changing_table" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="has_changing_table" value="false" /> No</label>
+          <label><input type="radio" formControlName="has_changing_table" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
       <div class="form-group">
         <label for="comment">Comentario (opcional)</label>
         <textarea id="comment" formControlName="comment"></textarea>

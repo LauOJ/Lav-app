@@ -24,7 +24,6 @@ export class WCFormPage {
     latitude: 0,
     longitude: 0,
     is_public: true,
-    has_changing_table: false,
     description: '',
   });
 
@@ -153,7 +152,6 @@ export class WCFormPage {
           latitude: wc.latitude,
           longitude: wc.longitude,
           is_public: wc.is_public,
-          has_changing_table: wc.has_changing_table,
           description: wc.description ?? '',
         });
         this.loadingWc.set(false);

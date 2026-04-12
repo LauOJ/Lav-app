@@ -10,6 +10,7 @@ class ReviewBase(BaseModel):
     hygiene_products_available: bool | None = None
     could_enter_without_buying: bool | None = None
     has_gender_mixed_option: bool | None = None
+    has_changing_table: bool | None = None
     comment: str | None = None
 
 

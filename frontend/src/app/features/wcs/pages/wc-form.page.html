@@ -55,15 +55,6 @@
         />
         <label for="wc-is_public">Acceso público</label>
       </div>
-      <div>
-        <input
-          id="wc-has_changing_table"
-          type="checkbox"
-          [checked]="form().has_changing_table"
-          (change)="toggleFlag('has_changing_table', $any($event.target).checked)"
-        />
-        <label for="wc-has_changing_table">Cambiador</label>
-      </div>
     </div>
   </fieldset>
 

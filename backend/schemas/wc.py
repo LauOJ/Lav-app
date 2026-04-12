@@ -7,7 +7,6 @@ class WCBase(BaseModel):
     latitude: float
     longitude: float
     is_public: bool = True
-    has_changing_table: bool = False
     description: str | None = None
 
 
@@ -20,7 +19,6 @@ class WCUpdate(BaseModel):
     latitude: float | None = None
     longitude: float | None = None
     is_public: bool | None = None
-    has_changing_table: bool | None = None
     description: str | None = None
 
 
@@ -42,5 +40,6 @@ class WCRead(WCBase):
     hygiene_products_score: float | None
     free_entry_score: float | None
     gender_mixed_score: float | None
+    changing_table_score: float | None
 
     model_config = ConfigDict(from_attributes=True)

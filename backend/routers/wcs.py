@@ -39,13 +39,11 @@ def create_wc_endpoint(
 )
 def list_wcs_endpoint(
     is_public: Optional[bool] = Query(None),
-    has_changing_table: Optional[bool] = Query(None),
     db: Session = Depends(get_db),
 ):
     return get_wcs(
         db=db,
         is_public=is_public,
-        has_changing_table=has_changing_table,
     )
 
 

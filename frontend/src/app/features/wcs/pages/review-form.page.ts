@@ -36,6 +36,7 @@ export class ReviewFormPage {
     hygiene_products_available: ['' as 'true' | 'false' | ''],
     could_enter_without_buying: ['' as 'true' | 'false' | ''],
     has_gender_mixed_option: ['' as 'true' | 'false' | ''],
+    has_changing_table: ['' as 'true' | 'false' | ''],
     comment: [''],
   });
 
@@ -64,6 +65,7 @@ export class ReviewFormPage {
         hygiene_products_available: this.toNullableBool(raw.hygiene_products_available),
         could_enter_without_buying: this.toNullableBool(raw.could_enter_without_buying),
         has_gender_mixed_option: this.toNullableBool(raw.has_gender_mixed_option),
+        has_changing_table: this.toNullableBool(raw.has_changing_table),
         comment: raw.comment || undefined,
       })
       .subscribe(() => {
