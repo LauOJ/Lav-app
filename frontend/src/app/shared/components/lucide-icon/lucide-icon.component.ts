@@ -11,7 +11,8 @@ export type LucideIconName =
   | 'scroll'
   | 'tag'
   | 'spray-can'
-  | 'sparkles';
+  | 'sparkles'
+  | 'locate';
 
 @Component({
   selector: 'app-lucide-icon',

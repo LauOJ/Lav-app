@@ -38,17 +38,39 @@
   border-top: 1px solid var(--color-border) !important;
 }
 
-/* User location pin: soft shadow only */
-:host ::ng-deep .user-location-marker {
-  background: none !important;
-  border: none !important;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+/* User location dot: Google-style blue circle */
+:host ::ng-deep .user-location-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-:host ::ng-deep .user-location-marker span {
-  font-size: 1.75rem;
-  line-height: 1;
-  display: block;
+:host ::ng-deep .user-location-pulse {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(46, 74, 107, 0.2);
+  animation: location-pulse 2s ease-out infinite;
+}
+
+:host ::ng-deep .user-location-core {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2E4A6B;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(46, 74, 107, 0.5);
+  z-index: 1;
+}
+
+@keyframes location-pulse {
+  0%   { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
 
 /* WC markers: brand teardrop with point down */

@@ -204,14 +204,19 @@
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 999px;
-  border: 1px solid var(--color-primary);
-  background: #ffffff;
-  color: var(--color-primary);
-  font-size: 1.1rem;
+  border: none;
+  background: var(--color-primary);
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 3px 10px rgba(46, 74, 107, 0.35);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.locate-button:active {
+  background: var(--color-primary-hover);
+  transform: scale(0.95);
 }
 
 .explore-page app-map-view {

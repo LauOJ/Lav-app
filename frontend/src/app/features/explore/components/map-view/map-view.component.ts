@@ -37,12 +37,14 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private pendingLatLng: L.LatLng | null = null;
   private userMarker: L.Marker | null = null;
 
-  /** Same pin icon as the "Centrar en mi ubicación" button (📍) */
   private readonly userLocationIcon = L.divIcon({
-    className: 'user-location-marker',
-    html: '<span aria-hidden="true">📍</span>',
-    iconSize: [28, 28],
-    iconAnchor: [14, 28],
+    className: '',
+    html: `<div class="user-location-dot" aria-hidden="true">
+      <div class="user-location-pulse"></div>
+      <div class="user-location-core"></div>
+    </div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
   });
 
   /** Brand teardrop shape flipped (point down) for WC markers */
