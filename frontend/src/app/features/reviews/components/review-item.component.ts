@@ -20,6 +20,7 @@ export class ReviewItemComponent {
     hygiene_products_available: boolean | null;
     could_enter_without_buying: boolean | null;
     has_gender_mixed_option: boolean | null;
+    has_changing_table: boolean | null;
     comment?: string;
   }>();
 
@@ -69,6 +70,7 @@ export class ReviewItemComponent {
       hygiene_products_available: this.review().hygiene_products_available,
       could_enter_without_buying: this.review().could_enter_without_buying,
       has_gender_mixed_option: this.review().has_gender_mixed_option,
+      has_changing_table: this.review().has_changing_table,
       comment: this.comment(),
     });
     this.isEditing.set(false);

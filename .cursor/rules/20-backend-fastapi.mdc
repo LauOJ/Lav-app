@@ -1,0 +1,22 @@
+---
+description: FastAPI backend structure and API conventions
+globs: backend/**/*.py
+alwaysApply: false
+---
+
+# Backend Structure
+
+- Keep flow consistent: `routers/` -> `crud/` -> `models.py`.
+- Put request validation in schemas and business checks in CRUD/service logic.
+- Keep endpoints thin: parse input, call logic layer, return response.
+
+# Data and Auth
+
+- Preserve JWT auth and bcrypt-based password handling.
+- Keep SQLAlchemy 2.0 style patterns and explicit transactions.
+- Respect DB constraints, especially one review per user per WC.
+
+# API Consistency
+
+- Return clear HTTP errors with useful messages.
+- Avoid breaking existing response shapes unless migration is intentional.

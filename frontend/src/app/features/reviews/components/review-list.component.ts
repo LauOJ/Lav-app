@@ -41,6 +41,7 @@ export class ReviewListComponent {
         hygiene_products_available: boolean | null;
         could_enter_without_buying: boolean | null;
         has_gender_mixed_option: boolean | null;
+        has_changing_table: boolean | null;
         comment?: string;
       }) {
         this.reviewsService
@@ -52,6 +53,7 @@ export class ReviewListComponent {
             hygiene_products_available: payload.hygiene_products_available,
             could_enter_without_buying: payload.could_enter_without_buying,
             has_gender_mixed_option: payload.has_gender_mixed_option,
+            has_changing_table: payload.has_changing_table,
             comment: payload.comment,
           })
           .subscribe({

@@ -1,0 +1,19 @@
+---
+description: Angular frontend conventions for standalone components and signals
+globs: frontend/src/**/*.ts
+alwaysApply: false
+---
+
+# Angular + Signals Rules
+
+- Use standalone components only; do not add NgModules.
+- Use `signal()` and `computed()` for state; do not introduce NgRx.
+- Keep feature-first organization under `features/<feature>/...`.
+- Prefer lazy-loaded routes for feature pages.
+- Keep components focused: move reusable state logic to `state/` and pure helpers to `utils/`.
+
+# TypeScript Quality
+
+- Keep functions small and explicit in naming.
+- Avoid `any`; use typed DTOs/interfaces for API and UI state.
+- Add short English comments only where logic is not obvious.

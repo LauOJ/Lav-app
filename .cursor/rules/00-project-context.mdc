@@ -1,0 +1,18 @@
+---
+description: Core WC-Advisor architecture and delivery priorities
+alwaysApply: true
+---
+
+# WC-Advisor Project Context
+
+- Build features for a bathroom finder/review app with Angular frontend and FastAPI backend.
+- Keep architecture boundaries: frontend in `frontend/`, backend in `backend/`, gateway in `nginx-gateway/`.
+- Follow production routing model: `/api/*` to FastAPI, all other routes to Angular SPA.
+- Preserve the rule "one review per user per WC" in any backend or DB changes.
+- Prioritize finishing the WC state/filtering refactor before unrelated improvements.
+
+# Change Discipline
+
+- Prefer small, focused diffs over broad refactors.
+- Avoid introducing new frameworks/state libraries (no NgRx).
+- Keep docs and naming consistent with existing feature-first structure.

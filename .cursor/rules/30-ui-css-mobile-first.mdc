@@ -1,0 +1,18 @@
+---
+description: UI and CSS conventions for mobile-first WC-Advisor screens
+globs: frontend/src/**/*.{css,html}
+alwaysApply: false
+---
+
+# UI/CSS Rules
+
+- Build mobile-first layouts, then scale up with responsive breakpoints.
+- Do not introduce external UI component libraries.
+- Keep HTML semantic and accessible (labels, roles, and keyboard-friendly interactions).
+- Prefer simple, reusable class patterns over deeply nested selectors.
+- Maintain visual consistency with existing spacing, typography, and color tokens.
+
+# UX Focus
+
+- Prioritize map/list usability on small screens.
+- Ensure detail sheets and filters remain clear and touch-friendly.
