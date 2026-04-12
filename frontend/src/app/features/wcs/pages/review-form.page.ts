@@ -30,12 +30,12 @@ export class ReviewFormPage {
 
   form = this.fb.group({
     cleanliness_rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]],
-    felt_safe: [true, Validators.required],
-    accessible: [false, Validators.required],
-    has_toilet_paper: [false, Validators.required],
-    hygiene_products_available: [false, Validators.required],
+    felt_safe: ['' as 'true' | 'false' | ''],
+    accessible: ['' as 'true' | 'false' | ''],
+    has_toilet_paper: ['' as 'true' | 'false' | ''],
+    hygiene_products_available: ['' as 'true' | 'false' | ''],
     could_enter_without_buying: ['' as 'true' | 'false' | ''],
-    has_gender_mixed_option: [false, Validators.required],
+    has_gender_mixed_option: ['' as 'true' | 'false' | ''],
     comment: [''],
   });
 
@@ -43,30 +43,31 @@ export class ReviewFormPage {
     this.router.navigate(['/explore']);
   }
 
+  private toNullableBool(value: 'true' | 'false' | '' | null): boolean | null {
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return null;
+  }
+
   submit() {
     if (this.form.invalid) return;
 
     const raw = this.form.getRawValue();
-    const canEnterRaw = raw.could_enter_without_buying;
-    const couldEnterWithoutBuying =
-      canEnterRaw === '' || canEnterRaw == null
-        ? null
-        : canEnterRaw === 'true';
 
     this.reviewsService
       .createReview({
         wc_id: this.wcId,
         cleanliness_rating: raw.cleanliness_rating!,
-        felt_safe: !!raw.felt_safe,
-        accessible: !!raw.accessible,
-        has_toilet_paper: !!raw.has_toilet_paper,
-        hygiene_products_available: !!raw.hygiene_products_available,
-        could_enter_without_buying: couldEnterWithoutBuying,
-        has_gender_mixed_option: !!raw.has_gender_mixed_option,
+        felt_safe: this.toNullableBool(raw.felt_safe),
+        accessible: this.toNullableBool(raw.accessible),
+        has_toilet_paper: this.toNullableBool(raw.has_toilet_paper),
+        hygiene_products_available: this.toNullableBool(raw.hygiene_products_available),
+        could_enter_without_buying: this.toNullableBool(raw.could_enter_without_buying),
+        has_gender_mixed_option: this.toNullableBool(raw.has_gender_mixed_option),
         comment: raw.comment || undefined,
       })
       .subscribe(() => {
-        this.router.navigate(['/wcs', this.wcId]);
+        this.router.navigate(['/explore']);
       });
   }
 }

@@ -4,12 +4,12 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class ReviewBase(BaseModel):
     cleanliness_rating: Annotated[int, Field(ge=1, le=5)]
-    felt_safe: bool
-    accessible: bool
-    has_toilet_paper: bool
-    hygiene_products_available: bool
+    felt_safe: bool | None = None
+    accessible: bool | None = None
+    has_toilet_paper: bool | None = None
+    hygiene_products_available: bool | None = None
     could_enter_without_buying: bool | None = None
-    has_gender_mixed_option: bool
+    has_gender_mixed_option: bool | None = None
     comment: str | None = None
 
 

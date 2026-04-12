@@ -7,11 +7,13 @@ from schemas.wc import WCCreate, WCUpdate
 
 
 def _bool_avg_percentage(column):
-    # Keep NULL when there are no joined reviews, return 0/1 for real rows.
+    # NULL when no reviews at all; skip per-row NULLs (prefer-not-to-say) so
+    # they don't count as "No" — SQL avg() ignores NULLs automatically.
     return (
         func.avg(
             case(
                 (Review.id.is_(None), None),
+                (column.is_(None), None),
                 (column.is_(True), 1.0),
                 else_=0.0,
             )

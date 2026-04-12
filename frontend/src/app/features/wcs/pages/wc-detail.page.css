@@ -1,9 +1,0 @@
-.favorite-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.favorite-btn.is-favorite .favorite-icon img {
-  filter: brightness(0) saturate(100%) invert(1);
-}

@@ -15,11 +15,6 @@ export const WCS_ROUTES: Routes = [
       import('./pages/wc-form.page').then(m => m.WCFormPage),
   },
   {
-    path: ':id',
-    loadComponent: () =>
-      import('./pages/wc-detail.page').then(m => m.WcDetailPage),
-  },
-  {
     path: ':id/reviews/new',
     canActivate: [authGuard],
     loadComponent: () =>

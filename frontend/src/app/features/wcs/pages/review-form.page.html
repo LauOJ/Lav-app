@@ -2,7 +2,7 @@
   <h2 class="page-title">Nueva review</h2>
 
   <div class="actions">
-    <a class="btn btn-secondary" [routerLink]="['/wcs', wcId]">← Volver al WC</a>
+    <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
   </div>
 
   @if (justCreated()) {
@@ -13,133 +13,103 @@
 
   <div class="section">
     <form [formGroup]="form" (ngSubmit)="submit()">
-  <fieldset class="fieldset-reset">
-    <legend>Experiencia</legend>
-    <div class="form-group">
-      <label for="cleanliness_rating">Limpieza (1–5)</label>
-      <input
-        id="cleanliness_rating"
-        type="number"
-        min="1"
-        max="5"
-        formControlName="cleanliness_rating"
-      />
-    </div>
-  </fieldset>
 
-  <div class="form-group">
-    <label for="comment">Comentario</label>
-    <textarea id="comment" formControlName="comment"></textarea>
-  </div>
+      <fieldset class="fieldset-reset">
+        <legend>Limpieza (1–5)</legend>
+        <div class="form-group">
+          <input
+            id="cleanliness_rating"
+            type="number"
+            min="1"
+            max="5"
+            formControlName="cleanliness_rating"
+          />
+        </div>
+      </fieldset>
 
-  <fieldset class="fieldset-reset">
-    <legend>Indicadores rápidos</legend>
-    <div class="radio-group">
-      <input
-        id="felt_safe_yes"
-        type="radio"
-        formControlName="felt_safe"
-        [value]="true"
-      />
-      <label for="felt_safe_yes">Me sentí segura</label>
-      <input
-        id="felt_safe_no"
-        type="radio"
-        formControlName="felt_safe"
-        [value]="false"
-      />
-      <label for="felt_safe_no">No me sentí segura</label>
-    </div>
-  </fieldset>
+      <fieldset class="fieldset-reset">
+        <legend>¿Te sentiste segura?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="felt_safe" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="felt_safe" value="false" /> No</label>
+          <label><input type="radio" formControlName="felt_safe" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
 
-  <fieldset class="fieldset-reset">
-    <legend>Accesibilidad y servicios</legend>
-    <div class="checkbox-group">
-      <div>
-        <input
-          id="review-accessible"
-          type="checkbox"
-          formControlName="accessible"
-        />
-        <label for="review-accessible">Fue accesible</label>
+      <fieldset class="fieldset-reset">
+        <legend>¿Era accesible?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="accessible" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="accessible" value="false" /> No</label>
+          <label><input type="radio" formControlName="accessible" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset-reset">
+        <legend>¿Había papel higiénico?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="has_toilet_paper" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="has_toilet_paper" value="false" /> No</label>
+          <label><input type="radio" formControlName="has_toilet_paper" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset-reset">
+        <legend>¿Había productos de higiene?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="hygiene_products_available" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="hygiene_products_available" value="false" /> No</label>
+          <label><input type="radio" formControlName="hygiene_products_available" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset-reset">
+        <legend>¿Tenía opción mixta/neutra?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="false" /> No</label>
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset-reset">
+        <legend>¿Pudiste entrar sin consumir?</legend>
+        <div class="radio-group">
+          <label><input type="radio" formControlName="could_enter_without_buying" value="true" /> Sí</label>
+          <label><input type="radio" formControlName="could_enter_without_buying" value="false" /> No</label>
+          <label><input type="radio" formControlName="could_enter_without_buying" value="" /> Prefiero no decir</label>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label for="comment">Comentario (opcional)</label>
+        <textarea id="comment" formControlName="comment"></textarea>
       </div>
-      <div>
-        <input
-          id="review-has_toilet_paper"
-          type="checkbox"
-          formControlName="has_toilet_paper"
-        />
-        <label for="review-has_toilet_paper">Había papel higiénico</label>
-      </div>
-      <div>
-        <input
-          id="review-hygiene_products_available"
-          type="checkbox"
-          formControlName="hygiene_products_available"
-        />
-        <label for="review-hygiene_products_available">Había productos de higiene</label>
-      </div>
-      <div>
-        <input
-          id="review-has_gender_mixed_option"
-          type="checkbox"
-          formControlName="has_gender_mixed_option"
-        />
-        <label for="review-has_gender_mixed_option">Tiene opción mixta/neutra</label>
-      </div>
-    </div>
-  </fieldset>
 
-  <fieldset class="fieldset-reset">
-    <legend>Acceso sin consumo</legend>
-    <div class="radio-group">
-      <input
-        id="could_enter_yes"
-        type="radio"
-        formControlName="could_enter_without_buying"
-        [value]="'true'"
-      />
-      <label for="could_enter_yes">Sí</label>
-      <input
-        id="could_enter_no"
-        type="radio"
-        formControlName="could_enter_without_buying"
-        [value]="'false'"
-      />
-      <label for="could_enter_no">No</label>
-      <input
-        id="could_enter_skip"
-        type="radio"
-        formControlName="could_enter_without_buying"
-        [value]="''"
-      />
-      <label for="could_enter_skip">No lo sé / prefiero no decir</label>
-    </div>
-  </fieldset>
+      @if (form.invalid) {
+        <p id="form-errors" class="form-error" role="alert">
+          Revisa los campos marcados.
+        </p>
+      }
 
-  @if (form.invalid) {
-    <p id="form-errors" class="form-error" role="alert">
-      Revisa los campos marcados.
-    </p>
-  }
+      <div class="actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="form.invalid"
+          [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
+        >
+          Enviar review
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onSkip()"
+        >
+          {{ justCreated() ? 'Crear WC sin review' : 'Omitir por ahora' }}
+        </button>
+      </div>
 
-  <div class="actions">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="form.invalid"
-      [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
-    >
-      Enviar review
-    </button>
-    <button
-      type="button"
-      class="btn btn-secondary"
-      (click)="onSkip()"
-    >
-      {{ justCreated() ? 'Crear WC sin review' : 'Omitir por ahora' }}
-    </button>
-  </div>
     </form>
   </div>
 </div>

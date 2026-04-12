@@ -21,7 +21,7 @@
       <ul>
         @for (wc of wcs(); track wc.id) {
           <li>
-            <a class="btn btn-secondary" [routerLink]="['/wcs', wc.id]">{{ wc.name }}</a>
+            <span class="wc-name">{{ wc.name }}</span>
           </li>
         }
       </ul>

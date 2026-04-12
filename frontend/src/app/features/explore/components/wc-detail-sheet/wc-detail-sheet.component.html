@@ -31,11 +31,37 @@
   <app-wc-feature-icons [wc]="wc()" />
 
   @if (isExpanded()) {
-  <div class="actions">
-  </div>
     <app-wc-detail-content [wc]="wc()" />
 
     <div class="cta">
+      @if (userState.isLoggedIn()) {
+        <div class="cta-actions">
+          <button
+            type="button"
+            class="action-btn favorite"
+            [class.active]="isFavorite()"
+            [disabled]="favoriteLoading()"
+            (click)="onToggleFavorite(); $event.stopPropagation()"
+            [attr.aria-label]="isFavorite() ? 'Quitar de favoritos' : 'Añadir a favoritos'"
+          >
+            {{ isFavorite() ? '★' : '☆' }} {{ isFavorite() ? 'Favorito' : 'Favoritos' }}
+          </button>
+          <a
+            class="action-btn"
+            [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
+            (click)="$event.stopPropagation()"
+          >
+            ✏️ Review
+          </a>
+          <a
+            class="action-btn"
+            [routerLink]="['/wcs', wc().id, 'edit']"
+            (click)="$event.stopPropagation()"
+          >
+            ⚙️ Editar
+          </a>
+        </div>
+      }
       <button
         type="button"
         class="primary"
@@ -45,22 +71,6 @@
       >
         {{ showReviews() ? 'Ocultar reviews' : 'Ver reviews' }}
       </button>
-      <a
-        class="secondary"
-        [routerLink]="['/wcs', wc().id]"
-        (click)="$event.stopPropagation()"
-      >
-        Ver todas las reviews ({{ wc().reviews_count }})
-      </a>
-      @if (userState.isLoggedIn()) {
-        <a
-          class="primary"
-          [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
-          (click)="$event.stopPropagation()"
-        >
-          Escribir review
-        </a>
-      }
     </div>
 
     @if (showReviews()) {
@@ -75,33 +85,26 @@
           <ul class="review-list">
             @for (review of visibleReviews(); track review.id) {
               <li class="review-item">
-                <div class="review-metrics">
-                  <div class="review-metric">
-                    <span class="review-label">Limpieza</span>
-                    <span
-                      class="review-stars"
-                      [attr.aria-label]="'Limpieza: ' + review.cleanliness_rating + ' de 5'"
-                    >
-                      {{ reviewStars(review.cleanliness_rating) }}
-                    </span>
-                    <span class="review-score">
-                      {{ review.cleanliness_rating }}/5
-                    </span>
-                  </div>
-                  <div class="review-metric">
-                    <span class="review-label">Seguridad percibida</span>
-                    <span class="review-score">
-                      {{ review.felt_safe ? 'Sí' : 'No' }}
-                    </span>
-                  </div>
+                <div class="review-header">
+                  <span
+                    class="review-stars"
+                    [attr.aria-label]="'Limpieza: ' + review.cleanliness_rating + ' de 5'"
+                  >{{ reviewStars(review.cleanliness_rating) }}</span>
+                  <span class="review-score">{{ review.cleanliness_rating }}/5</span>
+                  @if (review.created_at) {
+                    <span class="review-date">{{ review.created_at | date: 'dd/MM/yy' }}</span>
+                  }
+                </div>
+                <div class="review-tags">
+                  @if (review.felt_safe) { <span class="review-tag">✓ Seguro</span> }
+                  @if (review.accessible) { <span class="review-tag">✓ Accesible</span> }
+                  @if (review.has_toilet_paper) { <span class="review-tag">✓ Papel</span> }
+                  @if (review.hygiene_products_available) { <span class="review-tag">✓ Higiene</span> }
+                  @if (review.could_enter_without_buying) { <span class="review-tag">✓ Sin consumir</span> }
+                  @if (review.has_gender_mixed_option) { <span class="review-tag">✓ Mixto</span> }
                 </div>
                 @if (review.comment) {
                   <p class="review-comment">{{ review.comment }}</p>
-                }
-                @if (review.created_at) {
-                  <span class="review-date">
-                    {{ review.created_at | date: 'dd/MM/yy' }}
-                  </span>
                 }
               </li>
             }

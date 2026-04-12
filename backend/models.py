@@ -70,12 +70,12 @@ class Review(Base):
     id = Column(Integer, primary_key=True)
 
     cleanliness_rating = Column(Integer, nullable=False)
-    felt_safe = Column(Boolean, nullable=False)
-    accessible = Column(Boolean, nullable=False)
-    has_toilet_paper = Column(Boolean, nullable=False)
-    hygiene_products_available = Column(Boolean, nullable=False)
+    felt_safe = Column(Boolean, nullable=True)
+    accessible = Column(Boolean, nullable=True)
+    has_toilet_paper = Column(Boolean, nullable=True)
+    hygiene_products_available = Column(Boolean, nullable=True)
     could_enter_without_buying = Column(Boolean, nullable=True)
-    has_gender_mixed_option = Column(Boolean, nullable=False)
+    has_gender_mixed_option = Column(Boolean, nullable=True)
 
     comment = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

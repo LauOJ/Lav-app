@@ -21,6 +21,7 @@ import { WcFeatureIconsComponent } from '../wc-feature-icons/wc-feature-icons.co
 import { ReviewsService } from '../../../reviews/services/reviews.service';
 import { Review } from '../../../reviews/models/review.model';
 import { UserState } from '../../../../core/user/user.state';
+import { WCService } from '../../../wcs/services/wc.service';
 
 @Component({
   selector: 'app-wc-detail-sheet',
@@ -30,7 +31,11 @@ import { UserState } from '../../../../core/user/user.state';
 })
 export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly reviewsService = inject(ReviewsService);
+  private readonly wcService = inject(WCService);
   readonly userState = inject(UserState);
+
+  readonly isFavorite = signal(false);
+  readonly favoriteLoading = signal(false);
 
   @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
 
@@ -58,9 +63,13 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
 
   constructor() {
     effect(() => {
-      this.wc();
+      const wc = this.wc();
       this.sheetState.set('collapsed');
       this.showReviews.set(false);
+      this.isFavorite.set(false);
+      if (this.userState.isLoggedIn()) {
+        this.loadFavoriteState(wc.id);
+      }
     });
 
     effect(() => {
@@ -108,6 +117,30 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
 
   onToggleReviews(): void {
     this.showReviews.set(!this.showReviews());
+  }
+
+  onToggleFavorite(): void {
+    if (this.favoriteLoading()) return;
+    this.favoriteLoading.set(true);
+    const wasFavorite = this.isFavorite();
+    this.isFavorite.set(!wasFavorite);
+    const request = wasFavorite
+      ? this.wcService.removeFavorite(this.wc().id)
+      : this.wcService.addFavorite(this.wc().id);
+    request.subscribe({
+      error: () => {
+        this.isFavorite.set(wasFavorite);
+        this.favoriteLoading.set(false);
+      },
+      complete: () => this.favoriteLoading.set(false),
+    });
+  }
+
+  private loadFavoriteState(wcId: number): void {
+    this.wcService.getMyFavorites().subscribe({
+      next: favorites => this.isFavorite.set(favorites.some(w => w.id === wcId)),
+      error: () => this.isFavorite.set(false),
+    });
   }
 
   reviewStars(rating: number): string {
