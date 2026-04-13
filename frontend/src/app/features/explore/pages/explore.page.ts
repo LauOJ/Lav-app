@@ -109,13 +109,13 @@ export class ExplorePage implements OnInit {
   }
 
   readonly nearbyConfirm = signal<{ lat: number; lng: number } | null>(null);
-  readonly nearbyWcNames = signal<string[]>([]);
+  readonly nearbyWcs = signal<{ id: number; name: string }[]>([]);
   readonly showNearbyList = signal(false);
 
   onAddWcAt(coords: { lat: number; lng: number }): void {
     const nearby = this.getNearbyWcs(coords.lat, coords.lng);
     if (nearby.length > 0) {
-      this.nearbyWcNames.set(nearby.map(wc => wc.name));
+      this.nearbyWcs.set(nearby.map(wc => ({ id: wc.id, name: wc.name })));
       this.showNearbyList.set(false);
       this.nearbyConfirm.set(coords);
       return;

@@ -128,8 +128,15 @@
         </button>
         @if (showNearbyList()) {
           <ul class="nearby-list">
-            @for (name of nearbyWcNames(); track name) {
-              <li>{{ name }}</li>
+            @for (wc of nearbyWcs(); track wc.id) {
+              <li class="nearby-list-item">
+                <span>{{ wc.name }}</span>
+                <a
+                  class="nearby-review-link"
+                  [routerLink]="['/wcs', wc.id, 'reviews', 'new']"
+                  (click)="onNearbyCancel()"
+                >Añadir review</a>
+              </li>
             }
           </ul>
         }
