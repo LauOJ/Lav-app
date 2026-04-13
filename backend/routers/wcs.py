@@ -11,7 +11,7 @@ from crud.review import get_reviews_by_wc_id
 from crud.favorite import add_favorite, remove_favorite
 
 from security import get_current_user
-from main import limiter
+from limiter import limiter
 from models import User, WC
 
 

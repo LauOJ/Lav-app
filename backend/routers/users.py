@@ -11,7 +11,7 @@ from crud.favorite import get_user_favorites
 from crud.wc import get_wc_by_id
 
 from security import hash_password, get_current_user
-from main import limiter
+from limiter import limiter
 from crud.review import get_reviews_by_user_id
 from models import User
 

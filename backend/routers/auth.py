@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from crud.user import get_user_by_email
 from security import verify_password, create_access_token
-from main import limiter
+from limiter import limiter
 
 from fastapi.security import OAuth2PasswordRequestForm
 
