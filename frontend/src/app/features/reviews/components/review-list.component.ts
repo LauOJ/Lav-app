@@ -42,6 +42,7 @@ export class ReviewListComponent {
         could_enter_without_buying: boolean | null;
         has_gender_mixed_option: boolean | null;
         has_changing_table: boolean | null;
+        changing_table_location: 'mens' | 'womens' | 'mixed' | null;
         comment?: string;
       }) {
         this.reviewsService
@@ -54,6 +55,7 @@ export class ReviewListComponent {
             could_enter_without_buying: payload.could_enter_without_buying,
             has_gender_mixed_option: payload.has_gender_mixed_option,
             has_changing_table: payload.has_changing_table,
+            changing_table_location: payload.changing_table_location,
             comment: payload.comment,
           })
           .subscribe({

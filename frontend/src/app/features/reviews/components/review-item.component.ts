@@ -21,6 +21,7 @@ export class ReviewItemComponent {
     could_enter_without_buying: boolean | null;
     has_gender_mixed_option: boolean | null;
     has_changing_table: boolean | null;
+    changing_table_location: 'mens' | 'womens' | 'mixed' | null;
     comment?: string;
   }>();
 
@@ -71,6 +72,7 @@ export class ReviewItemComponent {
       could_enter_without_buying: this.review().could_enter_without_buying,
       has_gender_mixed_option: this.review().has_gender_mixed_option,
       has_changing_table: this.review().has_changing_table,
+      changing_table_location: this.review().changing_table_location,
       comment: this.comment(),
     });
     this.isEditing.set(false);

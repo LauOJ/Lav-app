@@ -90,6 +90,17 @@
         </div>
       </fieldset>
 
+      @if (form.get('has_changing_table')?.value === 'true') {
+        <fieldset class="fieldset-reset">
+          <legend>¿Dónde estaba el cambiador?</legend>
+          <div class="radio-group">
+            <label><input type="radio" formControlName="changing_table_location" value="mens" /> Baño masculino</label>
+            <label><input type="radio" formControlName="changing_table_location" value="womens" /> Baño femenino</label>
+            <label><input type="radio" formControlName="changing_table_location" value="mixed" /> Baño mixto</label>
+          </div>
+        </fieldset>
+      }
+
       <div class="form-group">
         <label for="comment">Comentario (opcional)</label>
         <textarea id="comment" formControlName="comment"></textarea>

@@ -37,6 +37,7 @@ export class ReviewFormPage {
     could_enter_without_buying: ['' as 'true' | 'false' | ''],
     has_gender_mixed_option: ['' as 'true' | 'false' | ''],
     has_changing_table: ['' as 'true' | 'false' | ''],
+    changing_table_location: ['' as 'mens' | 'womens' | 'mixed' | ''],
     comment: [''],
   });
 
@@ -66,6 +67,9 @@ export class ReviewFormPage {
         could_enter_without_buying: this.toNullableBool(raw.could_enter_without_buying),
         has_gender_mixed_option: this.toNullableBool(raw.has_gender_mixed_option),
         has_changing_table: this.toNullableBool(raw.has_changing_table),
+        changing_table_location: (raw.has_changing_table === 'true' && raw.changing_table_location)
+          ? raw.changing_table_location
+          : null,
         comment: raw.comment || undefined,
       })
       .subscribe(() => {

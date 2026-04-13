@@ -11,6 +11,7 @@ class ReviewBase(BaseModel):
     could_enter_without_buying: bool | None = None
     has_gender_mixed_option: bool | None = None
     has_changing_table: bool | None = None
+    changing_table_location: str | None = None
     comment: str | None = None
 
 

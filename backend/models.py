@@ -76,6 +76,7 @@ class Review(Base):
     could_enter_without_buying = Column(Boolean, nullable=True)
     has_gender_mixed_option = Column(Boolean, nullable=True)
     has_changing_table = Column(Boolean, nullable=True)
+    changing_table_location = Column(String(10), nullable=True)  # 'mens', 'womens', 'mixed'
 
     comment = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

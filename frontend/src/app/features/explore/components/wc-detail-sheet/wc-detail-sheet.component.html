@@ -102,7 +102,13 @@
                   @if (review.hygiene_products_available) { <span class="review-tag">✓ Higiene</span> }
                   @if (review.could_enter_without_buying) { <span class="review-tag">✓ Sin consumir</span> }
                   @if (review.has_gender_mixed_option) { <span class="review-tag">✓ Mixto</span> }
-                  @if (review.has_changing_table) { <span class="review-tag">✓ Cambiador</span> }
+                  @if (review.has_changing_table) {
+                    <span class="review-tag">✓ Cambiador
+                      @if (review.changing_table_location === 'mens') { (masc.) }
+                      @else if (review.changing_table_location === 'womens') { (fem.) }
+                      @else if (review.changing_table_location === 'mixed') { (mixto) }
+                    </span>
+                  }
                 </div>
                 @if (review.comment) {
                   <p class="review-comment">{{ review.comment }}</p>

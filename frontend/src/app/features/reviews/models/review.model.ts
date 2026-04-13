@@ -8,6 +8,7 @@ export interface Review {
   could_enter_without_buying: boolean | null;
   has_gender_mixed_option: boolean | null;
   has_changing_table: boolean | null;
+  changing_table_location: 'mens' | 'womens' | 'mixed' | null;
   comment?: string;
   user_id: number;
   wc_id: number;
