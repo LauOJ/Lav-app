@@ -2,7 +2,7 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .rating {
@@ -14,6 +14,25 @@
 
 .label {
   color: #4a4a4a;
+}
+
+.scores-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3rem 1rem;
+  align-items: baseline;
+}
+
+.score-label {
+  font-size: 0.88rem;
+  color: #4a4a4a;
+}
+
+.score-value {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-align: right;
 }
 
 .rating-visual {
