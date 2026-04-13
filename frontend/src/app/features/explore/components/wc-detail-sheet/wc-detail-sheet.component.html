@@ -38,27 +38,30 @@
         <div class="cta-actions">
           <button
             type="button"
-            class="action-btn favorite"
-            [class.active]="isFavorite()"
+            class="action-btn"
+            [class.favorite-active]="isFavorite()"
             [disabled]="favoriteLoading()"
             (click)="onToggleFavorite(); $event.stopPropagation()"
             [attr.aria-label]="isFavorite() ? 'Quitar de favoritos' : 'Añadir a favoritos'"
           >
-            {{ isFavorite() ? '★' : '☆' }} {{ isFavorite() ? 'Favorito' : 'Favoritos' }}
+            <app-lucide-icon icon="star" />
+            {{ isFavorite() ? 'Guardado' : 'Guardar' }}
           </button>
           <a
             class="action-btn"
             [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
             (click)="$event.stopPropagation()"
           >
-            ✏️ Review
+            <app-lucide-icon icon="pencil" />
+            Review
           </a>
           <a
             class="action-btn"
             [routerLink]="['/wcs', wc().id, 'edit']"
             (click)="$event.stopPropagation()"
           >
-            ⚙️ Editar
+            <app-lucide-icon icon="settings" />
+            Editar
           </a>
         </div>
       }

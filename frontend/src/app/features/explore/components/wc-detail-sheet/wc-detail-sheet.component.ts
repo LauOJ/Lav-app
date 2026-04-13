@@ -18,6 +18,7 @@ import { WC } from '../../../wcs/models/wc.model';
 import { wcDistanceMeters } from '../../../wcs/utils/wc.utils';
 import { WcDetailContentComponent } from '../../../wcs/components/wc-detail-content/wc-detail-content.component';
 import { WcFeatureIconsComponent } from '../wc-feature-icons/wc-feature-icons.component';
+import { LucideIconComponent } from '../../../../shared/components/lucide-icon/lucide-icon.component';
 import { ReviewsService } from '../../../reviews/services/reviews.service';
 import { Review } from '../../../reviews/models/review.model';
 import { UserState } from '../../../../core/user/user.state';
@@ -25,7 +26,7 @@ import { WCService } from '../../../wcs/services/wc.service';
 
 @Component({
   selector: 'app-wc-detail-sheet',
-  imports: [CommonModule, RouterModule, WcFeatureIconsComponent, WcDetailContentComponent],
+  imports: [CommonModule, RouterModule, WcFeatureIconsComponent, WcDetailContentComponent, LucideIconComponent],
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })

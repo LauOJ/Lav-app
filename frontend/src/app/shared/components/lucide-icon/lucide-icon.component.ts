@@ -12,7 +12,9 @@ export type LucideIconName =
   | 'tag'
   | 'spray-can'
   | 'sparkles'
-  | 'locate';
+  | 'locate'
+  | 'pencil'
+  | 'settings';
 
 @Component({
   selector: 'app-lucide-icon',
