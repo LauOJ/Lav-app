@@ -109,9 +109,14 @@ export class ExplorePage implements OnInit {
   }
 
   readonly nearbyConfirm = signal<{ lat: number; lng: number } | null>(null);
+  readonly nearbyWcNames = signal<string[]>([]);
+  readonly showNearbyList = signal(false);
 
   onAddWcAt(coords: { lat: number; lng: number }): void {
-    if (this.hasNearbyWcs(coords.lat, coords.lng)) {
+    const nearby = this.getNearbyWcs(coords.lat, coords.lng);
+    if (nearby.length > 0) {
+      this.nearbyWcNames.set(nearby.map(wc => wc.name));
+      this.showNearbyList.set(false);
       this.nearbyConfirm.set(coords);
       return;
     }
@@ -229,13 +234,10 @@ export class ExplorePage implements OnInit {
     });
   }
 
-  private hasNearbyWcs(lat: number, lng: number): boolean {
-    for (const wc of this.wcState.wcs()) {
-      if (wc.latitude == null || wc.longitude == null) continue;
-      if (wcDistanceMeters(lat, lng, wc.latitude, wc.longitude) <= this.nearbyRadiusMeters) {
-        return true;
-      }
-    }
-    return false;
+  private getNearbyWcs(lat: number, lng: number) {
+    return this.wcState.wcs().filter(wc => {
+      if (wc.latitude == null || wc.longitude == null) return false;
+      return wcDistanceMeters(lat, lng, wc.latitude, wc.longitude) <= this.nearbyRadiusMeters;
+    });
   }
 }

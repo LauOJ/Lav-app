@@ -123,9 +123,19 @@
     <div class="dialog-backdrop" (click)="onNearbyCancel()">
       <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="nearby-title" (click)="$event.stopPropagation()">
         <p id="nearby-title" class="dialog-message">Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?</p>
+        <button type="button" class="dialog-expand" (click)="showNearbyList.set(!showNearbyList())">
+          {{ showNearbyList() ? '▲ Ocultar lista' : '▼ Ver WCs cercanos' }}
+        </button>
+        @if (showNearbyList()) {
+          <ul class="nearby-list">
+            @for (name of nearbyWcNames(); track name) {
+              <li>{{ name }}</li>
+            }
+          </ul>
+        }
         <div class="dialog-actions">
           <button type="button" class="dialog-btn secondary" (click)="onNearbyCancel()">Cancelar</button>
-          <button type="button" class="dialog-btn primary" (click)="onNearbyConfirm()">Añadir</button>
+          <button type="button" class="dialog-btn primary" (click)="onNearbyConfirm()">Añadir igualmente</button>
         </div>
       </div>
     </div>
