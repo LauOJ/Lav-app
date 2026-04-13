@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
@@ -11,6 +11,7 @@ from crud.favorite import get_user_favorites
 from crud.wc import get_wc_by_id
 
 from security import hash_password, get_current_user
+from main import limiter
 from crud.review import get_reviews_by_user_id
 from models import User
 
@@ -24,7 +25,9 @@ router = APIRouter(
     response_model=UserRead,
     status_code=status.HTTP_201_CREATED,
 )
+@limiter.limit("10/minute")
 def create_user_endpoint(
+    request: Request,
     user_in: UserCreate,
     db: Session = Depends(get_db),
 ):

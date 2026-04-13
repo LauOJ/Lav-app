@@ -11,8 +11,8 @@
   
       @if (isMine()) {
         <div>
-          <button type="button" (click)="onEdit()">✏️ Editar</button>
-          <button type="button" (click)="onDelete()">🗑️ Borrar</button>
+          <button type="button" (click)="onEdit()"><span aria-hidden="true">✏️</span> Editar</button>
+          <button type="button" (click)="onDelete()"><span aria-hidden="true">🗑️</span> Borrar</button>
         </div>
       }
     </li>

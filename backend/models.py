@@ -22,6 +22,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String(255), nullable=False, unique=True, index=True)
     password_hash = Column(String(255), nullable=False)
+    is_admin = Column(Boolean, nullable=False, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
@@ -46,6 +47,7 @@ class WC(Base):
     longitude = Column(Float, nullable=False)
 
     is_public = Column(Boolean, nullable=False, default=True)
+    is_active = Column(Boolean, nullable=False, default=True)
 
     description = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

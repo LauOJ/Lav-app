@@ -19,6 +19,7 @@ class WCUpdate(BaseModel):
     latitude: float | None = None
     longitude: float | None = None
     is_public: bool | None = None
+    is_active: bool | None = None
     description: str | None = None
 
 
@@ -31,6 +32,7 @@ class WCCreated(WCBase):
 
 class WCRead(WCBase):
     id: int
+    is_active: bool
     created_at: datetime
     avg_cleanliness: float | None
     reviews_count: int

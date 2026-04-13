@@ -56,7 +56,7 @@ def get_wcs(
     db: Session,
     is_public: Optional[bool] = None,
 ) -> list[WC]:
-    query = db.query(WC)
+    query = db.query(WC).filter(WC.is_active == True)
 
     if is_public is not None:
         query = query.filter(WC.is_public == is_public)
@@ -111,7 +111,7 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
     row = (
         db.query(WC)
         .outerjoin(Review, Review.wc_id == WC.id)
-        .filter(WC.id == wc_id)
+        .filter(WC.id == wc_id, WC.is_active == True)
         .group_by(WC.id)
         .with_entities(
             WC,

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, Request, status, Query
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -11,6 +11,7 @@ from crud.review import get_reviews_by_wc_id
 from crud.favorite import add_favorite, remove_favorite
 
 from security import get_current_user
+from main import limiter
 from models import User, WC
 
 
@@ -24,7 +25,9 @@ router = APIRouter(
     response_model=WCCreated,
     status_code=status.HTTP_201_CREATED,
 )
+@limiter.limit("5/day")
 def create_wc_endpoint(
+    request: Request,
     wc_in: WCCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),

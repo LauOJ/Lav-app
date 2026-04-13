@@ -4,9 +4,9 @@ services:
     container_name: wcadvisor_db
     restart: always
     environment:
-      POSTGRES_USER: wcadmin
-      POSTGRES_PASSWORD: wcpassword
-      POSTGRES_DB: wcadvisor
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -21,8 +21,9 @@ services:
     ports:
       - "8001:8000"
     environment:
-      DATABASE_URL: postgresql+psycopg://wcadmin:wcpassword@db:5432/wcadvisor
-      SECRET_KEY: super-secret-dev-key-change-me
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
     volumes:
       - ./backend:/app
 

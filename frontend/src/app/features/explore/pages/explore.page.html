@@ -114,7 +114,7 @@
 
   @if (showEmptyState()) {
     <div class="empty-state-overlay" role="status" aria-live="polite">
-      <p>No hay baños que cumplan los filtros 😕</p>
+      <p>No hay baños que cumplan los filtros <span aria-hidden="true">😕</span></p>
       <button type="button" (click)="onClearFilters()">Quitar filtros</button>
     </div>
   }

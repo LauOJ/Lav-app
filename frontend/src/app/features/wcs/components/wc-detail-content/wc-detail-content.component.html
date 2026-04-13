@@ -1,7 +1,7 @@
 <div class="ratings">
   <div class="reviews-count">
     @if (wc().reviews_count > 0) {
-      <span class="reviews-text">💬 {{ wc().reviews_count }} {{ wc().reviews_count === 1 ? 'valoración' : 'valoraciones' }}{{ hasLimitedInfo() ? ' — información limitada' : '' }}</span>
+      <span class="reviews-text"><span aria-hidden="true">💬</span> {{ wc().reviews_count }} {{ wc().reviews_count === 1 ? 'valoración' : 'valoraciones' }}{{ hasLimitedInfo() ? ' — información limitada' : '' }}</span>
     } @else {
       <span class="reviews-text muted">Sin valoraciones aún</span>
     }

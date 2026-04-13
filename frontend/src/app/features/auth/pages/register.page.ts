@@ -25,6 +25,11 @@ export class RegisterPage {
   readonly error = signal<string | null>(null);
 
   onSubmit() {
+    if (this.password().length < 8) {
+      this.error.set('La contraseña debe tener al menos 8 caracteres');
+      return;
+    }
+
     this.loading.set(true);
     this.error.set(null);
 
