@@ -22,15 +22,15 @@
 }
 
 .feature-icon.score-good {
-  border-color: #2e7d32;
-  background: #e8f5e9;
-  color: #2e7d32;
+  border-color: var(--color-primary);
+  background: #eef2f7;
+  color: var(--color-primary);
 }
 
 .feature-icon.score-medium {
-  border-color: #f9a825;
+  border-color: #d4860a;
   background: #fff8e1;
-  color: #f9a825;
+  color: #d4860a;
 }
 
 .feature-icon.score-low {
@@ -40,9 +40,9 @@
 }
 
 .feature-icon.score-unknown {
-  border-color: #9e9e9e;
-  background: #f2f2f2;
-  color: #9e9e9e;
+  border-color: #c0c8d0;
+  background: #f4f6f8;
+  color: #9eaab6;
 }
 
 .feature-icon .icon {
