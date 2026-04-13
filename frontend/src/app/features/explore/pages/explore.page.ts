@@ -108,13 +108,27 @@ export class ExplorePage implements OnInit {
     this.wcState.selectWc(null);
   }
 
+  readonly nearbyConfirm = signal<{ lat: number; lng: number } | null>(null);
+
   onAddWcAt(coords: { lat: number; lng: number }): void {
     if (this.hasNearbyWcs(coords.lat, coords.lng)) {
-      const shouldContinue = confirm(
-        'Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?'
-      );
-      if (!shouldContinue) return;
+      this.nearbyConfirm.set(coords);
+      return;
     }
+    this.navigateToNewWc(coords);
+  }
+
+  onNearbyConfirm(): void {
+    const coords = this.nearbyConfirm();
+    this.nearbyConfirm.set(null);
+    if (coords) this.navigateToNewWc(coords);
+  }
+
+  onNearbyCancel(): void {
+    this.nearbyConfirm.set(null);
+  }
+
+  private navigateToNewWc(coords: { lat: number; lng: number }): void {
     this.router.navigate(['/wcs', 'new'], {
       queryParams: { lat: coords.lat, lng: coords.lng },
     });

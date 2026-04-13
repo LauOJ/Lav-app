@@ -119,6 +119,18 @@
     </div>
   }
 
+  @if (nearbyConfirm()) {
+    <div class="dialog-backdrop" (click)="onNearbyCancel()">
+      <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="nearby-title" (click)="$event.stopPropagation()">
+        <p id="nearby-title" class="dialog-message">Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?</p>
+        <div class="dialog-actions">
+          <button type="button" class="dialog-btn secondary" (click)="onNearbyCancel()">Cancelar</button>
+          <button type="button" class="dialog-btn primary" (click)="onNearbyConfirm()">Añadir</button>
+        </div>
+      </div>
+    </div>
+  }
+
   @if (wcState.selectedWc()) {
     <app-wc-detail-sheet
       [wc]="wcState.selectedWc()!"
