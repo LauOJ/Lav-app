@@ -181,17 +181,17 @@
 
   "about": {
     "title": "¿Quiénes somos?",
-    "intro": "lav-app es una herramienta colectiva para encontrar y valorar baños públicos en la ciudad.",
-    "manifesto": "Creemos que poder moverse por la ciudad con comodidad es un derecho básico — y que demasiado a menudo no es igual para todo el mundo. Hay barreras que no siempre se ven, pero que se padecen cada día.",
+    "intro": "lav-app es una herramienta comunitaria para encontrar y valorar baños públicos en la ciudad.",
+    "manifesto": "Creemos que el espacio público es un derecho, no un privilegio. Toda persona merece poder moverse por la ciudad con dignidad, comodidad y seguridad — independientemente de quién sea, cómo se mueva o cómo se identifique.",
 
     "s1_title": "El baño público es un derecho",
-    "s1_body": "El acceso a un baño limpio y seguro debería ser una garantía, no una cuestión de suerte. Pero hay demasiados lugares con barreras de accesibilidad, espacios que excluyen o simplemente ausencia de servicio. Por eso existe lav-app.",
+    "s1_body": "El acceso a un baño limpio y seguro es una necesidad básica. Pero demasiado a menudo es desigual: barreras de accesibilidad, espacios no inclusivos, escasez de baños públicos... lav-app quiere visibilizar y cambiar esta realidad.",
 
-    "s2_title": "Datos hechos por la comunidad",
-    "s2_body": "La información de lav-app la generan las personas que viven y transitan la ciudad cada día — no empresas ni algoritmos. Cada valoración que añades suma a un mapa colectivo que nadie más va a construir.",
+    "s2_title": "Datos colectivos",
+    "s2_body": "La información de lav-app la construye la gente que vive y transita la ciudad cada día. Las valoraciones se expresan como porcentajes de impresiones para que cada persona pueda hacerse su propia idea.",
 
     "s3_title": "El baño no es neutral",
-    "s3_body": "Si hay rampa o no, si hay opción mixta, si el lugar es seguro para personas trans o vulnerables — todo eso importa, y no se vive igual para todo el mundo. Por eso recogemos datos sobre todo esto.",
+    "s3_body": "Si hay rampa o no, si hay opción mixta, si el lugar es seguro para personas trans o vulnerables: todo eso determina, en la práctica, si el espacio público es realmente para todo el mundo.",
 
     "s4_title": "La ciudad es de quien la habita",
     "s4_body": "Personas mayores, personas con diversidad funcional, familias, personas trans, personas sin hogar: todas tienen que poder moverse por la ciudad sin que la falta de un baño digno les condicione el trayecto.",
