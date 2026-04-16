@@ -9,6 +9,8 @@
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
     "register": "Registrarse",
+    "about": "¿Quiénes somos?",
+    "open_menu": "Abrir menú",
     "user_menu": "Menú de usuario",
     "close_menu": "Cerrar menú"
   },
@@ -175,6 +177,30 @@
     "confirm_delete": "¿Seguro que quieres borrar esta review?",
     "error_delete": "Error al borrar la review",
     "error_update": "Error al actualizar la review"
+  },
+
+  "about": {
+    "title": "¿Quiénes somos?",
+    "intro": "Labu es una herramienta comunitaria para encontrar y valorar baños públicos en la ciudad.",
+    "manifesto": "Creemos que el espacio público es un derecho, no un privilegio. Toda persona merece poder moverse por la ciudad con dignidad, comodidad y seguridad — independientemente de quién sea, cómo se mueva o cómo se sienta.",
+
+    "s1_title": "Para todo el mundo, sin excepción",
+    "s1_body": "El acceso a un baño limpio y seguro es una necesidad básica. Pero demasiado a menudo es desigual: barreras de accesibilidad, espacios no inclusivos o simplemente escasez. Labu quiere visibilizar y cambiar esta realidad.",
+
+    "s2_title": "Datos hechos por la comunidad",
+    "s2_body": "La información de Labu la hacen las personas que viven y transitan la ciudad cada día. No somos una empresa de datos: somos un proyecto colectivo donde cada valoración cuenta y suma.",
+
+    "s3_title": "Inclusión y diversidad",
+    "s3_body": "Aquí importa si hay opción de género mixto, si el espacio es accesible, si es seguro para personas vulnerables... Porque la seguridad y la comodidad no se viven igual por todo el mundo, y reconocerlo es el primer paso.",
+
+    "s4_title": "El espacio público como derecho",
+    "s4_body": "La ciudad es de quien la habita. Reclamar el derecho a un baño digno es reclamar el derecho al espacio público — para personas mayores, personas con diversidad funcional, familias, personas sin hogar, y cualquier persona en movimiento.",
+
+    "cta_title": "Únete",
+    "cta_body": "Cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita. La cartografía es un acto político.",
+    "cta_btn": "Explorar el mapa",
+
+    "back": "← Volver al mapa"
   },
 
   "review_item": {

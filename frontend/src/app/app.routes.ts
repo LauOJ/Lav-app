@@ -32,6 +32,11 @@ export const routes: Routes = [
       import('./features/auth/pages/register.page').then(m => m.RegisterPage),
   },
   {
+    path: 'about',
+    loadComponent: () =>
+      import('./features/about/about.page').then(m => m.AboutPage),
+  },
+  {
     path: 'wcs',
     loadChildren: () =>
       import('./features/wcs/wcs.routes').then(m => m.WCS_ROUTES),

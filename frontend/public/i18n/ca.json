@@ -9,6 +9,8 @@
     "logout": "Tanca sessió",
     "login": "Inicia sessió",
     "register": "Registra't",
+    "about": "Qui som?",
+    "open_menu": "Obre el menú",
     "user_menu": "Menú d'usuari",
     "close_menu": "Tanca el menú"
   },
@@ -175,6 +177,30 @@
     "confirm_delete": "Segur que vols esborrar aquesta valoració?",
     "error_delete": "Error en esborrar la valoració",
     "error_update": "Error en actualitzar la valoració"
+  },
+
+  "about": {
+    "title": "Qui som?",
+    "intro": "Labu és una eina comunitària per trobar i valorar banys públics a la ciutat.",
+    "manifesto": "Creiem que l'espai públic és un dret, no un privilegi. Tothom mereix poder moure's per la ciutat amb dignitat, comoditat i seguretat — independentment de qui sigui, com es mogui o com es senti.",
+
+    "s1_title": "Per a tothom, sense excepció",
+    "s1_body": "L'accés a un bany net i segur és una necessitat bàsica. Però massa sovint és desigual: barreres d'accessibilitat, espais no inclusius o simplement escassetat. Labu vol visibilitzar i canviar aquesta realitat.",
+
+    "s2_title": "Dades fetes per la comunitat",
+    "s2_body": "La informació de Labu la fan les persones que viuen i transiten la ciutat cada dia. No som una empresa de dades: som un projecte col·lectiu on cada valoració compta i suma.",
+
+    "s3_title": "Inclusió i diversitat",
+    "s3_body": "Aquí importa si hi ha opció de gènere mixt, si l'espai és accessible, si és segur per a persones vulnerables... Perquè la seguretat i la comoditat no es viuen igual per tothom, i reconèixer-ho és el primer pas.",
+
+    "s4_title": "L'espai públic com a dret",
+    "s4_body": "La ciutat és de qui l'habita. Reclamar el dret a un bany digne és reclamar el dret a l'espai públic — per a les persones grans, persones amb diversitat funcional, famílies, persones sense llar, i qualsevol persona en moviment.",
+
+    "cta_title": "Suma-t'hi",
+    "cta_body": "Cada valoració que afegeixes ajuda algú que no coneixes a trobar el que necessita. La cartografia és un acte polític.",
+    "cta_btn": "Explorar el mapa",
+
+    "back": "← Tornar al mapa"
   },
 
   "review_item": {

@@ -1,24 +1,22 @@
 <div class="app-layout">
-  @if (isUserMenuOpen()) {
+  @if (isUserMenuOpen() || isGuestMenuOpen()) {
     <div
-      class="user-menu-overlay"
-      (click)="closeUserMenu()"
+      class="menu-overlay"
+      (click)="closeAllMenus()"
       role="button"
       tabindex="-1"
       [attr.aria-label]="'nav.close_menu' | translate"
     ></div>
   }
+
   <header class="app-header">
     <a routerLink="/explore" class="brand">
-      <img
-        src="logo/labu-icon.svg"
-        alt="Labu logo"
-        class="brand-icon"
-      />
+      <img src="logo/labu-icon.svg" alt="Labu logo" class="brand-icon" />
       <span class="brand-name">lav-app</span>
     </a>
 
     <div class="header-right">
+      <!-- Language switcher — always visible -->
       <div class="lang-switcher" role="group" aria-label="Idioma">
         <button
           type="button"
@@ -37,33 +35,64 @@
       </div>
 
       @if (authState.isAuthenticated()) {
+        <!-- Logged-in: human icon with dropdown -->
         <div class="user-menu">
           <button
             type="button"
-            class="user-button"
+            class="icon-btn"
             (click)="toggleUserMenu()"
             [attr.aria-label]="'nav.user_menu' | translate"
             [attr.aria-expanded]="isUserMenuOpen()"
           >
-            <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="8" r="4"/>
               <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
             </svg>
           </button>
           @if (isUserMenuOpen()) {
-            <div class="user-dropdown">
-              <a routerLink="/favorites" (click)="closeUserMenu()">
-                <app-lucide-icon icon="star" class="dropdown-icon" /> {{ 'nav.favorites' | translate }}
+            <div class="dropdown" role="menu">
+              <a routerLink="/favorites" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                <app-lucide-icon icon="star" class="dropdown-icon" />
+                {{ 'nav.favorites' | translate }}
               </a>
-              <button type="button" (click)="onLogout()">{{ 'nav.logout' | translate }}</button>
+              <hr class="dropdown-divider" />
+              <button type="button" class="dropdown-item" role="menuitem" (click)="onLogout()">
+                {{ 'nav.logout' | translate }}
+              </button>
             </div>
           }
         </div>
+
       } @else {
-        <nav class="auth-links">
-          <a routerLink="/login" class="auth-link">{{ 'nav.login' | translate }}</a>
-          <a routerLink="/register" class="auth-link auth-link-primary">{{ 'nav.register' | translate }}</a>
-        </nav>
+        <!-- Guest: hamburger with nav menu -->
+        <div class="guest-menu">
+          <button
+            type="button"
+            class="icon-btn hamburger-btn"
+            (click)="toggleGuestMenu()"
+            [attr.aria-label]="'nav.open_menu' | translate"
+            [attr.aria-expanded]="isGuestMenuOpen()"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+          @if (isGuestMenuOpen()) {
+            <div class="dropdown" role="menu">
+              <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                {{ 'nav.about' | translate }}
+              </a>
+              <hr class="dropdown-divider" />
+              <a routerLink="/login" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                {{ 'nav.login' | translate }}
+              </a>
+              <a routerLink="/register" class="dropdown-item dropdown-item--primary" role="menuitem" (click)="closeAllMenus()">
+                {{ 'nav.register' | translate }}
+              </a>
+            </div>
+          }
+        </div>
       }
     </div>
   </header>

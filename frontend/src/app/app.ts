@@ -21,13 +21,12 @@ export class App {
   private readonly router = inject(Router);
 
   readonly isUserMenuOpen = signal(false);
+  readonly isGuestMenuOpen = signal(false);
 
   constructor() {
-    // Init language once on startup (reads DB pref / localStorage / navigator)
     this.langService.init();
 
     effect(() => {
-      // Once user loads after login, re-apply their DB language preference
       const user = this.userState.user();
       if (user) {
         this.langService.init();
@@ -47,19 +46,31 @@ export class App {
 
   switchLang(lang: AppLanguage): void {
     this.langService.setLang(lang);
-    this.closeUserMenu();
+    this.closeAllMenus();
   }
 
   toggleUserMenu(): void {
+    this.isGuestMenuOpen.set(false);
     this.isUserMenuOpen.update(open => !open);
   }
 
-  closeUserMenu(): void {
+  toggleGuestMenu(): void {
     this.isUserMenuOpen.set(false);
+    this.isGuestMenuOpen.update(open => !open);
+  }
+
+  closeAllMenus(): void {
+    this.isUserMenuOpen.set(false);
+    this.isGuestMenuOpen.set(false);
+  }
+
+  // kept for template overlay click
+  closeUserMenu(): void {
+    this.closeAllMenus();
   }
 
   onLogout(): void {
-    this.closeUserMenu();
+    this.closeAllMenus();
     this.authState.clearToken();
     this.userState.clearUser();
     this.router.navigate(['/login']);
