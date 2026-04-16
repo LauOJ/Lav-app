@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
 from database import get_db
-from schemas.user import UserCreate, UserRead
+from schemas.user import UserCreate, UserRead, UserLanguageUpdate
 from schemas.review import ReviewRead
 from schemas.wc import WCRead
 from crud.user import create_user
@@ -51,6 +51,27 @@ def create_user_endpoint(
 def get_me_endpoint(
     current_user: User = Depends(get_current_user),
 ):
+    return current_user
+
+
+@router.patch(
+    "/me/language",
+    response_model=UserRead,
+)
+def update_language_endpoint(
+    lang_in: UserLanguageUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    allowed = {'ca', 'es'}
+    if lang_in.language_preference not in allowed:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid language. Allowed values: ca, es",
+        )
+    current_user.language_preference = lang_in.language_preference
+    db.commit()
+    db.refresh(current_user)
     return current_user
 
 

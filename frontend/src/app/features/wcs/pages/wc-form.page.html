@@ -1,26 +1,26 @@
 <div class="page-container">
-  <h2 class="page-title">{{ isEditMode() ? 'Editar WC' : 'Crear nuevo WC' }}</h2>
+  <h2 class="page-title">{{ (isEditMode() ? 'wc_form.title_edit' : 'wc_form.title_create') | translate }}</h2>
 
   <div class="actions">
-    <button class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</button>
+    <button class="btn btn-secondary" [routerLink]="['/explore']">{{ 'wc_form.back' | translate }}</button>
   </div>
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">
   <div class="form-group">
-    <label for="wc-name">Nombre del lugar *</label>
+    <label for="wc-name">{{ 'wc_form.name_label' | translate }}</label>
     <input
       id="wc-name"
       type="text"
       [value]="form().name"
       (input)="updateName($any($event.target).value)"
-      placeholder="Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants"
+      [placeholder]="'wc_form.name_placeholder' | translate"
       required
     />
   </div>
 
   <div class="form-group">
-    <label for="wc-latitude">Latitud *</label>
+    <label for="wc-latitude">{{ 'wc_form.lat_label' | translate }}</label>
     <input
       id="wc-latitude"
       type="number"
@@ -32,7 +32,7 @@
   </div>
 
   <div class="form-group">
-    <label for="wc-longitude">Longitud *</label>
+    <label for="wc-longitude">{{ 'wc_form.lng_label' | translate }}</label>
     <input
       id="wc-longitude"
       type="number"
@@ -44,7 +44,7 @@
   </div>
 
   <fieldset class="fieldset-reset">
-    <legend>Características</legend>
+    <legend>{{ 'wc_form.features_legend' | translate }}</legend>
     <div class="checkbox-group">
       <div>
         <input
@@ -53,13 +53,13 @@
           [checked]="form().is_public"
           (change)="toggleFlag('is_public', $any($event.target).checked)"
         />
-        <label for="wc-is_public">Baño público</label>
+        <label for="wc-is_public">{{ 'wc_form.public_label' | translate }}</label>
       </div>
     </div>
   </fieldset>
 
   <div class="form-group">
-    <label for="wc-description">Descripción</label>
+    <label for="wc-description">{{ 'wc_form.description_label' | translate }}</label>
     <textarea
       id="wc-description"
       [value]="form().description || ''"
@@ -79,9 +79,9 @@
       [attr.aria-describedby]="error() ? 'wc-form-errors' : null"
     >
       @if (isEditMode()) {
-        {{ loading() ? 'Guardando…' : 'Guardar cambios' }}
+        {{ loading() ? ('wc_form.submit_saving' | translate) : ('wc_form.submit_save' | translate) }}
       } @else {
-        {{ loading() ? 'Creando…' : 'Crear WC' }}
+        {{ loading() ? ('wc_form.submit_creating' | translate) : ('wc_form.submit_create' | translate) }}
       }
     </button>
   </div>

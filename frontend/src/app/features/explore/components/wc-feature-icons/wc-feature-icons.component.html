@@ -5,8 +5,8 @@
       class="feature-icon"
       [ngClass]="scoreClass(feature.score)"
       role="listitem"
-      [attr.aria-label]="feature.label + ': ' + scoreLabel(feature.score)"
-      [attr.title]="feature.label + ': ' + scoreLabel(feature.score)"
+      [attr.aria-label]="(feature.label | translate) + ': ' + (scoreLabel(feature.score) ?? ('wc_detail.no_data' | translate))"
+      [attr.title]="(feature.label | translate) + ': ' + (scoreLabel(feature.score) ?? ('wc_detail.no_data' | translate))"
       (pointerdown)="onPointerDown($event, feature.key)"
       (pointerup)="onPointerUp()"
       (pointerleave)="onPointerUp()"
@@ -15,7 +15,7 @@
       <app-lucide-icon [icon]="feature.icon" class="icon" />
       @if (activeFeature() === feature.key) {
         <span class="tooltip" role="tooltip">
-          {{ feature.label }}: {{ scoreLabel(feature.score) }}
+          {{ feature.label | translate }}: {{ scoreLabel(feature.score) ?? ('wc_detail.no_data' | translate) }}
         </span>
       }
     </button>

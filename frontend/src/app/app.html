@@ -5,7 +5,7 @@
       (click)="closeUserMenu()"
       role="button"
       tabindex="-1"
-      aria-label="Cerrar menú"
+      [attr.aria-label]="'nav.close_menu' | translate"
     ></div>
   }
   <header class="app-header">
@@ -18,35 +18,54 @@
       <span class="brand-name">lav-app</span>
     </a>
 
-    @if (authState.isAuthenticated()) {
-      <div class="user-menu">
+    <div class="header-right">
+      <div class="lang-switcher" role="group" aria-label="Idioma">
         <button
           type="button"
-          class="user-button"
-          (click)="toggleUserMenu()"
-          aria-label="Menú de usuario"
-          [attr.aria-expanded]="isUserMenuOpen()"
-        >
-          <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
-          </svg>
-        </button>
-        @if (isUserMenuOpen()) {
-          <div class="user-dropdown">
-            <a routerLink="/favorites" (click)="closeUserMenu()">
-              <app-lucide-icon icon="star" class="dropdown-icon" /> Mis favoritos
-            </a>
-            <button type="button" (click)="onLogout()">Cerrar sesión</button>
-          </div>
-        }
+          class="lang-btn"
+          [class.lang-active]="currentLang === 'ca'"
+          (click)="switchLang('ca')"
+          [attr.aria-pressed]="currentLang === 'ca'"
+        >CA</button>
+        <button
+          type="button"
+          class="lang-btn"
+          [class.lang-active]="currentLang === 'es'"
+          (click)="switchLang('es')"
+          [attr.aria-pressed]="currentLang === 'es'"
+        >ES</button>
       </div>
-    } @else {
-      <nav class="auth-links">
-        <a routerLink="/login" class="auth-link">Iniciar sesión</a>
-        <a routerLink="/register" class="auth-link auth-link-primary">Registrarse</a>
-      </nav>
-    }
+
+      @if (authState.isAuthenticated()) {
+        <div class="user-menu">
+          <button
+            type="button"
+            class="user-button"
+            (click)="toggleUserMenu()"
+            [attr.aria-label]="'nav.user_menu' | translate"
+            [attr.aria-expanded]="isUserMenuOpen()"
+          >
+            <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+            </svg>
+          </button>
+          @if (isUserMenuOpen()) {
+            <div class="user-dropdown">
+              <a routerLink="/favorites" (click)="closeUserMenu()">
+                <app-lucide-icon icon="star" class="dropdown-icon" /> {{ 'nav.favorites' | translate }}
+              </a>
+              <button type="button" (click)="onLogout()">{{ 'nav.logout' | translate }}</button>
+            </div>
+          }
+        </div>
+      } @else {
+        <nav class="auth-links">
+          <a routerLink="/login" class="auth-link">{{ 'nav.login' | translate }}</a>
+          <a routerLink="/register" class="auth-link auth-link-primary">{{ 'nav.register' | translate }}</a>
+        </nav>
+      }
+    </div>
   </header>
 
   <main class="app-content">

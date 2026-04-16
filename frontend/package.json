@@ -29,17 +29,19 @@
     "@angular/forms": "^21.0.0",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "leaflet": "^1.9.4"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.0.5",
     "@angular/cli": "^21.0.5",
     "@angular/compiler-cli": "^21.0.0",
+    "@types/leaflet": "^1.9.12",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8",
-    "@types/leaflet": "^1.9.12"
+    "vitest": "^4.0.8"
   }
 }

@@ -5,9 +5,11 @@ import {
   HostListener,
   OnDestroy,
   computed,
+  inject,
   input,
   signal,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideIconComponent, LucideIconName } from '../../../../shared/components/lucide-icon/lucide-icon.component';
 import { WC } from '../../../wcs/models/wc.model';
@@ -24,17 +26,18 @@ interface FeatureItem {
 
 @Component({
   selector: 'app-wc-feature-icons',
-  imports: [CommonModule, LucideIconComponent],
+  imports: [CommonModule, LucideIconComponent, TranslatePipe],
   templateUrl: './wc-feature-icons.component.html',
   styleUrl: './wc-feature-icons.component.css'
 })
 export class WcFeatureIconsComponent implements OnDestroy {
   wc = input.required<WC>();
 
+  // label holds i18n keys, resolved in template via | translate
   private readonly features: Array<Omit<FeatureItem, 'score'>> = [
-    { key: 'safety_score', label: 'Seguridad', icon: 'lock' },
-    { key: 'accessibility_score', label: 'Accesibilidad', icon: 'accessibility' },
-    { key: 'toilet_paper_score', label: 'Papel', icon: 'droplets' },
+    { key: 'safety_score',       label: 'wc_detail.safety',       icon: 'lock' },
+    { key: 'accessibility_score',label: 'wc_detail.accessibility', icon: 'accessibility' },
+    { key: 'toilet_paper_score', label: 'wc_detail.paper',         icon: 'droplets' },
   ];
 
   readonly featureItems = computed(() => {
@@ -89,9 +92,10 @@ export class WcFeatureIconsComponent implements OnDestroy {
     return 'score-low';
   }
 
-  scoreLabel(score: number | null): string {
+  /** Returns a percentage string, or null when there is no data. */
+  scoreLabel(score: number | null): string | null {
     const normalized = normalizeWcScore(score);
-    if (normalized == null) return 'Sin datos';
+    if (normalized == null) return null;
     return `${Math.round(normalized * 100)}%`;
   }
 }

@@ -1,31 +1,31 @@
 <div class="page-container">
-  <h2 class="page-title">Mis favoritos</h2>
+  <h2 class="page-title">{{ 'favorites.title' | translate }}</h2>
 
   <div class="actions">
-    <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
+    <a class="btn btn-secondary" [routerLink]="['/explore']">{{ 'favorites.back' | translate }}</a>
   </div>
 
   <div class="section">
     @if (loading()) {
-  <p>Cargando...</p>
-}
+      <p>{{ 'favorites.loading' | translate }}</p>
+    }
 
-@if (error()) {
-  <p>{{ error() }}</p>
-}
+    @if (error()) {
+      <p>{{ error() }}</p>
+    }
 
-@if (!loading() && !error()) {
-  @if (wcs().length === 0) {
-    <p>Todavía no tienes favoritos.</p>
-  } @else {
-      <ul>
-        @for (wc of wcs(); track wc.id) {
-          <li>
-            <span class="wc-name">{{ wc.name }}</span>
-          </li>
-        }
-      </ul>
-  }
-  }
+    @if (!loading() && !error()) {
+      @if (wcs().length === 0) {
+        <p>{{ 'favorites.empty' | translate }}</p>
+      } @else {
+        <ul>
+          @for (wc of wcs(); track wc.id) {
+            <li>
+              <span class="wc-name">{{ wc.name }}</span>
+            </li>
+          }
+        </ul>
+      }
+    }
   </div>
 </div>

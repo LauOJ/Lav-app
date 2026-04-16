@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthState } from '../../../core/auth/auth.state';
@@ -10,7 +11,7 @@ import { UserState } from '../../../core/user/user.state';
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './login.page.html',
 })
 export class LoginPage {
@@ -19,7 +20,8 @@ export class LoginPage {
   private readonly authState = inject(AuthState);
   private readonly userService = inject(UserService);
   private readonly userState = inject(UserState);
-  
+  private readonly translate = inject(TranslateService);
+
   readonly email = signal('');
   readonly password = signal('');
   readonly loading = signal(false);
@@ -36,7 +38,7 @@ export class LoginPage {
         this.router.navigate(['/explore']);
       },
       error: () => {
-        this.error.set('Email o contraseña incorrectos');
+        this.error.set(this.translate.instant('auth.login.error_credentials'));
         this.loading.set(false);
       },
     });

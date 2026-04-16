@@ -3,27 +3,27 @@
     <form class="search-panel" (submit)="onSearchLocation(); $event.preventDefault()">
       <input
         type="text"
-        placeholder="Buscar lugar o dirección"
+        [placeholder]="'explore.search_placeholder' | translate"
         [value]="searchQuery()"
         (input)="searchQuery.set($any($event.target).value)"
-        aria-label="Buscar lugar o dirección"
+        [attr.aria-label]="'explore.search_placeholder' | translate"
       />
       <button type="submit" [disabled]="searchLoading()">
-        {{ searchLoading() ? 'Buscando...' : 'Buscar' }}
+        {{ (searchLoading() ? 'explore.search_loading' : 'explore.search_btn') | translate }}
       </button>
     </form>
     <button
       type="button"
       class="locate-button"
       (click)="onLocateUser()"
-      aria-label="Centrar en mi ubicación"
-      title="Centrar en mi ubicación"
+      [attr.aria-label]="'explore.locate_me' | translate"
+      [attr.title]="'explore.locate_me' | translate"
     >
       <app-lucide-icon icon="locate" />
     </button>
   </header>
 
-  <div class="filter-column" role="group" aria-label="Filtros del mapa">
+  <div class="filter-column" role="group" [attr.aria-label]="'explore.filters_label' | translate">
     @for (chip of filterChips; track chip.key) {
       <div class="filter-btn-wrap">
         <button
@@ -31,8 +31,8 @@
           class="filter-btn"
           [class.active]="wcState.filters()[chip.key]"
           [attr.aria-pressed]="wcState.filters()[chip.key]"
-          [attr.aria-label]="chip.label"
-          [title]="chip.label"
+          [attr.aria-label]="chip.label | translate"
+          [title]="chip.label | translate"
           (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
           (pointerdown)="onFilterPointerDown($event, chip.key)"
           (pointerup)="onFilterPointerUp()"
@@ -40,7 +40,7 @@
         >
           <app-lucide-icon [icon]="chip.icon" />
           @if (activeTooltip() === chip.key) {
-            <span class="filter-tooltip" role="tooltip">{{ chip.label }}</span>
+            <span class="filter-tooltip" role="tooltip">{{ chip.label | translate }}</span>
           }
         </button>
       </div>
@@ -51,7 +51,7 @@
         class="filter-btn more-btn"
         [class.active]="showMoreFilters() || activeMoreFiltersCount() > 0"
         [attr.aria-expanded]="showMoreFilters()"
-        [title]="'Más filtros'"
+        [attr.title]="'explore.more_filters' | translate"
         (click)="showMoreFilters.set(!showMoreFilters())"
         (pointerdown)="onFilterPointerDown($event, '__more__')"
         (pointerup)="onFilterPointerUp()"
@@ -62,7 +62,7 @@
           <span class="more-badge">{{ activeMoreFiltersCount() }}</span>
         }
         @if (activeTooltip() === '__more__') {
-          <span class="filter-tooltip" role="tooltip">Más filtros</span>
+          <span class="filter-tooltip" role="tooltip">{{ 'explore.more_filters' | translate }}</span>
         }
       </button>
     </div>
@@ -70,7 +70,7 @@
 
   @if (showMoreFilters()) {
     <div class="more-filters-backdrop" (click)="showMoreFilters.set(false)"></div>
-    <div class="more-filters-panel" role="group" aria-label="Más filtros">
+    <div class="more-filters-panel" role="group" [attr.aria-label]="'explore.more_filters' | translate">
       @for (chip of moreFilterChips; track chip.key) {
         @if (chip.key !== 'freeEntry' || !wcState.filters().isPublic) {
           <button
@@ -81,7 +81,7 @@
             (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
           >
             <app-lucide-icon [icon]="chip.icon" />
-            <span>{{ chip.label }}</span>
+            <span>{{ chip.label | translate }}</span>
           </button>
         }
       }
@@ -97,7 +97,7 @@
   ></app-map-view>
 
   @if (loading()) {
-    <div class="status-banner">Cargando WCs...</div>
+    <div class="status-banner">{{ 'explore.loading_wcs' | translate }}</div>
   }
 
   @if (error()) {
@@ -114,17 +114,17 @@
 
   @if (showEmptyState()) {
     <div class="empty-state-overlay" role="status" aria-live="polite">
-      <p>No hay baños que cumplan los filtros <span aria-hidden="true">😕</span></p>
-      <button type="button" (click)="onClearFilters()">Quitar filtros</button>
+      <p>{{ 'explore.no_results' | translate }} <span aria-hidden="true">😕</span></p>
+      <button type="button" (click)="onClearFilters()">{{ 'explore.clear_filters' | translate }}</button>
     </div>
   }
 
   @if (nearbyConfirm()) {
     <div class="dialog-backdrop" (click)="onNearbyCancel()">
       <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="nearby-title" (click)="$event.stopPropagation()">
-        <p id="nearby-title" class="dialog-message">Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?</p>
+        <p id="nearby-title" class="dialog-message">{{ 'explore.nearby_dialog' | translate }}</p>
         <button type="button" class="dialog-expand" (click)="showNearbyList.set(!showNearbyList())">
-          {{ showNearbyList() ? '▲ Ocultar lista' : '▼ Ver WCs cercanos' }}
+          {{ (showNearbyList() ? 'explore.nearby_hide' : 'explore.nearby_show') | translate }}
         </button>
         @if (showNearbyList()) {
           <ul class="nearby-list">
@@ -135,14 +135,14 @@
                   class="nearby-review-link"
                   [routerLink]="['/wcs', wc.id, 'reviews', 'new']"
                   (click)="onNearbyCancel()"
-                >Añadir review</a>
+                >{{ 'explore.nearby_add_review' | translate }}</a>
               </li>
             }
           </ul>
         }
         <div class="dialog-actions">
-          <button type="button" class="dialog-btn secondary" (click)="onNearbyCancel()">Cancelar</button>
-          <button type="button" class="dialog-btn primary" (click)="onNearbyConfirm()">Añadir igualmente</button>
+          <button type="button" class="dialog-btn secondary" (click)="onNearbyCancel()">{{ 'explore.nearby_cancel' | translate }}</button>
+          <button type="button" class="dialog-btn primary" (click)="onNearbyConfirm()">{{ 'explore.nearby_confirm' | translate }}</button>
         </div>
       </div>
     </div>

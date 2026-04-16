@@ -1,13 +1,13 @@
 <div class="page-container">
-  <h2 class="page-title">Nueva review</h2>
+  <h2 class="page-title">{{ 'review_form.title' | translate }}</h2>
 
   <div class="actions">
-    <a class="btn btn-secondary" [routerLink]="['/explore']">← Volver al mapa</a>
+    <a class="btn btn-secondary" [routerLink]="['/explore']">{{ 'review_form.back' | translate }}</a>
   </div>
 
   @if (justCreated()) {
     <div class="success-banner">
-      WC creado correctamente. Ahora puedes añadir tu experiencia.
+      {{ 'review_form.wc_created_banner' | translate }}
     </div>
   }
 
@@ -15,7 +15,7 @@
     <form [formGroup]="form" (ngSubmit)="submit()">
 
       <fieldset class="fieldset-reset">
-        <legend>Limpieza (1–5)</legend>
+        <legend>{{ 'review_form.cleanliness_legend' | translate }}</legend>
         <div class="form-group">
           <input
             id="cleanliness_rating"
@@ -28,87 +28,87 @@
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Te sentiste segura?</legend>
+        <legend>{{ 'review_form.felt_safe_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="felt_safe" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="felt_safe" value="false" /> No</label>
-          <label><input type="radio" formControlName="felt_safe" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="felt_safe" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="felt_safe" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="felt_safe" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Era accesible?</legend>
+        <legend>{{ 'review_form.accessible_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="accessible" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="accessible" value="false" /> No</label>
-          <label><input type="radio" formControlName="accessible" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="accessible" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="accessible" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="accessible" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Había papel higiénico?</legend>
+        <legend>{{ 'review_form.toilet_paper_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="has_toilet_paper" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="has_toilet_paper" value="false" /> No</label>
-          <label><input type="radio" formControlName="has_toilet_paper" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="has_toilet_paper" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="has_toilet_paper" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="has_toilet_paper" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Había productos de higiene?</legend>
+        <legend>{{ 'review_form.hygiene_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="hygiene_products_available" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="hygiene_products_available" value="false" /> No</label>
-          <label><input type="radio" formControlName="hygiene_products_available" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="hygiene_products_available" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="hygiene_products_available" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="hygiene_products_available" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Tenía opción mixta/neutra?</legend>
+        <legend>{{ 'review_form.gender_mixed_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="false" /> No</label>
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="has_gender_mixed_option" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Pudiste entrar sin consumir?</legend>
+        <legend>{{ 'review_form.free_entry_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="could_enter_without_buying" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="could_enter_without_buying" value="false" /> No</label>
-          <label><input type="radio" formControlName="could_enter_without_buying" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="could_enter_without_buying" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="could_enter_without_buying" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="could_enter_without_buying" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       <fieldset class="fieldset-reset">
-        <legend>¿Había cambiador de bebés?</legend>
+        <legend>{{ 'review_form.changing_table_legend' | translate }}</legend>
         <div class="radio-group">
-          <label><input type="radio" formControlName="has_changing_table" value="true" /> Sí</label>
-          <label><input type="radio" formControlName="has_changing_table" value="false" /> No</label>
-          <label><input type="radio" formControlName="has_changing_table" value="" /> Prefiero no decir</label>
+          <label><input type="radio" formControlName="has_changing_table" value="true" /> {{ 'review_form.yes' | translate }}</label>
+          <label><input type="radio" formControlName="has_changing_table" value="false" /> {{ 'review_form.no' | translate }}</label>
+          <label><input type="radio" formControlName="has_changing_table" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
         </div>
       </fieldset>
 
       @if (form.get('has_changing_table')?.value === 'true') {
         <fieldset class="fieldset-reset">
-          <legend>¿Dónde estaba el cambiador?</legend>
+          <legend>{{ 'review_form.changing_location_legend' | translate }}</legend>
           <div class="radio-group">
-            <label><input type="radio" formControlName="changing_table_location" value="mens" /> Baño masculino</label>
-            <label><input type="radio" formControlName="changing_table_location" value="womens" /> Baño femenino</label>
-            <label><input type="radio" formControlName="changing_table_location" value="mixed" /> Baño o espacio mixto</label>
+            <label><input type="radio" formControlName="changing_table_location" value="mens" /> {{ 'review_form.mens_bathroom' | translate }}</label>
+            <label><input type="radio" formControlName="changing_table_location" value="womens" /> {{ 'review_form.womens_bathroom' | translate }}</label>
+            <label><input type="radio" formControlName="changing_table_location" value="mixed" /> {{ 'review_form.mixed_bathroom' | translate }}</label>
           </div>
         </fieldset>
       }
 
       <div class="form-group">
-        <label for="comment">Comentario (opcional)</label>
+        <label for="comment">{{ 'review_form.comment_label' | translate }}</label>
         <textarea id="comment" formControlName="comment"></textarea>
       </div>
 
       @if (form.invalid) {
         <p id="form-errors" class="form-error" role="alert">
-          Revisa los campos marcados.
+          {{ 'review_form.error_review' | translate }}
         </p>
       }
 
@@ -119,14 +119,14 @@
           [disabled]="form.invalid"
           [attr.aria-describedby]="form.invalid ? 'form-errors' : null"
         >
-          Enviar review
+          {{ 'review_form.submit' | translate }}
         </button>
         <button
           type="button"
           class="btn btn-secondary"
           (click)="onSkip()"
         >
-          {{ justCreated() ? 'Crear WC sin review' : 'Omitir por ahora' }}
+          {{ (justCreated() ? 'review_form.skip_wc_created' : 'review_form.skip_generic') | translate }}
         </button>
       </div>
 

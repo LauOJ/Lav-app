@@ -1,12 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WCService } from '../services/wc.service';
 import { WCCreate } from '../models/wc.model';
 
 @Component({
   selector: 'app-wc-form-page',
-  imports: [RouterModule],
+  imports: [RouterModule, TranslatePipe],
   templateUrl: './wc-form.page.html',
   styles: [
     '.fieldset-reset { border: none; margin: 0 0 1.25rem 0; padding: 0; }',
@@ -16,6 +17,7 @@ export class WCFormPage {
   private readonly wcService = inject(WCService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly translate = inject(TranslateService);
 
   readonly isEditMode = signal(false);
   readonly editId = signal<number | null>(null);
@@ -48,60 +50,39 @@ export class WCFormPage {
     const longitude = lngParam ? Number(lngParam) : null;
 
     if (latitude != null && !Number.isNaN(latitude)) {
-      this.form.update(f => ({
-        ...f,
-        latitude,
-      }));
+      this.form.update(f => ({ ...f, latitude }));
     }
 
     if (longitude != null && !Number.isNaN(longitude)) {
-      this.form.update(f => ({
-        ...f,
-        longitude,
-      }));
+      this.form.update(f => ({ ...f, longitude }));
     }
   }
 
   updateName(value: string) {
-    this.form.update(f => ({
-      ...f,
-      name: value,
-    }));
+    this.form.update(f => ({ ...f, name: value }));
   }
 
   updateLatitude(value: number) {
-    this.form.update(f => ({
-      ...f,
-      latitude: value,
-    }));
+    this.form.update(f => ({ ...f, latitude: value }));
   }
 
   updateLongitude(value: number) {
-    this.form.update(f => ({
-      ...f,
-      longitude: value,
-    }));
+    this.form.update(f => ({ ...f, longitude: value }));
   }
 
   updateDescription(value: string) {
-    this.form.update(f => ({
-      ...f,
-      description: value.trim() || null,
-    }));
+    this.form.update(f => ({ ...f, description: value.trim() || null }));
   }
 
   toggleFlag<K extends keyof WCCreate>(key: K, value: boolean) {
-    this.form.update(f => ({
-      ...f,
-      [key]: value,
-    }));
+    this.form.update(f => ({ ...f, [key]: value }));
   }
 
   onSubmit() {
     const formData = this.form();
-    
+
     if (!formData.name.trim() || formData.latitude === 0 || formData.longitude === 0) {
-      this.error.set('Nombre, latitud y longitud son obligatorios');
+      this.error.set(this.translate.instant('wc_form.error_required'));
       return;
     }
 
@@ -111,7 +92,7 @@ export class WCFormPage {
     if (this.isEditMode()) {
       const wcId = this.editId();
       if (wcId == null) {
-        this.error.set('WC no válido');
+        this.error.set(this.translate.instant('wc_form.error_invalid_id'));
         this.loading.set(false);
         return;
       }
@@ -121,7 +102,7 @@ export class WCFormPage {
           this.router.navigate(['/wcs', wcId]);
         },
         error: () => {
-          this.error.set('Error al actualizar el WC');
+          this.error.set(this.translate.instant('wc_form.error_update'));
           this.loading.set(false);
         },
       });
@@ -136,7 +117,7 @@ export class WCFormPage {
         });
       },
       error: () => {
-        this.error.set('Error al crear el WC');
+        this.error.set(this.translate.instant('wc_form.error_create'));
         this.loading.set(false);
       },
     });
@@ -157,7 +138,7 @@ export class WCFormPage {
         this.loadingWc.set(false);
       },
       error: () => {
-        this.error.set('WC no encontrado');
+        this.error.set(this.translate.instant('wc_form.error_not_found'));
         this.loadingWc.set(false);
       },
     });

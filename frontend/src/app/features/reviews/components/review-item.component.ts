@@ -1,10 +1,12 @@
 import { Component, input, output, signal, effect } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Review } from '../models/review.model';
 import { User } from '../../../core/user/user.model';
 
 @Component({
   selector: 'app-review-item',
   templateUrl: './review-item.component.html',
+  imports: [TranslatePipe],
 })
 export class ReviewItemComponent {
   review = input.required<Review>();

@@ -1,5 +1,5 @@
 <div class="page-container">
-  <h1 class="page-title">Login</h1>
+  <h1 class="page-title">{{ 'auth.login.title' | translate }}</h1>
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">
@@ -15,7 +15,7 @@
       </div>
 
       <div class="form-group">
-        <label for="login-password">Contraseña</label>
+        <label for="login-password">{{ 'auth.login.password_label' | translate }}</label>
         <input
           id="login-password"
           type="password"
@@ -31,7 +31,7 @@
 
       <div class="actions">
         <button type="submit" class="btn btn-primary" [disabled]="loading()">
-          {{ loading() ? 'Entrando…' : 'Entrar' }}
+          {{ loading() ? ('auth.login.submit_loading' | translate) : ('auth.login.submit' | translate) }}
         </button>
       </div>
     </form>
@@ -39,7 +39,8 @@
 
   <div class="section">
     <p>
-      ¿No tienes cuenta? <a class="btn btn-secondary" [routerLink]="['/register']">Regístrate</a>
+      {{ 'auth.login.no_account' | translate }}
+      <a class="btn btn-secondary" [routerLink]="['/register']">{{ 'auth.login.register_link' | translate }}</a>
     </p>
   </div>
 </div>

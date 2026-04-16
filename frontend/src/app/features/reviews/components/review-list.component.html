@@ -1,7 +1,7 @@
-<h3>Reviews</h3>
+<h3>{{ 'review_list.title' | translate }}</h3>
 
 @if (reviews().length === 0) {
-  <p>No hay reviews todavía.</p>
+  <p>{{ 'review_list.empty' | translate }}</p>
 } @else {
   <ul>
     @for (review of reviews(); track review.id) {

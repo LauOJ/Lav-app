@@ -1,11 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ReviewsService } from '../../reviews/services/reviews.service';
 
 @Component({
   templateUrl: './review-form.page.html',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, TranslatePipe],
   styles: [
     '.fieldset-reset { border: none; margin: 0 0 1.25rem 0; padding: 0; }',
   ],

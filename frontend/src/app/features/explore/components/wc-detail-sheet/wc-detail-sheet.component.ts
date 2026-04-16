@@ -13,6 +13,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WC } from '../../../wcs/models/wc.model';
 import { wcDistanceMeters } from '../../../wcs/utils/wc.utils';
@@ -26,13 +27,14 @@ import { WCService } from '../../../wcs/services/wc.service';
 
 @Component({
   selector: 'app-wc-detail-sheet',
-  imports: [CommonModule, RouterModule, WcFeatureIconsComponent, WcDetailContentComponent, LucideIconComponent],
+  imports: [CommonModule, RouterModule, WcFeatureIconsComponent, WcDetailContentComponent, LucideIconComponent, TranslatePipe],
   templateUrl: './wc-detail-sheet.component.html',
   styleUrl: './wc-detail-sheet.component.css'
 })
 export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly reviewsService = inject(ReviewsService);
   private readonly wcService = inject(WCService);
+  private readonly translate = inject(TranslateService);
   readonly userState = inject(UserState);
 
   readonly isFavorite = signal(false);
@@ -144,6 +146,10 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
     });
   }
 
+  cleanlinessAriaLabel(rating: number): string {
+    return this.translate.instant('sheet.cleanliness_aria', { rating });
+  }
+
   reviewStars(rating: number): string {
     const bounded = Math.min(5, Math.max(0, Math.round(rating)));
     return '★★★★★'.slice(0, bounded) + '☆☆☆☆☆'.slice(0, 5 - bounded);
@@ -179,7 +185,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
         this.reviewsLoading.set(false);
       },
       error: () => {
-        this.reviewsError.set('No se pudieron cargar las reviews');
+        this.reviewsError.set(this.translate.instant('sheet.reviews_load_error'));
         this.reviewsLoading.set(false);
       },
     });

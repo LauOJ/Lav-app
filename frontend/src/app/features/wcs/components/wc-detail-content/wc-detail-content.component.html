@@ -1,46 +1,47 @@
 <div class="ratings">
   <div class="reviews-count">
     @if (wc().reviews_count > 0) {
-      <span class="reviews-text"><span aria-hidden="true">💬</span> {{ wc().reviews_count }} {{ wc().reviews_count === 1 ? 'valoración' : 'valoraciones' }}{{ hasLimitedInfo() ? ' — información limitada' : '' }}</span>
+      <span class="reviews-text">
+        <span aria-hidden="true">💬</span>
+        {{ (wc().reviews_count === 1 ? 'wc_detail.ratings_count_one' : 'wc_detail.ratings_count_other') | translate: { count: wc().reviews_count } }}{{ hasLimitedInfo() ? ('wc_detail.limited_info' | translate) : '' }}
+      </span>
     } @else {
-      <span class="reviews-text muted">Sin valoraciones aún</span>
+      <span class="reviews-text muted">{{ 'wc_detail.no_ratings' | translate }}</span>
     }
   </div>
 
   <div class="rating">
-    <span class="label">Limpieza</span>
+    <span class="label">{{ 'wc_detail.cleanliness' | translate }}</span>
     <div class="rating-visual">
-      <span class="stars">
-        {{ cleanlinessStars() }}
-      </span>
+      <span class="stars">{{ cleanlinessStars() }}</span>
       @if (cleanlinessValue() != null) {
         <span class="rating-number">
           {{ cleanlinessValue()! | number: '1.1-1' }}
         </span>
       } @else {
-        <span class="rating-number muted">Sin valoraciones</span>
+        <span class="rating-number muted">{{ 'wc_detail.no_ratings' | translate }}</span>
       }
     </div>
   </div>
 
   <div class="scores-grid">
-    <span class="score-label">Seguridad</span>
-    <span class="score-value">{{ safetyPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.safety' | translate }}</span>
+    <span class="score-value">{{ safetyPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
-    <span class="score-label">Accesibilidad</span>
-    <span class="score-value">{{ accessibilityPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.accessibility' | translate }}</span>
+    <span class="score-value">{{ accessibilityPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
-    <span class="score-label">Papel</span>
-    <span class="score-value">{{ toiletPaperPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.paper' | translate }}</span>
+    <span class="score-value">{{ toiletPaperPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
-    <span class="score-label">Higiene</span>
-    <span class="score-value">{{ hygieneProductsPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.hygiene' | translate }}</span>
+    <span class="score-value">{{ hygieneProductsPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
-    <span class="score-label">Entrada libre</span>
-    <span class="score-value">{{ freeEntryPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.free_entry' | translate }}</span>
+    <span class="score-value">{{ freeEntryPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
-    <span class="score-label">Opción mixta</span>
-    <span class="score-value">{{ genderMixedPercentage() }}</span>
+    <span class="score-label">{{ 'wc_detail.gender_mixed' | translate }}</span>
+    <span class="score-value">{{ genderMixedPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
   </div>
 
 </div>

@@ -1,5 +1,5 @@
 export function wcCleanlinessStars(value: number | null): string {
-  if (value == null) return 'Sin datos';
+  if (value == null) return '';
   const rounded = Math.min(5, Math.max(0, Math.round(value)));
   return '★★★★★'.slice(0, rounded) + '☆☆☆☆☆'.slice(0, 5 - rounded);
 }
@@ -11,9 +11,10 @@ export function normalizeWcScore(score: number | null): number | null {
   return Math.min(1, Math.max(0, normalized));
 }
 
-export function wcScorePercentage(score: number | null): string {
+/** Returns a percentage string, or null when there is no data. */
+export function wcScorePercentage(score: number | null): string | null {
   const normalized = normalizeWcScore(score);
-  if (normalized == null) return 'Sin datos';
+  if (normalized == null) return null;
   return `${Math.round(normalized * 100)}%`;
 }
 

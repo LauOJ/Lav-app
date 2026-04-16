@@ -1,16 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WCService } from '../services/wc.service';
 import { WC } from '../models/wc.model';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TranslatePipe],
   templateUrl: './favorites.page.html',
 })
 export class FavoritesPage {
   private readonly wcService = inject(WCService);
+  private readonly translate = inject(TranslateService);
 
   readonly wcs = signal<WC[]>([]);
   readonly loading = signal(true);
@@ -30,7 +32,7 @@ export class FavoritesPage {
         this.loading.set(false);
       },
       error: () => {
-        this.error.set('No se pudieron cargar los favoritos.');
+        this.error.set(this.translate.instant('favorites.load_error'));
         this.loading.set(false);
       },
     });

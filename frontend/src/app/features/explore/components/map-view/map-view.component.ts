@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   input,
   output,
   OnChanges,
@@ -10,6 +11,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
 
 import { WC } from '../../../wcs/models/wc.model';
@@ -26,6 +28,8 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   addWcAt = output<{ lat: number; lng: number }>();
   selectedWcId = input<number | null>(null);
   userLocation = input<{ lat: number; lng: number; zoom?: number } | null>(null);
+
+  private readonly translate = inject(TranslateService);
 
   @ViewChild('mapContainer', { static: true })
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
@@ -204,7 +208,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (!this.userMarker) {
       this.userMarker = L.marker(latLng, {
         icon: this.userLocationIcon,
-        title: 'Estás aquí',
+        title: this.translate.instant('explore.locate_me'),
       });
       this.userMarker.addTo(this.map);
     } else {

@@ -15,6 +15,12 @@ class UserCreate(UserBase):
 class UserRead(UserBase):
     id: int
     is_admin: bool
+    language_preference: str
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# -------- Language update (input) --------
+class UserLanguageUpdate(BaseModel):
+    language_preference: str

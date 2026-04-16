@@ -1,43 +1,42 @@
 @if (!isEditing()) {
     <li>
       <p>
-        <strong>Limpieza:</strong> {{ review().cleanliness_rating }} / 5<br />
-        <strong>Seguridad percibida:</strong> {{ review().felt_safe ? 'Sí' : 'No' }}
+        <strong>{{ 'review_item.cleanliness' | translate }}</strong> {{ review().cleanliness_rating }} / 5<br />
+        <strong>{{ 'review_item.safety' | translate }}</strong> {{ review().felt_safe ? ('review_item.yes' | translate) : ('review_item.no' | translate) }}
       </p>
-  
+
       @if (review().comment) {
         <p>{{ review().comment }}</p>
       }
-  
+
       @if (isMine()) {
         <div>
-          <button type="button" (click)="onEdit()"><span aria-hidden="true">✏️</span> Editar</button>
-          <button type="button" (click)="onDelete()"><span aria-hidden="true">🗑️</span> Borrar</button>
+          <button type="button" (click)="onEdit()"><span aria-hidden="true">✏️</span> {{ 'review_item.edit' | translate }}</button>
+          <button type="button" (click)="onDelete()"><span aria-hidden="true">🗑️</span> {{ 'review_item.delete' | translate }}</button>
         </div>
       }
     </li>
   }
-  
+
   @if (isEditing()) {
     <li>
       <label>
-        Limpieza:
+        {{ 'review_item.cleanliness' | translate }}
         <input type="number" min="1" max="5" [value]="cleanliness()" (input)="cleanliness.set($any($event.target).valueAsNumber)" />
       </label>
-  
+
       <br />
-  
+
       <label>
-        Comentario:
+        {{ 'review_item.comment_label' | translate }}
         <textarea [value]="comment()" (input)="comment.set($any($event.target).value)"></textarea>
       </label>
-  
+
       <br />
-  
+
       <div class="actions">
-        <button type="button" class="btn btn-primary" (click)="onSave()">Guardar</button>
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="onSave()">{{ 'review_item.save' | translate }}</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">{{ 'review_item.cancel' | translate }}</button>
       </div>
     </li>
   }
-  

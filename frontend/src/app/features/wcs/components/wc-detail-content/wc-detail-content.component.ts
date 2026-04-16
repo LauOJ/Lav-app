@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { WC } from '../../models/wc.model';
 import { wcCleanlinessStars, wcHasLimitedInfo, wcScorePercentage } from '../../utils/wc.utils';
 
 @Component({
   selector: 'app-wc-detail-content',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './wc-detail-content.component.html',
   styleUrl: './wc-detail-content.component.css',
 })
@@ -24,7 +25,7 @@ export class WcDetailContentComponent {
 
   readonly safetyPercentage = computed(() =>
     wcScorePercentage(this.wc().safety_score)
-  );
+  ); // string | null
 
   readonly accessibilityPercentage = computed(() =>
     wcScorePercentage(this.wc().accessibility_score)

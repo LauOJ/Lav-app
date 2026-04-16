@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from '../api/api.service';
-import { User } from './user.model';
+import { AppLanguage, User } from './user.model';
 
 export interface RegisterRequest {
   email: string;
@@ -25,6 +25,12 @@ export class UserService {
     return this.http.post<User>(`${this.api.baseUrl}/users`, {
       email,
       password,
+    });
+  }
+
+  updateLanguage(language_preference: AppLanguage): Observable<User> {
+    return this.http.patch<User>(`${this.api.baseUrl}/users/me/language`, {
+      language_preference,
     });
   }
 }

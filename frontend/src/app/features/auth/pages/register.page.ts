@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../../core/user/user.service';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -9,7 +10,7 @@ import { UserState } from '../../../core/user/user.state';
 
 @Component({
   selector: 'app-register-page',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './register.page.html',
 })
 export class RegisterPage {
@@ -18,7 +19,8 @@ export class RegisterPage {
   private readonly router = inject(Router);
   private readonly authState = inject(AuthState);
   private readonly userState = inject(UserState);
-  
+  private readonly translate = inject(TranslateService);
+
   readonly email = signal('');
   readonly password = signal('');
   readonly loading = signal(false);
@@ -26,7 +28,7 @@ export class RegisterPage {
 
   onSubmit() {
     if (this.password().length < 8) {
-      this.error.set('La contraseña debe tener al menos 8 caracteres');
+      this.error.set(this.translate.instant('auth.register.error_min_length'));
       return;
     }
 
@@ -51,9 +53,9 @@ export class RegisterPage {
       error: (err) => {
         this.loading.set(false);
         if (err.status === 400) {
-          this.error.set('Este email ya está registrado');
+          this.error.set(this.translate.instant('auth.register.error_email_taken'));
         } else {
-          this.error.set('Error al registrar usuario');
+          this.error.set(this.translate.instant('auth.register.error_generic'));
         }
       },
     });

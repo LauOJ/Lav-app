@@ -1,0 +1,191 @@
+{
+  "lang": {
+    "ca": "Català",
+    "es": "Castellano"
+  },
+
+  "nav": {
+    "favorites": "Mis favoritos",
+    "logout": "Cerrar sesión",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "user_menu": "Menú de usuario",
+    "close_menu": "Cerrar menú"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Login",
+      "password_label": "Contraseña",
+      "submit_loading": "Entrando…",
+      "submit": "Entrar",
+      "no_account": "¿No tienes cuenta?",
+      "register_link": "Regístrate",
+      "error_credentials": "Email o contraseña incorrectos"
+    },
+    "register": {
+      "title": "Registro",
+      "password_label": "Contraseña",
+      "submit_loading": "Registrando…",
+      "submit": "Registrarse",
+      "already_account": "¿Ya tienes cuenta?",
+      "login_link": "Inicia sesión",
+      "error_min_length": "La contraseña debe tener al menos 8 caracteres",
+      "error_email_taken": "Este email ya está registrado",
+      "error_generic": "Error al registrar usuario"
+    }
+  },
+
+  "explore": {
+    "search_placeholder": "Buscar lugar o dirección",
+    "search_loading": "Buscando…",
+    "search_btn": "Buscar",
+    "locate_me": "Centrar en mi ubicación",
+    "filters_label": "Filtros del mapa",
+    "more_filters": "Más filtros",
+    "loading_wcs": "Cargando WCs…",
+    "no_results": "No hay baños que cumplan los filtros",
+    "clear_filters": "Quitar filtros",
+    "geo_unavailable": "La geolocalización no está disponible en este navegador.",
+    "geo_error": "No se pudo obtener tu ubicación.",
+    "search_error": "No se encontraron resultados",
+    "search_fetch_error": "No se pudo buscar la ubicación",
+    "load_error": "No se pudieron cargar los WCs",
+    "nearby_dialog": "Ya hay WCs cerca de esta ubicación. ¿Quieres añadir uno igualmente?",
+    "nearby_hide": "▲ Ocultar lista",
+    "nearby_show": "▼ Ver WCs cercanos",
+    "nearby_add_review": "Añadir review",
+    "nearby_cancel": "Cancelar",
+    "nearby_confirm": "Añadir igualmente"
+  },
+
+  "filter": {
+    "isPublic": "Público",
+    "clean": "Limpio",
+    "accessible": "Accesible",
+    "safe": "Seguro",
+    "withPaper": "Papel",
+    "hygieneProducts": "Higiene",
+    "freeEntry": "Sin consumición",
+    "genderMixed": "Mixto",
+    "changingTable": "Cambiador"
+  },
+
+  "sheet": {
+    "expand": "Expandir o contraer",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "saved": "Guardado",
+    "add_to_favorites": "Añadir a favoritos",
+    "remove_from_favorites": "Quitar de favoritos",
+    "review_btn": "Review",
+    "edit_btn": "Editar",
+    "show_reviews": "Ver reviews",
+    "hide_reviews": "Ocultar reviews",
+    "reviews_loading": "Cargando reviews...",
+    "reviews_load_error": "No se pudieron cargar las reviews",
+    "no_reviews": "Todavía no hay reviews",
+    "cleanliness_aria": "Limpieza: {{ rating }} de 5",
+    "tag_safe": "✓ Seguro",
+    "tag_accessible": "✓ Accesible",
+    "tag_paper": "✓ Papel",
+    "tag_hygiene": "✓ Higiene",
+    "tag_free_entry": "✓ Sin consumir",
+    "tag_gender_mixed": "✓ Mixto",
+    "tag_changing_table": "✓ Cambiador",
+    "changing_mens": "(masc.)",
+    "changing_womens": "(fem.)",
+    "changing_mixed": "(mixto)"
+  },
+
+  "wc_detail": {
+    "ratings_count_one": "1 valoración",
+    "ratings_count_other": "{{count}} valoraciones",
+    "limited_info": " — información limitada",
+    "cleanliness": "Limpieza",
+    "no_ratings": "Sin valoraciones",
+    "safety": "Seguridad",
+    "accessibility": "Accesibilidad",
+    "paper": "Papel",
+    "hygiene": "Higiene",
+    "free_entry": "Entrada libre",
+    "gender_mixed": "Opción mixta",
+    "no_data": "Sin datos"
+  },
+
+  "wc_form": {
+    "title_create": "Crear nuevo WC",
+    "title_edit": "Editar WC",
+    "back": "← Volver al mapa",
+    "name_label": "Nombre del lugar *",
+    "name_placeholder": "Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants",
+    "lat_label": "Latitud *",
+    "lng_label": "Longitud *",
+    "features_legend": "Características",
+    "public_label": "Baño público",
+    "description_label": "Descripción",
+    "submit_saving": "Guardando…",
+    "submit_save": "Guardar cambios",
+    "submit_creating": "Creando…",
+    "submit_create": "Crear WC",
+    "error_required": "Nombre, latitud y longitud son obligatorios",
+    "error_invalid_id": "WC no válido",
+    "error_update": "Error al actualizar el WC",
+    "error_not_found": "WC no encontrado",
+    "error_create": "Error al crear el WC"
+  },
+
+  "review_form": {
+    "title": "Nueva review",
+    "back": "← Volver al mapa",
+    "wc_created_banner": "WC creado correctamente. Ahora puedes añadir tu experiencia.",
+    "cleanliness_legend": "Limpieza (1–5)",
+    "felt_safe_legend": "¿Te sentiste segura?",
+    "accessible_legend": "¿Era accesible?",
+    "toilet_paper_legend": "¿Había papel higiénico?",
+    "hygiene_legend": "¿Había productos de higiene?",
+    "gender_mixed_legend": "¿Tenía opción mixta/neutra?",
+    "free_entry_legend": "¿Pudiste entrar sin consumir?",
+    "changing_table_legend": "¿Había cambiador de bebés?",
+    "changing_location_legend": "¿Dónde estaba el cambiador?",
+    "yes": "Sí",
+    "no": "No",
+    "skip_answer": "Prefiero no decir",
+    "mens_bathroom": "Baño masculino",
+    "womens_bathroom": "Baño femenino",
+    "mixed_bathroom": "Baño o espacio mixto",
+    "comment_label": "Comentario (opcional)",
+    "error_review": "Revisa los campos marcados.",
+    "submit": "Enviar review",
+    "skip_wc_created": "Crear WC sin review",
+    "skip_generic": "Omitir por ahora"
+  },
+
+  "favorites": {
+    "title": "Mis favoritos",
+    "back": "← Volver al mapa",
+    "loading": "Cargando...",
+    "empty": "Todavía no tienes favoritos.",
+    "load_error": "No se pudieron cargar los favoritos."
+  },
+
+  "review_list": {
+    "title": "Reviews",
+    "empty": "No hay reviews todavía.",
+    "confirm_delete": "¿Seguro que quieres borrar esta review?",
+    "error_delete": "Error al borrar la review",
+    "error_update": "Error al actualizar la review"
+  },
+
+  "review_item": {
+    "cleanliness": "Limpieza:",
+    "safety": "Seguridad percibida:",
+    "yes": "Sí",
+    "no": "No",
+    "comment_label": "Comentario:",
+    "edit": "Editar",
+    "delete": "Borrar",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  }
+}

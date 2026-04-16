@@ -1,0 +1,191 @@
+{
+  "lang": {
+    "ca": "Català",
+    "es": "Castellà"
+  },
+
+  "nav": {
+    "favorites": "Els meus preferits",
+    "logout": "Tanca sessió",
+    "login": "Inicia sessió",
+    "register": "Registra't",
+    "user_menu": "Menú d'usuari",
+    "close_menu": "Tanca el menú"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Login",
+      "password_label": "Contrasenya",
+      "submit_loading": "Entrant…",
+      "submit": "Entrar",
+      "no_account": "No tens compte?",
+      "register_link": "Registra't",
+      "error_credentials": "Correu o contrasenya incorrectes"
+    },
+    "register": {
+      "title": "Registre",
+      "password_label": "Contrasenya",
+      "submit_loading": "Registrant…",
+      "submit": "Registra't",
+      "already_account": "Ja tens compte?",
+      "login_link": "Inicia sessió",
+      "error_min_length": "La contrasenya ha de tenir almenys 8 caràcters",
+      "error_email_taken": "Aquest correu ja està registrat",
+      "error_generic": "Error en registrar l'usuari"
+    }
+  },
+
+  "explore": {
+    "search_placeholder": "Cerca un lloc o adreça",
+    "search_loading": "Cercant…",
+    "search_btn": "Cerca",
+    "locate_me": "Centra en la meva ubicació",
+    "filters_label": "Filtres del mapa",
+    "more_filters": "Més filtres",
+    "loading_wcs": "Carregant WCs…",
+    "no_results": "No hi ha banys que compleixin els filtres",
+    "clear_filters": "Treure filtres",
+    "geo_unavailable": "La geolocalització no està disponible en aquest navegador.",
+    "geo_error": "No s'ha pogut obtenir la teva ubicació.",
+    "search_error": "No s'han trobat resultats",
+    "search_fetch_error": "No s'ha pogut cercar la ubicació",
+    "load_error": "No s'han pogut carregar els WCs",
+    "nearby_dialog": "Ja hi ha WCs a prop d'aquesta ubicació. Vols afegir-ne un igualment?",
+    "nearby_hide": "▲ Amaga la llista",
+    "nearby_show": "▼ Veure WCs propers",
+    "nearby_add_review": "Afegeix valoració",
+    "nearby_cancel": "Cancel·la",
+    "nearby_confirm": "Afegeix igualment"
+  },
+
+  "filter": {
+    "isPublic": "Públic",
+    "clean": "Net",
+    "accessible": "Accessible",
+    "safe": "Segur",
+    "withPaper": "Paper",
+    "hygieneProducts": "Higiene",
+    "freeEntry": "Sense consumició",
+    "genderMixed": "Mixt",
+    "changingTable": "Canviador"
+  },
+
+  "sheet": {
+    "expand": "Expandeix o redueix",
+    "close": "Tanca",
+    "save": "Desa",
+    "saved": "Desat",
+    "add_to_favorites": "Afegeix als preferits",
+    "remove_from_favorites": "Treu dels preferits",
+    "review_btn": "Valoració",
+    "edit_btn": "Edita",
+    "show_reviews": "Veure valoracions",
+    "hide_reviews": "Amaga valoracions",
+    "reviews_loading": "Carregant valoracions…",
+    "reviews_load_error": "No s'han pogut carregar les valoracions",
+    "no_reviews": "Encara no hi ha valoracions",
+    "cleanliness_aria": "Neteja: {{ rating }} de 5",
+    "tag_safe": "✓ Segur",
+    "tag_accessible": "✓ Accessible",
+    "tag_paper": "✓ Paper",
+    "tag_hygiene": "✓ Higiene",
+    "tag_free_entry": "✓ Sense consumir",
+    "tag_gender_mixed": "✓ Mixt",
+    "tag_changing_table": "✓ Canviador",
+    "changing_mens": "(masc.)",
+    "changing_womens": "(fem.)",
+    "changing_mixed": "(mixt)"
+  },
+
+  "wc_detail": {
+    "ratings_count_one": "1 valoració",
+    "ratings_count_other": "{{count}} valoracions",
+    "limited_info": " — informació limitada",
+    "cleanliness": "Neteja",
+    "no_ratings": "Sense valoracions",
+    "safety": "Seguretat",
+    "accessibility": "Accessibilitat",
+    "paper": "Paper",
+    "hygiene": "Higiene",
+    "free_entry": "Entrada lliure",
+    "gender_mixed": "Opció mixta",
+    "no_data": "Sense dades"
+  },
+
+  "wc_form": {
+    "title_create": "Crear nou WC",
+    "title_edit": "Editar WC",
+    "back": "← Tornar al mapa",
+    "name_label": "Nom del lloc *",
+    "name_placeholder": "Ex.: Biblioteca Jaume Fuster, Bar La Perla, Estació de Sants",
+    "lat_label": "Latitud *",
+    "lng_label": "Longitud *",
+    "features_legend": "Característiques",
+    "public_label": "Bany públic",
+    "description_label": "Descripció",
+    "submit_saving": "Desant…",
+    "submit_save": "Desa els canvis",
+    "submit_creating": "Creant…",
+    "submit_create": "Crear WC",
+    "error_required": "Nom, latitud i longitud són obligatoris",
+    "error_invalid_id": "WC no vàlid",
+    "error_update": "Error en actualitzar el WC",
+    "error_not_found": "WC no trobat",
+    "error_create": "Error en crear el WC"
+  },
+
+  "review_form": {
+    "title": "Nova valoració",
+    "back": "← Tornar al mapa",
+    "wc_created_banner": "WC creat correctament. Ara pots afegir la teva experiència.",
+    "cleanliness_legend": "Neteja (1–5)",
+    "felt_safe_legend": "Et vas sentir segura?",
+    "accessible_legend": "Era accessible?",
+    "toilet_paper_legend": "Hi havia paper higiènic?",
+    "hygiene_legend": "Hi havia productes d'higiene?",
+    "gender_mixed_legend": "Tenia opció mixta/neutra?",
+    "free_entry_legend": "Vas poder entrar sense consumir?",
+    "changing_table_legend": "Hi havia canviador de nadons?",
+    "changing_location_legend": "On era el canviador?",
+    "yes": "Sí",
+    "no": "No",
+    "skip_answer": "Prefereixo no dir-ho",
+    "mens_bathroom": "Bany masculí",
+    "womens_bathroom": "Bany femení",
+    "mixed_bathroom": "Bany o espai mixt",
+    "comment_label": "Comentari (opcional)",
+    "error_review": "Revisa els camps marcats.",
+    "submit": "Enviar valoració",
+    "skip_wc_created": "Crear WC sense valoració",
+    "skip_generic": "Ometre per ara"
+  },
+
+  "favorites": {
+    "title": "Els meus preferits",
+    "back": "← Tornar al mapa",
+    "loading": "Carregant…",
+    "empty": "Encara no tens preferits.",
+    "load_error": "No s'han pogut carregar els preferits."
+  },
+
+  "review_list": {
+    "title": "Valoracions",
+    "empty": "Encara no hi ha valoracions.",
+    "confirm_delete": "Segur que vols esborrar aquesta valoració?",
+    "error_delete": "Error en esborrar la valoració",
+    "error_update": "Error en actualitzar la valoració"
+  },
+
+  "review_item": {
+    "cleanliness": "Neteja:",
+    "safety": "Seguretat percebuda:",
+    "yes": "Sí",
+    "no": "No",
+    "comment_label": "Comentari:",
+    "edit": "Edita",
+    "delete": "Esborra",
+    "save": "Desa",
+    "cancel": "Cancel·la"
+  }
+}

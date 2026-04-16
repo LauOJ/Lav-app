@@ -23,6 +23,7 @@ class User(Base):
     email = Column(String(255), nullable=False, unique=True, index=True)
     password_hash = Column(String(255), nullable=False)
     is_admin = Column(Boolean, nullable=False, default=False)
+    language_preference = Column(String(5), nullable=False, server_default='ca')
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
