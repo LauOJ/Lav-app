@@ -181,23 +181,23 @@
 
   "about": {
     "title": "¿Quiénes somos?",
-    "intro": "lav-app es una herramienta comunitaria para encontrar y valorar baños públicos en la ciudad.",
-    "manifesto": "Creemos que el espacio público es un derecho, no un privilegio. Toda persona merece poder moverse por la ciudad con dignidad, comodidad y seguridad — independientemente de quién sea, cómo se mueva o cómo se sienta.",
+    "intro": "lav-app es una herramienta colectiva para cartografiar el acceso real a los baños públicos. No es un servicio: es una herramienta política.",
+    "manifesto": "El acceso a un baño no debería depender de si tienes dinero para consumir, de si tu cuerpo cabe por la puerta, o de si el nombre del género en la puerta te corresponde. Pero depende. Y mientras depende, hay que mapearlo, nombrarlo y presionar para cambiarlo.",
 
-    "s1_title": "Para todo el mundo, sin excepción",
-    "s1_body": "El acceso a un baño limpio y seguro es una necesidad básica. Pero demasiado a menudo es desigual: barreras de accesibilidad, espacios no inclusivos o simplemente escasez. Labu quiere visibilizar y cambiar esta realidad.",
+    "s1_title": "El baño público es un derecho, no un servicio",
+    "s1_body": "La falta de baños accesibles, limpios y seguros no es un accidente: es el resultado de decisiones políticas que priorizan el consumo sobre las necesidades básicas. lav-app existe para hacer visible lo que los ayuntamientos prefieren ignorar.",
 
-    "s2_title": "Datos hechos por la comunidad",
-    "s2_body": "La información de Labu la hacen las personas que viven y transitan la ciudad cada día. No somos una empresa de datos: somos un proyecto colectivo donde cada valoración cuenta y suma.",
+    "s2_title": "Información hecha por quienes viven la ciudad",
+    "s2_body": "Los datos de lav-app los generan las personas que transitan la ciudad cada día — no empresas, no algoritmos. Cada valoración es un acto de documentación colectiva contra la desinformación oficial.",
 
-    "s3_title": "Inclusión y diversidad",
-    "s3_body": "Aquí importa si hay opción de género mixto, si el espacio es accesible, si es seguro para personas vulnerables... Porque la seguridad y la comodidad no se viven igual por todo el mundo, y reconocerlo es el primer paso.",
+    "s3_title": "Basta de neutralidad",
+    "s3_body": "No existe un baño 'neutral'. Existen baños que excluyen: sin rampa, sin opción mixta, sin cambiador en los baños masculinos, sin seguridad para personas trans o en situación de vulnerabilidad. Nombrarlo es el primer paso para cambiarlo.",
 
-    "s4_title": "El espacio público como derecho",
-    "s4_body": "La ciudad es de quien la habita. Reclamar el derecho a un baño digno es reclamar el derecho al espacio público — para personas mayores, personas con diversidad funcional, familias, personas sin hogar, y cualquier persona en movimiento.",
+    "s4_title": "La ciudad es de quien la habita",
+    "s4_body": "Personas mayores, personas con diversidad funcional, familias, personas sin hogar, personas trans, personas en movimiento: todas merecen poder circular por la ciudad sin tener que planificar cada paso alrededor de un baño que no existe o que no es para ellas.",
 
-    "cta_title": "Únete",
-    "cta_body": "Cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita. La cartografía es un acto político.",
+    "cta_title": "Cartografía la exclusión",
+    "cta_body": "Cada valoración que añades documenta una realidad que el poder preferiría ignorar. La cartografía ciudadana es resistencia.",
     "cta_btn": "Explorar el mapa",
 
     "back": "← Volver al mapa"

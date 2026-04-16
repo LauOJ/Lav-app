@@ -181,23 +181,23 @@
 
   "about": {
     "title": "Qui som?",
-    "intro": "lav-app és una eina comunitària per trobar i valorar banys públics a la ciutat.",
-    "manifesto": "Creiem que l'espai públic és un dret, no un privilegi. Tothom mereix poder moure's per la ciutat amb dignitat, comoditat i seguretat — independentment de qui sigui, com es mogui o com es senti.",
+    "intro": "lav-app és una eina col·lectiva per cartografiar l'accés real als banys públics. No és un servei: és una eina política.",
+    "manifesto": "L'accés a un bany no hauria de dependre de si tens diners per consumir, de si el teu cos cap per la porta, o de si el nom del gènere a la porta et correspon. Però depèn. I mentre depèn, cal mapejar-ho, nomenar-ho i pressionar per canviar-ho.",
 
-    "s1_title": "Per a tothom, sense excepció",
-    "s1_body": "L'accés a un bany net i segur és una necessitat bàsica. Però massa sovint és desigual: barreres d'accessibilitat, espais no inclusius o simplement escassetat. Labu vol visibilitzar i canviar aquesta realitat.",
+    "s1_title": "El bany públic és un dret, no un servei",
+    "s1_body": "La manca de banys accessibles, nets i segurs no és un accident: és el resultat de decisions polítiques que prioritzen el consum sobre les necessitats bàsiques. lav-app existeix per fer visible allò que els ajuntaments prefereixen ignorar.",
 
-    "s2_title": "Dades fetes per la comunitat",
-    "s2_body": "La informació de Labu la fan les persones que viuen i transiten la ciutat cada dia. No som una empresa de dades: som un projecte col·lectiu on cada valoració compta i suma.",
+    "s2_title": "Informació feta per qui viu la ciutat",
+    "s2_body": "Les dades de lav-app les generen les persones que transiten la ciutat cada dia — no empreses, no algoritmes. Cada valoració és un acte de documentació col·lectiva contra la desinformació oficial.",
 
-    "s3_title": "Inclusió i diversitat",
-    "s3_body": "Aquí importa si hi ha opció de gènere mixt, si l'espai és accessible, si és segur per a persones vulnerables... Perquè la seguretat i la comoditat no es viuen igual per tothom, i reconèixer-ho és el primer pas.",
+    "s3_title": "Prou neutralitat",
+    "s3_body": "No existeix un bany 'neutral'. Existeixen banys que exclouen: sense rampa, sense opció mixta, sense canviador als banys masculins, sense seguretat per a persones trans o en situació de vulnerabilitat. Anomenar-ho és el primer pas per canviar-ho.",
 
-    "s4_title": "L'espai públic com a dret",
-    "s4_body": "La ciutat és de qui l'habita. Reclamar el dret a un bany digne és reclamar el dret a l'espai públic — per a les persones grans, persones amb diversitat funcional, famílies, persones sense llar, i qualsevol persona en moviment.",
+    "s4_title": "La ciutat és de qui l'habita",
+    "s4_body": "Persones grans, persones amb diversitat funcional, famílies, persones sense llar, persones trans, persones en moviment: totes mereixen poder circular per la ciutat sense haver de planificar cada pas al voltant d'un bany que no existeix o que no és per a elles.",
 
-    "cta_title": "Suma-t'hi",
-    "cta_body": "Cada valoració que afegeixes ajuda algú que no coneixes a trobar el que necessita. La cartografia és un acte polític.",
+    "cta_title": "Cartografia l'exclusió",
+    "cta_body": "Cada valoració que afegeixes documenta una realitat que el poder preferiria ignorar. La cartografia ciutadana és resistència.",
     "cta_btn": "Explorar el mapa",
 
     "back": "← Tornar al mapa"
