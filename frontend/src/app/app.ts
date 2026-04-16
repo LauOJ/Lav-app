@@ -1,5 +1,7 @@
 import { Component, inject, effect, signal } from '@angular/core';
-import { RouterOutlet, Router, RouterLink } from '@angular/router';
+import { RouterOutlet, Router, RouterLink, NavigationEnd } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideIconComponent } from './shared/components/lucide-icon/lucide-icon.component';
@@ -22,6 +24,14 @@ export class App {
 
   readonly isUserMenuOpen = signal(false);
   readonly isGuestMenuOpen = signal(false);
+
+  readonly currentUrl = toSignal(
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      map(() => this.router.url)
+    ),
+    { initialValue: this.router.url }
+  );
 
   constructor() {
     this.langService.init();

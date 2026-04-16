@@ -52,10 +52,22 @@
           </button>
           @if (isUserMenuOpen()) {
             <div class="dropdown" role="menu">
-              <a routerLink="/favorites" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
-                <app-lucide-icon icon="star" class="dropdown-icon" />
-                {{ 'nav.favorites' | translate }}
-              </a>
+              @if (currentUrl() !== '/explore') {
+                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.explore' | translate }}
+                </a>
+              }
+              @if (currentUrl() !== '/about') {
+                <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.about' | translate }}
+                </a>
+              }
+              @if (currentUrl() !== '/favorites') {
+                <a routerLink="/favorites" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  <app-lucide-icon icon="star" class="dropdown-icon" />
+                  {{ 'nav.favorites' | translate }}
+                </a>
+              }
               <hr class="dropdown-divider" />
               <button type="button" class="dropdown-item" role="menuitem" (click)="onLogout()">
                 {{ 'nav.logout' | translate }}
@@ -80,16 +92,27 @@
           </button>
           @if (isGuestMenuOpen()) {
             <div class="dropdown" role="menu">
-              <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
-                {{ 'nav.about' | translate }}
-              </a>
+              @if (currentUrl() !== '/explore') {
+                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.explore' | translate }}
+                </a>
+              }
+              @if (currentUrl() !== '/about') {
+                <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.about' | translate }}
+                </a>
+              }
               <hr class="dropdown-divider" />
-              <a routerLink="/login" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
-                {{ 'nav.login' | translate }}
-              </a>
-              <a routerLink="/register" class="dropdown-item dropdown-item--primary" role="menuitem" (click)="closeAllMenus()">
-                {{ 'nav.register' | translate }}
-              </a>
+              @if (currentUrl() !== '/login') {
+                <a routerLink="/login" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.login' | translate }}
+                </a>
+              }
+              @if (currentUrl() !== '/register') {
+                <a routerLink="/register" class="dropdown-item dropdown-item--primary" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.register' | translate }}
+                </a>
+              }
             </div>
           }
         </div>

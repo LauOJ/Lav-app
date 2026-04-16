@@ -5,6 +5,7 @@
   },
 
   "nav": {
+    "explore": "Explorar el mapa",
     "favorites": "Els meus preferits",
     "logout": "Tanca sessió",
     "login": "Inicia sessió",

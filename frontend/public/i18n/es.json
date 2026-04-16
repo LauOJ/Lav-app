@@ -5,6 +5,7 @@
   },
 
   "nav": {
+    "explore": "Explorar el mapa",
     "favorites": "Mis favoritos",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
