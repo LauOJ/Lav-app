@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
 
 import { WC } from '../../../wcs/models/wc.model';
+import { BoundingBox } from '../../../wcs/models/bounding-box.model';
 
 @Component({
   selector: 'app-map-view',
@@ -26,6 +27,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   wcs = input.required<WC[]>();
   wcSelected = output<number>();
   addWcAt = output<{ lat: number; lng: number }>();
+  boundsChange = output<BoundingBox>();
   selectedWcId = input<number | null>(null);
   userLocation = input<{ lat: number; lng: number; zoom?: number } | null>(null);
 
@@ -106,6 +108,18 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.markers.addTo(this.map);
     this.setDefaultMarkerIcons();
     this.attachMapHandlers();
+    this.emitBounds();
+  }
+
+  private emitBounds(): void {
+    if (!this.map) return;
+    const b = this.map.getBounds();
+    this.boundsChange.emit({
+      minLat: b.getSouth(),
+      maxLat: b.getNorth(),
+      minLng: b.getWest(),
+      maxLng: b.getEast(),
+    });
   }
 
   private renderMarkers(): void {
@@ -151,6 +165,8 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private attachMapHandlers(): void {
     if (!this.map) return;
+
+    this.map.on('moveend', () => this.emitBounds());
 
     this.map.on('click', (event: L.LeafletMouseEvent) => {
       this.pendingLatLng = event.latlng;

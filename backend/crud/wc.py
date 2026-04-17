@@ -55,11 +55,23 @@ def _attach_review_stats(
 def get_wcs(
     db: Session,
     is_public: Optional[bool] = None,
+    min_lat: Optional[float] = None,
+    max_lat: Optional[float] = None,
+    min_lng: Optional[float] = None,
+    max_lng: Optional[float] = None,
 ) -> list[WC]:
     query = db.query(WC).filter(WC.is_active == True)
 
     if is_public is not None:
         query = query.filter(WC.is_public == is_public)
+    if min_lat is not None:
+        query = query.filter(WC.latitude >= min_lat)
+    if max_lat is not None:
+        query = query.filter(WC.latitude <= max_lat)
+    if min_lng is not None:
+        query = query.filter(WC.longitude >= min_lng)
+    if max_lng is not None:
+        query = query.filter(WC.longitude <= max_lng)
 
     query = (
         query.outerjoin(Review, Review.wc_id == WC.id)

@@ -1,8 +1,10 @@
 import { Injectable, inject } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from '../../../core/api/api.service';
 import { WC, WCCreate } from '../models/wc.model';
+import { BoundingBox } from '../models/bounding-box.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +12,14 @@ import { WC, WCCreate } from '../models/wc.model';
 export class WCService {
   private readonly api = inject(ApiService);
 
-  getWCs(): Observable<WC[]> {
-    return this.api.get<WC[]>('/wcs');
+  getWCs(bbox?: BoundingBox): Observable<WC[]> {
+    if (!bbox) return this.api.get<WC[]>('/wcs');
+    const params = new HttpParams()
+      .set('min_lat', bbox.minLat)
+      .set('max_lat', bbox.maxLat)
+      .set('min_lng', bbox.minLng)
+      .set('max_lng', bbox.maxLng);
+    return this.api.get<WC[]>('/wcs', { params });
   }
 
   getById(id: number): Observable<WC> {

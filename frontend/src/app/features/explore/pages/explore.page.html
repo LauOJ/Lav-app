@@ -94,6 +94,7 @@
     [userLocation]="userLocation()"
     (wcSelected)="onSelectWc($event)"
     (addWcAt)="onAddWcAt($event)"
+    (boundsChange)="onBoundsChange($event)"
   ></app-map-view>
 
   @if (loading()) {

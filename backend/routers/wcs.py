@@ -42,11 +42,19 @@ def create_wc_endpoint(
 )
 def list_wcs_endpoint(
     is_public: Optional[bool] = Query(None),
+    min_lat: Optional[float] = Query(None),
+    max_lat: Optional[float] = Query(None),
+    min_lng: Optional[float] = Query(None),
+    max_lng: Optional[float] = Query(None),
     db: Session = Depends(get_db),
 ):
     return get_wcs(
         db=db,
         is_public=is_public,
+        min_lat=min_lat,
+        max_lat=max_lat,
+        min_lng=min_lng,
+        max_lng=max_lng,
     )
 
 

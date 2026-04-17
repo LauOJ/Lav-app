@@ -70,6 +70,16 @@ export class WCState {
     this.wcs.set(wcs);
   }
 
+  mergeWcs(incoming: WC[]): void {
+    this.wcs.update((current) => {
+      const byId = new Map(current.map(wc => [wc.id, wc]));
+      for (const wc of incoming) {
+        byId.set(wc.id, wc);
+      }
+      return Array.from(byId.values());
+    });
+  }
+
   upsertWc(wc: WC): void {
     this.wcs.update((current) => {
       const index = current.findIndex((item) => item.id === wc.id);

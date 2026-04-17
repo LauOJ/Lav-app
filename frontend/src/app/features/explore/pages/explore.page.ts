@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WCFilters } from '../../wcs/models/wc-filters.model';
+import { BoundingBox } from '../../wcs/models/bounding-box.model';
 import { wcDistanceMeters } from '../../wcs/utils/wc.utils';
 import { WCState } from '../../wcs/state/wc.state';
 
@@ -38,6 +39,7 @@ export class ExplorePage implements OnInit {
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
   private readonly nearbyRadiusMeters = 30;
+  private loadedBounds: BoundingBox | null = null;
 
   readonly loading = signal<boolean>(false);
   readonly error = signal<string | null>(null);
@@ -90,7 +92,6 @@ export class ExplorePage implements OnInit {
   );
 
   ngOnInit(): void {
-    this.loadWcs();
     this.requestInitialLocation();
   }
 
@@ -224,18 +225,16 @@ export class ExplorePage implements OnInit {
       });
   }
 
-  private loadWcs(): void {
-    if (this.wcState.wcs().length > 0) {
-      this.loading.set(false);
-      return;
-    }
+  onBoundsChange(bbox: BoundingBox): void {
+    if (this.loadedBounds && this.isBboxContained(bbox, this.loadedBounds)) return;
 
     this.loading.set(true);
     this.error.set(null);
 
-    this.wcService.getWCs().subscribe({
+    this.wcService.getWCs(bbox).subscribe({
       next: (wcs) => {
-        this.wcState.setWcs(wcs);
+        this.wcState.mergeWcs(wcs);
+        this.loadedBounds = bbox;
         this.loading.set(false);
       },
       error: () => {
@@ -243,6 +242,15 @@ export class ExplorePage implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  private isBboxContained(inner: BoundingBox, outer: BoundingBox): boolean {
+    return (
+      inner.minLat >= outer.minLat &&
+      inner.maxLat <= outer.maxLat &&
+      inner.minLng >= outer.minLng &&
+      inner.maxLng <= outer.maxLng
+    );
   }
 
   private getNearbyWcs(lat: number, lng: number) {
