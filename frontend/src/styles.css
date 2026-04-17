@@ -158,6 +158,17 @@ a.btn {
   border-color: #ccc;
 }
 
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text-secondary, #666);
+  font-size: 0.875rem;
+}
+
+.btn-ghost:hover {
+  color: var(--color-primary);
+}
+
 
 /* ---- TIPOGRAFÍA BASE ---- */
 
