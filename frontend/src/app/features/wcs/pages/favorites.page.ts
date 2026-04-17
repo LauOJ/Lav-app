@@ -4,10 +4,11 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WCService } from '../services/wc.service';
 import { WC } from '../models/wc.model';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, TranslatePipe],
+  imports: [RouterModule, TranslatePipe, LucideIconComponent],
   templateUrl: './favorites.page.html',
 })
 export class FavoritesPage {

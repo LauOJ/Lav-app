@@ -4,10 +4,11 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WCService } from '../services/wc.service';
 import { WCCreate } from '../models/wc.model';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   selector: 'app-wc-form-page',
-  imports: [RouterModule, TranslatePipe],
+  imports: [RouterModule, TranslatePipe, LucideIconComponent],
   templateUrl: './wc-form.page.html',
   styles: [
     '.fieldset-reset { border: none; margin: 0 0 1.25rem 0; padding: 0; }',

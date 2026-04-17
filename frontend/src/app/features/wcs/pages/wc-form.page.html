@@ -1,9 +1,10 @@
 <div class="page-container">
   <h2 class="page-title">{{ (isEditMode() ? 'wc_form.title_edit' : 'wc_form.title_create') | translate }}</h2>
 
-  <div class="actions">
-    <button class="btn btn-secondary" [routerLink]="['/explore']">{{ 'wc_form.back' | translate }}</button>
-  </div>
+  <a class="map-link" [routerLink]="['/explore']">
+    <app-lucide-icon icon="locate" />
+    {{ 'nav.back_to_map' | translate }}
+  </a>
 
   <div class="section">
     <form (submit)="onSubmit(); $event.preventDefault()">

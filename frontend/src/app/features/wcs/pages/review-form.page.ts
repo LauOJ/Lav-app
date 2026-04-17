@@ -3,10 +3,11 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ReviewsService } from '../../reviews/services/reviews.service';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   templateUrl: './review-form.page.html',
-  imports: [ReactiveFormsModule, RouterModule, TranslatePipe],
+  imports: [ReactiveFormsModule, RouterModule, TranslatePipe, LucideIconComponent],
   styles: [
     '.fieldset-reset { border: none; margin: 0 0 1.25rem 0; padding: 0; }',
   ],

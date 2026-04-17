@@ -5,7 +5,8 @@
   },
 
   "nav": {
-    "explore": "Explorar el mapa",
+    "explore": "Explora el mapa",
+    "back_to_map": "Torna al mapa",
     "favorites": "Els meus preferits",
     "logout": "Tanca sessió",
     "login": "Inicia sessió",
@@ -29,10 +30,10 @@
     },
     "forgot_password": {
       "link": "He oblidat la contrasenya",
-      "title": "Recuperar contrasenya",
+      "title": "Recupera la contrasenya",
       "intro": "Introdueix el teu correu i t'enviarem un enllaç per restablir la contrasenya.",
       "email_label": "Correu electrònic",
-      "submit": "Enviar enllaç",
+      "submit": "Envia l'enllaç",
       "submit_loading": "Enviant…",
       "success": "Si aquest correu existeix al sistema, rebràs un missatge en breus moments.",
       "back_to_login": "← Tornar al login"
@@ -40,13 +41,13 @@
     "reset_password": {
       "title": "Nova contrasenya",
       "password_label": "Nova contrasenya",
-      "submit": "Canviar contrasenya",
+      "submit": "Canvia la contrasenya",
       "submit_loading": "Guardant…",
       "success": "Contrasenya actualitzada. Ja pots iniciar sessió.",
       "error_invalid_token": "L'enllaç no és vàlid o ha caducat.",
       "error_min_length": "La contrasenya ha de tenir almenys 8 caràcters",
       "error_generic": "Error en actualitzar la contrasenya",
-      "back_to_login": "← Tornar al login"
+      "back_to_login": "← Torna al login"
     },
     "register": {
       "title": "Registre",
@@ -140,9 +141,9 @@
   },
 
   "wc_form": {
-    "title_create": "Crear nou WC",
-    "title_edit": "Editar WC",
-    "back": "← Tornar al mapa",
+    "title_create": "Crea nou WC",
+    "title_edit": "Edita WC",
+    "back": "Torna al mapa",
     "name_label": "Nom del lloc *",
     "name_placeholder": "Ex.: Biblioteca Jaume Fuster, Bar La Perla, Estació de Sants",
     "lat_label": "Latitud *",
@@ -153,7 +154,7 @@
     "submit_saving": "Desant…",
     "submit_save": "Desa els canvis",
     "submit_creating": "Creant…",
-    "submit_create": "Crear WC",
+    "submit_create": "Crea el WC",
     "error_required": "Nom, latitud i longitud són obligatoris",
     "error_invalid_id": "WC no vàlid",
     "error_update": "Error en actualitzar el WC",
@@ -163,7 +164,7 @@
 
   "review_form": {
     "title": "Nova valoració",
-    "back": "← Tornar al mapa",
+    "back": "Torna al mapa",
     "wc_created_banner": "WC creat correctament. Ara pots afegir la teva experiència.",
     "cleanliness_legend": "Neteja (1–5)",
     "felt_safe_legend": "Et vas sentir segura?",
@@ -171,8 +172,8 @@
     "toilet_paper_legend": "Hi havia paper higiènic?",
     "hygiene_legend": "Hi havia productes d'higiene?",
     "gender_mixed_legend": "Tenia opció mixta/neutra?",
-    "free_entry_legend": "Vas poder entrar sense consumir?",
-    "changing_table_legend": "Hi havia canviador de nadons?",
+    "free_entry_legend": "Hi vas poder entrar sense consumir?",
+    "changing_table_legend": "Hi havia canviador per a nadons?",
     "changing_location_legend": "On era el canviador?",
     "yes": "Sí",
     "no": "No",
@@ -182,14 +183,14 @@
     "mixed_bathroom": "Bany o espai mixt",
     "comment_label": "Comentari (opcional)",
     "error_review": "Revisa els camps marcats.",
-    "submit": "Enviar valoració",
-    "skip_wc_created": "Crear WC sense valoració",
+    "submit": "Envia valoració",
+    "skip_wc_created": "Crea WC sense valoració",
     "skip_generic": "Ometre per ara"
   },
 
   "favorites": {
     "title": "Els meus preferits",
-    "back": "← Tornar al mapa",
+    "back": "Torna al mapa",
     "loading": "Carregant…",
     "empty": "Encara no tens preferits.",
     "load_error": "No s'han pogut carregar els preferits."
@@ -224,7 +225,7 @@
     "cta_body": "Cada valoració que afegeixes ajuda algú que no coneixes a trobar el que necessita. I ajuda a dibuixar un mapa que reflecteix la ciutat real.",
     "cta_btn": "Explorar el mapa",
 
-    "back": "← Tornar al mapa"
+    "back": "Torna al mapa"
   },
 
   "review_item": {

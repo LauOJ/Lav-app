@@ -6,6 +6,7 @@
 
   "nav": {
     "explore": "Explorar el mapa",
+    "back_to_map": "Volver al mapa",
     "favorites": "Mis favoritos",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
@@ -142,7 +143,7 @@
   "wc_form": {
     "title_create": "Crear nuevo WC",
     "title_edit": "Editar WC",
-    "back": "← Volver al mapa",
+    "back": "Volver al mapa",
     "name_label": "Nombre del lugar *",
     "name_placeholder": "Ej.: Biblioteca Jaume Fuster, Bar La Perla, Estación de Sants",
     "lat_label": "Latitud *",
@@ -163,7 +164,7 @@
 
   "review_form": {
     "title": "Nueva review",
-    "back": "← Volver al mapa",
+    "back": "Volver al mapa",
     "wc_created_banner": "WC creado correctamente. Ahora puedes añadir tu experiencia.",
     "cleanliness_legend": "Limpieza (1–5)",
     "felt_safe_legend": "¿Te sentiste segura?",
@@ -189,7 +190,7 @@
 
   "favorites": {
     "title": "Mis favoritos",
-    "back": "← Volver al mapa",
+    "back": "Volver al mapa",
     "loading": "Cargando...",
     "empty": "Todavía no tienes favoritos.",
     "load_error": "No se pudieron cargar los favoritos."
@@ -224,7 +225,7 @@
     "cta_body": "Cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita. Y ayuda a dibujar un mapa que refleja la ciudad real.",
     "cta_btn": "Explorar el mapa",
 
-    "back": "← Volver al mapa"
+    "back": "Volver al mapa"
   },
 
   "review_item": {

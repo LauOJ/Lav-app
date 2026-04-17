@@ -1,9 +1,10 @@
 <div class="page-container">
   <h2 class="page-title">{{ 'favorites.title' | translate }}</h2>
 
-  <div class="actions">
-    <a class="btn btn-secondary" [routerLink]="['/explore']">{{ 'favorites.back' | translate }}</a>
-  </div>
+  <a class="map-link" [routerLink]="['/explore']">
+    <app-lucide-icon icon="locate" />
+    {{ 'nav.back_to_map' | translate }}
+  </a>
 
   <div class="section">
     @if (loading()) {
