@@ -405,25 +405,47 @@
 }
 
 @media (min-width: 768px) {
+  /* Top bar: one third of the viewport width, anchored to the left */
   .top-bar {
     left: 0.75rem;
-    right: 0.75rem;
     top: 0.75rem;
+    right: auto;
+    width: calc(33.333% - 0.75rem);
   }
 
+  /* Filter chips below the search bar, horizontal row, left-aligned with it */
   .filter-column {
-    top: 5rem;
-    right: 0.75rem;
+    flex-direction: row;
+    top: 4.25rem;
+    left: 0.75rem;
+    right: auto;
   }
 
+  /* Tooltip: appear below instead of to the left */
+  .filter-tooltip {
+    right: auto;
+    left: 50%;
+    top: calc(100% + 0.5rem);
+    transform: translateX(-50%);
+  }
+
+  /* More-filters panel: opens below the chip row */
   .more-filters-panel {
-    right: 4rem;
+    top: 7rem;
+    left: 0.75rem;
+    right: auto;
   }
 
   .search-panel input,
   .search-panel button,
   .locate-button,
+  .filter-btn,
   .empty-state-overlay button {
     min-height: 2.35rem;
+  }
+
+  .filter-btn {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 }
