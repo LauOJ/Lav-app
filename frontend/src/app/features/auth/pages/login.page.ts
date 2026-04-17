@@ -7,11 +7,12 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { AuthState } from '../../../core/auth/auth.state';
 import { UserService } from '../../../core/user/user.service';
 import { UserState } from '../../../core/user/user.state';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, RouterModule, TranslatePipe],
+  imports: [CommonModule, RouterModule, TranslatePipe, LucideIconComponent],
   templateUrl: './login.page.html',
 })
 export class LoginPage {

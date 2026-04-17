@@ -225,6 +225,31 @@ li {
   font-weight: 500;
 }
 
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+
+.map-link app-lucide-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.map-link app-lucide-icon .icon-mask {
+  width: 1rem;
+  height: 1rem;
+}
+
 .success-banner {
   background: #e6f0ff;
   border: 1px solid #c7dbff;

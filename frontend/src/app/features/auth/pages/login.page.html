@@ -1,4 +1,9 @@
 <div class="page-container">
+  <a class="map-link" [routerLink]="['/explore']">
+    <app-lucide-icon icon="locate" />
+    {{ 'nav.explore' | translate }}
+  </a>
+
   <h1 class="page-title">{{ 'auth.login.title' | translate }}</h1>
 
   <div class="section">
@@ -43,6 +48,5 @@
       {{ 'auth.login.no_account' | translate }}
       <a class="btn btn-secondary" [routerLink]="['/register']">{{ 'auth.login.register_link' | translate }}</a>
     </p>
-    <a class="btn btn-ghost" [routerLink]="['/explore']">{{ 'nav.explore' | translate }}</a>
   </div>
 </div>
