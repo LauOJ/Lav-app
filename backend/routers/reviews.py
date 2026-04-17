@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
@@ -6,6 +6,7 @@ from database import get_db
 from schemas.review import ReviewCreate, ReviewRead, ReviewUpdate
 from crud.review import create_review, delete_review, update_review
 from security import get_current_user
+from limiter import limiter
 from models import User
 
 
@@ -19,7 +20,9 @@ router = APIRouter(
     response_model=ReviewRead,
     status_code=status.HTTP_201_CREATED,
 )
+@limiter.limit("20/day")
 def create_review_endpoint(
+    request: Request,
     review_in: ReviewCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -72,7 +75,9 @@ def delete_review_endpoint(
     "/{review_id}",
     response_model=ReviewRead,
 )
+@limiter.limit("20/day")
 def update_review_endpoint(
+    request: Request,
     review_id: int,
     review_in: ReviewUpdate,
     db: Session = Depends(get_db),

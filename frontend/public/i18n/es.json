@@ -47,6 +47,7 @@
       "success": "Contraseña actualizada. Ya puedes iniciar sesión.",
       "error_invalid_token": "El enlace no es válido o ha caducado.",
       "error_min_length": "La contraseña debe tener al menos 8 caracteres",
+      "error_complexity": "La contraseña debe tener al menos una letra y un número",
       "error_generic": "Error al actualizar la contraseña",
       "back_to_login": "← Volver al login"
     },
@@ -58,6 +59,7 @@
       "already_account": "¿Ya tienes cuenta?",
       "login_link": "Inicia sesión",
       "error_min_length": "La contraseña debe tener al menos 8 caracteres",
+      "error_complexity": "La contraseña debe tener al menos una letra y un número",
       "error_email_taken": "Este email ya está registrado",
       "error_generic": "Error al registrar usuario"
     }
@@ -245,6 +247,7 @@
     "error_profile": "Error al actualizar el perfil",
     "error_pwd_required": "Rellena los dos campos de contraseña",
     "error_pwd_min_length": "La nueva contraseña debe tener al menos 8 caracteres",
+    "error_pwd_complexity": "La nueva contraseña debe tener al menos una letra y un número",
     "error_pwd_wrong": "La contraseña actual no es correcta",
     "error_pwd_generic": "Error al cambiar la contraseña",
     "error_delete": "Error al eliminar la cuenta",

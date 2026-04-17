@@ -1,5 +1,15 @@
+import re
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
+
+
+def _validate_password_complexity(v: str) -> str:
+    if not re.search(r'[A-Za-z]', v):
+        raise ValueError('Password must contain at least one letter')
+    if not re.search(r'\d', v):
+        raise ValueError('Password must contain at least one number')
+    return v
+
 
 # -------- Base --------
 class UserBase(BaseModel):
@@ -9,6 +19,11 @@ class UserBase(BaseModel):
 # -------- Create (input) --------
 class UserCreate(UserBase):
     password: str = Field(min_length=8)
+
+    @field_validator('password')
+    @classmethod
+    def password_complexity(cls, v: str) -> str:
+        return _validate_password_complexity(v)
 
 
 # -------- Read (output) --------
@@ -32,6 +47,11 @@ class UserUpdate(BaseModel):
 class UserPasswordChange(BaseModel):
     current_password: str
     new_password: str = Field(min_length=8)
+
+    @field_validator('new_password')
+    @classmethod
+    def new_password_complexity(cls, v: str) -> str:
+        return _validate_password_complexity(v)
 
 
 # -------- Language update (input) --------

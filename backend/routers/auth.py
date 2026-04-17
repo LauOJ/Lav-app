@@ -9,6 +9,7 @@ from crud.password_reset import create_reset_token, get_valid_token, consume_tok
 from security import verify_password, create_access_token
 from config import RESEND_API_KEY, FRONTEND_URL
 from limiter import limiter
+from schemas.user import _validate_password_complexity
 
 from fastapi.security import OAuth2PasswordRequestForm
 
@@ -84,7 +85,9 @@ def forgot_password(
 
 
 @router.post("/reset-password", status_code=status.HTTP_200_OK)
+@limiter.limit("5/hour")
 def reset_password(
+    request: Request,
     body: ResetPasswordRequest,
     db: Session = Depends(get_db),
 ):
@@ -92,6 +95,13 @@ def reset_password(
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="Password must be at least 8 characters",
+        )
+    try:
+        _validate_password_complexity(body.new_password)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=str(e),
         )
 
     token = get_valid_token(db, body.token)

@@ -82,7 +82,9 @@ def update_me_endpoint(
     "/me/password",
     status_code=status.HTTP_204_NO_CONTENT,
 )
+@limiter.limit("5/hour")
 def change_password_endpoint(
+    request: Request,
     pwd_in: UserPasswordChange,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),

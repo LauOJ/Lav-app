@@ -94,6 +94,10 @@ export class ProfilePage {
       this.pwdError.set(this.translate.instant('profile.error_pwd_min_length'));
       return;
     }
+    if (!/[A-Za-z]/.test(next) || !/\d/.test(next)) {
+      this.pwdError.set(this.translate.instant('profile.error_pwd_complexity'));
+      return;
+    }
 
     this.pwdLoading.set(true);
     this.pwdError.set(null);

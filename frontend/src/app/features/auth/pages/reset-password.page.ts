@@ -33,6 +33,10 @@ export class ResetPasswordPage implements OnInit {
       this.error.set(this.translate.instant('auth.reset_password.error_min_length'));
       return;
     }
+    if (!/[A-Za-z]/.test(this.password()) || !/\d/.test(this.password())) {
+      this.error.set(this.translate.instant('auth.reset_password.error_complexity'));
+      return;
+    }
 
     this.loading.set(true);
     this.error.set(null);

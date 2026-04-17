@@ -47,6 +47,7 @@
       "success": "Contrasenya actualitzada. Ja pots iniciar sessió.",
       "error_invalid_token": "L'enllaç no és vàlid o ha caducat.",
       "error_min_length": "La contrasenya ha de tenir almenys 8 caràcters",
+      "error_complexity": "La contrasenya ha de tenir almenys una lletra i un número",
       "error_generic": "Error en actualitzar la contrasenya",
       "back_to_login": "← Torna al login"
     },
@@ -58,6 +59,7 @@
       "already_account": "Ja tens compte?",
       "login_link": "Inicia sessió",
       "error_min_length": "La contrasenya ha de tenir almenys 8 caràcters",
+      "error_complexity": "La contrasenya ha de tenir almenys una lletra i un número",
       "error_email_taken": "Aquest correu ja està registrat",
       "error_generic": "Error en registrar l'usuari"
     }
@@ -245,6 +247,7 @@
     "error_profile": "Error en actualitzar el perfil",
     "error_pwd_required": "Omple els dos camps de contrasenya",
     "error_pwd_min_length": "La nova contrasenya ha de tenir almenys 8 caràcters",
+    "error_pwd_complexity": "La nova contrasenya ha de tenir almenys una lletra i un número",
     "error_pwd_wrong": "La contrasenya actual no és correcta",
     "error_pwd_generic": "Error en canviar la contrasenya",
     "error_delete": "Error en eliminar el compte",
