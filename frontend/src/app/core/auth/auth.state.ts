@@ -14,9 +14,20 @@ export class AuthState {
 
   readonly isAuthenticated = computed(() => !!this._token());
 
+  readonly sessionExpired = signal(false);
+
   setToken(token: string) {
     this._token.set(token);
     localStorage.setItem(TOKEN_KEY, token);
+    this.sessionExpired.set(false);
+  }
+
+  markSessionExpired(): void {
+    this.sessionExpired.set(true);
+  }
+
+  clearSessionExpired(): void {
+    this.sessionExpired.set(false);
   }
 
   clearToken() {

@@ -17,6 +17,7 @@
   },
 
   "auth": {
+    "session_expired": "La sessió ha caducat. Torna a iniciar sessió.",
     "login": {
       "title": "Login",
       "password_label": "Contrasenya",

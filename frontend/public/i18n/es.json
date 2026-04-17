@@ -17,6 +17,7 @@
   },
 
   "auth": {
+    "session_expired": "La sesión ha caducado. Vuelve a iniciar sesión.",
     "login": {
       "title": "Login",
       "password_label": "Contraseña",

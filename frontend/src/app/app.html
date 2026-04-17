@@ -9,6 +9,13 @@
     ></div>
   }
 
+  @if (authState.sessionExpired()) {
+    <div class="session-expired-banner" role="alert">
+      <span>{{ 'auth.session_expired' | translate }}</span>
+      <button type="button" class="session-expired-close" (click)="authState.clearSessionExpired()" [attr.aria-label]="'nav.close_menu' | translate">✕</button>
+    </div>
+  }
+
   <header class="app-header">
     <a routerLink="/explore" class="brand">
       <img src="logo/labu-icon.svg" alt="lav-app logo" class="brand-icon" />
