@@ -8,6 +8,7 @@
     "explore": "Explora el mapa",
     "back_to_map": "Torna al mapa",
     "favorites": "Els meus preferits",
+    "profile": "El meu perfil",
     "logout": "Tanca sessió",
     "login": "Inicia sessió",
     "register": "Registra't",
@@ -226,6 +227,36 @@
     "cta_btn": "Explorar el mapa",
 
     "back": "Torna al mapa"
+  },
+
+  "profile": {
+    "title": "El meu perfil",
+    "section_profile": "Dades del compte",
+    "name_label": "Nom (opcional)",
+    "name_placeholder": "El teu nom",
+    "email_label": "Correu electrònic",
+    "submit_save": "Desa els canvis",
+    "submit_saving": "Desant…",
+    "submit_change_pwd": "Canvia la contrasenya",
+    "success_profile": "Perfil actualitzat correctament.",
+    "success_pwd": "Contrasenya canviada correctament.",
+    "error_email_required": "El correu és obligatori",
+    "error_email_taken": "Aquest correu ja està en ús",
+    "error_profile": "Error en actualitzar el perfil",
+    "error_pwd_required": "Omple els dos camps de contrasenya",
+    "error_pwd_min_length": "La nova contrasenya ha de tenir almenys 8 caràcters",
+    "error_pwd_wrong": "La contrasenya actual no és correcta",
+    "error_pwd_generic": "Error en canviar la contrasenya",
+    "error_delete": "Error en eliminar el compte",
+    "section_password": "Canvia la contrasenya",
+    "current_pwd_label": "Contrasenya actual",
+    "new_pwd_label": "Nova contrasenya",
+    "section_danger": "Zona de perill",
+    "delete_description": "Un cop elimines el compte, no es pot recuperar. Totes les teves valoracions i preferits s'esborraran.",
+    "delete_btn": "Elimina el compte",
+    "delete_confirm": "Estàs segura? Aquesta acció és irreversible.",
+    "delete_confirm_btn": "Sí, elimina el compte",
+    "delete_cancel_btn": "Cancel·la"
   },
 
   "review_item": {

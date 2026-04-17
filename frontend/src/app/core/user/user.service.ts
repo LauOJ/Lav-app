@@ -33,4 +33,19 @@ export class UserService {
       language_preference,
     });
   }
+
+  updateProfile(data: { name?: string | null; email?: string }): Observable<User> {
+    return this.http.patch<User>(`${this.api.baseUrl}/users/me`, data);
+  }
+
+  changePassword(current_password: string, new_password: string): Observable<void> {
+    return this.http.patch<void>(`${this.api.baseUrl}/users/me/password`, {
+      current_password,
+      new_password,
+    });
+  }
+
+  deleteAccount(): Observable<void> {
+    return this.http.delete<void>(`${this.api.baseUrl}/users/me`);
+  }
 }

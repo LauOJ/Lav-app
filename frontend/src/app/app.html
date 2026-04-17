@@ -75,6 +75,12 @@
                   {{ 'nav.favorites' | translate }}
                 </a>
               }
+              @if (currentUrl() !== '/profile') {
+                <a routerLink="/profile" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  <app-lucide-icon icon="settings" class="dropdown-icon" />
+                  {{ 'nav.profile' | translate }}
+                </a>
+              }
               <hr class="dropdown-divider" />
               <button type="button" class="dropdown-item" role="menuitem" (click)="onLogout()">
                 {{ 'nav.logout' | translate }}

@@ -8,6 +8,7 @@
     "explore": "Explorar el mapa",
     "back_to_map": "Volver al mapa",
     "favorites": "Mis favoritos",
+    "profile": "Mi perfil",
     "logout": "Cerrar sesión",
     "login": "Iniciar sesión",
     "register": "Registrarse",
@@ -226,6 +227,36 @@
     "cta_btn": "Explorar el mapa",
 
     "back": "Volver al mapa"
+  },
+
+  "profile": {
+    "title": "Mi perfil",
+    "section_profile": "Datos de la cuenta",
+    "name_label": "Nombre (opcional)",
+    "name_placeholder": "Tu nombre",
+    "email_label": "Correo electrónico",
+    "submit_save": "Guardar cambios",
+    "submit_saving": "Guardando…",
+    "submit_change_pwd": "Cambiar contraseña",
+    "success_profile": "Perfil actualizado correctamente.",
+    "success_pwd": "Contraseña cambiada correctamente.",
+    "error_email_required": "El correo es obligatorio",
+    "error_email_taken": "Este correo ya está en uso",
+    "error_profile": "Error al actualizar el perfil",
+    "error_pwd_required": "Rellena los dos campos de contraseña",
+    "error_pwd_min_length": "La nueva contraseña debe tener al menos 8 caracteres",
+    "error_pwd_wrong": "La contraseña actual no es correcta",
+    "error_pwd_generic": "Error al cambiar la contraseña",
+    "error_delete": "Error al eliminar la cuenta",
+    "section_password": "Cambiar contraseña",
+    "current_pwd_label": "Contraseña actual",
+    "new_pwd_label": "Nueva contraseña",
+    "section_danger": "Zona de peligro",
+    "delete_description": "Una vez elimines la cuenta, no se puede recuperar. Todas tus valoraciones y favoritos se borrarán.",
+    "delete_btn": "Eliminar cuenta",
+    "delete_confirm": "¿Estás segura? Esta acción es irreversible.",
+    "delete_confirm_btn": "Sí, eliminar cuenta",
+    "delete_cancel_btn": "Cancelar"
   },
 
   "review_item": {

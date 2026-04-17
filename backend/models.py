@@ -21,6 +21,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(String(255), nullable=False, unique=True, index=True)
+    name = Column(String(100), nullable=True)
     password_hash = Column(String(255), nullable=False)
     is_admin = Column(Boolean, nullable=False, default=False)
     language_preference = Column(String(5), nullable=False, server_default='ca')
