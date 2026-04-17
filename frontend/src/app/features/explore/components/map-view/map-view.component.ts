@@ -173,7 +173,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.addPopup
         .setLatLng(event.latlng)
         .setContent(
-          '<button type="button" class="add-wc-button">Añadir WC aquí</button>'
+          `<button type="button" class="add-wc-button">${this.translate.instant('explore.add_wc_here')}</button>`
         );
       this.addPopup.openOn(this.map!);
     });
