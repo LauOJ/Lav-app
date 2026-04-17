@@ -226,8 +226,9 @@ li {
 }
 
 .map-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.35rem;
   color: var(--color-primary);
   text-decoration: none;
