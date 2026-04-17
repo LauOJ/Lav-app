@@ -23,7 +23,7 @@
       "title": "Login",
       "password_label": "Contrasenya",
       "submit_loading": "Entrant…",
-      "submit": "Entrar",
+      "submit": "Entra",
       "no_account": "No tens compte?",
       "register_link": "Registra't",
       "error_credentials": "Correu o contrasenya incorrectes"
@@ -36,7 +36,7 @@
       "submit": "Envia l'enllaç",
       "submit_loading": "Enviant…",
       "success": "Si aquest correu existeix al sistema, rebràs un missatge en breus moments.",
-      "back_to_login": "← Tornar al login"
+      "back_to_login": "← Torna al login"
     },
     "reset_password": {
       "title": "Nova contrasenya",
@@ -79,7 +79,7 @@
     "load_error": "No s'han pogut carregar els WCs",
     "nearby_dialog": "Ja hi ha WCs a prop d'aquesta ubicació. Vols afegir-ne un igualment?",
     "nearby_hide": "▲ Amaga la llista",
-    "nearby_show": "▼ Veure WCs propers",
+    "nearby_show": "▼ Mostra WCs propers",
     "nearby_add_review": "Afegeix valoració",
     "add_wc_here": "Afegir WC aquí",
     "nearby_cancel": "Cancel·la",
@@ -107,8 +107,8 @@
     "remove_from_favorites": "Treu dels preferits",
     "review_btn": "Valoració",
     "edit_btn": "Edita",
-    "show_reviews": "Veure valoracions",
-    "hide_reviews": "Amaga valoracions",
+    "show_reviews": "Mostra les valoracions",
+    "hide_reviews": "Amaga les valoracions",
     "reviews_loading": "Carregant valoracions…",
     "reviews_load_error": "No s'han pogut carregar les valoracions",
     "no_reviews": "Encara no hi ha valoracions",
