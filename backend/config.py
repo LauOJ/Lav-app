@@ -27,3 +27,5 @@ _load_local_env()
 
 DATABASE_URL = _require_env("DATABASE_URL")
 SECRET_KEY = _require_env("SECRET_KEY")
+RESEND_API_KEY = _require_env("RESEND_API_KEY")
+FRONTEND_URL = _require_env("FRONTEND_URL")

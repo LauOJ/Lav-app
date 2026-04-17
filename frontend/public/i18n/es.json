@@ -27,6 +27,27 @@
       "register_link": "Regístrate",
       "error_credentials": "Email o contraseña incorrectos"
     },
+    "forgot_password": {
+      "link": "He olvidado la contraseña",
+      "title": "Recuperar contraseña",
+      "intro": "Introduce tu correo y te enviaremos un enlace para restablecer la contraseña.",
+      "email_label": "Correo electrónico",
+      "submit": "Enviar enlace",
+      "submit_loading": "Enviando…",
+      "success": "Si este correo existe en el sistema, recibirás un mensaje en breves momentos.",
+      "back_to_login": "← Volver al login"
+    },
+    "reset_password": {
+      "title": "Nueva contraseña",
+      "password_label": "Nueva contraseña",
+      "submit": "Cambiar contraseña",
+      "submit_loading": "Guardando…",
+      "success": "Contraseña actualizada. Ya puedes iniciar sesión.",
+      "error_invalid_token": "El enlace no es válido o ha caducado.",
+      "error_min_length": "La contraseña debe tener al menos 8 caracteres",
+      "error_generic": "Error al actualizar la contraseña",
+      "back_to_login": "← Volver al login"
+    },
     "register": {
       "title": "Registro",
       "password_label": "Contraseña",

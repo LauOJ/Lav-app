@@ -37,6 +37,11 @@ class User(Base):
         back_populates="user",
         cascade="all, delete-orphan",
     )
+    password_reset_tokens = relationship(
+        "PasswordResetToken",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
 
 
 class WC(Base):
@@ -102,6 +107,23 @@ class Review(Base):
     # Relationships
     user = relationship("User", back_populates="reviews")
     wc = relationship("WC", back_populates="reviews")
+
+
+class PasswordResetToken(Base):
+    __tablename__ = "password_reset_tokens"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    token = Column(String(36), nullable=False, unique=True, index=True)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    used = Column(Boolean, nullable=False, default=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", back_populates="password_reset_tokens")
 
 
 class Favorite(Base):

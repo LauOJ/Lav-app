@@ -52,4 +52,12 @@ export class AuthService {
       switchMap(() => this.login(email, password))
     );
   }
+
+  forgotPassword(email: string): Observable<unknown> {
+    return this.api.post('/auth/forgot-password', { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<unknown> {
+    return this.api.post('/auth/reset-password', { token, new_password: newPassword });
+  }
 }

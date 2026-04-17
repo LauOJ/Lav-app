@@ -27,6 +27,27 @@
       "register_link": "Registra't",
       "error_credentials": "Correu o contrasenya incorrectes"
     },
+    "forgot_password": {
+      "link": "He oblidat la contrasenya",
+      "title": "Recuperar contrasenya",
+      "intro": "Introdueix el teu correu i t'enviarem un enllaç per restablir la contrasenya.",
+      "email_label": "Correu electrònic",
+      "submit": "Enviar enllaç",
+      "submit_loading": "Enviant…",
+      "success": "Si aquest correu existeix al sistema, rebràs un missatge en breus moments.",
+      "back_to_login": "← Tornar al login"
+    },
+    "reset_password": {
+      "title": "Nova contrasenya",
+      "password_label": "Nova contrasenya",
+      "submit": "Canviar contrasenya",
+      "submit_loading": "Guardant…",
+      "success": "Contrasenya actualitzada. Ja pots iniciar sessió.",
+      "error_invalid_token": "L'enllaç no és vàlid o ha caducat.",
+      "error_min_length": "La contrasenya ha de tenir almenys 8 caràcters",
+      "error_generic": "Error en actualitzar la contrasenya",
+      "back_to_login": "← Tornar al login"
+    },
     "register": {
       "title": "Registre",
       "password_label": "Contrasenya",

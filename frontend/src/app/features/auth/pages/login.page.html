@@ -33,6 +33,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="loading()">
           {{ loading() ? ('auth.login.submit_loading' | translate) : ('auth.login.submit' | translate) }}
         </button>
+        <a class="btn btn-ghost" [routerLink]="['/forgot-password']">{{ 'auth.forgot_password.link' | translate }}</a>
       </div>
     </form>
   </div>

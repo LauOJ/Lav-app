@@ -221,6 +221,11 @@ li {
   color: #c00;
 }
 
+.form-success {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
 .success-banner {
   background: #e6f0ff;
   border: 1px solid #c7dbff;
