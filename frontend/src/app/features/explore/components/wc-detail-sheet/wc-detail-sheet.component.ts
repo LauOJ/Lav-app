@@ -67,7 +67,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   constructor() {
     effect(() => {
       const wc = this.wc();
-      this.sheetState.set('collapsed');
+      this.sheetState.set(window.innerWidth >= 768 ? 'expanded' : 'collapsed');
       this.showReviews.set(false);
       this.isFavorite.set(false);
       if (this.userState.isLoggedIn()) {

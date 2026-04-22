@@ -268,12 +268,23 @@ button.primary {
 
 @media (min-width: 768px) {
   .sheet {
-    min-height: 0;
-    max-height: fit-content;
+    left: auto;
+    right: 0.75rem;
+    top: 0.75rem;
+    bottom: auto;
+    width: 380px;
+    border-radius: 18px;
+    max-height: calc(100vh - 1.5rem);
+    overflow-y: auto;
   }
 
   .sheet.expanded {
-    max-height: 82vh;
+    max-height: calc(100vh - 1.5rem);
+    overflow-y: auto;
+  }
+
+  .handle-button {
+    display: none;
   }
 
   .cta {

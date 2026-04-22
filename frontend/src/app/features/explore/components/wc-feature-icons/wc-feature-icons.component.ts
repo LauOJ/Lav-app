@@ -15,7 +15,14 @@ import { LucideIconComponent, LucideIconName } from '../../../../shared/componen
 import { WC } from '../../../wcs/models/wc.model';
 import { normalizeWcScore } from '../../../wcs/utils/wc.utils';
 
-type FeatureKey = 'safety_score' | 'accessibility_score' | 'toilet_paper_score';
+type FeatureKey =
+  | 'safety_score'
+  | 'accessibility_score'
+  | 'toilet_paper_score'
+  | 'hygiene_products_score'
+  | 'free_entry_score'
+  | 'gender_mixed_score'
+  | 'changing_table_score';
 
 interface FeatureItem {
   key: FeatureKey;
@@ -35,9 +42,13 @@ export class WcFeatureIconsComponent implements OnDestroy {
 
   // label holds i18n keys, resolved in template via | translate
   private readonly features: Array<Omit<FeatureItem, 'score'>> = [
-    { key: 'safety_score',       label: 'wc_detail.safety',       icon: 'lock' },
-    { key: 'accessibility_score',label: 'wc_detail.accessibility', icon: 'accessibility' },
-    { key: 'toilet_paper_score', label: 'wc_detail.paper',         icon: 'droplets' },
+    { key: 'toilet_paper_score',    label: 'wc_detail.paper',         icon: 'scroll' },
+    { key: 'free_entry_score',      label: 'wc_detail.free_entry',    icon: 'tag' },
+    { key: 'changing_table_score',  label: 'wc_detail.changing_table',icon: 'baby' },
+    { key: 'gender_mixed_score',    label: 'wc_detail.gender_mixed',  icon: 'non-binary' },
+    { key: 'safety_score',          label: 'wc_detail.safety',        icon: 'lock' },
+    { key: 'accessibility_score',   label: 'wc_detail.accessibility', icon: 'accessibility' },
+    { key: 'hygiene_products_score',label: 'wc_detail.hygiene',       icon: 'droplets' },
   ];
 
   readonly featureItems = computed(() => {

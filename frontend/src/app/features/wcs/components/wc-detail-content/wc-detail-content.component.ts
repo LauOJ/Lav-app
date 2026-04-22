@@ -47,6 +47,10 @@ export class WcDetailContentComponent {
     wcScorePercentage(this.wc().gender_mixed_score)
   );
 
+  readonly changingTablePercentage = computed(() =>
+    wcScorePercentage(this.wc().changing_table_score)
+  );
+
   readonly hasLimitedInfo = computed(() =>
     wcHasLimitedInfo(this.wc().reviews_count)
   );
