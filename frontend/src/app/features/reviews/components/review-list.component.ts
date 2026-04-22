@@ -39,8 +39,13 @@ export class ReviewListComponent {
         cleanliness_rating: number;
         felt_safe: boolean | null;
         accessible: boolean | null;
+        step_free_access: boolean | null;
+        wide_door: boolean | null;
+        turning_space: boolean | null;
+        has_grab_bars: boolean | null;
         has_toilet_paper: boolean | null;
         hygiene_products_available: boolean | null;
+        menstrual_cup_suitable: boolean | null;
         could_enter_without_buying: boolean | null;
         has_gender_mixed_option: boolean | null;
         has_changing_table: boolean | null;
@@ -52,8 +57,13 @@ export class ReviewListComponent {
             cleanliness_rating: payload.cleanliness_rating,
             felt_safe: payload.felt_safe,
             accessible: payload.accessible,
+            step_free_access: payload.step_free_access,
+            wide_door: payload.wide_door,
+            turning_space: payload.turning_space,
+            has_grab_bars: payload.has_grab_bars,
             has_toilet_paper: payload.has_toilet_paper,
             hygiene_products_available: payload.hygiene_products_available,
+            menstrual_cup_suitable: payload.menstrual_cup_suitable,
             could_enter_without_buying: payload.could_enter_without_buying,
             has_gender_mixed_option: payload.has_gender_mixed_option,
             has_changing_table: payload.has_changing_table,

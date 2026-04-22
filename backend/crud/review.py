@@ -18,6 +18,13 @@ def create_review(
         hygiene_products_available=review_in.hygiene_products_available,
         could_enter_without_buying=review_in.could_enter_without_buying,
         has_gender_mixed_option=review_in.has_gender_mixed_option,
+        has_changing_table=review_in.has_changing_table,
+        changing_table_location=review_in.changing_table_location,
+        step_free_access=review_in.step_free_access,
+        wide_door=review_in.wide_door,
+        turning_space=review_in.turning_space,
+        has_grab_bars=review_in.has_grab_bars,
+        menstrual_cup_suitable=review_in.menstrual_cup_suitable,
         comment=review_in.comment,
         user_id=user_id,
     )
@@ -66,6 +73,13 @@ def update_review(
     review.hygiene_products_available = review_in.hygiene_products_available
     review.could_enter_without_buying = review_in.could_enter_without_buying
     review.has_gender_mixed_option = review_in.has_gender_mixed_option
+    review.has_changing_table = review_in.has_changing_table
+    review.changing_table_location = review_in.changing_table_location
+    review.step_free_access = review_in.step_free_access
+    review.wide_door = review_in.wide_door
+    review.turning_space = review_in.turning_space
+    review.has_grab_bars = review_in.has_grab_bars
+    review.menstrual_cup_suitable = review_in.menstrual_cup_suitable
     review.comment = review_in.comment
 
     db.commit()

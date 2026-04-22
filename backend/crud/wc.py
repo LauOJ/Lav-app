@@ -40,6 +40,11 @@ def _attach_review_stats(
     free_entry_score: float | None,
     gender_mixed_score: float | None,
     changing_table_score: float | None,
+    step_free_score: float | None,
+    wide_door_score: float | None,
+    turning_space_score: float | None,
+    grab_bars_score: float | None,
+    menstrual_cup_score: float | None,
 ) -> WC:
     wc.avg_cleanliness = avg_cleanliness
     wc.reviews_count = reviews_count
@@ -50,6 +55,11 @@ def _attach_review_stats(
     wc.free_entry_score = free_entry_score
     wc.gender_mixed_score = gender_mixed_score
     wc.changing_table_score = changing_table_score
+    wc.step_free_score = step_free_score
+    wc.wide_door_score = wide_door_score
+    wc.turning_space_score = turning_space_score
+    wc.grab_bars_score = grab_bars_score
+    wc.menstrual_cup_score = menstrual_cup_score
     return wc
 
 def get_wcs(
@@ -87,6 +97,11 @@ def get_wcs(
             _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
             _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
             _bool_avg_percentage(Review.has_changing_table).label("changing_table_score"),
+            _bool_avg_percentage(Review.step_free_access).label("step_free_score"),
+            _bool_avg_percentage(Review.wide_door).label("wide_door_score"),
+            _bool_avg_percentage(Review.turning_space).label("turning_space_score"),
+            _bool_avg_percentage(Review.has_grab_bars).label("grab_bars_score"),
+            _bool_avg_percentage(Review.menstrual_cup_suitable).label("menstrual_cup_score"),
         )
     )
 
@@ -103,6 +118,11 @@ def get_wcs(
             free_entry_score,
             gender_mixed_score,
             changing_table_score,
+            step_free_score,
+            wide_door_score,
+            turning_space_score,
+            grab_bars_score,
+            menstrual_cup_score,
         )
         for (
             wc,
@@ -115,6 +135,11 @@ def get_wcs(
             free_entry_score,
             gender_mixed_score,
             changing_table_score,
+            step_free_score,
+            wide_door_score,
+            turning_space_score,
+            grab_bars_score,
+            menstrual_cup_score,
         ) in rows
     ]
 
@@ -136,6 +161,11 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
             _bool_avg_percentage(Review.could_enter_without_buying).label("free_entry_score"),
             _bool_avg_percentage(Review.has_gender_mixed_option).label("gender_mixed_score"),
             _bool_avg_percentage(Review.has_changing_table).label("changing_table_score"),
+            _bool_avg_percentage(Review.step_free_access).label("step_free_score"),
+            _bool_avg_percentage(Review.wide_door).label("wide_door_score"),
+            _bool_avg_percentage(Review.turning_space).label("turning_space_score"),
+            _bool_avg_percentage(Review.has_grab_bars).label("grab_bars_score"),
+            _bool_avg_percentage(Review.menstrual_cup_suitable).label("menstrual_cup_score"),
         )
         .first()
     )
@@ -154,6 +184,11 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         free_entry_score,
         gender_mixed_score,
         changing_table_score,
+        step_free_score,
+        wide_door_score,
+        turning_space_score,
+        grab_bars_score,
+        menstrual_cup_score,
     ) = row
     return _attach_review_stats(
         wc,
@@ -166,6 +201,11 @@ def get_wc_by_id(db: Session, wc_id: int) -> WC | None:
         free_entry_score,
         gender_mixed_score,
         changing_table_score,
+        step_free_score,
+        wide_door_score,
+        turning_space_score,
+        grab_bars_score,
+        menstrual_cup_score,
     )
 
 

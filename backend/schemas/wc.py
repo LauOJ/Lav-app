@@ -43,5 +43,10 @@ class WCRead(WCBase):
     free_entry_score: float | None
     gender_mixed_score: float | None
     changing_table_score: float | None
+    step_free_score: float | None
+    wide_door_score: float | None
+    turning_space_score: float | None
+    grab_bars_score: float | None
+    menstrual_cup_score: float | None
 
     model_config = ConfigDict(from_attributes=True)

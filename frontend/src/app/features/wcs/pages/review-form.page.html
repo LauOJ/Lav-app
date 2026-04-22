@@ -1,10 +1,10 @@
 <div class="page-container">
-  <h2 class="page-title">{{ 'review_form.title' | translate }}</h2>
-
   <a class="map-link" [routerLink]="['/explore']">
     <app-lucide-icon icon="locate" />
     {{ 'nav.back_to_map' | translate }}
   </a>
+
+  <h2 class="page-title">{{ 'review_form.title' | translate }}</h2>
 
   @if (justCreated()) {
     <div class="success-banner">
@@ -15,93 +15,178 @@
   <div class="section">
     <form [formGroup]="form" (ngSubmit)="submit()">
 
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.cleanliness_legend' | translate }}</legend>
-        <div class="form-group">
-          <input
-            id="cleanliness_rating"
-            type="number"
-            min="1"
-            max="5"
-            formControlName="cleanliness_rating"
-          />
-        </div>
-      </fieldset>
+      <!-- Card general -->
+      <div class="review-card">
 
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.felt_safe_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="felt_safe" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="felt_safe" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="felt_safe" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.accessible_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="accessible" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="accessible" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="accessible" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.toilet_paper_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="has_toilet_paper" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="has_toilet_paper" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="has_toilet_paper" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.hygiene_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="hygiene_products_available" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="hygiene_products_available" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="hygiene_products_available" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.gender_mixed_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="has_gender_mixed_option" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.free_entry_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="could_enter_without_buying" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="could_enter_without_buying" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="could_enter_without_buying" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fieldset-reset">
-        <legend>{{ 'review_form.changing_table_legend' | translate }}</legend>
-        <div class="radio-group">
-          <label><input type="radio" formControlName="has_changing_table" value="true" /> {{ 'review_form.yes' | translate }}</label>
-          <label><input type="radio" formControlName="has_changing_table" value="false" /> {{ 'review_form.no' | translate }}</label>
-          <label><input type="radio" formControlName="has_changing_table" value="" /> {{ 'review_form.skip_answer' | translate }}</label>
-        </div>
-      </fieldset>
-
-      @if (form.get('has_changing_table')?.value === 'true') {
-        <fieldset class="fieldset-reset">
-          <legend>{{ 'review_form.changing_location_legend' | translate }}</legend>
-          <div class="radio-group">
-            <label><input type="radio" formControlName="changing_table_location" value="mens" /> {{ 'review_form.mens_bathroom' | translate }}</label>
-            <label><input type="radio" formControlName="changing_table_location" value="womens" /> {{ 'review_form.womens_bathroom' | translate }}</label>
-            <label><input type="radio" formControlName="changing_table_location" value="mixed" /> {{ 'review_form.mixed_bathroom' | translate }}</label>
+        <div class="review-row review-row--stars">
+          <span class="review-row-label">{{ 'review_form.cleanliness_legend' | translate }}</span>
+          <div class="star-group" role="group" [attr.aria-label]="'review_form.cleanliness_legend' | translate">
+            @for (star of stars; track star) {
+              <button
+                type="button"
+                class="star-btn"
+                [class.active]="(form.get('cleanliness_rating')?.value ?? 0) >= star"
+                (click)="form.get('cleanliness_rating')?.setValue(star)"
+                [attr.aria-label]="star + ' de 5'"
+              >★</button>
+            }
           </div>
-        </fieldset>
-      }
+        </div>
 
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.toilet_paper_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('has_toilet_paper')?.value === 'true'" (click)="form.get('has_toilet_paper')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_toilet_paper')?.value === 'false'" (click)="form.get('has_toilet_paper')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_toilet_paper')?.value === ''" (click)="form.get('has_toilet_paper')?.setValue('')">∅</button>
+          </div>
+        </div>
+
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.free_entry_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'true'" (click)="form.get('could_enter_without_buying')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'false'" (click)="form.get('could_enter_without_buying')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === ''" (click)="form.get('could_enter_without_buying')?.setValue('')">∅</button>
+          </div>
+        </div>
+
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.changing_table_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('has_changing_table')?.value === 'true'" (click)="form.get('has_changing_table')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_changing_table')?.value === 'false'" (click)="form.get('has_changing_table')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_changing_table')?.value === ''" (click)="form.get('has_changing_table')?.setValue('')">∅</button>
+          </div>
+        </div>
+
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.gender_mixed_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'true'" (click)="form.get('has_gender_mixed_option')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'false'" (click)="form.get('has_gender_mixed_option')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === ''" (click)="form.get('has_gender_mixed_option')?.setValue('')">∅</button>
+          </div>
+        </div>
+
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.felt_safe_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === 'true'" (click)="form.get('felt_safe')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === 'false'" (click)="form.get('felt_safe')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === ''" (click)="form.get('felt_safe')?.setValue('')">∅</button>
+          </div>
+        </div>
+
+        @if (form.get('has_changing_table')?.value === 'true') {
+          <div class="review-row review-row--sub">
+            <span class="review-row-label review-row-label--sub">{{ 'review_form.changing_location_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('changing_table_location')?.value === 'mens'" (click)="form.get('changing_table_location')?.setValue('mens')">♂ {{ 'review_form.mens_bathroom' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('changing_table_location')?.value === 'womens'" (click)="form.get('changing_table_location')?.setValue('womens')">♀ {{ 'review_form.womens_bathroom' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('changing_table_location')?.value === 'mixed'" (click)="form.get('changing_table_location')?.setValue('mixed')">⚧ {{ 'review_form.mixed_bathroom' | translate }}</button>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <!-- Accessibilitat (col·lapsable) -->
+      <div class="review-card">
+        <button type="button" class="review-card-toggle" (click)="toggleAccessibility()">
+          <span>{{ 'review_form.section_accessibility' | translate }}</span>
+          <span class="review-card-chevron" [class.open]="accessibilityOpen()">›</span>
+        </button>
+
+        @if (accessibilityOpen()) {
+          <div class="review-row">
+            <span class="review-row-label">{{ 'review_form.accessible_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('accessible')?.value === 'true'" (click)="form.get('accessible')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('accessible')?.value === 'false'" (click)="form.get('accessible')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('accessible')?.value === ''" (click)="form.get('accessible')?.setValue('')">∅</button>
+            </div>
+          </div>
+
+          <div class="review-row review-row--sub">
+            <span class="review-row-label review-row-label--sub">{{ 'review_form.step_free_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('step_free_access')?.value === 'true'" (click)="form.get('step_free_access')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('step_free_access')?.value === 'false'" (click)="form.get('step_free_access')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('step_free_access')?.value === ''" (click)="form.get('step_free_access')?.setValue('')">∅</button>
+            </div>
+          </div>
+
+          <div class="review-row review-row--sub">
+            <span class="review-row-label review-row-label--sub">{{ 'review_form.wide_door_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('wide_door')?.value === 'true'" (click)="form.get('wide_door')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('wide_door')?.value === 'false'" (click)="form.get('wide_door')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('wide_door')?.value === ''" (click)="form.get('wide_door')?.setValue('')">∅</button>
+            </div>
+          </div>
+
+          <div class="review-row review-row--sub">
+            <span class="review-row-label review-row-label--sub">{{ 'review_form.turning_space_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('turning_space')?.value === 'true'" (click)="form.get('turning_space')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('turning_space')?.value === 'false'" (click)="form.get('turning_space')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('turning_space')?.value === ''" (click)="form.get('turning_space')?.setValue('')">∅</button>
+            </div>
+          </div>
+
+          <div class="review-row review-row--sub">
+            <span class="review-row-label review-row-label--sub">{{ 'review_form.grab_bars_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('has_grab_bars')?.value === 'true'" (click)="form.get('has_grab_bars')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('has_grab_bars')?.value === 'false'" (click)="form.get('has_grab_bars')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('has_grab_bars')?.value === ''" (click)="form.get('has_grab_bars')?.setValue('')">∅</button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Menstruació (col·lapsable) -->
+      <div class="review-card">
+        <button type="button" class="review-card-toggle" (click)="toggleMenstruation()">
+          <span>{{ 'review_form.section_menstruation' | translate }}</span>
+          <span class="review-card-chevron" [class.open]="menstruationOpen()">›</span>
+        </button>
+
+        @if (menstruationOpen()) {
+          <div class="review-row">
+            <span class="review-row-label">{{ 'review_form.hygiene_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('hygiene_products_available')?.value === 'true'" (click)="form.get('hygiene_products_available')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('hygiene_products_available')?.value === 'false'" (click)="form.get('hygiene_products_available')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('hygiene_products_available')?.value === ''" (click)="form.get('hygiene_products_available')?.setValue('')">∅</button>
+            </div>
+          </div>
+
+          <hr class="review-divider" />
+
+          <div class="review-row">
+            <span class="review-row-label">{{ 'review_form.menstrual_cup_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('menstrual_cup_suitable')?.value === 'true'" (click)="form.get('menstrual_cup_suitable')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('menstrual_cup_suitable')?.value === 'false'" (click)="form.get('menstrual_cup_suitable')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('menstrual_cup_suitable')?.value === ''" (click)="form.get('menstrual_cup_suitable')?.setValue('')">∅</button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Comentari -->
       <div class="form-group">
         <label for="comment">{{ 'review_form.comment_label' | translate }}</label>
         <textarea id="comment" formControlName="comment"></textarea>

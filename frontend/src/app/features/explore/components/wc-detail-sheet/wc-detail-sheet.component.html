@@ -99,17 +99,22 @@
                   }
                 </div>
                 <div class="review-tags">
-                  @if (review.felt_safe) { <span class="review-tag">{{ 'sheet.tag_safe' | translate }}</span> }
                   @if (review.accessible) { <span class="review-tag">{{ 'sheet.tag_accessible' | translate }}</span> }
+                  @if (review.step_free_access) { <span class="review-tag">{{ 'sheet.tag_step_free' | translate }}</span> }
+                  @if (review.wide_door) { <span class="review-tag">{{ 'sheet.tag_wide_door' | translate }}</span> }
+                  @if (review.turning_space) { <span class="review-tag">{{ 'sheet.tag_turning_space' | translate }}</span> }
+                  @if (review.has_grab_bars) { <span class="review-tag">{{ 'sheet.tag_grab_bars' | translate }}</span> }
                   @if (review.has_toilet_paper) { <span class="review-tag">{{ 'sheet.tag_paper' | translate }}</span> }
                   @if (review.hygiene_products_available) { <span class="review-tag">{{ 'sheet.tag_hygiene' | translate }}</span> }
+                  @if (review.menstrual_cup_suitable) { <span class="review-tag">{{ 'sheet.tag_menstrual_cup' | translate }}</span> }
                   @if (review.could_enter_without_buying) { <span class="review-tag">{{ 'sheet.tag_free_entry' | translate }}</span> }
                   @if (review.has_gender_mixed_option) { <span class="review-tag">{{ 'sheet.tag_gender_mixed' | translate }}</span> }
+                  @if (review.felt_safe) { <span class="review-tag">{{ 'sheet.tag_safe' | translate }}</span> }
                   @if (review.has_changing_table) {
                     <span class="review-tag">{{ 'sheet.tag_changing_table' | translate }}
-                      @if (review.changing_table_location === 'mens') { {{ 'sheet.changing_mens' | translate }} }
-                      @else if (review.changing_table_location === 'womens') { {{ 'sheet.changing_womens' | translate }} }
-                      @else if (review.changing_table_location === 'mixed') { {{ 'sheet.changing_mixed' | translate }} }
+                      @if (review.changing_table_location === 'mens') { ♂ }
+                      @else if (review.changing_table_location === 'womens') { ♀ }
+                      @else if (review.changing_table_location === 'mixed') { ⚧ }
                     </span>
                   }
                 </div>

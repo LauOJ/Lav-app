@@ -87,6 +87,15 @@ class Review(Base):
     has_changing_table = Column(Boolean, nullable=True)
     changing_table_location = Column(String(10), nullable=True)  # 'mens', 'womens', 'mixed'
 
+    # Accessibilitat (detall)
+    step_free_access = Column(Boolean, nullable=True)
+    wide_door = Column(Boolean, nullable=True)
+    turning_space = Column(Boolean, nullable=True)
+    has_grab_bars = Column(Boolean, nullable=True)
+
+    # Menstruació
+    menstrual_cup_suitable = Column(Boolean, nullable=True)
+
     comment = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

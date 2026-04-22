@@ -12,6 +12,13 @@ class ReviewBase(BaseModel):
     has_gender_mixed_option: bool | None = None
     has_changing_table: bool | None = None
     changing_table_location: str | None = None
+    # Accessibilitat (detall)
+    step_free_access: bool | None = None
+    wide_door: bool | None = None
+    turning_space: bool | None = None
+    has_grab_bars: bool | None = None
+    # Menstruació
+    menstrual_cup_suitable: bool | None = None
     comment: str | None = None
 
 

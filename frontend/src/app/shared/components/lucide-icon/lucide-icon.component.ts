@@ -14,7 +14,11 @@ export type LucideIconName =
   | 'sparkles'
   | 'locate'
   | 'pencil'
-  | 'settings';
+  | 'settings'
+  | 'footprints'
+  | 'rotate-ccw'
+  | 'grip-horizontal'
+  | 'cup-soda';
 
 @Component({
   selector: 'app-lucide-icon',

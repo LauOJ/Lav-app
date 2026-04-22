@@ -71,18 +71,28 @@
   @if (showMoreFilters()) {
     <div class="more-filters-backdrop" (click)="showMoreFilters.set(false)"></div>
     <div class="more-filters-panel" role="group" [attr.aria-label]="'explore.more_filters' | translate">
-      @for (chip of moreFilterChips; track chip.key) {
-        @if (chip.key !== 'freeEntry' || !wcState.filters().isPublic) {
-          <button
-            type="button"
-            class="more-filter-item"
-            [class.active]="wcState.filters()[chip.key]"
-            [attr.aria-pressed]="wcState.filters()[chip.key]"
-            (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
-          >
-            <app-lucide-icon [icon]="chip.icon" />
-            <span>{{ chip.label | translate }}</span>
+      @for (section of moreFilterSections; track $index) {
+        @if (section.label) {
+          <button type="button" class="more-filter-section-toggle" (click)="toggleSection($index)">
+            <span>{{ section.label | translate }}</span>
+            <span class="more-filter-section-chevron" [class.open]="sectionOpen()[$index]">›</span>
           </button>
+        }
+        @if (!section.label || sectionOpen()[$index]) {
+          @for (chip of section.chips; track chip.key) {
+            @if (chip.key !== 'freeEntry' || !wcState.filters().isPublic) {
+              <button
+                type="button"
+                class="more-filter-item"
+                [class.active]="wcState.filters()[chip.key]"
+                [attr.aria-pressed]="wcState.filters()[chip.key]"
+                (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
+              >
+                <app-lucide-icon [icon]="chip.icon" />
+                <span>{{ chip.label | translate }}</span>
+              </button>
+            }
+          }
         }
       }
     </div>

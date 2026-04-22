@@ -21,6 +21,11 @@ interface FilterChip {
   icon: LucideIconName;
 }
 
+interface FilterSection {
+  label?: string; // i18n key for section header, undefined = no header
+  chips: FilterChip[];
+}
+
 @Component({
   imports: [
     CommonModule,
@@ -50,19 +55,44 @@ export class ExplorePage implements OnInit {
   readonly searchLoading = signal(false);
 
   readonly filterChips: ReadonlyArray<FilterChip> = [
-    { key: 'isPublic', label: 'filter.isPublic', icon: 'door-open' },
-    { key: 'clean',    label: 'filter.clean',    icon: 'sparkles' },
+    { key: 'isPublic',   label: 'filter.isPublic',   icon: 'door-open' },
+    { key: 'clean',      label: 'filter.clean',      icon: 'sparkles' },
     { key: 'accessible', label: 'filter.accessible', icon: 'accessibility' },
   ];
 
-  readonly moreFilterChips: ReadonlyArray<FilterChip> = [
-    { key: 'safe',           label: 'filter.safe',           icon: 'lock' },
-    { key: 'withPaper',      label: 'filter.withPaper',      icon: 'scroll' },
-    { key: 'hygieneProducts',label: 'filter.hygieneProducts', icon: 'droplets' },
-    { key: 'freeEntry',      label: 'filter.freeEntry',      icon: 'tag' },
-    { key: 'genderMixed',    label: 'filter.genderMixed',    icon: 'non-binary' },
-    { key: 'changingTable',  label: 'filter.changingTable',  icon: 'baby' },
+  readonly moreFilterSections: ReadonlyArray<FilterSection> = [
+    {
+      chips: [
+        { key: 'withPaper',     label: 'filter.withPaper',     icon: 'scroll' },
+        { key: 'freeEntry',     label: 'filter.freeEntry',     icon: 'tag' },
+        { key: 'changingTable', label: 'filter.changingTable', icon: 'baby' },
+        { key: 'genderMixed',   label: 'filter.genderMixed',   icon: 'non-binary' },
+        { key: 'safe',          label: 'filter.safe',          icon: 'lock' },
+      ],
+    },
+    {
+      label: 'filter.section_accessibility',
+      chips: [
+        { key: 'stepFree',     label: 'filter.stepFree',     icon: 'footprints' },
+        { key: 'wideDoor',     label: 'filter.wideDoor',     icon: 'door-open' },
+        { key: 'turningSpace', label: 'filter.turningSpace', icon: 'rotate-ccw' },
+        { key: 'grabBars',     label: 'filter.grabBars',     icon: 'grip-horizontal' },
+      ],
+    },
+    {
+      label: 'filter.section_menstruation',
+      chips: [
+        { key: 'hygieneProducts', label: 'filter.hygieneProducts', icon: 'droplets' },
+        { key: 'menstrualCup',    label: 'filter.menstrualCup',    icon: 'cup-soda' },
+      ],
+    },
   ];
+
+  readonly sectionOpen = signal<Record<number, boolean>>({ 0: true, 1: false, 2: false });
+
+  toggleSection(index: number): void {
+    this.sectionOpen.update(state => ({ ...state, [index]: !state[index] }));
+  }
 
   readonly showMoreFilters = signal(false);
   readonly activeTooltip = signal<string | null>(null);
@@ -84,7 +114,9 @@ export class ExplorePage implements OnInit {
   }
 
   readonly activeMoreFiltersCount = computed(() =>
-    this.moreFilterChips.filter(c => this.wcState.filters()[c.key]).length
+    this.moreFilterSections
+      .flatMap(s => s.chips)
+      .filter(c => this.wcState.filters()[c.key]).length
   );
 
   readonly showEmptyState = computed(
