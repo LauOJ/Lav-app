@@ -29,5 +29,5 @@ DATABASE_URL = _require_env("DATABASE_URL")
 SECRET_KEY = _require_env("SECRET_KEY")
 if len(SECRET_KEY) < 32:
     raise RuntimeError("SECRET_KEY must be at least 32 characters. Generate one with: openssl rand -hex 32")
-RESEND_API_KEY = _require_env("RESEND_API_KEY")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY", "")
 FRONTEND_URL = _require_env("FRONTEND_URL")
