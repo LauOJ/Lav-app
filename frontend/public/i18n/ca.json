@@ -289,5 +289,9 @@
     "delete": "Esborra",
     "save": "Desa",
     "cancel": "Cancel·la"
+  },
+
+  "footer": {
+    "contact": "Contacte"
   }
 }
