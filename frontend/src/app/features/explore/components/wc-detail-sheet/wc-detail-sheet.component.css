@@ -139,13 +139,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  min-height: 2.6rem;
-  padding: 0.5rem 0.4rem;
+  gap: 0.3rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.4rem;
   border: 1px solid var(--color-primary);
   border-radius: 10px;
   background: var(--color-surface);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-decoration: none;
   color: var(--color-primary);
@@ -155,8 +155,8 @@
 }
 
 .action-btn ::ng-deep .lucide-icon {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
 }
 
 .action-btn:active {

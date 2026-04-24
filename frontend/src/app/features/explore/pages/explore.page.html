@@ -112,15 +112,24 @@
   }
 
   @if (error()) {
-    <div class="status-banner error">{{ error() }}</div>
+    <div class="status-banner error">
+      <span>{{ error() }}</span>
+      <button type="button" class="banner-close" (click)="error.set(null)" aria-label="Tancar">✕</button>
+    </div>
   }
 
   @if (searchError()) {
-    <div class="status-banner error">{{ searchError() }}</div>
+    <div class="status-banner error">
+      <span>{{ searchError() }}</span>
+      <button type="button" class="banner-close" (click)="searchError.set(null)" aria-label="Tancar">✕</button>
+    </div>
   }
 
   @if (geoError()) {
-    <div class="status-banner error">{{ geoError() }}</div>
+    <div class="status-banner error">
+      <span>{{ geoError() }}</span>
+      <button type="button" class="banner-close" (click)="geoError.set(null)" aria-label="Tancar">✕</button>
+    </div>
   }
 
   @if (showEmptyState()) {

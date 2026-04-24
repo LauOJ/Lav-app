@@ -268,13 +268,33 @@
   transform: translateX(-50%);
   background: #ffffff;
   color: #222222;
-  padding: 0.55rem 0.9rem;
+  padding: 0.45rem 0.6rem 0.45rem 0.9rem;
   border-radius: 999px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   font-size: 0.9rem;
   z-index: 1000;
   max-width: calc(100% - 1rem);
   text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.banner-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: inherit;
+  padding: 0 0.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.banner-close:hover {
+  opacity: 1;
 }
 
 .status-banner.error {
