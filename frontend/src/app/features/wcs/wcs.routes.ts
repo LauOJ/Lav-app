@@ -23,6 +23,7 @@ export const WCS_ROUTES: Routes = [
   {
     path: ':id/reviews/edit',
     canActivate: [authGuard],
+    data: { editMode: true },
     loadComponent: () =>
       import('../wcs/pages/review-form.page').then(m => m.ReviewFormPage),
   },
