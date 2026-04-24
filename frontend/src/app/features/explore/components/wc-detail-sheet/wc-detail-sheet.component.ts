@@ -39,6 +39,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
 
   readonly isFavorite = signal(false);
   readonly favoriteLoading = signal(false);
+  readonly userReview = signal<Review | null>(null);
 
   @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
 
@@ -70,8 +71,10 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
       this.sheetState.set(window.innerWidth >= 768 ? 'expanded' : 'collapsed');
       this.showReviews.set(false);
       this.isFavorite.set(false);
+      this.userReview.set(null);
       if (this.userState.isLoggedIn()) {
         this.loadFavoriteState(wc.id);
+        this.loadUserReview(wc.id);
       }
     });
 
@@ -136,6 +139,13 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
         this.favoriteLoading.set(false);
       },
       complete: () => this.favoriteLoading.set(false),
+    });
+  }
+
+  private loadUserReview(wcId: number): void {
+    this.reviewsService.getMyReviewForWc(wcId).subscribe({
+      next: (review) => this.userReview.set(review),
+      error: () => this.userReview.set(null),
     });
   }
 

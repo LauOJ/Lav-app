@@ -47,14 +47,25 @@
             <app-lucide-icon icon="star" />
             {{ (isFavorite() ? 'sheet.saved' : 'sheet.save') | translate }}
           </button>
-          <a
-            class="action-btn"
-            [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
-            (click)="$event.stopPropagation()"
-          >
-            <app-lucide-icon icon="pencil" />
-            {{ 'sheet.review_btn' | translate }}
-          </a>
+          @if (userReview()) {
+            <a
+              class="action-btn"
+              [routerLink]="['/wcs', wc().id, 'reviews', 'edit']"
+              (click)="$event.stopPropagation()"
+            >
+              <app-lucide-icon icon="pencil" />
+              {{ 'sheet.edit_review_btn' | translate }}
+            </a>
+          } @else {
+            <a
+              class="action-btn"
+              [routerLink]="['/wcs', wc().id, 'reviews', 'new']"
+              (click)="$event.stopPropagation()"
+            >
+              <app-lucide-icon icon="pencil" />
+              {{ 'sheet.review_btn' | translate }}
+            </a>
+          }
           <a
             class="action-btn"
             [routerLink]="['/wcs', wc().id, 'edit']"

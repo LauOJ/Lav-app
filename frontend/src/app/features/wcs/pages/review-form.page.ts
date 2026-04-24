@@ -35,7 +35,8 @@ export class ReviewFormPage implements OnInit {
   }
 
   ngOnInit() {
-    const isEdit = this.router.url.includes('/reviews/edit');
+    const segments = this.route.snapshot.url;
+    const isEdit = segments.length > 0 && segments[segments.length - 1].path === 'edit';
     this.isEditMode.set(isEdit);
 
     if (isEdit) {
