@@ -181,6 +181,7 @@
 
   "review_form": {
     "title": "Nueva review",
+    "title_edit": "Edita tu valoración",
     "back": "Volver al mapa",
     "wc_created_banner": "WC creado correctamente. Ahora puedes añadir tu experiencia.",
     "cleanliness_legend": "Limpieza (1–5)",

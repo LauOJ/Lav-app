@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from database import get_db
 from schemas.review import ReviewCreate, ReviewRead, ReviewUpdate
-from crud.review import create_review, delete_review, update_review
+from crud.review import create_review, delete_review, update_review, get_review_by_user_and_wc
 from security import get_current_user
 from limiter import limiter
 from models import User
@@ -14,6 +14,21 @@ router = APIRouter(
     prefix="/reviews",
     tags=["reviews"],
 )
+
+@router.get(
+    "/mine/wc/{wc_id}",
+    response_model=ReviewRead,
+)
+def get_my_review_for_wc(
+    wc_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    review = get_review_by_user_and_wc(db, current_user.id, wc_id)
+    if not review:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No review found")
+    return review
+
 
 @router.post(
     "",

@@ -32,6 +32,10 @@ export class ReviewsService {
     return this.api.get<Review[]>(`/wcs/${wcId}/reviews`);
   }
 
+  getMyReviewForWc(wcId: number): Observable<Review> {
+    return this.api.get<Review>(`/reviews/mine/wc/${wcId}`);
+  }
+
   createReview(data: ReviewPayload & { wc_id: number }) {
     return this.api.post('/reviews', data);
   }

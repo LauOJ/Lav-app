@@ -4,7 +4,7 @@
     {{ 'nav.back_to_map' | translate }}
   </a>
 
-  <h2 class="page-title">{{ 'review_form.title' | translate }}</h2>
+  <h2 class="page-title">{{ (isEditMode() ? 'review_form.title_edit' : 'review_form.title') | translate }}</h2>
 
   @if (justCreated()) {
     <div class="success-banner">

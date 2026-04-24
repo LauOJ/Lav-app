@@ -181,6 +181,7 @@
 
   "review_form": {
     "title": "Nova valoració",
+    "title_edit": "Edita la teva valoració",
     "back": "Torna al mapa",
     "wc_created_banner": "WC creat correctament. Ara pots afegir la teva experiència.",
     "cleanliness_legend": "Neteja (1–5)",

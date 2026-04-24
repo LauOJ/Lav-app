@@ -93,3 +93,7 @@ def get_reviews_by_wc_id(db: Session, wc_id: int) -> list[Review]:
 
 def get_reviews_by_user_id(db: Session, user_id: int) -> list[Review]:
     return db.query(Review).filter(Review.user_id == user_id).all()
+
+
+def get_review_by_user_and_wc(db: Session, user_id: int, wc_id: int) -> Review | None:
+    return db.query(Review).filter(Review.user_id == user_id, Review.wc_id == wc_id).first()
