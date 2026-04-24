@@ -25,6 +25,7 @@ export class LoginPage {
 
   readonly email = signal('');
   readonly password = signal('');
+  readonly showPassword = signal(false);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 

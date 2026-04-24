@@ -34,6 +34,8 @@ export class ProfilePage {
   // Password form
   readonly currentPassword = signal('');
   readonly newPassword = signal('');
+  readonly showCurrentPwd = signal(false);
+  readonly showNewPwd = signal(false);
   readonly pwdLoading = signal(false);
   readonly pwdError = signal<string | null>(null);
   readonly pwdSuccess = signal(false);

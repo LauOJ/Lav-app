@@ -18,7 +18,9 @@ export type LucideIconName =
   | 'footprints'
   | 'rotate-ccw'
   | 'grip-horizontal'
-  | 'cup-soda';
+  | 'cup-soda'
+  | 'eye'
+  | 'eye-off';
 
 @Component({
   selector: 'app-lucide-icon',

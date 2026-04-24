@@ -20,6 +20,8 @@
 
   "auth": {
     "session_expired": "La sessió ha caducat. Torna a iniciar sessió.",
+    "show_password": "Mostra la contrasenya",
+    "hide_password": "Amaga la contrasenya",
     "login": {
       "title": "Login",
       "password_label": "Contrasenya",
@@ -74,6 +76,8 @@
     "more_filters": "Més filtres",
     "loading_wcs": "Carregant WCs…",
     "no_results": "No hi ha banys que compleixin els filtres",
+    "no_results_filters": "No hi ha WCs que compleixin els filtres",
+    "no_results_area": "No hi ha WCs en aquesta zona",
     "clear_filters": "Treure filtres",
     "geo_unavailable": "La geolocalització no està disponible en aquest navegador.",
     "geo_error": "No s'ha pogut obtenir la teva ubicació.",

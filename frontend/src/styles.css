@@ -103,6 +103,36 @@ fieldset {
   margin-bottom: 1.25rem;
 }
 
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding-right: 2.75rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted, #888);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.password-toggle:hover {
+  color: var(--color-text);
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

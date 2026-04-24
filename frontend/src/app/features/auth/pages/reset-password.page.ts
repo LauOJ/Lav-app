@@ -3,10 +3,11 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { AuthService } from '../../../core/auth/auth.service';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   selector: 'app-reset-password-page',
-  imports: [RouterModule, TranslatePipe],
+  imports: [RouterModule, TranslatePipe, LucideIconComponent],
   templateUrl: './reset-password.page.html',
 })
 export class ResetPasswordPage implements OnInit {
@@ -15,6 +16,7 @@ export class ResetPasswordPage implements OnInit {
   private readonly translate = inject(TranslateService);
 
   readonly password = signal('');
+  readonly showPassword = signal(false);
   readonly loading = signal(false);
   readonly success = signal(false);
   readonly error = signal<string | null>(null);

@@ -123,6 +123,10 @@ export class ExplorePage implements OnInit {
     () => !this.loading() && !this.error() && this.wcState.filteredWcs().length === 0
   );
 
+  readonly hasActiveFilters = computed(() =>
+    Object.values(this.wcState.filters()).some(v => v === true)
+  );
+
   ngOnInit(): void {
     this.requestInitialLocation();
   }

@@ -20,6 +20,8 @@
 
   "auth": {
     "session_expired": "La sesión ha caducado. Vuelve a iniciar sesión.",
+    "show_password": "Mostrar contraseña",
+    "hide_password": "Ocultar contraseña",
     "login": {
       "title": "Login",
       "password_label": "Contraseña",
@@ -74,6 +76,8 @@
     "more_filters": "Más filtros",
     "loading_wcs": "Cargando WCs…",
     "no_results": "No hay baños que cumplan los filtros",
+    "no_results_filters": "No hay WCs que cumplan los filtros",
+    "no_results_area": "No hay WCs en esta zona",
     "clear_filters": "Quitar filtros",
     "geo_unavailable": "La geolocalización no está disponible en este navegador.",
     "geo_error": "No se pudo obtener tu ubicación.",

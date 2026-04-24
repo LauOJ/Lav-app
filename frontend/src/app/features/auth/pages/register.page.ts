@@ -7,10 +7,11 @@ import { UserService } from '../../../core/user/user.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { AuthState } from '../../../core/auth/auth.state';
 import { UserState } from '../../../core/user/user.state';
+import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 
 @Component({
   selector: 'app-register-page',
-  imports: [CommonModule, RouterModule, TranslatePipe],
+  imports: [CommonModule, RouterModule, TranslatePipe, LucideIconComponent],
   templateUrl: './register.page.html',
 })
 export class RegisterPage {
@@ -23,6 +24,7 @@ export class RegisterPage {
 
   readonly email = signal('');
   readonly password = signal('');
+  readonly showPassword = signal(false);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 
