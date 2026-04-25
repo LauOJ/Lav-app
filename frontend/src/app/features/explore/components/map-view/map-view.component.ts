@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
 
 import { WC } from '../../../wcs/models/wc.model';
@@ -19,7 +19,7 @@ import { BoundingBox } from '../../../wcs/models/bounding-box.model';
 
 @Component({
   selector: 'app-map-view',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.css'
 })
@@ -135,11 +135,30 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
         icon: this.wcMarkerIcon,
       });
       marker.on('click', () => this.wcSelected.emit(wc.id));
+      marker.bindTooltip(wc.name, {
+        permanent: true,
+        direction: 'right',
+        className: 'wc-name-tooltip',
+        offset: [8, -20],
+      });
 
       marker.addTo(this.markers);
       this.markerById.set(wc.id, marker);
     }
     this.updateSelectedMarkerClass();
+    this.updateTooltipVisibility();
+  }
+
+  private updateTooltipVisibility(): void {
+    if (!this.map) return;
+    const show = this.map.getZoom() >= 16;
+    this.markerById.forEach(marker => {
+      if (show) {
+        marker.openTooltip();
+      } else {
+        marker.closeTooltip();
+      }
+    });
   }
 
   private updateSelectedMarkerClass(): void {
@@ -167,6 +186,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (!this.map) return;
 
     this.map.on('moveend', () => this.emitBounds());
+    this.map.on('zoomend', () => this.updateTooltipVisibility());
 
     this.map.on('click', (event: L.LeafletMouseEvent) => {
       this.pendingLatLng = event.latlng;

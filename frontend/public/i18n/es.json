@@ -89,6 +89,7 @@
     "nearby_show": "▼ Ver WCs cercanos",
     "nearby_add_review": "Añadir review",
     "add_wc_here": "Añadir WC aquí",
+    "add_wc_hint": "Toca el mapa para añadir un WC",
     "nearby_cancel": "Cancelar",
     "nearby_confirm": "Añadir igualmente"
   },

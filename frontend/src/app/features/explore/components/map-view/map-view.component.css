@@ -2,6 +2,24 @@
   display: block;
   flex: 1 1 auto;
   min-height: 0;
+  position: relative;
+}
+
+.map-hint {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--color-muted, #888);
+  font-size: 0.7rem;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 500;
+  white-space: nowrap;
+  backdrop-filter: blur(3px);
 }
 
 .map-container {
@@ -136,4 +154,21 @@
   right: 6px !important;
   padding: 0 !important;
   line-height: 1 !important;
+}
+
+/* WC name tooltips at high zoom */
+:host ::ng-deep .wc-name-tooltip {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--color-border, #dde2ea);
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text, #1a2535);
+  padding: 2px 7px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+:host ::ng-deep .wc-name-tooltip::before {
+  display: none;
 }
