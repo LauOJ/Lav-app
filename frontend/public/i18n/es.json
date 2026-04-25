@@ -299,6 +299,32 @@
   },
 
   "footer": {
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "privacy": "Privacidad"
+  },
+
+  "privacy": {
+    "title": "Política de privacidad",
+    "back": "Volver al mapa",
+    "updated": "Última actualización: abril 2025",
+    "intro": "Lavapp es una aplicación comunitaria para encontrar y valorar baños públicos. Aquí te explicamos qué datos recogemos y para qué los usamos.",
+
+    "s1_title": "Cuenta de usuario",
+    "s1_body": "Cuando te registras, guardamos tu correo electrónico y tu contraseña cifrada. Estos datos se utilizan exclusivamente para identificarte dentro de la aplicación. No compartimos tu correo con nadie ni lo enviamos a ningún servicio externo.",
+
+    "s2_title": "Geolocalización",
+    "s2_body": "Lavapp puede acceder a tu ubicación cuando pulsas el botón de localizar. Este dato se utiliza únicamente para centrar el mapa en tu posición y no se guarda nunca en ninguna base de datos.",
+
+    "s3_title": "Valoraciones",
+    "s3_body": "Cuando valoras un WC, guardamos la información que introduces: limpieza, accesibilidad, disponibilidad de papel, productos de higiene menstrual, etc. Estas valoraciones están asociadas a tu cuenta pero no a tu nombre real. Puedes editar o eliminar tus valoraciones en cualquier momento desde la ficha del WC.",
+
+    "s4_title": "Cookies y terceros",
+    "s4_body": "Lavapp no utiliza cookies de seguimiento, publicidad ni servicios de analítica de terceros. El mapa utiliza teselas de OpenStreetMap, un proyecto de mapas de código abierto. Las peticiones de teselas se hacen directamente a los servidores de OpenStreetMap, que pueden registrar tu dirección IP.",
+
+    "s5_title": "Tus derechos",
+    "s5_body": "Tienes derecho a consultar, modificar y eliminar tus datos en cualquier momento. Desde la página de perfil puedes cambiar tu correo electrónico y contraseña, o eliminar tu cuenta de forma permanente. Al eliminar la cuenta, borramos todas tus valoraciones y datos personales de forma irreversible.",
+
+    "s6_title": "Contacto",
+    "s6_body": "Si tienes cualquier duda sobre la privacidad de tus datos, escríbenos a:"
   }
 }

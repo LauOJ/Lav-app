@@ -1,0 +1,78 @@
+.policy-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+
+.map-link ::ng-deep .icon-mask {
+  width: 1rem;
+  height: 1rem;
+}
+
+.policy-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.3rem;
+}
+
+.policy-updated {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin: 0 0 1.5rem;
+}
+
+.policy-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0 0 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.policy-section {
+  margin-bottom: 1.75rem;
+}
+
+.policy-section h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.4rem;
+}
+
+.policy-section p {
+  font-size: 0.93rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.policy-email {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.93rem;
+  text-decoration: none;
+}
+
+.policy-email:hover {
+  text-decoration: underline;
+}

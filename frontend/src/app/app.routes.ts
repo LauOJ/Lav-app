@@ -55,6 +55,11 @@ export const routes: Routes = [
       import('./features/about/about.page').then(m => m.AboutPage),
   },
   {
+    path: 'privacy',
+    loadComponent: () =>
+      import('./features/privacy/privacy.page').then(m => m.PrivacyPage),
+  },
+  {
     path: 'wcs',
     loadChildren: () =>
       import('./features/wcs/wcs.routes').then(m => m.WCS_ROUTES),

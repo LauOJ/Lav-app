@@ -299,6 +299,32 @@
   },
 
   "footer": {
-    "contact": "Contacte"
+    "contact": "Contacte",
+    "privacy": "Privacitat"
+  },
+
+  "privacy": {
+    "title": "Política de privacitat",
+    "back": "Tornar al mapa",
+    "updated": "Última actualització: abril 2025",
+    "intro": "Lavapp és una aplicació comunitària per trobar i valorar banys públics. Aquí t'expliquem quines dades recollim i per a què les fem servir.",
+
+    "s1_title": "Compte d'usuari",
+    "s1_body": "Quan et registres, guardem el teu correu electrònic i la teva contrasenya xifrada. Aquestes dades s'utilitzen exclusivament per identificar-te dins de l'aplicació. No compartim el teu correu amb ningú ni l'enviem a cap servei extern.",
+
+    "s2_title": "Geolocalització",
+    "s2_body": "Lavapp pot accedir a la teva ubicació quan prems el botó de localitzar. Aquesta dada s'utilitza únicament per centrar el mapa en el teu punt i no es guarda mai en cap base de dades.",
+
+    "s3_title": "Valoracions",
+    "s3_body": "Quan valores un WC, guardem la informació que introdueixes: neteja, accessibilitat, disponibilitat de paper, productes d'higiene menstrual, etc. Aquestes valoracions estan associades al teu compte però no al teu nom real. Pots editar o eliminar les teves valoracions en qualsevol moment des de la fitxa del WC.",
+
+    "s4_title": "Cookies i tercers",
+    "s4_body": "Lavapp no utilitza cookies de seguiment, publicitat ni serveis d'analítica de tercers. El mapa utilitza teseles d'OpenStreetMap, un projecte de mapes de codi obert. Les peticions de teseles es fan directament als servidors d'OpenStreetMap, que poden registrar la teva adreça IP.",
+
+    "s5_title": "Els teus drets",
+    "s5_body": "Tens dret a consultar, modificar i eliminar les teves dades en qualsevol moment. Des de la pàgina de perfil pots canviar el teu correu electrònic i contrasenya, o eliminar el teu compte de manera permanent. En eliminar el compte, esborrem totes les teves valoracions i dades personals de manera irreversible.",
+
+    "s6_title": "Contacte",
+    "s6_body": "Si tens qualsevol dubte sobre la privacitat de les teves dades, escriu-nos a:"
   }
 }
