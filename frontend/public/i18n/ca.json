@@ -233,25 +233,10 @@
 
   "about": {
     "title": "Qui som?",
-    "intro": "Lavapp és una eina comunitària per trobar i valorar banys públics a la ciutat.",
-    "manifesto": "Creiem que l'espai públic és un dret, no un privilegi. Tothom mereix poder moure's per la ciutat amb dignitat, comoditat i seguretat — independentment de qui sigui, com es mogui o com s'identifiqui.",
-
-    "s1_title": "El bany públic és un dret",
-    "s1_body": "L'accés a un bany net i segur és una necessitat bàsica. Però massa sovint és desigual: barreres d'accessibilitat, espais no inclusius, escassetat de banys públics... Lavapp vol visibilitzar i canviar aquesta realitat.",
-
-    "s2_title": "Dades col·lectives",
-    "s2_body": "La informació de Lavapp la construeix la gent que viu i transita la ciutat cada dia. Les valoracions s'expressen com a percentatges d'impressions perquè cada persona es pugui fer la seva pròpia idea.",
-
-    "s3_title": "El bany no és neutral",
-    "s3_body": "Si hi ha rampa o no, si hi ha opció mixta, si el lloc és segur per a persones trans o vulnerables: tot això determina, en la pràctica, si l'espai públic és realment per a tothom.",
-
-    "s4_title": "La ciutat és de qui l'habita",
-    "s4_body": "Dones, persones grans, persones amb diversitat funcional, famílies, persones trans, persones sense llar: totes han de poder moure's per la ciutat sense que la manca d'un bany digne els condicioni el trajecte.",
-
-    "cta_title": "Suma-t'hi",
-    "cta_body": "Cada valoració que afegeixes ajuda algú que no coneixes a trobar el que necessita. I ajuda a dibuixar un mapa que reflecteix la ciutat real.",
+    "intro": "Una eina comunitària per trobar banys públics a la ciutat.",
+    "p1": "Lavapp neix de la convicció que tenir accés a un bany net, segur i accessible no hauria de ser una sort. Ho construïm entre totes: cada valoració que afegeixes ajuda algú que no coneixes a trobar el que necessita.",
+    "p2": "No hi ha anuncis, no hi ha algoritmes de recomanació. Només un mapa honest fet per la gent que viu i transita la ciutat cada dia.",
     "cta_btn": "Explorar el mapa",
-
     "back": "Torna al mapa"
   },
 

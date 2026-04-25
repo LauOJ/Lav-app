@@ -233,25 +233,10 @@
 
   "about": {
     "title": "¿Quiénes somos?",
-    "intro": "Lavapp es una herramienta comunitaria para encontrar y valorar baños públicos en la ciudad.",
-    "manifesto": "Creemos que el espacio público es un derecho, no un privilegio. Toda persona merece poder moverse por la ciudad con dignidad, comodidad y seguridad — independientemente de quién sea, cómo se mueva o cómo se identifique.",
-
-    "s1_title": "El baño público es un derecho",
-    "s1_body": "El acceso a un baño limpio y seguro es una necesidad básica. Pero demasiado a menudo es desigual: barreras de accesibilidad, espacios no inclusivos, escasez de baños públicos... Lavapp quiere visibilizar y cambiar esta realidad.",
-
-    "s2_title": "Datos colectivos",
-    "s2_body": "La información de Lavapp la construye la gente que vive y transita la ciudad cada día. Las valoraciones se expresan como porcentajes de impresiones para que cada persona pueda hacerse su propia idea.",
-
-    "s3_title": "El baño no es neutral",
-    "s3_body": "Si hay rampa o no, si hay opción mixta, si el lugar es seguro para personas trans o vulnerables: todo eso determina, en la práctica, si el espacio público es realmente para todo el mundo.",
-
-    "s4_title": "La ciudad es de quien la habita",
-    "s4_body": "Mujeres, personas mayores, personas con diversidad funcional, familias, personas trans, personas sin hogar: todas tienen que poder moverse por la ciudad sin que la falta de un baño digno les condicione el trayecto.",
-
-    "cta_title": "Únete",
-    "cta_body": "Cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita. Y ayuda a dibujar un mapa que refleja la ciudad real.",
+    "intro": "Una herramienta comunitaria para encontrar baños públicos en la ciudad.",
+    "p1": "Lavapp nace de la convicción de que tener acceso a un baño limpio, seguro y accesible no debería ser cuestión de suerte. Lo construimos entre todas: cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita.",
+    "p2": "No hay anuncios, no hay algoritmos de recomendación. Solo un mapa honesto hecho por la gente que vive y transita la ciudad cada día.",
     "cta_btn": "Explorar el mapa",
-
     "back": "Volver al mapa"
   },
 

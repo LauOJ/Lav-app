@@ -6,49 +6,12 @@
     <p class="about-intro">{{ 'about.intro' | translate }}</p>
   </div>
 
-  <blockquote class="about-manifesto">
-    {{ 'about.manifesto' | translate }}
-  </blockquote>
-
-  <div class="about-values">
-
-    <div class="value-card">
-      <app-lucide-icon icon="door-open" class="value-icon" aria-hidden="true" />
-      <div>
-        <h2>{{ 'about.s1_title' | translate }}</h2>
-        <p>{{ 'about.s1_body' | translate }}</p>
-      </div>
-    </div>
-
-    <div class="value-card">
-      <app-lucide-icon icon="scroll" class="value-icon" aria-hidden="true" />
-      <div>
-        <h2>{{ 'about.s2_title' | translate }}</h2>
-        <p>{{ 'about.s2_body' | translate }}</p>
-      </div>
-    </div>
-
-    <div class="value-card">
-      <app-lucide-icon icon="non-binary" class="value-icon" aria-hidden="true" />
-      <div>
-        <h2>{{ 'about.s3_title' | translate }}</h2>
-        <p>{{ 'about.s3_body' | translate }}</p>
-      </div>
-    </div>
-
-    <div class="value-card">
-      <app-lucide-icon icon="locate" class="value-icon" aria-hidden="true" />
-      <div>
-        <h2>{{ 'about.s4_title' | translate }}</h2>
-        <p>{{ 'about.s4_body' | translate }}</p>
-      </div>
-    </div>
-
+  <div class="about-body">
+    <p>{{ 'about.p1' | translate }}</p>
+    <p>{{ 'about.p2' | translate }}</p>
   </div>
 
   <div class="about-cta">
-    <h2>{{ 'about.cta_title' | translate }}</h2>
-    <p>{{ 'about.cta_body' | translate }}</p>
     <a routerLink="/explore" class="btn btn-primary">{{ 'about.cta_btn' | translate }}</a>
   </div>
 
