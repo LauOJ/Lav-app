@@ -12,7 +12,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { WC } from '../../../wcs/models/wc.model';
@@ -35,6 +35,7 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   private readonly reviewsService = inject(ReviewsService);
   private readonly wcService = inject(WCService);
   private readonly translate = inject(TranslateService);
+  private readonly router = inject(Router);
   readonly userState = inject(UserState);
 
   readonly isFavorite = signal(false);
@@ -139,6 +140,13 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
         this.favoriteLoading.set(false);
       },
       complete: () => this.favoriteLoading.set(false),
+    });
+  }
+
+  onEditReview(event: Event): void {
+    event.stopPropagation();
+    this.router.navigate(['/wcs', this.wc().id, 'reviews', 'edit'], {
+      state: { review: this.userReview() },
     });
   }
 

@@ -25,12 +25,16 @@ export class ReviewFormPage implements OnInit {
   readonly justCreated = signal(false);
   readonly isEditMode = signal(false);
   private existingReviewId: number | null = null;
+  private _preloadedReview: Review | null = null;
 
   constructor() {
     const navigation = this.router.getCurrentNavigation();
-    const fromState = navigation?.extras?.state as { justCreated?: boolean } | undefined;
-    if (fromState?.justCreated === true) {
+    const state = navigation?.extras?.state as { justCreated?: boolean; review?: Review } | undefined;
+    if (state?.justCreated === true) {
       this.justCreated.set(true);
+    }
+    if (state?.review) {
+      this._preloadedReview = state.review;
     }
   }
 
@@ -39,16 +43,24 @@ export class ReviewFormPage implements OnInit {
     this.isEditMode.set(isEdit);
 
     if (isEdit) {
-      this.reviewsService.getMyReviewForWc(this.wcId).subscribe({
-        next: (review) => {
-          this.existingReviewId = review.id;
-          this.patchForm(review);
-        },
-        error: () => this.router.navigate(['/wcs', this.wcId, 'reviews', 'new']),
-      });
+      if (this._preloadedReview) {
+        this.existingReviewId = this._preloadedReview.id;
+        this.patchForm(this._preloadedReview);
+      } else {
+        this.reviewsService.getMyReviewForWc(this.wcId).subscribe({
+          next: (review) => {
+            this.existingReviewId = review.id;
+            this.patchForm(review);
+          },
+          error: () => this.router.navigate(['/wcs', this.wcId, 'reviews', 'new']),
+        });
+      }
     } else {
       this.reviewsService.getMyReviewForWc(this.wcId).subscribe({
-        next: () => this.router.navigate(['/wcs', this.wcId, 'reviews', 'edit']),
+        next: (review) => this.router.navigate(
+          ['/wcs', this.wcId, 'reviews', 'edit'],
+          { state: { review } }
+        ),
         error: () => { /* no review yet, stay */ },
       });
     }
