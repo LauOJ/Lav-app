@@ -233,10 +233,13 @@
 
   "about": {
     "title": "¿Quiénes somos?",
-    "intro": "Una herramienta comunitaria para encontrar baños públicos en la ciudad.",
-    "p1": "Lavapp nace de la convicción de que tener acceso a un baño limpio, seguro y accesible no debería ser cuestión de suerte. Lo construimos entre todas: cada valoración que añades ayuda a alguien que no conoces a encontrar lo que necesita.",
-    "p2": "No hay anuncios, no hay algoritmos de recomendación. Solo un mapa honesto hecho por la gente que vive y transita la ciudad cada día.",
-    "cta_btn": "Explorar el mapa",
+    "intro": "Lavapp es una aplicación web colaborativa que pretende ayudar a hacer del espacio público un espacio para todas las personas, independientemente de quiénes sean, cómo se muevan o cómo se identifiquen.",
+    "p1": "Ya sea durante toda la vida o durante un breve período de tiempo, la mayoría de las personas necesitamos tener acceso rápido a un baño limpio, seguro y accesible. Esta herramienta quiere hacer visibles las desigualdades en este acceso y ayudar a las personas que lo necesiten a encontrar los lugares que les permitan hacer uso del espacio público con tranquilidad y con dignidad.",
+    "p2": "No hay anuncios, no hay algoritmos de recomendación, no guardamos tus datos. Solo pretendemos crear una comunidad que identifique los espacios seguros y les dé visibilidad, y que motive a los que no lo son a mejorar, con el objetivo final de hacer del espacio público un lugar para todo el mundo.",
+    "cta_map_q": "¿Quieres colaborar?",
+    "cta_map_a": "Haz crecer el mapa",
+    "cta_coffee_q": "¿Te gusta el proyecto?",
+    "cta_coffee_a": "Invítame a un café",
     "back": "Volver al mapa"
   },
 

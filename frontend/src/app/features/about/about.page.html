@@ -11,8 +11,15 @@
     <p>{{ 'about.p2' | translate }}</p>
   </div>
 
-  <div class="about-cta">
-    <a routerLink="/explore" class="btn btn-primary">{{ 'about.cta_btn' | translate }}</a>
+  <div class="about-ctas">
+    <div class="cta-block">
+      <p class="cta-question">{{ 'about.cta_map_q' | translate }}</p>
+      <a routerLink="/explore" class="btn btn-primary">{{ 'about.cta_map_a' | translate }}</a>
+    </div>
+    <div class="cta-block">
+      <p class="cta-question">{{ 'about.cta_coffee_q' | translate }}</p>
+      <a href="https://ko-fi.com/lavapp" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">{{ 'about.cta_coffee_a' | translate }}</a>
+    </div>
   </div>
 
 </div>
