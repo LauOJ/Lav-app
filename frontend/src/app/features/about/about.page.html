@@ -6,22 +6,21 @@
     <p class="about-intro">{{ 'about.intro' | translate }}</p>
   </div>
 
-  <p class="about-manifesto">{{ 'about.manifesto' | translate }}</p>
-
-  <div class="about-body">
+  <div class="about-text">
+    <p>{{ 'about.manifesto' | translate }}</p>
     <p>{{ 'about.p1' | translate }}</p>
     <p>{{ 'about.p2' | translate }}</p>
   </div>
 
-  <div class="about-ctas">
-    <div class="cta-card cta-card--primary">
-      <p class="cta-question">{{ 'about.cta_map_q' | translate }}</p>
-      <a routerLink="/explore" class="btn btn-white">{{ 'about.cta_map_a' | translate }}</a>
-    </div>
-    <div class="cta-card cta-card--secondary">
-      <p class="cta-question">{{ 'about.cta_coffee_q' | translate }}</p>
-      <a href="https://ko-fi.com/lavapp" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">{{ 'about.cta_coffee_a' | translate }}</a>
-    </div>
+  <div class="about-cta-primary">
+    <p class="cta-question">{{ 'about.cta_map_q' | translate }}</p>
+    <p class="cta-sub">{{ 'about.cta_map_sub' | translate }}</p>
+    <a routerLink="/explore" class="btn btn-white">{{ 'about.cta_map_a' | translate }}</a>
   </div>
+
+  <p class="coffee-link">
+    {{ 'about.cta_coffee_q' | translate }}
+    <a href="https://ko-fi.com/lavapp" target="_blank" rel="noopener noreferrer">{{ 'about.cta_coffee_a' | translate }}</a>
+  </p>
 
 </div>
