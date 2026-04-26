@@ -3,7 +3,7 @@ import { Component, computed, input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { WC } from '../../models/wc.model';
-import { wcCleanlinessStars, wcHasLimitedInfo, wcScorePercentage } from '../../utils/wc.utils';
+import { wcCleanlinessStars, wcHasLimitedInfo, wcScorePercentage, normalizeWcScore } from '../../utils/wc.utils';
 
 @Component({
   selector: 'app-wc-detail-content',
