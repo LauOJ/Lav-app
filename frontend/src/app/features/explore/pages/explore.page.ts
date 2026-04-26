@@ -119,8 +119,10 @@ export class ExplorePage implements OnInit {
       .filter(c => this.wcState.filters()[c.key]).length
   );
 
+  readonly emptyStateDismissed = signal(false);
+
   readonly showEmptyState = computed(
-    () => !this.loading() && !this.error() && this.wcState.filteredWcs().length === 0
+    () => !this.loading() && !this.error() && this.wcState.filteredWcs().length === 0 && !this.emptyStateDismissed()
   );
 
   readonly hasActiveFilters = computed(() =>
@@ -189,6 +191,7 @@ export class ExplorePage implements OnInit {
 
   onToggleFilter(key: keyof WCFilters, value: boolean): void {
     this.wcState.setFilter(key, value);
+    this.emptyStateDismissed.set(false);
   }
 
   onClearFilters(): void {
@@ -266,6 +269,7 @@ export class ExplorePage implements OnInit {
 
     this.loading.set(true);
     this.error.set(null);
+    this.emptyStateDismissed.set(false);
 
     this.wcService.getWCs(bbox).subscribe({
       next: (wcs) => {
