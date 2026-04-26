@@ -35,6 +35,29 @@
 
         <hr class="review-divider" />
 
+        <div class="review-row review-row--stars">
+          <span class="review-row-label">{{ 'review_form.felt_safe_legend' | translate }}</span>
+          <div class="star-group" role="group" [attr.aria-label]="'review_form.felt_safe_legend' | translate">
+            @for (star of stars; track star) {
+              <button
+                type="button"
+                class="star-btn"
+                [class.active]="(form.get('felt_safe')?.value ?? 0) >= star"
+                (click)="onSafetyStarClick(star)"
+                [attr.aria-label]="star + ' de 5'"
+              >★</button>
+            }
+            <button
+              type="button"
+              class="pill"
+              [class.active]="form.get('felt_safe')?.value === null"
+              (click)="form.get('felt_safe')?.setValue(null)"
+            >∅</button>
+          </div>
+        </div>
+
+        <hr class="review-divider" />
+
         <div class="review-row">
           <span class="review-row-label">{{ 'review_form.toilet_paper_legend' | translate }}</span>
           <div class="pill-group">
@@ -74,29 +97,6 @@
             <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'true'" (click)="form.get('has_gender_mixed_option')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
             <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'false'" (click)="form.get('has_gender_mixed_option')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
             <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === ''" (click)="form.get('has_gender_mixed_option')?.setValue('')">∅</button>
-          </div>
-        </div>
-
-        <hr class="review-divider" />
-
-        <div class="review-row review-row--stars">
-          <span class="review-row-label">{{ 'review_form.felt_safe_legend' | translate }}</span>
-          <div class="star-group" role="group" [attr.aria-label]="'review_form.felt_safe_legend' | translate">
-            @for (star of stars; track star) {
-              <button
-                type="button"
-                class="star-btn"
-                [class.active]="(form.get('felt_safe')?.value ?? 0) >= star"
-                (click)="onSafetyStarClick(star)"
-                [attr.aria-label]="star + ' de 5'"
-              >★</button>
-            }
-            <button
-              type="button"
-              class="pill"
-              [class.active]="form.get('felt_safe')?.value === null"
-              (click)="form.get('felt_safe')?.setValue(null)"
-            >∅</button>
           </div>
         </div>
 

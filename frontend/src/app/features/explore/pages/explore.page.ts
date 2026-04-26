@@ -57,6 +57,7 @@ export class ExplorePage implements OnInit {
   readonly filterChips: ReadonlyArray<FilterChip> = [
     { key: 'isPublic',   label: 'filter.isPublic',   icon: 'door-open' },
     { key: 'clean',      label: 'filter.clean',      icon: 'sparkles' },
+    { key: 'safe',       label: 'filter.safe',       icon: 'lock' },
     { key: 'accessible', label: 'filter.accessible', icon: 'accessibility' },
   ];
 
@@ -67,7 +68,6 @@ export class ExplorePage implements OnInit {
         { key: 'freeEntry',     label: 'filter.freeEntry',     icon: 'tag' },
         { key: 'changingTable', label: 'filter.changingTable', icon: 'baby' },
         { key: 'genderMixed',   label: 'filter.genderMixed',   icon: 'non-binary' },
-        { key: 'safe',          label: 'filter.safe',          icon: 'lock' },
       ],
     },
     {

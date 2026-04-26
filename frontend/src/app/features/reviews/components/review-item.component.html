@@ -2,7 +2,7 @@
     <li>
       <p>
         <strong>{{ 'review_item.cleanliness' | translate }}</strong> {{ review().cleanliness_rating }} / 5<br />
-        <strong>{{ 'review_item.safety' | translate }}</strong> {{ review().felt_safe ? ('review_item.yes' | translate) : ('review_item.no' | translate) }}
+        <strong>{{ 'review_item.safety' | translate }}</strong> {{ review().felt_safe != null ? (review().felt_safe + ' / 5') : '—' }}
       </p>
 
       @if (review().comment) {
