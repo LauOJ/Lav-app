@@ -26,7 +26,7 @@ export class WCFormPage {
     name: '',
     latitude: 0,
     longitude: 0,
-    is_public: true,
+    is_public: false,
     description: '',
   });
 
