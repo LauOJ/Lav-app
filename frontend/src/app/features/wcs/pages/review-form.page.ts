@@ -83,7 +83,7 @@ export class ReviewFormPage implements OnInit {
     menstrual_cup_suitable: ['' as 'true' | 'false' | ''],
     // Sense secció
     has_gender_mixed_option: ['' as 'true' | 'false' | ''],
-    felt_safe: ['' as 'true' | 'false' | ''],
+    felt_safe: [null as number | null],
     comment: [''],
   });
 
@@ -93,6 +93,11 @@ export class ReviewFormPage implements OnInit {
 
   toggleMenstruation() {
     this.menstruationOpen.update(v => !v);
+  }
+
+  onSafetyStarClick(star: number) {
+    const current = this.form.get('felt_safe')?.value;
+    this.form.get('felt_safe')?.setValue(current === star ? null : star);
   }
 
   onSkip() {
@@ -120,7 +125,7 @@ export class ReviewFormPage implements OnInit {
       hygiene_products_available: this.fromBool(review.hygiene_products_available),
       menstrual_cup_suitable: this.fromBool(review.menstrual_cup_suitable),
       has_gender_mixed_option: this.fromBool(review.has_gender_mixed_option),
-      felt_safe: this.fromBool(review.felt_safe),
+      felt_safe: review.felt_safe,
       comment: review.comment ?? '',
     });
   }
@@ -149,7 +154,7 @@ export class ReviewFormPage implements OnInit {
       hygiene_products_available: this.toNullableBool(raw.hygiene_products_available),
       menstrual_cup_suitable: this.toNullableBool(raw.menstrual_cup_suitable),
       has_gender_mixed_option: this.toNullableBool(raw.has_gender_mixed_option),
-      felt_safe: this.toNullableBool(raw.felt_safe),
+      felt_safe: raw.felt_safe,
       comment: raw.comment || undefined,
     };
   }

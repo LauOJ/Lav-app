@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class ReviewBase(BaseModel):
     cleanliness_rating: Annotated[int, Field(ge=1, le=5)]
-    felt_safe: bool | None = None
+    felt_safe: Annotated[int, Field(ge=1, le=5)] | None = None
     accessible: bool | None = None
     has_toilet_paper: bool | None = None
     hygiene_products_available: bool | None = None

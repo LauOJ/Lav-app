@@ -79,12 +79,24 @@
 
         <hr class="review-divider" />
 
-        <div class="review-row">
+        <div class="review-row review-row--stars">
           <span class="review-row-label">{{ 'review_form.felt_safe_legend' | translate }}</span>
-          <div class="pill-group">
-            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === 'true'" (click)="form.get('felt_safe')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === 'false'" (click)="form.get('felt_safe')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('felt_safe')?.value === ''" (click)="form.get('felt_safe')?.setValue('')">∅</button>
+          <div class="star-group" role="group" [attr.aria-label]="'review_form.felt_safe_legend' | translate">
+            @for (star of stars; track star) {
+              <button
+                type="button"
+                class="star-btn"
+                [class.active]="(form.get('felt_safe')?.value ?? 0) >= star"
+                (click)="onSafetyStarClick(star)"
+                [attr.aria-label]="star + ' de 5'"
+              >★</button>
+            }
+            <button
+              type="button"
+              class="pill"
+              [class.active]="form.get('felt_safe')?.value === null"
+              (click)="form.get('felt_safe')?.setValue(null)"
+            >∅</button>
           </div>
         </div>
 

@@ -38,7 +38,7 @@
     <span class="score-value">{{ genderMixedPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
 
     <span class="score-label">{{ 'wc_detail.safety' | translate }}</span>
-    <span class="score-value">{{ safetyPercentage() ?? ('wc_detail.no_data' | translate) }}</span>
+    <span class="score-value">{{ safetyScore() != null ? (safetyScore()! | number: '1.1-1') + ' / 5' : ('wc_detail.no_data' | translate) }}</span>
 
     <span class="score-label">{{ 'wc_detail.accessibility' | translate }}</span>
     <span class="score-value">{{ accessibilityPercentage() ?? ('wc_detail.no_data' | translate) }}</span>

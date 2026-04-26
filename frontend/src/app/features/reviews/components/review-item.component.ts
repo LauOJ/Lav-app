@@ -16,7 +16,7 @@ export class ReviewItemComponent {
   save = output<{
     reviewId: number;
     cleanliness_rating: number;
-    felt_safe: boolean | null;
+    felt_safe: number | null;
     accessible: boolean | null;
     step_free_access: boolean | null;
     wide_door: boolean | null;

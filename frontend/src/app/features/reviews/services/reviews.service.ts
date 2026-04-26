@@ -6,7 +6,7 @@ import { Review } from '../models/review.model';
 
 type ReviewPayload = {
   cleanliness_rating: number;
-  felt_safe: boolean | null;
+  felt_safe: number | null;
   accessible: boolean | null;
   step_free_access: boolean | null;
   wide_door: boolean | null;

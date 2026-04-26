@@ -120,7 +120,7 @@
                     </span>
                   }
                   @if (review.has_gender_mixed_option) { <span class="review-tag">{{ 'sheet.tag_gender_mixed' | translate }}</span> }
-                  @if (review.felt_safe) { <span class="review-tag">{{ 'sheet.tag_safe' | translate }}</span> }
+                  @if (review.felt_safe != null) { <span class="review-tag">{{ 'sheet.tag_safe' | translate }} {{ review.felt_safe }}/5</span> }
                   @if (review.accessible) { <span class="review-tag">{{ 'sheet.tag_accessible' | translate }}</span> }
                   @if (review.step_free_access) { <span class="review-tag">{{ 'sheet.tag_step_free' | translate }}</span> }
                   @if (review.wide_door) { <span class="review-tag">{{ 'sheet.tag_wide_door' | translate }}</span> }

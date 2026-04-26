@@ -23,9 +23,10 @@ export class WcDetailContentComponent {
     return this.wc().avg_cleanliness;
   });
 
-  readonly safetyPercentage = computed(() =>
-    wcScorePercentage(this.wc().safety_score)
-  ); // string | null
+  readonly safetyScore = computed(() => {
+    const n = normalizeWcScore(this.wc().safety_score);
+    return n == null ? null : Math.round(n * 5 * 10) / 10;
+  }); // 0–5 with one decimal, or null
 
   readonly accessibilityPercentage = computed(() =>
     wcScorePercentage(this.wc().accessibility_score)

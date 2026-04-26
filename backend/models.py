@@ -78,7 +78,7 @@ class Review(Base):
     id = Column(Integer, primary_key=True)
 
     cleanliness_rating = Column(Integer, nullable=False)
-    felt_safe = Column(Boolean, nullable=True)
+    felt_safe = Column(Integer, nullable=True)  # 1–5 safety rating
     accessible = Column(Boolean, nullable=True)
     has_toilet_paper = Column(Boolean, nullable=True)
     hygiene_products_available = Column(Boolean, nullable=True)
