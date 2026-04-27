@@ -1,138 +1,114 @@
-# WC-Advisor
+# Lavapp
 
-Aplicación web colaborativa para localizar y valorar aseos urbanos con enfoque inclusivo y social.
+**[lavapp.net](https://lavapp.net)** — collaborative map for finding and reviewing public bathrooms, with a focus on accessibility and inclusion.
 
-Proyecto final del Ciclo Formativo de Desarrollo de Aplicaciones Web (DAW) – Curso 2025/2026.
+Add locations, rate cleanliness and safety, filter by accessibility or gender-neutral facilities, and report places that no longer exist. Available in Catalan and Spanish.
 
 ---
 
-## Puesta en marcha para desarrollo
+## Tech Stack
 
-### Requisitos previos
-- Docker Desktop en ejecución
-- Node.js + npm instalados localmente
-- Python 3.12 instalado localmente
+| Layer | Technology |
+|---|---|
+| Frontend | Angular 21, Signals, Leaflet + OpenStreetMap |
+| Backend | FastAPI, SQLAlchemy 2.0, Alembic |
+| Database | PostgreSQL 16 |
+| Auth | JWT (python-jose) + bcrypt |
+| Infra | Docker Compose, Nginx, Let's Encrypt SSL |
+| i18n | ngx-translate (Catalan + Spanish) |
 
-### Cómo arrancar el entorno de desarrollo
+---
 
-El flujo habitual es: **solo la base de datos corre en Docker**, el backend y el frontend se ejecutan localmente.
+## Running locally
 
-**1. Levantar la base de datos**
+The standard dev setup runs only the database in Docker; backend and frontend run locally.
+
+### Prerequisites
+
+- Docker Desktop
+- Node.js + npm
+- Python 3.12
+
+### 1. Start the database
+
 ```bash
 docker compose up db
 ```
 
-**2. Arrancar el backend** (en una terminal nueva, desde `backend/`)
+### 2. Start the backend
+
 ```bash
 cd backend
 
-# Solo la primera vez (o si el venv no existe):
+# First time only:
 python -m venv venv
-
-# Activar el entorno virtual (Windows PowerShell)
-venv\Scripts\activate
-
-# Solo la primera vez (o si cambia requirements.txt):
 pip install -r requirements.txt
 
-# Ejecutar el servidor
+# Activate the virtual environment (Windows)
+venv\Scripts\activate
+# or (macOS/Linux)
+source venv/bin/activate
+
+# Apply database migrations (first time and after pulling new ones)
+alembic upgrade head
+
 uvicorn main:app --reload
 ```
-El backend queda disponible en `http://localhost:8000`.
-La documentación interactiva de la API: `http://localhost:8000/docs`.
 
-**3. Arrancar el frontend** (en otra terminal nueva, desde `frontend/`)
+API available at `http://localhost:8000` — interactive docs at `http://localhost:8000/docs`.
+
+### 3. Start the frontend
+
 ```bash
 cd frontend
-
-# Solo la primera vez (o si cambia package.json):
 npm install
-
 npm start
 ```
-La app queda disponible en `http://localhost:4200`.
 
----
+App available at `http://localhost:4200`.
 
-### Alternativa: todo en Docker (sin instalar nada localmente)
+### Alternative: everything in Docker
+
 ```bash
 docker compose up
 ```
+
 - Frontend: `http://localhost:4201`
 - Backend: `http://localhost:8001`
 
 ---
 
-### Producción
-```bash
-docker compose -f docker-compose.prod.yml up --build
+## Project structure
+
+```
+wc-advisor/
+├── backend/
+│   ├── routers/       # FastAPI route handlers
+│   ├── crud/          # Database operations
+│   ├── schemas/       # Pydantic request/response models
+│   ├── alembic/       # Database migrations
+│   └── models.py      # SQLAlchemy ORM models
+└── frontend/
+    └── src/app/
+        ├── features/  # Lazy-loaded feature modules
+        │   ├── explore/   # Map + WC detail sheet
+        │   ├── wcs/       # Add/edit WC forms, state
+        │   ├── reviews/   # Review list and form
+        │   ├── auth/      # Login, register
+        │   └── profile/   # User profile, account settings
+        └── shared/    # Reusable components, services
 ```
 
 ---
 
-##  Descripción
+## Features
 
-LAV-APP nace como una respuesta a una necesidad cotidiana: encontrar baños accesibles, limpios y adecuados en entornos urbanos.
-
-A diferencia de otras aplicaciones de localización, LAV-APP incorpora filtros específicos como:
-
-- Accesible (movilidad reducida)
-- Baño neutro
-- Cambiador
-- Solo para clientes
-- Productos de higiene íntima
-
-Además, permite que las personas usuarias valoren su experiencia mediante puntuaciones y comentarios.
-
-El proyecto está diseñado bajo principios de tecnología ética, accesible y open source.
-
----
-
-##  Arquitectura del proyecto
-
-El proyecto está desarrollado con una arquitectura full stack separada en frontend y backend:
-
-
-### 🔹 Frontend
-- Angular 21
-- Standalone components
-- Signals y computed
-- Leaflet + OpenStreetMap
-- Diseño mobile-first
-
-### 🔹 Backend
-- FastAPI
-- Pydantic (validaciones)
-- SQLAlchemy (ORM)
-- Autenticación JWT
-
-### 🔹 Base de datos
-- PostgreSQL
-- Restricciones de integridad
-- Claves foráneas
-- Unicidad de reviews por usuario y WC
-
----
-
-##  Autenticación
-
-La aplicación utiliza autenticación basada en JWT:
-
-1. La persona usuaria se registra o inicia sesión.
-2. El servidor valida las credenciales.
-3. Se genera un token JWT.
-4. El token se envía en cada petición protegida.
-
----
-
-##  Funcionalidades principales
-
-- Mapa interactivo con geolocalización
-- Filtros dinámicos
-- Bottom sheet con información del WC
-- Sistema de reviews
-- Sistema de favoritos
-- CRUD de WCs
-- Validaciones en formularios
-- Control de errores de API
-
+- Interactive map with geolocation and bounding-box queries
+- WC detail sheet with scores, tags, reviews, and distance
+- Add and edit WCs with accessibility, gender, cleanliness, and safety fields
+- One review per user per WC (enforced at DB level), editable
+- Favorites
+- Filters: accessibility, gender-neutral, cleanliness, safety, opening hours
+- Report a WC as closed (auto-deactivates at 3 reports)
+- User accounts: register, login, edit profile, change password, delete account
+- Mobile-first, no UI library
