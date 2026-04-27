@@ -5,20 +5,31 @@
   bottom: 0;
   min-height: 0;
   max-height: fit-content;
-  padding: 0.4rem 1rem 1rem;
   background: #ffffff;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
   z-index: 1100;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   transition: max-height 180ms ease;
 }
 
 .sheet.expanded {
   max-height: 86vh;
+}
+
+.sheet-header {
+  flex-shrink: 0;
+  position: relative;
+  padding: 0.4rem 1rem 0.75rem;
+}
+
+.sheet-body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 0 1rem 1rem;
 }
 
 .handle-button {
@@ -276,12 +287,14 @@ button.primary {
     width: 380px;
     border-radius: 18px;
     max-height: calc(100vh - 1.5rem);
-    overflow-y: auto;
   }
 
   .sheet.expanded {
     max-height: calc(100vh - 1.5rem);
-    overflow-y: auto;
+  }
+
+  .sheet-header {
+    padding: 0.4rem 1rem 0.75rem;
   }
 
   .handle-button {

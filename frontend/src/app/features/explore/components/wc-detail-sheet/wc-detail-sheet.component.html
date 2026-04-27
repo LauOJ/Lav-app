@@ -6,30 +6,32 @@
   aria-labelledby="wc-sheet-title"
   (click)="onSheetClick($event)"
 >
-  <button
-    type="button"
-    class="handle-button"
-    (click)="onExpand()"
-    [attr.aria-label]="'sheet.expand' | translate"
-  >
-    <span class="handle"></span>
-  </button>
-  <button
-    #closeButton
-    type="button"
-    class="close-button"
-    (click)="onClose()"
-    [attr.aria-label]="'sheet.close' | translate"
-  >
-    ×
-  </button>
-  <h2 id="wc-sheet-title" class="title" (click)="onExpand()">{{ wc().name }}</h2>
-  @if (distanceLabel()) {
-    <p class="distance muted">{{ distanceLabel() }}</p>
-  }
+  <div class="sheet-header">
+    <button
+      type="button"
+      class="handle-button"
+      (click)="onExpand()"
+      [attr.aria-label]="'sheet.expand' | translate"
+    >
+      <span class="handle"></span>
+    </button>
+    <button
+      #closeButton
+      type="button"
+      class="close-button"
+      (click)="onClose()"
+      [attr.aria-label]="'sheet.close' | translate"
+    >
+      ×
+    </button>
+    <h2 id="wc-sheet-title" class="title" (click)="onExpand()">{{ wc().name }}</h2>
+    @if (distanceLabel()) {
+      <p class="distance muted">{{ distanceLabel() }}</p>
+    }
+    <app-wc-feature-icons [wc]="wc()" />
+  </div>
 
-  <app-wc-feature-icons [wc]="wc()" />
-
+  <div class="sheet-body">
   @if (isExpanded()) {
     <app-wc-detail-content [wc]="wc()" />
 
@@ -152,4 +154,5 @@
       }
     </div>
   }
+  </div>
 </aside>
