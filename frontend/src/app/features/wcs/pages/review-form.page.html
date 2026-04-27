@@ -89,17 +89,6 @@
           </div>
         </div>
 
-        <hr class="review-divider" />
-
-        <div class="review-row">
-          <span class="review-row-label">{{ 'review_form.gender_mixed_legend' | translate }}</span>
-          <div class="pill-group">
-            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'true'" (click)="form.get('has_gender_mixed_option')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'false'" (click)="form.get('has_gender_mixed_option')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === ''" (click)="form.get('has_gender_mixed_option')?.setValue('')">∅</button>
-          </div>
-        </div>
-
         @if (form.get('has_changing_table')?.value === 'true') {
           <div class="review-row review-row--sub">
             <span class="review-row-label review-row-label--sub">{{ 'review_form.changing_location_legend' | translate }}</span>
@@ -110,6 +99,17 @@
             </div>
           </div>
         }
+
+        <hr class="review-divider" />
+
+        <div class="review-row">
+          <span class="review-row-label">{{ 'review_form.gender_mixed_legend' | translate }}</span>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'true'" (click)="form.get('has_gender_mixed_option')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === 'false'" (click)="form.get('has_gender_mixed_option')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+            <button type="button" class="pill" [class.active]="form.get('has_gender_mixed_option')?.value === ''" (click)="form.get('has_gender_mixed_option')?.setValue('')">∅</button>
+          </div>
+        </div>
 
       </div>
 
