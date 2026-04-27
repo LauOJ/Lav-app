@@ -1,5 +1,5 @@
 .sheet {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
@@ -280,6 +280,7 @@ button.primary {
 
 @media (min-width: 768px) {
   .sheet {
+    position: fixed;
     left: auto;
     right: 0.75rem;
     top: 0.75rem;
