@@ -96,7 +96,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     this.map = L.map(this.mapContainer.nativeElement, {
       zoomControl: false,
-    }).setView([41.3874, 2.1686], 12);
+    }).setView([41.7, 1.8], 8);
 
     L.control.zoom({ position: 'bottomleft' }).addTo(this.map);
 
