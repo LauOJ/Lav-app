@@ -91,7 +91,8 @@
     "add_wc_here": "Afegir WC aquí",
     "add_wc_hint": "Clica al mapa per afegir un WC",
     "nearby_cancel": "Cancel·la",
-    "nearby_confirm": "Afegeix igualment"
+    "nearby_confirm": "Afegeix igualment",
+    "toast_close": "Tanca"
   },
 
   "filter": {

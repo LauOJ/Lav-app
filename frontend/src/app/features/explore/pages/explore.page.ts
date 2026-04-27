@@ -191,7 +191,6 @@ export class ExplorePage implements OnInit {
 
   onToggleFilter(key: keyof WCFilters, value: boolean): void {
     this.wcState.setFilter(key, value);
-    this.emptyStateDismissed.set(false);
   }
 
   onClearFilters(): void {
@@ -269,7 +268,6 @@ export class ExplorePage implements OnInit {
 
     this.loading.set(true);
     this.error.set(null);
-    this.emptyStateDismissed.set(false);
 
     this.wcService.getWCs(bbox).subscribe({
       next: (wcs) => {

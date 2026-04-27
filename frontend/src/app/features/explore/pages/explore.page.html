@@ -138,7 +138,7 @@
       @if (hasActiveFilters()) {
         <button type="button" (click)="onClearFilters()">{{ 'explore.clear_filters' | translate }}</button>
       }
-      <button type="button" class="toast-close" (click)="emptyStateDismissed.set(true)" aria-label="Tancar">✕</button>
+      <button type="button" class="toast-close" (click)="emptyStateDismissed.set(true)">{{ 'explore.toast_close' | translate }}</button>
     </div>
   }
 
