@@ -20,7 +20,9 @@ export type LucideIconName =
   | 'grip-horizontal'
   | 'cup-soda'
   | 'eye'
-  | 'eye-off';
+  | 'eye-off'
+  | 'map'
+  | 'users';
 
 @Component({
   selector: 'app-lucide-icon',

@@ -54,6 +54,9 @@
   font-weight: 700;
   margin-bottom: 0.35rem;
   color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .about-card p {
