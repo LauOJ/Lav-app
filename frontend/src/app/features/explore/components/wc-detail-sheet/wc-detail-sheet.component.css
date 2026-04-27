@@ -298,3 +298,36 @@ button.primary {
     font-size: 0.95rem;
   }
 }
+
+/* ── Report closed ───────────────────────────────────────────── */
+.report-closed {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.report-closed-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.report-closed-btn:hover:not(:disabled) {
+  color: var(--color-text);
+}
+
+.report-closed-btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.report-closed-done {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}

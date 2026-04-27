@@ -45,4 +45,8 @@ export class WCService {
   removeFavorite(wcId: number): Observable<void> {
     return this.api.delete<void>(`/wcs/${wcId}/favorite`);
   }
+
+  reportClosed(wcId: number): Observable<void> {
+    return this.api.post<void>(`/wcs/${wcId}/report-closed`, {});
+  }
 }

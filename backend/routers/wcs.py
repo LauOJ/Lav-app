@@ -150,3 +150,24 @@ def remove_favorite_endpoint(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Favorite not found",
         )
+
+
+@router.post(
+    "/{wc_id}/report-closed",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def report_closed_endpoint(
+    wc_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    wc = db.get(WC, wc_id)
+    if not wc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="WC not found",
+        )
+    wc.closed_reports += 1
+    if wc.closed_reports >= 3:
+        wc.is_active = False
+    db.commit()

@@ -138,5 +138,18 @@
         }
       </section>
     }
+
+    <div class="report-closed">
+      @if (reportDone()) {
+        <span class="report-closed-done">{{ 'sheet.report_closed_done' | translate }}</span>
+      } @else {
+        <button
+          type="button"
+          class="report-closed-btn"
+          [disabled]="reportedClosed() || reportLoading()"
+          (click)="onReportClosed(); $event.stopPropagation()"
+        >{{ 'sheet.report_closed' | translate }}</button>
+      }
+    </div>
   }
 </aside>

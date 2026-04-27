@@ -141,7 +141,9 @@
     "tag_menstrual_cup": "✓ Apta copa menstrual",
     "tag_free_entry": "✓ Acceso sin consumición",
     "tag_gender_mixed": "✓ Opción no binaria",
-    "tag_changing_table": "✓ Cambiador"
+    "tag_changing_table": "✓ Cambiador",
+    "report_closed": "Este lugar ya no existe",
+    "report_closed_done": "Gracias, lo hemos registrado"
   },
 
   "wc_detail": {

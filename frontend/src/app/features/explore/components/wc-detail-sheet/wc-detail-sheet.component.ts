@@ -41,6 +41,9 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
   readonly isFavorite = signal(false);
   readonly favoriteLoading = signal(false);
   readonly userReview = signal<Review | null>(null);
+  readonly reportedClosed = signal(false);
+  readonly reportLoading = signal(false);
+  readonly reportDone = signal(false);
 
   @ViewChild('closeButton') closeButtonRef?: ElementRef<HTMLButtonElement>;
 
@@ -73,6 +76,10 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
       this.showReviews.set(false);
       this.isFavorite.set(false);
       this.userReview.set(null);
+      this.reportDone.set(false);
+      this.reportedClosed.set(
+        localStorage.getItem(`reported_closed_${wc.id}`) === '1'
+      );
       if (this.userState.isLoggedIn()) {
         this.loadFavoriteState(wc.id);
         this.loadUserReview(wc.id);
@@ -190,6 +197,20 @@ export class WcDetailSheet implements AfterViewInit, OnDestroy {
     }
     const km = Math.round((distance / 1000) * 10) / 10;
     return `≈ ${km} km`;
+  }
+
+  onReportClosed(): void {
+    if (this.reportedClosed() || this.reportLoading()) return;
+    this.reportLoading.set(true);
+    this.wcService.reportClosed(this.wc().id).subscribe({
+      next: () => {
+        localStorage.setItem(`reported_closed_${this.wc().id}`, '1');
+        this.reportedClosed.set(true);
+        this.reportDone.set(true);
+        this.reportLoading.set(false);
+      },
+      error: () => this.reportLoading.set(false),
+    });
   }
 
   private loadReviews(wcId: number): void {

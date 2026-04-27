@@ -55,6 +55,7 @@ class WC(Base):
 
     is_public = Column(Boolean, nullable=False, default=True)
     is_active = Column(Boolean, nullable=False, default=True)
+    closed_reports = Column(Integer, nullable=False, default=0)
 
     description = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
