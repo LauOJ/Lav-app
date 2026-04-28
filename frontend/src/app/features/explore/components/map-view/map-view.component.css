@@ -91,6 +91,18 @@
   100% { transform: scale(1.8); opacity: 0; }
 }
 
+/* Cluster markers: same teardrop with count */
+:host ::ng-deep .wc-cluster-icon {
+  background: none !important;
+  border: none !important;
+}
+
+:host ::ng-deep .wc-cluster-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* WC markers: brand teardrop with point down */
 :host ::ng-deep .wc-marker-icon {
   background: none !important;
