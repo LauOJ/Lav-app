@@ -59,14 +59,18 @@
           </button>
           @if (isUserMenuOpen()) {
             <div class="dropdown" role="menu">
-              @if (currentUrl() !== '/explore') {
-                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
-                  {{ 'nav.explore' | translate }}
-                </a>
-              }
+              <button type="button" class="dropdown-item" role="menuitem" (click)="openOnboarding(); closeAllMenus()">
+                {{ 'nav.welcome' | translate }}
+              </button>
               @if (currentUrl() !== '/about') {
                 <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
                   {{ 'nav.about' | translate }}
+                </a>
+              }
+              <hr class="dropdown-divider" />
+              @if (currentUrl() !== '/explore') {
+                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.explore' | translate }}
                 </a>
               }
               @if (currentUrl() !== '/favorites') {
@@ -105,14 +109,17 @@
           </button>
           @if (isGuestMenuOpen()) {
             <div class="dropdown" role="menu">
-              @if (currentUrl() !== '/explore') {
-                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
-                  {{ 'nav.explore' | translate }}
-                </a>
-              }
+              <button type="button" class="dropdown-item" role="menuitem" (click)="openOnboarding(); closeAllMenus()">
+                {{ 'nav.welcome' | translate }}
+              </button>
               @if (currentUrl() !== '/about') {
                 <a routerLink="/about" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
                   {{ 'nav.about' | translate }}
+                </a>
+              }
+              @if (currentUrl() !== '/explore') {
+                <a routerLink="/explore" class="dropdown-item" role="menuitem" (click)="closeAllMenus()">
+                  {{ 'nav.explore' | translate }}
                 </a>
               }
               <hr class="dropdown-divider" />
@@ -132,6 +139,10 @@
       }
     </div>
   </header>
+
+  @if (showOnboarding()) {
+    <app-onboarding-modal (dismissed)="onOnboardingDismissed()" />
+  }
 
   <main class="app-content">
     <router-outlet></router-outlet>

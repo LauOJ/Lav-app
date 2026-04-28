@@ -5,6 +5,7 @@ import { filter, map } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideIconComponent } from './shared/components/lucide-icon/lucide-icon.component';
+import { OnboardingModalComponent } from './shared/components/onboarding-modal/onboarding-modal.component';
 import { AuthState } from './core/auth/auth.state';
 import { UserState } from './core/user/user.state';
 import { LanguageService } from './core/i18n/language.service';
@@ -12,7 +13,7 @@ import { AppLanguage } from './core/user/user.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, LucideIconComponent, TranslatePipe],
+  imports: [RouterOutlet, RouterLink, LucideIconComponent, OnboardingModalComponent, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -24,6 +25,7 @@ export class App {
 
   readonly isUserMenuOpen = signal(false);
   readonly isGuestMenuOpen = signal(false);
+  readonly showOnboarding = signal(false);
 
   readonly currentUrl = toSignal(
     this.router.events.pipe(
@@ -35,6 +37,10 @@ export class App {
 
   constructor() {
     this.langService.init();
+
+    if (!localStorage.getItem('lavapp_onboarding_seen')) {
+      this.showOnboarding.set(true);
+    }
 
     effect(() => {
       const user = this.userState.user();
@@ -77,6 +83,15 @@ export class App {
   // kept for template overlay click
   closeUserMenu(): void {
     this.closeAllMenus();
+  }
+
+  openOnboarding(): void {
+    this.showOnboarding.set(true);
+  }
+
+  onOnboardingDismissed(): void {
+    localStorage.setItem('lavapp_onboarding_seen', '1');
+    this.showOnboarding.set(false);
   }
 
   onLogout(): void {

@@ -1,0 +1,67 @@
+<div
+  class="onboarding-overlay"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="'onboarding.aria_label' | translate"
+  (click)="dismiss()"
+>
+  <div class="onboarding-card" (click)="$event.stopPropagation()">
+
+    <button
+      type="button"
+      class="onboarding-skip"
+      (click)="dismiss()"
+    >{{ 'onboarding.skip' | translate }}</button>
+
+    <div class="onboarding-slide">
+      @switch (currentSlide()) {
+        @case (1) {
+          <p class="slide-title">{{ 'onboarding.s1_title' | translate }}</p>
+          <p class="slide-body">{{ 'onboarding.s1_body' | translate }}</p>
+        }
+        @case (2) {
+          <p class="slide-title">{{ 'onboarding.s2_title' | translate }}</p>
+          <p class="slide-body">{{ 'onboarding.s2_body' | translate }}</p>
+        }
+        @case (3) {
+          <p class="slide-title">{{ 'onboarding.s3_title' | translate }}</p>
+          <p class="slide-body">{{ 'onboarding.s3_body' | translate }}</p>
+        }
+      }
+    </div>
+
+    <div class="onboarding-dots" role="group" [attr.aria-label]="'onboarding.slide_indicator' | translate">
+      @for (n of slides; track n) {
+        <button
+          type="button"
+          class="dot"
+          [class.dot-active]="currentSlide() === n"
+          (click)="goToSlide(n)"
+          [attr.aria-label]="n + ' / ' + totalSlides"
+          [attr.aria-current]="currentSlide() === n ? 'true' : null"
+        ></button>
+      }
+    </div>
+
+    <div class="onboarding-nav">
+      @if (!isFirst()) {
+        <button type="button" class="btn-nav btn-prev" (click)="goPrev()">
+          {{ 'onboarding.prev' | translate }}
+        </button>
+      } @else {
+        <span></span>
+      }
+
+      @if (isLast()) {
+        <button type="button" class="btn-nav btn-next btn-cta" (click)="goNext()">
+          {{ 'onboarding.s4_cta' | translate }}
+        </button>
+      } @else {
+        <button type="button" class="btn-nav btn-next" (click)="goNext()">
+          {{ 'onboarding.next' | translate }}
+        </button>
+      }
+    </div>
+
+  </div>
+</div>

@@ -15,7 +15,8 @@
     "about": "¿Quiénes somos?",
     "open_menu": "Abrir menú",
     "user_menu": "Menú de usuario",
-    "close_menu": "Cerrar menú"
+    "close_menu": "Cerrar menú",
+    "welcome": "Bienvenida"
   },
 
   "auth": {
@@ -189,6 +190,7 @@
     "title_edit": "Edita tu valoración",
     "back": "Volver al mapa",
     "wc_created_banner": "WC creado correctamente. Ahora puedes añadir tu experiencia.",
+    "skip_no_review": "No quiero hacer ninguna valoración",
     "cleanliness_legend": "Limpieza (1–5)",
     "felt_safe_legend": "Seguridad del espacio (1–5)",
     "accessible_legend": "¿Era un espacio accesible?",
@@ -199,7 +201,7 @@
     "changing_table_legend": "¿Había cambiador de bebés?",
     "changing_location_legend": "¿Dónde estaba el cambiador?",
     "section_accessibility": "Accesibilidad",
-    "step_free_legend": "Sin escalones / rampa de acceso",
+    "step_free_legend": "Sin escalones / con rampa",
     "wide_door_legend": "Puerta ancha para silla de ruedas",
     "turning_space_legend": "Espacio suficiente para girar",
     "grab_bars_legend": "Barras de apoyo",
@@ -292,6 +294,21 @@
     "delete": "Borrar",
     "save": "Guardar",
     "cancel": "Cancelar"
+  },
+
+  "onboarding": {
+    "aria_label": "Cómo funciona Lavapp",
+    "skip": "Saltar",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "slide_indicator": "Diapositiva",
+    "s1_title": "¡Hola!",
+    "s1_body": "Te damos la bienvenida a Lavapp, el mapa colaborativo de baños públicos accesibles. Encuéntralos ahora, o ayuda a la comunidad añadiendo uno.",
+    "s2_title": "Busca sin registrarte",
+    "s2_body": "Explora el mapa, usa los filtros y consulta los detalles de cada baño. Mantén pulsado un filtro para ver qué significa. Sin cuenta.",
+    "s3_title": "Añade y valora baños",
+    "s3_body": "Haz clic en el mapa para añadir un baño en el lugar exacto. Para añadir o valorar hay que registrarse — es gratis y rápido.",
+    "s4_cta": "Explorar el mapa"
   },
 
   "footer": {

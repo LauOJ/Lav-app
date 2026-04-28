@@ -15,7 +15,8 @@
     "about": "Qui som?",
     "open_menu": "Obre el menú",
     "user_menu": "Menú d'usuari",
-    "close_menu": "Tanca el menú"
+    "close_menu": "Tanca el menú",
+    "welcome": "Benvinguda"
   },
 
   "auth": {
@@ -189,6 +190,7 @@
     "title_edit": "Edita la teva valoració",
     "back": "Torna al mapa",
     "wc_created_banner": "WC creat correctament. Ara pots afegir la teva experiència.",
+    "skip_no_review": "No vull fer cap valoració",
     "cleanliness_legend": "Neteja (1–5)",
     "felt_safe_legend": "Seguretat de l'espai (1–5)",
     "accessible_legend": "Era un espai accessible?",
@@ -199,7 +201,7 @@
     "changing_table_legend": "Hi havia canviador per a nadons?",
     "changing_location_legend": "On era el canviador?",
     "section_accessibility": "Accessibilitat",
-    "step_free_legend": "Sense graons / rampa d'accés",
+    "step_free_legend": "Sense graons / amb rampa",
     "wide_door_legend": "Porta ampla per a cadira de rodes",
     "turning_space_legend": "Espai suficient per girar",
     "grab_bars_legend": "Barres de suport",
@@ -292,6 +294,21 @@
     "delete": "Esborra",
     "save": "Desa",
     "cancel": "Cancel·la"
+  },
+
+  "onboarding": {
+    "aria_label": "Com funciona Lavapp",
+    "skip": "Salta",
+    "prev": "Anterior",
+    "next": "Següent",
+    "slide_indicator": "Diapositiva",
+    "s1_title": "Hola!",
+    "s1_body": "Et donem la benvinguda a Lavapp, el mapa col·laboratiu de banys públics accessibles. Troba'n un ara, o ajuda la comunitat afegint-ne.",
+    "s2_title": "Busca sense registrar-te",
+    "s2_body": "Explora el mapa, fes servir els filtres i consulta els detalls de cada bany. Mantén premut un filtre per veure què significa. No cal compte.",
+    "s3_title": "Afegeix i valora banys",
+    "s3_body": "Fes clic al mapa per afegir un bany nou al lloc exacte. Per afegir o valorar cal registrar-se — és gratis i ràpid.",
+    "s4_cta": "Explora el mapa"
   },
 
   "footer": {
