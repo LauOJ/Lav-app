@@ -38,25 +38,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
 
   private map: L.Map | null = null;
-  private readonly markers = L.markerClusterGroup({
-    disableClusteringAtZoom: 16,
-    spiderfyOnMaxZoom: false,
-    iconCreateFunction: (cluster) => {
-      const count = cluster.getChildCount();
-      const fontSize = count < 10 ? 44 : count < 100 ? 36 : 28;
-      return L.divIcon({
-        className: 'wc-cluster-icon',
-        html: `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g transform="scale(1 -1) translate(0 -160)">
-            <path d="M60 10 C60 10, 15 70, 15 105 C15 135, 35 150, 60 150 C85 150, 105 135, 105 105 C105 70, 60 10, 60 10 Z" fill="var(--color-primary, #2E4A6B)"/>
-          </g>
-          <text x="60" y="58" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="${fontSize}" font-weight="700" font-family="system-ui, sans-serif">${count}</text>
-        </svg>`,
-        iconSize: [30, 40],
-        iconAnchor: [15, 40],
-      });
-    },
-  });
+  private markers!: L.MarkerClusterGroup;
   private readonly markerById = new Map<number, L.Marker>();
   private readonly addPopup = L.popup({ closeButton: true, autoClose: true });
   private pendingLatLng: L.LatLng | null = null;
@@ -112,6 +94,26 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private setupMap(): void {
     if (this.map) return;
+
+    this.markers = (L as any).markerClusterGroup({
+      disableClusteringAtZoom: 16,
+      spiderfyOnMaxZoom: false,
+      iconCreateFunction: (cluster: L.MarkerCluster) => {
+        const count = cluster.getChildCount();
+        const fontSize = count < 10 ? 44 : count < 100 ? 36 : 28;
+        return L.divIcon({
+          className: 'wc-cluster-icon',
+          html: `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g transform="scale(1 -1) translate(0 -160)">
+              <path d="M60 10 C60 10, 15 70, 15 105 C15 135, 35 150, 60 150 C85 150, 105 135, 105 105 C105 70, 60 10, 60 10 Z" fill="var(--color-primary, #2E4A6B)"/>
+            </g>
+            <text x="60" y="58" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="${fontSize}" font-weight="700" font-family="system-ui, sans-serif">${count}</text>
+          </svg>`,
+          iconSize: [30, 40],
+          iconAnchor: [15, 40],
+        });
+      },
+    });
 
     this.map = L.map(this.mapContainer.nativeElement, {
       zoomControl: false,
