@@ -95,7 +95,9 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private setupMap(): void {
     if (this.map) return;
 
-    this.markers = (L as any).markerClusterGroup({
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const leafletCJS = require('leaflet') as typeof L;
+    this.markers = (leafletCJS as any).markerClusterGroup({
       disableClusteringAtZoom: 16,
       spiderfyOnMaxZoom: false,
       iconCreateFunction: (cluster: L.MarkerCluster) => {
