@@ -7,6 +7,7 @@
       role="listitem"
       [attr.aria-label]="(feature.label | translate) + ': ' + (scoreLabel(feature.score) ?? ('wc_detail.no_data' | translate))"
       [attr.title]="(feature.label | translate) + ': ' + (scoreLabel(feature.score) ?? ('wc_detail.no_data' | translate))"
+      (click)="onClickFeature(feature.key)"
       (pointerdown)="onPointerDown($event, feature.key)"
       (pointerup)="onPointerUp()"
       (pointerleave)="onPointerUp()"

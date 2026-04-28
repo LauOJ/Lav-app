@@ -46,7 +46,6 @@ export class WcFeatureIconsComponent implements OnDestroy {
     { key: 'free_entry_score',      label: 'wc_detail.free_entry',    icon: 'tag' },
     { key: 'changing_table_score',  label: 'wc_detail.changing_table',icon: 'baby' },
     { key: 'gender_mixed_score',    label: 'wc_detail.gender_mixed',  icon: 'non-binary' },
-    { key: 'safety_score',          label: 'wc_detail.safety',        icon: 'lock' },
     { key: 'accessibility_score',   label: 'wc_detail.accessibility', icon: 'accessibility' },
     { key: 'hygiene_products_score',label: 'wc_detail.hygiene',       icon: 'droplets' },
   ];
@@ -61,12 +60,14 @@ export class WcFeatureIconsComponent implements OnDestroy {
   readonly activeFeature = signal<FeatureKey | null>(null);
 
   private longPressTimer: number | null = null;
+  private tooltipFlashTimer: number | null = null;
   private readonly longPressDelay = 450;
 
   constructor(private readonly host: ElementRef<HTMLElement>) {}
 
   ngOnDestroy(): void {
     this.clearLongPressTimer();
+    if (this.tooltipFlashTimer !== null) window.clearTimeout(this.tooltipFlashTimer);
   }
 
   onPointerDown(event: PointerEvent, featureKey: FeatureKey): void {
@@ -80,6 +81,15 @@ export class WcFeatureIconsComponent implements OnDestroy {
   onPointerUp(): void {
     this.clearLongPressTimer();
     this.activeFeature.set(null);
+  }
+
+  onClickFeature(featureKey: FeatureKey): void {
+    if (this.tooltipFlashTimer !== null) window.clearTimeout(this.tooltipFlashTimer);
+    this.activeFeature.set(featureKey);
+    this.tooltipFlashTimer = window.setTimeout(() => {
+      this.activeFeature.set(null);
+      this.tooltipFlashTimer = null;
+    }, 1500);
   }
 
   @HostListener('document:pointerdown', ['$event'])

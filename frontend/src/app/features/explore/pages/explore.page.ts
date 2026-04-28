@@ -97,6 +97,7 @@ export class ExplorePage implements OnInit {
   readonly showMoreFilters = signal(false);
   readonly activeTooltip = signal<string | null>(null);
   private longPressTimer: number | null = null;
+  private tooltipFlashTimer: number | null = null;
 
   onFilterPointerDown(event: PointerEvent, key: string): void {
     if (event.pointerType === 'mouse') return;
@@ -111,6 +112,21 @@ export class ExplorePage implements OnInit {
       this.longPressTimer = null;
     }
     this.activeTooltip.set(null);
+  }
+
+  onFilterChipClick(key: keyof WCFilters, currentValue: boolean): void {
+    const newValue = !currentValue;
+    this.onToggleFilter(key, newValue);
+    if (newValue) {
+      if (this.tooltipFlashTimer !== null) {
+        window.clearTimeout(this.tooltipFlashTimer);
+      }
+      this.activeTooltip.set(key);
+      this.tooltipFlashTimer = window.setTimeout(() => {
+        this.activeTooltip.set(null);
+        this.tooltipFlashTimer = null;
+      }, 1500);
+    }
   }
 
   readonly activeMoreFiltersCount = computed(() =>

@@ -33,7 +33,7 @@
           [attr.aria-pressed]="wcState.filters()[chip.key]"
           [attr.aria-label]="chip.label | translate"
           [title]="chip.label | translate"
-          (click)="onToggleFilter(chip.key, !wcState.filters()[chip.key])"
+          (click)="onFilterChipClick(chip.key, wcState.filters()[chip.key])"
           (pointerdown)="onFilterPointerDown($event, chip.key)"
           (pointerup)="onFilterPointerUp()"
           (pointerleave)="onFilterPointerUp()"
