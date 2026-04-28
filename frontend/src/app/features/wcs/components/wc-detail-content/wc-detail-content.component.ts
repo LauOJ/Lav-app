@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { WC } from '../../models/wc.model';
 import { wcCleanlinessStars, wcHasLimitedInfo, wcScorePercentage, normalizeWcScore } from '../../utils/wc.utils';
 
+
 @Component({
   selector: 'app-wc-detail-content',
   imports: [CommonModule, TranslatePipe],
@@ -27,6 +28,8 @@ export class WcDetailContentComponent {
     const n = normalizeWcScore(this.wc().safety_score);
     return n == null ? null : Math.round(n * 5 * 10) / 10;
   }); // 0–5 with one decimal, or null
+
+  readonly safetyStars = computed(() => wcCleanlinessStars(this.safetyScore()));
 
   readonly accessibilityPercentage = computed(() =>
     wcScorePercentage(this.wc().accessibility_score)
