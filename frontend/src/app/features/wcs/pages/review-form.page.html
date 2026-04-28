@@ -9,6 +9,9 @@
   @if (justCreated()) {
     <div class="success-banner">
       {{ 'review_form.wc_created_banner' | translate }}
+      <button type="button" class="skip-inline" (click)="onSkip()">
+        {{ 'review_form.skip_no_review' | translate }}
+      </button>
     </div>
   }
 
@@ -69,16 +72,18 @@
 
         <hr class="review-divider" />
 
-        <div class="review-row">
-          <span class="review-row-label">{{ 'review_form.free_entry_legend' | translate }}</span>
-          <div class="pill-group">
-            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'true'" (click)="form.get('could_enter_without_buying')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'false'" (click)="form.get('could_enter_without_buying')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
-            <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === ''" (click)="form.get('could_enter_without_buying')?.setValue('')">∅</button>
+        @if (!isPublicWc()) {
+          <div class="review-row">
+            <span class="review-row-label">{{ 'review_form.free_entry_legend' | translate }}</span>
+            <div class="pill-group">
+              <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'true'" (click)="form.get('could_enter_without_buying')?.setValue('true')">{{ 'review_form.yes' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === 'false'" (click)="form.get('could_enter_without_buying')?.setValue('false')">{{ 'review_form.no' | translate }}</button>
+              <button type="button" class="pill" [class.active]="form.get('could_enter_without_buying')?.value === ''" (click)="form.get('could_enter_without_buying')?.setValue('')">∅</button>
+            </div>
           </div>
-        </div>
 
-        <hr class="review-divider" />
+          <hr class="review-divider" />
+        }
 
         <div class="review-row">
           <span class="review-row-label">{{ 'review_form.changing_table_legend' | translate }}</span>

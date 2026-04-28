@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ReviewsService } from '../../reviews/services/reviews.service';
 import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
 import { Review } from '../../reviews/models/review.model';
+import { WCState } from '../state/wc.state';
 
 @Component({
   templateUrl: './review-form.page.html',
@@ -19,8 +20,11 @@ export class ReviewFormPage implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private reviewsService = inject(ReviewsService);
+  private wcState = inject(WCState);
 
   wcId = Number(this.route.snapshot.paramMap.get('id'));
+
+  readonly isPublicWc = computed(() => this.wcState.getWcById(this.wcId)?.is_public ?? false);
 
   readonly justCreated = signal(false);
   readonly isEditMode = signal(false);
