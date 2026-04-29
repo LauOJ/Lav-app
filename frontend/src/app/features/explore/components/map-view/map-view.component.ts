@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import * as L from 'leaflet';
+import L from 'leaflet';
 
 import { WC } from '../../../wcs/models/wc.model';
 import { BoundingBox } from '../../../wcs/models/bounding-box.model';
