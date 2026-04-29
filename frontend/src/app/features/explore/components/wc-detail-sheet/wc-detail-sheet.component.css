@@ -283,15 +283,15 @@ button.primary {
     position: fixed;
     left: auto;
     right: 0.75rem;
-    top: 0.75rem;
+    top: 4.5rem;
     bottom: auto;
     width: 380px;
     border-radius: 18px;
-    max-height: calc(100vh - 1.5rem);
+    max-height: calc(100vh - 5.25rem);
   }
 
   .sheet.expanded {
-    max-height: calc(100vh - 1.5rem);
+    max-height: calc(100vh - 5.25rem);
   }
 
   .sheet-header {
