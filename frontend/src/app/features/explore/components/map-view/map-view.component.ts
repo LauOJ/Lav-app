@@ -13,9 +13,6 @@ import {
 } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
-
-declare const require: (id: string) => any;
 
 import { WC } from '../../../wcs/models/wc.model';
 import { BoundingBox } from '../../../wcs/models/bounding-box.model';
@@ -40,7 +37,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
   private readonly mapContainer!: ElementRef<HTMLDivElement>;
 
   private map: L.Map | null = null;
-  private markers!: L.MarkerClusterGroup;
+  private markers!: any;
   private readonly markerById = new Map<number, L.Marker>();
   private readonly addPopup = L.popup({ closeButton: true, autoClose: true });
   private pendingLatLng: L.LatLng | null = null;
@@ -68,8 +65,8 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     iconAnchor: [15, 40],
   });
 
-  ngAfterViewInit(): void {
-    this.setupMap();
+  async ngAfterViewInit(): Promise<void> {
+    await this.setupMap();
     this.renderMarkers();
   }
 
@@ -94,15 +91,14 @@ export class MapViewComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.userMarker = null;
   }
 
-  private setupMap(): void {
+  private async setupMap(): Promise<void> {
     if (this.map) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const leafletCJS = require('leaflet') as typeof L;
-    this.markers = (leafletCJS as any).markerClusterGroup({
+    await import('leaflet.markercluster');
+    this.markers = (L as any).markerClusterGroup({
       disableClusteringAtZoom: 16,
       spiderfyOnMaxZoom: false,
-      iconCreateFunction: (cluster: L.MarkerCluster) => {
+      iconCreateFunction: (cluster: any) => {
         const count = cluster.getChildCount();
         const fontSize = count < 10 ? 44 : count < 100 ? 36 : 28;
         return L.divIcon({
