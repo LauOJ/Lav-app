@@ -25,7 +25,7 @@ router = APIRouter(
     response_model=UserRead,
     status_code=status.HTTP_201_CREATED,
 )
-@limiter.limit("10/minute")
+@limiter.limit("5/minute")
 def create_user_endpoint(
     request: Request,
     user_in: UserCreate,

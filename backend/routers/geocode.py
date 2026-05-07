@@ -3,19 +3,22 @@
 
 import json
 from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+from urllib.request import Request as URLRequest, urlopen
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Request
+
+from limiter import limiter
 
 router = APIRouter(prefix="/geocode", tags=["geocode"])
 
 
 @router.get("")
-def geocode(q: str = Query(..., min_length=1), limit: int = Query(1, ge=1, le=5)):
+@limiter.limit("30/minute")
+def geocode(request: Request, q: str = Query(..., min_length=1), limit: int = Query(1, ge=1, le=5)):
     url = "https://nominatim.openstreetmap.org/search?" + urlencode(
         {"format": "json", "q": q, "limit": limit}
     )
-    req = Request(url, headers={"User-Agent": "WC-Advisor/1.0"})
+    req = URLRequest(url, headers={"User-Agent": "WC-Advisor/1.0"})
     with urlopen(req, timeout=10) as resp:
         data = json.loads(resp.read().decode())
     return [{"lat": float(r["lat"]), "lon": float(r["lon"])} for r in data]
