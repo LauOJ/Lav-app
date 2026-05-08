@@ -26,6 +26,7 @@ class WCUpdate(BaseModel):
 class WCCreated(WCBase):
     id: int
     created_at: datetime
+    created_by: int | None = None
 
     model_config = ConfigDict(from_attributes=True)
 

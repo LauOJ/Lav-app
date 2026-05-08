@@ -21,8 +21,8 @@ def _bool_avg_percentage(column):
         * 100
     )
 
-def create_wc(db: Session, wc_in: WCCreate) -> WC:
-    wc = WC(**wc_in.model_dump())
+def create_wc(db: Session, wc_in: WCCreate, created_by: int | None = None) -> WC:
+    wc = WC(**wc_in.model_dump(), created_by=created_by)
     db.add(wc)
     db.commit()
     db.refresh(wc)

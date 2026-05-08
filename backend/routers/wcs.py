@@ -32,7 +32,7 @@ def create_wc_endpoint(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    wc = create_wc_crud(db, wc_in)
+    wc = create_wc_crud(db, wc_in, created_by=current_user.id)
     return wc
 
 
