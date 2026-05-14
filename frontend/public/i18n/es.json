@@ -144,7 +144,10 @@
     "tag_gender_mixed": "✓ Opción no binaria",
     "tag_changing_table": "✓ Cambiador",
     "report_closed": "Este lugar ya no existe",
-    "report_closed_done": "Gracias, lo hemos registrado"
+    "report_closed_done": "Gracias, lo hemos registrado",
+    "login_cta_login": "Inicia sesión",
+    "login_cta_register": "regístrate",
+    "login_cta_suffix": "para valorar este WC"
   },
 
   "wc_detail": {

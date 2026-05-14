@@ -1,4 +1,9 @@
 <div class="page-container">
+  <a class="map-link" [routerLink]="['/explore']">
+    <app-lucide-icon icon="locate" />
+    {{ 'nav.back_to_map' | translate }}
+  </a>
+
   <h1 class="page-title">{{ 'auth.register.title' | translate }}</h1>
 
   <div class="section">

@@ -313,6 +313,24 @@ button.primary {
   }
 }
 
+.login-cta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.login-cta a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.login-cta--collapsed {
+  margin: 0.4rem 0 0;
+  padding: 0 1rem;
+}
+
 /* ── Report closed ───────────────────────────────────────────── */
 .report-closed {
   margin-top: 1.5rem;

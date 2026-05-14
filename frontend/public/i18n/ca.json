@@ -144,7 +144,10 @@
     "tag_gender_mixed": "✓ Opció no-binària",
     "tag_changing_table": "✓ Canviador",
     "report_closed": "Aquest lloc ja no existeix",
-    "report_closed_done": "Gràcies, ho hem registrat"
+    "report_closed_done": "Gràcies, ho hem registrat",
+    "login_cta_login": "Inicia sessió",
+    "login_cta_register": "registra't",
+    "login_cta_suffix": "per valorar aquest WC"
   },
 
   "wc_detail": {

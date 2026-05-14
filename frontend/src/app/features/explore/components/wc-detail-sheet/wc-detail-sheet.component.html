@@ -29,6 +29,14 @@
       <p class="distance muted">{{ distanceLabel() }}</p>
     }
     <app-wc-feature-icons [wc]="wc()" />
+    @if (!isExpanded() && !userState.isLoggedIn()) {
+      <p class="login-cta login-cta--collapsed">
+        <a routerLink="/login" (click)="$event.stopPropagation()">{{ 'sheet.login_cta_login' | translate }}</a>
+        o
+        <a routerLink="/register" (click)="$event.stopPropagation()">{{ 'sheet.login_cta_register' | translate }}</a>
+        {{ 'sheet.login_cta_suffix' | translate }}
+      </p>
+    }
   </div>
 
   <div class="sheet-body">
@@ -77,6 +85,13 @@
             {{ 'sheet.edit_btn' | translate }}
           </a>
         </div>
+      } @else {
+        <p class="login-cta">
+          <a routerLink="/login" (click)="$event.stopPropagation()">{{ 'sheet.login_cta_login' | translate }}</a>
+          o
+          <a routerLink="/register" (click)="$event.stopPropagation()">{{ 'sheet.login_cta_register' | translate }}</a>
+          {{ 'sheet.login_cta_suffix' | translate }}
+        </p>
       }
       <button
         type="button"
